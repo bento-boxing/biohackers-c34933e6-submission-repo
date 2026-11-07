@@ -10,6 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from pipeline.clients import chembl  # noqa: E402
 from pipeline.clients import europepmc as epmc  # noqa: E402
 from pipeline.clients import opentargets as ot  # noqa: E402
 from pipeline.http import HttpClient  # noqa: E402
@@ -30,7 +31,26 @@ def record(disease_name: str, n: int) -> None:
     for t in targets:
         ot.target_safety(client, t.target_id)
         count, _ = epmc.literature_hits(client, t.symbol, disease.name)
-        print("safety+lit", t.symbol, count)
+        cid = chembl.find_target(client, t.uniprot, t.symbol)
+        potent = chembl.potent_count(client, cid) if cid else 0
+        print("safety+lit+chembl", t.symbol, count, cid, potent)
+    # stage-2 demo data for the first target that has a ChEMBL id (LRRK2 for Parkinson)
+    chembl.find_target(client, None, "ZZQXV1")
+    for t in targets:
+        cid = chembl.find_target(client, t.uniprot, t.symbol)
+        if cid:
+            acts = chembl.potent_activities(client, cid, max_pages=5)
+            chembl.potent_activities(client, cid, max_pages=1)
+            best: dict[str, float] = {}
+            for a in acts:
+                v = a.get("pchembl_value")
+                if v is not None:
+                    best[a["molecule_chembl_id"]] = max(best.get(a["molecule_chembl_id"], 0), float(v))
+            top = sorted(best, key=best.get, reverse=True)[:50]
+            chembl.molecules(client, top)
+            chembl.molecules(client, ["CHEMBL1721885"])
+            print("stage2", t.symbol, cid, len(acts), len(top))
+            break
 
 
 if __name__ == "__main__":

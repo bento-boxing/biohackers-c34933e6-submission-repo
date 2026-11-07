@@ -1,0 +1,1 @@
+{"ts": 1794076215.6639476, "method": "GET", "url": "https://www.ebi.ac.uk/chembl/api/data/activity.json", "params": {"target_chembl_id": "CHEMBL3580523", "pchembl_value__gte": 6, "limit": 1}, "body": null, "data": {"activities": [], "page_meta": {"limit": 1, "next": null, "offset": 0, "previous": null, "total_count": 0}}}

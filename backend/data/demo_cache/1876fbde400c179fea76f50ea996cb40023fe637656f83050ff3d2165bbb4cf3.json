@@ -1,0 +1,1 @@
+{"ts": 1794076211.9076717, "method": "GET", "url": "https://www.ebi.ac.uk/chembl/api/data/target/search.json", "params": {"q": "DNAJC6", "limit": 10}, "body": null, "data": {"page_meta": {"limit": 10, "next": null, "offset": 0, "previous": null, "total_count": 0}, "targets": []}}
