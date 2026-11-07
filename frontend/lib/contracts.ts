@@ -1,0 +1,22 @@
+export type { ScoutRun, ScoutTarget, Weights, Approval, ScreeningResult } from '../../lib/types';
+export { rankTargets, DEFAULT_WEIGHTS, normaliseWeights } from '../../lib/score';
+export type Mode = 'live' | 'offline';
+export type TargetInput = { disease_name: string; disease_id?: string | null; target_symbol: string; target_id?: string | null; chembl_target_id?: string | null; uniprot?: string | null };
+export type Call = {role: string; success: boolean; error: string; usage: Record<string,number>};
+export type AIClaim = { claim_id: string; text: string; kind: string; concern: string; stance: string; relevance: string; uncertainty: string; citations: {source_id:string; field:string; excerpt:string}[] };
+export type AIReport = { enabled: boolean; status: string; model: string; provider: string; calls: Call[]; warnings: string[]; source_urls: Record<string,string>; reassessment?: {assessment:string; remaining_uncertainty:string[]}; rounds: {round_number:number; draft:{initial_assessment:string; claims:AIClaim[]}; adjudications:{claim_id:string; verdict:string; finding:string; revision_request:string}[]; deterministic_objections:Record<string,string[]>; accepted_claim_ids:string[]}[] };
+export type Trial = { nct_id:string; title:string; status:string; why_stopped:string; relationship:string; compound_ids:string[]; compound_matches:Record<string,string>; disease_match:string; url:string; stop_reason:{state:string; value?:string|null; full_record_checked:boolean; source_url:string; detail:string} };
+export type Investigation = {
+  target:TargetInput; mode:Mode; resolved_target_id:string|null; resolution_status:string;
+  compounds:{chembl_id:string;name:string;mechanisms:string[];url:string}[];
+  trials:Trial[];
+  publications:{identifier:string;title:string;abstract:string;url:string;relevance:string}[];
+  claims:{claim_id:string;text:string;kind:string;stance:string;concern:string;source_id:string;source_url:string;uncertainty:string;relevance:string}[];
+  assessments:{source_ids:string[];historical_evidence:string;concern:string;relevance:string;limitations:string[];recommendation:string;rationale:string;compound_specificity:string;target_engagement:string}[];
+  conclusion:string; missing_information:string[]; retrieval_notes:string[]; retrieval_errors:string[]; ai?:AIReport|null;
+};
+export type Experiment = {question:string; competing_explanations:string[];model:string;measurement:string;controls:string[];possible_results:string[];limitations:string[];decision_impact:string;evidence_ids:string[];status:string};
+export type Report = {investigation:Investigation;experiment:Experiment;recorded_ai:boolean;mode:Mode;selection:{target_input:TargetInput;weighted_score?:number;association_score?:number;run_id?:string;cache_only:boolean};weights:Record<string,number>};
+export type Decision = {decision_id:string;job_id:string;action:string;rationale:string;confirmed:boolean;mode:Mode;approval?:import('../../lib/types').Approval};
+export type Job = {job_id:string;state:string;progress:{stage:string;calls:Call[]};result:Report|null;error:string|null;mode:Mode;selection:Report['selection'];weights:import('../../lib/types').Weights;decisions:Decision[]};
+export type Config = {ai:{enabled:boolean;provider:string;model:string;thinking_level:string;max_calls:number;timeout_seconds:number}};

@@ -1,0 +1,10 @@
+[
+  {
+    "tested_at_utc": "2026-11-07T19:30:28.371177+00:00",
+    "model": "gemini-4-argon",
+    "status": "completed",
+    "calls_attempted": 5,
+    "calls_completed": 5,
+    "warnings": []
+  }
+]

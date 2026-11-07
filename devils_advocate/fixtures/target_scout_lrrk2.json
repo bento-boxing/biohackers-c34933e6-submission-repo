@@ -1,0 +1,8 @@
+{
+  "disease": "Parkinson's disease",
+  "disease_id": "EFO_0002508",
+  "target": "LRRK2",
+  "target_id": "ENSG00000188906",
+  "association_score": 0.82,
+  "evidence_pmids": []
+}

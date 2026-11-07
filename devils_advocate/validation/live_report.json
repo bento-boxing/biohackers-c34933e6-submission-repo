@@ -1,0 +1,478 @@
+{
+  "captured_at_utc": "2026-11-07T19:01:09.721048+00:00",
+  "cases": [
+    {
+      "disease": "Alzheimer's disease",
+      "target": "BACE1",
+      "resolved_target_id": "CHEMBL4822",
+      "compounds": 4,
+      "trials": 27,
+      "publications": 34,
+      "exact_compound_and_disease_trials": 12,
+      "trials_with_posted_outcomes": 11,
+      "explicit_target_or_compound_and_disease_publications": 34,
+      "errors": [],
+      "notes": [
+        "Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review."
+      ],
+      "missing_information": [
+        "Target validity cannot be inferred from compound or trial failure alone.",
+        "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+        "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+        "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+      ],
+      "trial_samples": [
+        {
+          "nct_id": "NCT03131453",
+          "title": "A Study of CNP520 Versus Placebo in Participants at Risk for the Onset of Clinical Symptoms of Alzheimer's Disease",
+          "status": "TERMINATED",
+          "why_stopped": "The study was terminated due to safety issues.",
+          "conditions": [
+            "Alzheimers Disease"
+          ],
+          "interventions": [
+            "CNP520 50mg",
+            "CNP520 15mg",
+            "Matching placebo"
+          ],
+          "has_results": true,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "uncertain",
+          "url": "https://clinicaltrials.gov/study/NCT03131453"
+        },
+        {
+          "nct_id": "NCT01819545",
+          "title": "The Study of microRNA 107 (miRNA 107) and Beta-amyloid Precursor Protein-cleaving Enzyme 1 (BACE1) Messenger Ribonucleic Acid (mRNA) Gene Expression in Cerebrospinal Fluid and Peripheral Blood of Alzheimer's Disease",
+          "status": "UNKNOWN",
+          "why_stopped": "",
+          "conditions": [
+            "Alzheimer's Disease"
+          ],
+          "interventions": [],
+          "has_results": false,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "matched",
+          "url": "https://clinicaltrials.gov/study/NCT01819545"
+        },
+        {
+          "nct_id": "NCT02565511",
+          "title": "A Study of CAD106 and CNP520 Versus Placebo in Participants at Risk for the Onset of Clinical Symptoms of Alzheimer's Disease",
+          "status": "TERMINATED",
+          "why_stopped": "",
+          "conditions": [
+            "Alzheimers Disease"
+          ],
+          "interventions": [
+            "CAD106 Immunotherapy",
+            "Placebo to CAD106",
+            "CNP520",
+            "Placebo to CNP520",
+            "Alum"
+          ],
+          "has_results": true,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "uncertain",
+          "url": "https://clinicaltrials.gov/study/NCT02565511"
+        }
+      ],
+      "publication_samples": [
+        {
+          "identifier": "MED:40675957",
+          "title": "AI-guided patient stratification improves outcomes and efficiency in the AMARANTH Alzheimer's Disease clinical trial.",
+          "doi": "10.1038/s41467-025-61355-3",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/40675957"
+        },
+        {
+          "identifier": "MED:33464300",
+          "title": "Findings of Efficacy, Safety, and Biomarker Outcomes of Atabecestat in Preclinical Alzheimer Disease: A Truncated Randomized Phase 2b/3 Clinical Trial.",
+          "doi": "10.1001/jamaneurol.2020.4857",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/33464300"
+        },
+        {
+          "identifier": "MED:37830926",
+          "title": "Eligibility Rates among Racially and Ethnically Diverse US Participants in Phase 2 and Phase 3 Placebo-Controlled, Double-Blind, Randomized Trials of Lecanemab and Elenbecestat in Early Alzheimer Disease.",
+          "doi": "10.1002/ana.26819",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/37830926"
+        }
+      ]
+    },
+    {
+      "disease": "Parkinson's disease",
+      "target": "LRRK2",
+      "resolved_target_id": "CHEMBL1075104",
+      "compounds": 0,
+      "trials": 38,
+      "publications": 25,
+      "exact_compound_and_disease_trials": 0,
+      "trials_with_posted_outcomes": 1,
+      "explicit_target_or_compound_and_disease_publications": 25,
+      "errors": [],
+      "notes": [
+        "Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review."
+      ],
+      "missing_information": [
+        "No curated ChEMBL mechanism compounds retrieved. This is not evidence that no relevant compounds exist; trial compound links remain unverified.",
+        "Target validity cannot be inferred from compound or trial failure alone.",
+        "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+        "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+        "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+      ],
+      "trial_samples": [
+        {
+          "nct_id": "NCT07681219",
+          "title": "LRRK2 (Leucine-Rich Repeat Kinase 2) Parkinson's Disease Fingerprint",
+          "status": "NOT_YET_RECRUITING",
+          "why_stopped": "",
+          "conditions": [
+            "Parkinsons Disease (PD)",
+            "LRRK2"
+          ],
+          "interventions": [
+            "The interventions of the study are the study of blood biomarkers and neuroimaging and neurophysiological data"
+          ],
+          "has_results": false,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "uncertain",
+          "url": "https://clinicaltrials.gov/study/NCT07681219"
+        },
+        {
+          "nct_id": "NCT04919356",
+          "title": "Parkinson's Disease G2019S LRRK2 Genetic Testing Program",
+          "status": "TERMINATED",
+          "why_stopped": "Sponsor stopped the study",
+          "conditions": [
+            "Parkinson's Disease"
+          ],
+          "interventions": [
+            "G2019S LRRK2"
+          ],
+          "has_results": false,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "matched",
+          "url": "https://clinicaltrials.gov/study/NCT04919356"
+        },
+        {
+          "nct_id": "NCT06814431",
+          "title": "Study on the Incidence of Malignant Neoplasms in Patients With Parkinson's Disease and Heterozygous Mutation of the GBA Gene",
+          "status": "RECRUITING",
+          "why_stopped": "",
+          "conditions": [
+            "Idiopathic Parkinson&#39;s Disease (PD)"
+          ],
+          "interventions": [],
+          "has_results": false,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "matched",
+          "url": "https://clinicaltrials.gov/study/NCT06814431"
+        }
+      ],
+      "publication_samples": [
+        {
+          "identifier": "MED:41388619",
+          "title": "LRRK2 as a Potential Disease-Modifying Target in Sporadic Parkinson's Disease.",
+          "doi": "10.1002/mds.70100",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/41388619"
+        },
+        {
+          "identifier": "MED:41876647",
+          "title": "LRRK2-targeting antisense oligonucleotide in Parkinson's disease: a phase 1 randomized controlled trial.",
+          "doi": "10.1038/s41591-026-04262-4",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/41876647"
+        },
+        {
+          "identifier": "MED:41821671",
+          "title": "Advancing Development of LRRK2-Targeted Therapeutics for Parkinson's Disease: Conference Proceedings and Roadmap for Research.",
+          "doi": "10.7249/rhq-13-02-02",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/41821671"
+        }
+      ]
+    },
+    {
+      "disease": "Hypercholesterolemia",
+      "target": "PCSK9",
+      "resolved_target_id": "CHEMBL2929",
+      "compounds": 9,
+      "trials": 197,
+      "publications": 30,
+      "exact_compound_and_disease_trials": 88,
+      "trials_with_posted_outcomes": 102,
+      "explicit_target_or_compound_and_disease_publications": 30,
+      "errors": [],
+      "notes": [
+        "Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review.",
+        "Trial search capped at 100 records for PCSK9."
+      ],
+      "missing_information": [
+        "Target validity cannot be inferred from compound or trial failure alone.",
+        "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+        "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+        "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+      ],
+      "trial_samples": [
+        {
+          "nct_id": "NCT05739383",
+          "title": "A Study of Inclisiran to Prevent Cardiovascular Events in High-risk Primary Prevention Patients.",
+          "status": "ACTIVE_NOT_RECRUITING",
+          "why_stopped": "",
+          "conditions": [
+            "Primary Prevention of Atherosclerotic Cardiovascular Disease"
+          ],
+          "interventions": [
+            "Inclisiran sodium 300 mg (equivalent to 284 mg inclisiran) in 1.5 mL",
+            "KJX839",
+            "Placebo in 1.5ml"
+          ],
+          "has_results": false,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "uncertain",
+          "url": "https://clinicaltrials.gov/study/NCT05739383"
+        },
+        {
+          "nct_id": "NCT05325203",
+          "title": "A Study to Evaluate the Efficacy and Safety of JS002 in Patients With Heterozygous Familial Hypercholesterolemia (HeFH).",
+          "status": "COMPLETED",
+          "why_stopped": "",
+          "conditions": [
+            "Heterozygous Familial Hypercholesterolemia"
+          ],
+          "interventions": [
+            "Ongericimab",
+            "JS002",
+            "Placebo"
+          ],
+          "has_results": false,
+          "compound_ids": [
+            "CHEMBL4594566"
+          ],
+          "relationship": "verified",
+          "match_reason": "Exact normalized intervention alias",
+          "disease_match": "matched",
+          "url": "https://clinicaltrials.gov/study/NCT05325203"
+        },
+        {
+          "nct_id": "NCT03399370",
+          "title": "Inclisiran for Participants With Atherosclerotic Cardiovascular Disease and Elevated Low-density Lipoprotein Cholesterol",
+          "status": "COMPLETED",
+          "why_stopped": "",
+          "conditions": [
+            "ASCVD",
+            "Elevated Cholesterol"
+          ],
+          "interventions": [
+            "Inclisiran Sodium",
+            "Placebo",
+            "Saline Solution"
+          ],
+          "has_results": true,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "uncertain",
+          "url": "https://clinicaltrials.gov/study/NCT03399370"
+        }
+      ],
+      "publication_samples": [
+        {
+          "identifier": "MED:42105081",
+          "title": "Efficacy and Safety of Ongericimab in Chinese Patients with Hypercholesterolemia: A Meta-analysis of Randomized Controlled Trials.",
+          "doi": "10.1007/s40256-026-00797-6",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/42105081"
+        },
+        {
+          "identifier": "MED:39870096",
+          "title": "Lerodalcibep and evolocumab for the treatment of homozygous familial hypercholesterolaemia with PCSK9 inhibition (LIBerate-HoFH): a phase 3, randomised, open-label, crossover, non-inferiority trial.",
+          "doi": "10.1016/s2213-8587(24)00313-9",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/39870096"
+        },
+        {
+          "identifier": "MED:42054033",
+          "title": "Response to PCSK9 Inhibition Based on LDL Receptor Function in Familial Hypercholesterolemia: A Nonrandomized Clinical Trial.",
+          "doi": "10.1001/jamacardio.2026.0879",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/42054033"
+        }
+      ]
+    },
+    {
+      "disease": "Non-small-cell lung cancer",
+      "target": "EGFR",
+      "resolved_target_id": "CHEMBL203",
+      "compounds": 15,
+      "trials": 501,
+      "publications": 30,
+      "exact_compound_and_disease_trials": 207,
+      "trials_with_posted_outcomes": 155,
+      "explicit_target_or_compound_and_disease_publications": 30,
+      "errors": [],
+      "notes": [
+        "Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review.",
+        "Compound retrieval capped at 15 of 76 curated mechanism compounds.",
+        "Trial search capped at 100 records for EGFR.",
+        "Trial search capped at 100 records for ERLOTINIB HYDROCHLORIDE.",
+        "Trial search capped at 100 records for CETUXIMAB.",
+        "Trial search capped at 100 records for AFATINIB DIMALEATE."
+      ],
+      "missing_information": [
+        "Target validity cannot be inferred from compound or trial failure alone.",
+        "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+        "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+        "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+      ],
+      "trial_samples": [
+        {
+          "nct_id": "NCT00402896",
+          "title": "Malignant Pleural Effusion With ZD6474",
+          "status": "TERMINATED",
+          "why_stopped": "Slow Accrual",
+          "conditions": [
+            "Lung Cancer",
+            "Pleural Effusion"
+          ],
+          "interventions": [
+            "ZD6474",
+            "Vascular Endothelial Growth Factor Receptor",
+            "Epidermal Growth Factor Receptor Tyrosine Kinase Inhibitor"
+          ],
+          "has_results": true,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "uncertain",
+          "url": "https://clinicaltrials.gov/study/NCT00402896"
+        },
+        {
+          "nct_id": "NCT03799094",
+          "title": "Vitamin C and Tyrosine Kinase Inhibitor in Lung Cancer Patients With Epidermal Growth Factor Receptor Mutations",
+          "status": "UNKNOWN",
+          "why_stopped": "",
+          "conditions": [
+            "Carcinoma, Non-Small-Cell Lung"
+          ],
+          "interventions": [
+            "Vitamin C",
+            "Sodium Ascorbate",
+            "Tyrosine kinase inhibitor"
+          ],
+          "has_results": false,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "matched",
+          "url": "https://clinicaltrials.gov/study/NCT03799094"
+        },
+        {
+          "nct_id": "NCT07545213",
+          "title": "Efficacy and Safety of SKB264 Plus Anlotinib in EGFR-TKI-Resistant Advanced NSCLC With Liver Metastasis",
+          "status": "NOT_YET_RECRUITING",
+          "why_stopped": "",
+          "conditions": [
+            "Non-small Cell Lung Cancer",
+            "EGFR Mutant Advanced Non-small Cell Lung Cancer"
+          ],
+          "interventions": [
+            "SKB264",
+            "Anlotinib"
+          ],
+          "has_results": false,
+          "compound_ids": [],
+          "relationship": "uncertain",
+          "match_reason": "No intervention alias match",
+          "disease_match": "matched",
+          "url": "https://clinicaltrials.gov/study/NCT07545213"
+        }
+      ],
+      "publication_samples": [
+        {
+          "identifier": "MED:42507540",
+          "title": "Efficacy and Safety of Necitumumab and Pembrolizumab Combination Therapy in Advanced Non-Small Cell Lung Cancer with \u226550% PD-L1 Expression: A Nonrandomized Phase II Trial.",
+          "doi": "10.1158/1078-0432.ccr-25-2751",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/42507540"
+        },
+        {
+          "identifier": "MED:42734867",
+          "title": "Comparative efficacy and safety of first, second, and third-generation EGFR tyrosine kinase inhibitors in treatment-na\u00efve EGFR-mutant advanced non-small cell lung cancer: a systematic review and network meta-analysis of randomized controlled trials.",
+          "doi": "10.1186/s43046-026-00414-2",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/42734867"
+        },
+        {
+          "identifier": "MED:40866342",
+          "title": "Adjuvant icotinib for resected EGFR-mutated stage II-IIIA non-small-cell lung cancer (ICTAN, GASTO1002): a randomized comparison study.",
+          "doi": "10.1038/s41392-025-02358-w",
+          "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+          "url": "https://europepmc.org/article/MED/40866342"
+        }
+      ]
+    },
+    {
+      "disease": "Alzheimer's disease",
+      "target": "FAKEGENE123",
+      "resolved_target_id": null,
+      "compounds": 0,
+      "trials": 0,
+      "publications": 0,
+      "exact_compound_and_disease_trials": 0,
+      "trials_with_posted_outcomes": 0,
+      "explicit_target_or_compound_and_disease_publications": 0,
+      "errors": [],
+      "notes": [
+        "Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review."
+      ],
+      "missing_information": [
+        "No unambiguous exact human ChEMBL target resolution; no target ID guessed.",
+        "Unresolved target: downstream retrieval skipped to prevent unrelated disease-only evidence.",
+        "No curated ChEMBL mechanism compounds retrieved. This is not evidence that no relevant compounds exist; trial compound links remain unverified.",
+        "Target validity cannot be inferred from compound or trial failure alone.",
+        "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+        "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+        "Literature triage does not establish causality, negate contradictory findings or assess study quality.",
+        "No relevant trial records retrieved; this does not establish absence of trials.",
+        "No publication evidence retrieved."
+      ],
+      "trial_samples": [],
+      "publication_samples": []
+    }
+  ],
+  "target_scout_handoff": {
+    "target_input": {
+      "disease_name": "Parkinson's disease",
+      "disease_id": "EFO_0002508",
+      "target_symbol": "LRRK2",
+      "target_id": "ENSG00000188906"
+    },
+    "resolved_chembl_id": "CHEMBL1075104",
+    "association_score": 0.82,
+    "evidence_pmids": [],
+    "validation_notes": [
+      "Association score retained as upstream ranking metadata, not a probability of therapeutic success.",
+      "Upstream PMIDs are unverified leads, not independently verified evidence.",
+      "Disease identifier preserved; disease ontology equivalence has not been verified.",
+      "Ensembl human gene identifier and symbol agree.",
+      "Exact human ChEMBL target resolved."
+    ]
+  },
+  "interpretation": "Applicability counts are lexical checks, not expert confirmation of scientific relevance or target failure."
+}

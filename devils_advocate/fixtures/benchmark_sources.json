@@ -1,0 +1,730 @@
+{
+  "bace1": {
+    "target": {
+      "disease_name": "Alzheimer's disease",
+      "disease_id": null,
+      "target_symbol": "BACE1",
+      "target_id": null
+    },
+    "mode": "live",
+    "resolved_target_id": "CHEMBL4822",
+    "compounds": [
+      {
+        "chembl_id": "CHEMBL3301601",
+        "name": "VERUBECESTAT",
+        "synonyms": [
+          "MK-8931",
+          "SCH 900931",
+          "SCH-900931",
+          "SCH900931",
+          "VERUBECESTAT",
+          "VERUBECESTAT (MK-8931)",
+          "Verubecestat"
+        ],
+        "mechanisms": [
+          "Beta-secretase 1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3301601"
+      },
+      {
+        "chembl_id": "CHEMBL3916243",
+        "name": "ATABECESTAT",
+        "synonyms": [
+          "ATABECESTAT",
+          "Atabecestat",
+          "JNJ-54861911",
+          "JNJ-54861911-AAA",
+          "Jnj-54861911",
+          "RSC- 385896",
+          "RSC-385896"
+        ],
+        "mechanisms": [
+          "Beta-secretase 1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3916243"
+      },
+      {
+        "chembl_id": "CHEMBL3989948",
+        "name": "LANABECESTAT",
+        "synonyms": [
+          "AZD 3293",
+          "AZD-3293",
+          "AZD3293",
+          "LANABECESTAT",
+          "LANABECESTAT (AZD3293)",
+          "LY-3314814",
+          "LY3314814",
+          "Lanabecestat"
+        ],
+        "mechanisms": [
+          "Beta-secretase 1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3989948"
+      },
+      {
+        "chembl_id": "CHEMBL4204869",
+        "name": "ELENBECESTAT",
+        "synonyms": [
+          "E-2609",
+          "E2609",
+          "Elenbecestat"
+        ],
+        "mechanisms": [
+          "Beta-secretase 1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4204869"
+      }
+    ],
+    "trials": [
+      {
+        "nct_id": "NCT01739348",
+        "title": "An Efficacy and Safety Trial of Verubecestat (MK-8931) in Mild to Moderate Alzheimer's Disease (P07738)",
+        "status": "TERMINATED",
+        "why_stopped": "",
+        "conditions": [
+          "Alzheimer's Disease"
+        ],
+        "interventions": [
+          "Verubecestat (Part I and Part II)",
+          "SCH 900931",
+          "Verubecestat (Part I and Part II)",
+          "SCH 900931",
+          "Verubecestat (Part I and Part II)",
+          "SCH 900931",
+          "Placebo (Part I)",
+          "Verubecestat (Part II)",
+          "SCH 900931"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL3301601"
+        ],
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT01739348"
+      },
+      {
+        "nct_id": "NCT02783573",
+        "title": "A Study of Lanabecestat (LY3314814) in Participants With Mild Alzheimer's Disease Dementia",
+        "status": "TERMINATED",
+        "why_stopped": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility.",
+        "conditions": [
+          "Alzheimer's Disease"
+        ],
+        "interventions": [
+          "Lanabecestat",
+          "LY3314814",
+          "AZD3293",
+          "Placebo"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL3989948"
+        ],
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT02783573"
+      },
+      {
+        "nct_id": "NCT02972658",
+        "title": "A Study of Lanabecestat (LY3314814) in Early Alzheimer's Disease Dementia",
+        "status": "TERMINATED",
+        "why_stopped": "As the feeder study (AZES) was stopped for futility after an independent assessment, this trial was also stopped.",
+        "conditions": [
+          "Alzheimer's Disease"
+        ],
+        "interventions": [
+          "Lanabecestat",
+          "LY3314814",
+          "AZD3293"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL3989948"
+        ],
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT02972658"
+      }
+    ],
+    "missing_information": [
+      "Target validity cannot be inferred from compound or trial failure alone.",
+      "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+      "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+      "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+    ],
+    "retrieval_notes": [
+      "Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review."
+    ],
+    "retrieval_errors": [],
+    "conclusion": "Documented concerns require investigation; target-level invalidity remains unproven."
+  },
+  "pcsk9": {
+    "target": {
+      "disease_name": "Hypercholesterolemia",
+      "disease_id": null,
+      "target_symbol": "PCSK9",
+      "target_id": null
+    },
+    "mode": "live",
+    "resolved_target_id": "CHEMBL2929",
+    "compounds": [
+      {
+        "chembl_id": "CHEMBL2109539",
+        "name": "RG-7652",
+        "synonyms": [
+          "RG-7652"
+        ],
+        "mechanisms": [
+          "Subtilisin/kexin type 9 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2109539"
+      },
+      {
+        "chembl_id": "CHEMBL2109540",
+        "name": "ALIROCUMAB",
+        "synonyms": [
+          "Alirocumab",
+          "Praluent",
+          "REGN-727",
+          "REGN727",
+          "SAR-236553",
+          "SAR236553"
+        ],
+        "mechanisms": [
+          "Subtilisin/kexin type 9 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2109540"
+      },
+      {
+        "chembl_id": "CHEMBL2364655",
+        "name": "EVOLOCUMAB",
+        "synonyms": [
+          "AMG-145",
+          "Evolocumab",
+          "Repatha",
+          "Repatha sureclick"
+        ],
+        "mechanisms": [
+          "Subtilisin/kexin type 9 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2364655"
+      },
+      {
+        "chembl_id": "CHEMBL3137349",
+        "name": "BOCOCIZUMAB",
+        "synonyms": [
+          "Bococizumab",
+          "PF-04950615",
+          "RN-316",
+          "RN316"
+        ],
+        "mechanisms": [
+          "Subtilisin/kexin type 9 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3137349"
+      },
+      {
+        "chembl_id": "CHEMBL3137352",
+        "name": "RALPANCIZUMAB",
+        "synonyms": [
+          "PF-05335810",
+          "RN-317",
+          "RN317",
+          "Ralpancizumab"
+        ],
+        "mechanisms": [
+          "Subtilisin/kexin type 9 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3137352"
+      },
+      {
+        "chembl_id": "CHEMBL4298016",
+        "name": "FROVOCIMAB",
+        "synonyms": [
+          "Frovocimab",
+          "LY-3015014",
+          "LY3015014",
+          "Ly3015014"
+        ],
+        "mechanisms": [
+          "Subtilisin/kexin type 9 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4298016"
+      },
+      {
+        "chembl_id": "CHEMBL4594554",
+        "name": "TAFOLECIMAB",
+        "synonyms": [
+          "IBI-306",
+          "IBI306",
+          "Ibi306",
+          "Tafolecimab"
+        ],
+        "mechanisms": [
+          "Subtilisin/kexin type 9 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4594554"
+      },
+      {
+        "chembl_id": "CHEMBL4594566",
+        "name": "ONGERICIMAB",
+        "synonyms": [
+          "JS 002",
+          "JS-002",
+          "Js002",
+          "Ongericimab"
+        ],
+        "mechanisms": [
+          "Subtilisin/kexin type 9 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4594566"
+      },
+      {
+        "chembl_id": "CHEMBL4650405",
+        "name": "LERODALCIBEP",
+        "synonyms": [
+          "Lerodalcibep"
+        ],
+        "mechanisms": [
+          "Subtilisin/kexin type 9 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4650405"
+      }
+    ],
+    "trials": [
+      {
+        "nct_id": "NCT03331666",
+        "title": "Impact of LDL-cholesterol Lowering on Platelet Activation",
+        "status": "TERMINATED",
+        "why_stopped": "Terminated Prematurely due to COVID-19",
+        "conditions": [
+          "Familial Hypercholesterolemia"
+        ],
+        "interventions": [
+          "Evolocumab",
+          "REPATHA"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL2364655"
+        ],
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT03331666"
+      }
+    ],
+    "missing_information": [
+      "Target validity cannot be inferred from compound or trial failure alone.",
+      "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+      "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+      "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+    ],
+    "retrieval_notes": [
+      "Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review.",
+      "Trial search capped at 100 records for PCSK9."
+    ],
+    "retrieval_errors": [],
+    "conclusion": "insufficient evidence"
+  },
+  "egfr": {
+    "target": {
+      "disease_name": "Non-small-cell lung cancer",
+      "disease_id": null,
+      "target_symbol": "EGFR",
+      "target_id": null
+    },
+    "mode": "live",
+    "resolved_target_id": "CHEMBL203",
+    "compounds": [
+      {
+        "chembl_id": "CHEMBL1079742",
+        "name": "ERLOTINIB HYDROCHLORIDE",
+        "synonyms": [
+          "CP-358",
+          "CP-358,774-01",
+          "CP-358774-01",
+          "Erlotinib hcl",
+          "Erlotinib hydrochloride",
+          "OSI-774",
+          "Tarceva"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1079742"
+      },
+      {
+        "chembl_id": "CHEMBL1201179",
+        "name": "LAPATINIB DITOSYLATE",
+        "synonyms": [
+          "GW-572016F",
+          "GW572016F",
+          "Lapatinib ditoluenesulfonate monohydrate",
+          "Lapatinib ditosylate",
+          "Lapatinib ditosylate anhydrous",
+          "Lapatinib ditosylate monohydrate",
+          "Lapatinib tosilate",
+          "Lapatinib tosilate hydrate",
+          "Tycerb",
+          "Tykerb",
+          "Tyverb"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1201179"
+      },
+      {
+        "chembl_id": "CHEMBL1201577",
+        "name": "CETUXIMAB",
+        "synonyms": [
+          "ABP-494",
+          "C-225",
+          "C225",
+          "CMAB-009",
+          "CMAB009",
+          "Cetuximab",
+          "Cetuximab (genetical recombination)",
+          "Cetuximab biosimilar (abp-494)",
+          "Erbitux",
+          "IMC-225",
+          "IMC-C225",
+          "MOAB C225"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1201577"
+      },
+      {
+        "chembl_id": "CHEMBL1201827",
+        "name": "PANITUMUMAB",
+        "synonyms": [
+          "ABX-EGF",
+          "Abenix",
+          "E7.6.3",
+          "L01xc08",
+          "Panitumumab",
+          "Vectibix"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1201827"
+      },
+      {
+        "chembl_id": "CHEMBL1614725",
+        "name": "TAK-285",
+        "synonyms": [
+          "Tak 285",
+          "Tak-285",
+          "Tak285"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1614725"
+      },
+      {
+        "chembl_id": "CHEMBL1645462",
+        "name": "AC-480",
+        "synonyms": [
+          "AC-480",
+          "AC480",
+          "Ac-480",
+          "BMS-599626",
+          "Bms 599626"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1645462"
+      },
+      {
+        "chembl_id": "CHEMBL1743047",
+        "name": "NECITUMUMAB",
+        "synonyms": [
+          "11F8",
+          "IMC-11F8",
+          "Necitumumab",
+          "Portrazza"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1743047"
+      },
+      {
+        "chembl_id": "CHEMBL180022",
+        "name": "NERATINIB",
+        "synonyms": [
+          "CDP-820",
+          "HKI-272",
+          "Neratinib",
+          "WAY-179272"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL180022"
+      },
+      {
+        "chembl_id": "CHEMBL1947204",
+        "name": "ALLITINIB",
+        "synonyms": [
+          "ALL-3",
+          "Allitinib",
+          "Als 1306",
+          "Ast 1306",
+          "Ast-1306",
+          "Ast1306"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1947204"
+      },
+      {
+        "chembl_id": "CHEMBL1963502",
+        "name": "PKI-166",
+        "synonyms": [
+          "CGP-75166",
+          "NVP-PKI166",
+          "Pki 166",
+          "Pki-166"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1963502"
+      },
+      {
+        "chembl_id": "CHEMBL2029988",
+        "name": "CEP-32496",
+        "synonyms": [
+          "AB-024",
+          "AC-013773",
+          "Agerafenib",
+          "CEP-32496",
+          "Cep-32496",
+          "RXDX-105",
+          "Rxdx 105"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2029988"
+      },
+      {
+        "chembl_id": "CHEMBL2087361",
+        "name": "ICOTINIB",
+        "synonyms": [
+          "Bpi-2009",
+          "Icotinib"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2087361"
+      },
+      {
+        "chembl_id": "CHEMBL2103842",
+        "name": "VARLITINIB",
+        "synonyms": [
+          "AR-00334543",
+          "ARRY-334543",
+          "ARRY-543",
+          "ASLAN-001",
+          "ASLAN001",
+          "Varlitinib"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2103842"
+      },
+      {
+        "chembl_id": "CHEMBL2105712",
+        "name": "AFATINIB DIMALEATE",
+        "synonyms": [
+          "Afatinib dimaleate",
+          "Afatinib maleate",
+          "BIBW-2992 MA2",
+          "BIBW-2992-MA2",
+          "BIBW-2992MA2",
+          "BIBW2992 MA2",
+          "BIBW2992-MA2",
+          "Gilotrif",
+          "Giotrif"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2105712"
+      },
+      {
+        "chembl_id": "CHEMBL2105719",
+        "name": "DACOMITINIB",
+        "synonyms": [
+          "Dacomitinib",
+          "Dacomitinib hydrate",
+          "Dacomitinib monohydrate",
+          "PF-00299804-03",
+          "Vizimpro"
+        ],
+        "mechanisms": [
+          "Epidermal growth factor receptor erbB1 inhibitor"
+        ],
+        "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2105719"
+      }
+    ],
+    "trials": [
+      {
+        "nct_id": "NCT05241873",
+        "title": "(Concerto) Study of BLU-451 in Advanced Cancers With EGFR Exon 20 Insertion Mutations",
+        "status": "TERMINATED",
+        "why_stopped": "Sponsor decision, not related to safety concerns",
+        "conditions": [
+          "Lung Neoplasm Malignant",
+          "Carcinoma, Non-Small-Cell Lung",
+          "Respiratory Tract Neoplasms",
+          "Neoplasms",
+          "Neoplasms by Site",
+          "Lung Diseases",
+          "Respiratory Tract Disease",
+          "Carcinoma, Bronchogenic",
+          "Bronchial Neoplasms",
+          "Adenocarcinoma",
+          "Carcinoma",
+          "Neoplasms by Histologic Type",
+          "EGFR Exon 20 Mutation",
+          "EGFR Exon 20 Insertion Mutation",
+          "EGFR Activating Mutation",
+          "Antineoplastic Agents",
+          "Metastatic Lung Cancer",
+          "Brain Metastases",
+          "EGFR-mutated NSCLC",
+          "EGFR Atypical Mutations, Including G719X and L861Q"
+        ],
+        "interventions": [
+          "BLU-451",
+          "Carboplatin",
+          "Pemetrexed"
+        ],
+        "has_results": false,
+        "compound_ids": [],
+        "relationship": "uncertain",
+        "match_reason": "No intervention alias match",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT05241873"
+      },
+      {
+        "nct_id": "NCT06704724",
+        "title": "A Study to Learn About the Study Medicine PF-07985045 When Given Alone or With Other Anti-cancer Therapies in People With Advanced Solid Tumors That Have a Change in a Gene.",
+        "status": "TERMINATED",
+        "why_stopped": "The trial was terminated for strategic business reasons; the decision was not based on any safety and/or efficacy concerns.",
+        "conditions": [
+          "Carcinoma, Pancreatic Ductal",
+          "Colorectal Neoplasms",
+          "Carcinoma, Non-Small-Cell Lung"
+        ],
+        "interventions": [
+          "PF-07985045",
+          "PF-5045",
+          "Gemcitabine",
+          "Gemzar",
+          "Nab-paclitaxel",
+          "Abraxane",
+          "Cetuximab",
+          "Erbitux",
+          "Fluorouracil",
+          "5-FU",
+          "5-fluorouracil",
+          "Oxaliplatin",
+          "Eloxatin",
+          "Leucovorin",
+          "Folinic Acid",
+          "Wellcovorin",
+          "calcium folinate",
+          "Leucovorin Calcium",
+          "Bevacizumab",
+          "Zirabev",
+          "Avastin",
+          "Pembrolizumab",
+          "Pembro",
+          "Lambrolizumab",
+          "MK-3475",
+          "Keytruda",
+          "Sasanlimab",
+          "PF-06801591",
+          "pemetrexed",
+          "Alimta",
+          "Cisplatin",
+          "Platinol",
+          "Cisplatinum",
+          "neoplatin",
+          "Paclitaxel",
+          "Taxol",
+          "Onxol",
+          "Carboplatin",
+          "Paraplatin",
+          "Stricarb",
+          "PF-07284892",
+          "ARRY-558"
+        ],
+        "has_results": false,
+        "compound_ids": [
+          "CHEMBL1201577"
+        ],
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT06704724"
+      },
+      {
+        "nct_id": "NCT02443337",
+        "title": "A Study of LY3023414 and Necitumumab in Squamous Lung Cancer",
+        "status": "TERMINATED",
+        "why_stopped": "The study stopped due to lack of efficacy.",
+        "conditions": [
+          "Non-small Cell Lung Cancer Metastatic"
+        ],
+        "interventions": [
+          "LY3023414",
+          "Necitumumab",
+          "LY3012211",
+          "IMC-11F8"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL1743047"
+        ],
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT02443337"
+      }
+    ],
+    "missing_information": [
+      "Target validity cannot be inferred from compound or trial failure alone.",
+      "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+      "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+      "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+    ],
+    "retrieval_notes": [
+      "Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review.",
+      "Compound retrieval capped at 15 of 76 curated mechanism compounds.",
+      "Trial search capped at 100 records for EGFR.",
+      "Trial search capped at 100 records for ERLOTINIB HYDROCHLORIDE.",
+      "Trial search capped at 100 records for CETUXIMAB.",
+      "Trial search capped at 100 records for AFATINIB DIMALEATE."
+    ],
+    "retrieval_errors": [],
+    "conclusion": "Documented concerns require investigation; target-level invalidity remains unproven."
+  }
+}

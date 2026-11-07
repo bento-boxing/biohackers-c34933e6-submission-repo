@@ -1,0 +1,813 @@
+{
+  "tested_at_utc": "2026-11-07T19:30:28.371177+00:00",
+  "data_mode": "live",
+  "resolved_target_id": "CHEMBL4822",
+  "compounds": 4,
+  "trials": 27,
+  "publications": 34,
+  "retrieval_errors": [],
+  "ai": {
+    "enabled": true,
+    "provider": "google",
+    "model": "gemini-4-argon",
+    "status": "completed",
+    "calls": [
+      {
+        "role": "Devils Advocate",
+        "success": true,
+        "error": "",
+        "usage": {
+          "total_input_tokens": 7746,
+          "total_output_tokens": 1701,
+          "total_thought_tokens": 3851,
+          "total_tokens": 13298,
+          "total_cached_tokens": 0
+        }
+      },
+      {
+        "role": "Evidence Adjudicator",
+        "success": true,
+        "error": "",
+        "usage": {
+          "total_input_tokens": 8899,
+          "total_output_tokens": 620,
+          "total_thought_tokens": 2525,
+          "total_tokens": 12044,
+          "total_cached_tokens": 0
+        }
+      },
+      {
+        "role": "Devils Advocate revision",
+        "success": true,
+        "error": "",
+        "usage": {
+          "total_input_tokens": 11742,
+          "total_output_tokens": 1581,
+          "total_thought_tokens": 980,
+          "total_tokens": 14303,
+          "total_cached_tokens": 0
+        }
+      },
+      {
+        "role": "Evidence Adjudicator",
+        "success": true,
+        "error": "",
+        "usage": {
+          "total_input_tokens": 8909,
+          "total_output_tokens": 448,
+          "total_thought_tokens": 2943,
+          "total_tokens": 12300,
+          "total_cached_tokens": 0
+        }
+      },
+      {
+        "role": "Experimental Challenger",
+        "success": true,
+        "error": "",
+        "usage": {
+          "total_input_tokens": 9205,
+          "total_output_tokens": 1273,
+          "total_thought_tokens": 2455,
+          "total_tokens": 12933,
+          "total_cached_tokens": 0
+        }
+      }
+    ],
+    "rounds": [
+      {
+        "round_number": 0,
+        "draft": {
+          "initial_assessment": "Multiple clinical trials of structurally distinct BACE1 inhibitors (verubecestat, lanabecestat, elenbecestat, and atabecestat) across preclinical, prodromal, early, and mild-to-moderate Alzheimer's disease have been terminated early for futility, lack of efficacy, cognitive worsening trends, or safety concerns. While compound-level failures do not definitively invalidate BACE1 as a target, the consistent absence of clinical benefit despite confirmed cerebrospinal fluid biomarker reduction presents substantial efficacy and safety challenges that require researcher evaluation before any further action.",
+          "claims": [
+            {
+              "claim_id": "DA_CLAIM_1",
+              "text": "In randomized controlled trials of the oral BACE1 inhibitor verubecestat, treatment failed to slow cognitive or functional decline in mild-to-moderate Alzheimer's disease and was associated with higher rates of progression to dementia than placebo at the 40 mg dose in prodromal Alzheimer's disease.",
+              "kind": "interpretation",
+              "concern": "efficacy",
+              "stance": "contradictory",
+              "citations": [
+                {
+                  "source_id": "MED:29719179",
+                  "field": "abstract",
+                  "excerpt": "The estimated mean change from baseline to week 78 in the ADAS-cog score was 7.9 in the 12-mg group, 8.0 in the 40-mg group, and 7.7 in the placebo group (P=0.63 for the comparison between the 12-mg group and the placebo group and P=0.46 for the comparison between the 40-mg group and the placebo group)."
+                },
+                {
+                  "source_id": "MED:30970186",
+                  "field": "abstract",
+                  "excerpt": "The estimated rate of progression to dementia due to Alzheimer's disease was 24.5, 25.5, and 19.3 events per 100 patient-years in the 12-mg group, the 40-mg group, and the placebo group, respectively (hazard ratio for 40 mg vs. placebo, 1.38; 97.51% confidence interval, 1.07 to 1.79, not adjusted for multiple comparisons), favoring placebo."
+                }
+              ],
+              "relevance": "Directly challenges the clinical efficacy hypothesis by demonstrating that BACE1 inhibition with verubecestat did not provide clinical benefit in mild-to-moderate disease and worsened progression metrics in prodromal patients.",
+              "uncertainty": "Published abstracts are truncated and do not establish whether cognitive worsening stems from excessive BACE1 inhibition, non-amyloid substrate effects, or compound-specific off-target activity."
+            },
+            {
+              "claim_id": "DA_CLAIM_2",
+              "text": "Pharmacodynamic reductions in cerebrospinal fluid amyloid-beta fragments and sAPPbeta achieved by the BACE1 inhibitor atabecestat did not translate into cognitive benefit in predementia Alzheimer's disease, instead trending toward worse cognitive scores alongside treatment-limiting liver enzyme elevations.",
+              "kind": "interpretation",
+              "concern": "safety",
+              "stance": "contradictory",
+              "citations": [
+                {
+                  "source_id": "MED:32410694",
+                  "field": "abstract",
+                  "excerpt": "CSF A\u03b2 fragments and sAPP\u03b2 were reduced dose-proportionately."
+                },
+                {
+                  "source_id": "MED:32410694",
+                  "field": "abstract",
+                  "excerpt": "Atabecestat was associated with trend toward declines in cognition, and elevation of liver enzymes."
+                },
+                {
+                  "source_id": "NCT02569398",
+                  "field": "why_stopped",
+                  "excerpt": "Change in benefit-risk profile for individuals with early sporadic Alzheimer Disease because of elevations in liver enzymes in subjects receiving atabecestat"
+                }
+              ],
+              "relevance": "Demonstrates a disconnect between biochemical target pathway modulation in cerebrospinal fluid and clinical benefit, while highlighting hepatotoxicity that led to trial termination in asymptomatic at-risk participants.",
+              "uncertainty": "Biomarker reduction confirms pathway activity but does not differentiate whether hepatotoxicity is a compound-specific chemical liability of atabecestat or an on-target consequence."
+            },
+            {
+              "claim_id": "DA_CLAIM_3",
+              "text": "Clinical trials of two additional BACE1 inhibitors, lanabecestat and elenbecestat, in early and mild Alzheimer's disease populations were also terminated early due to futility or an unfavorable risk-benefit profile where adverse events exceeded placebo without evidence of efficacy.",
+              "kind": "interpretation",
+              "concern": "efficacy",
+              "stance": "contradictory",
+              "citations": [
+                {
+                  "source_id": "NCT02245737",
+                  "field": "why_stopped",
+                  "excerpt": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility"
+                },
+                {
+                  "source_id": "NCT02783573",
+                  "field": "why_stopped",
+                  "excerpt": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility."
+                },
+                {
+                  "source_id": "NCT02956486",
+                  "field": "why_stopped",
+                  "excerpt": "Due to an unfavorable risk-benefit ratio including no evidence of potential efficacy, and the adverse event profile of E2609 being worse than placebo."
+                }
+              ],
+              "relevance": "Indicates that lack of clinical efficacy and unfavorable risk-benefit outcomes occurred across multiple distinct BACE1 inhibitor scaffolds and early-stage trial populations, reducing the likelihood that failure is isolated to a single molecule.",
+              "uncertainty": "Registry termination summaries and truncated publication abstracts do not provide full quantitative endpoint data, target occupancy comparisons, or receptor selectivity profiles for lanabecestat and elenbecestat."
+            },
+            {
+              "claim_id": "DA_CLAIM_4",
+              "text": "It remains unresolved whether the diverse adverse events observed across BACE1 trials\u2014such as rash, falls, neuropsychiatric symptoms, and hair-color change with verubecestat, or unspecified safety issues in other prevention studies\u2014reflect on-target BACE1 physiological roles, cross-inhibition of related secretases, or compound-specific off-target toxicities.",
+              "kind": "unresolved",
+              "concern": "safety",
+              "stance": "context",
+              "citations": [
+                {
+                  "source_id": "MED:29719179",
+                  "field": "abstract",
+                  "excerpt": "Adverse events, including rash, falls and injuries, sleep disturbance, suicidal ideation, weight loss, and hair-color change, were more common in the verubecestat groups than in the placebo group."
+                },
+                {
+                  "source_id": "NCT03131453",
+                  "field": "why_stopped",
+                  "excerpt": "The study was terminated due to safety issues."
+                },
+                {
+                  "source_id": "CHEMBL3301601",
+                  "field": "mechanisms",
+                  "excerpt": "Beta-secretase 1 inhibitor"
+                }
+              ],
+              "relevance": "Distinguishing on-target mechanism-based toxicity from off-target compound selectivity issues is essential to determine whether a therapeutic window exists for BACE1 inhibition.",
+              "uncertainty": "The provided sources lack biochemical selectivity data (such as BACE2 vs. BACE1 affinity) and detailed safety adjudication for terminated prevention trials."
+            }
+          ],
+          "remaining_uncertainty": [
+            "Whether partial or lower-level BACE1 inhibition in earlier preclinical stages could avoid cognitive worsening while retaining disease-modifying potential.",
+            "Whether observed clinical adverse events (cognitive decline trends, neuropsychiatric symptoms, pigment changes, and hepatotoxicity) are driven by on-target BACE1 substrate processing deficits, off-target secretase cross-reactivity, or chemical scaffold toxicity.",
+            "Full quantitative efficacy and safety outcomes from truncated publication abstracts (such as MED:31764959 for lanabecestat) and unlinked compound mechanisms (such as CNP520 in NCT03131453) are not available in the provided dataset."
+          ]
+        },
+        "deterministic_objections": {
+          "DA_CLAIM_1": [],
+          "DA_CLAIM_2": [],
+          "DA_CLAIM_3": [],
+          "DA_CLAIM_4": []
+        },
+        "adjudications": [
+          {
+            "claim_id": "DA_CLAIM_1",
+            "verdict": "supported",
+            "finding": "The cited randomized trial abstracts directly support that verubecestat failed to reduce cognitive or functional decline in mild-to-moderate Alzheimer's disease (MED:29719179) and showed a higher rate of progression to dementia than placebo at the 40 mg dose in prodromal Alzheimer's disease (MED:30970186).",
+            "revision_request": ""
+          },
+          {
+            "claim_id": "DA_CLAIM_2",
+            "verdict": "supported",
+            "finding": "MED:32410694 and NCT02569398 directly support that atabecestat achieved dose-proportionate reductions in CSF A\u03b2 fragments and sAPP\u03b2 in predementia Alzheimer's disease but trended toward worse cognitive scores and caused liver enzyme elevations that altered the benefit-risk profile and led to trial termination.",
+            "revision_request": ""
+          },
+          {
+            "claim_id": "DA_CLAIM_3",
+            "verdict": "supported",
+            "finding": "The registry records (NCT02245737, NCT02783573, NCT02956486) and linked ChEMBL mechanism records (CHEMBL3989948, CHEMBL4204869) support that trials of the BACE1 inhibitors lanabecestat and elenbecestat in early and mild Alzheimer's disease were terminated early for futility or an unfavorable risk-benefit ratio with worse adverse events than placebo and no evidence of potential efficacy.",
+            "revision_request": ""
+          },
+          {
+            "claim_id": "DA_CLAIM_4",
+            "verdict": "revise",
+            "finding": "While MED:29719179 supports the specific adverse events for verubecestat and the sources leave the mechanistic basis of BACE1 inhibitor toxicities unresolved, NCT03131453 evaluates CNP520, which has no verified BACE1 target link in the provided sources, and 'cross-inhibition of related secretases' introduces an unmentioned mechanism.",
+            "revision_request": "Remove the citation and reference to NCT03131453 (as the provided sources do not establish CNP520 as a BACE1 inhibitor) and frame the unresolved question strictly around whether adverse events reported for verified BACE1 inhibitors in the payload reflect on-target BACE1 inhibition or compound-specific off-target effects."
+          }
+        ],
+        "accepted_claim_ids": [
+          "DA_CLAIM_1",
+          "DA_CLAIM_2",
+          "DA_CLAIM_3"
+        ]
+      },
+      {
+        "round_number": 1,
+        "draft": {
+          "initial_assessment": "Multiple clinical trials of structurally distinct BACE1 inhibitors (verubecestat, lanabecestat, elenbecestat, and atabecestat) across preclinical, prodromal, early, and mild-to-moderate Alzheimer's disease have been terminated early for futility, lack of efficacy, cognitive worsening trends, or safety concerns. While compound-level failures do not definitively invalidate BACE1 as a target, the consistent absence of clinical benefit despite confirmed cerebrospinal fluid biomarker reduction presents substantial efficacy and safety challenges that require researcher evaluation before any further action.",
+          "claims": [
+            {
+              "claim_id": "DA_CLAIM_1",
+              "text": "In randomized controlled trials of the oral BACE1 inhibitor verubecestat, treatment failed to slow cognitive or functional decline in mild-to-moderate Alzheimer's disease and was associated with higher rates of progression to dementia than placebo at the 40 mg dose in prodromal Alzheimer's disease.",
+              "kind": "interpretation",
+              "concern": "efficacy",
+              "stance": "contradictory",
+              "citations": [
+                {
+                  "source_id": "MED:29719179",
+                  "field": "abstract",
+                  "excerpt": "The estimated mean change from baseline to week 78 in the ADAS-cog score was 7.9 in the 12-mg group, 8.0 in the 40-mg group, and 7.7 in the placebo group (P=0.63 for the comparison between the 12-mg group and the placebo group and P=0.46 for the comparison between the 40-mg group and the placebo group)."
+                },
+                {
+                  "source_id": "MED:30970186",
+                  "field": "abstract",
+                  "excerpt": "The estimated rate of progression to dementia due to Alzheimer's disease was 24.5, 25.5, and 19.3 events per 100 patient-years in the 12-mg group, the 40-mg group, and the placebo group, respectively (hazard ratio for 40 mg vs. placebo, 1.38; 97.51% confidence interval, 1.07 to 1.79, not adjusted for multiple comparisons), favoring placebo."
+                }
+              ],
+              "relevance": "Directly challenges the clinical efficacy hypothesis by demonstrating that BACE1 inhibition with verubecestat did not provide clinical benefit in mild-to-moderate disease and worsened progression metrics in prodromal patients.",
+              "uncertainty": "Published abstracts are truncated and do not establish whether cognitive worsening stems from on-target BACE1 inhibition or compound-specific off-target activity."
+            },
+            {
+              "claim_id": "DA_CLAIM_2",
+              "text": "Pharmacodynamic reductions in cerebrospinal fluid amyloid-beta fragments and sAPPbeta achieved by the BACE1 inhibitor atabecestat did not translate into cognitive benefit in predementia Alzheimer's disease, instead trending toward worse cognitive scores alongside treatment-limiting liver enzyme elevations.",
+              "kind": "interpretation",
+              "concern": "safety",
+              "stance": "contradictory",
+              "citations": [
+                {
+                  "source_id": "MED:32410694",
+                  "field": "abstract",
+                  "excerpt": "CSF A\u03b2 fragments and sAPP\u03b2 were reduced dose-proportionately."
+                },
+                {
+                  "source_id": "MED:32410694",
+                  "field": "abstract",
+                  "excerpt": "Atabecestat was associated with trend toward declines in cognition, and elevation of liver enzymes."
+                },
+                {
+                  "source_id": "NCT02569398",
+                  "field": "why_stopped",
+                  "excerpt": "Change in benefit-risk profile for individuals with early sporadic Alzheimer Disease because of elevations in liver enzymes in subjects receiving atabecestat"
+                }
+              ],
+              "relevance": "Demonstrates a disconnect between biochemical target pathway modulation in cerebrospinal fluid and clinical benefit, while highlighting hepatotoxicity that led to trial termination in asymptomatic at-risk participants.",
+              "uncertainty": "Biomarker reduction confirms pathway activity but does not differentiate whether hepatotoxicity is a compound-specific chemical liability of atabecestat or an on-target consequence."
+            },
+            {
+              "claim_id": "DA_CLAIM_3",
+              "text": "Clinical trials of two additional BACE1 inhibitors, lanabecestat and elenbecestat, in early and mild Alzheimer's disease populations were also terminated early due to futility or an unfavorable risk-benefit profile where adverse events exceeded placebo without evidence of efficacy.",
+              "kind": "interpretation",
+              "concern": "efficacy",
+              "stance": "contradictory",
+              "citations": [
+                {
+                  "source_id": "NCT02245737",
+                  "field": "why_stopped",
+                  "excerpt": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility"
+                },
+                {
+                  "source_id": "NCT02783573",
+                  "field": "why_stopped",
+                  "excerpt": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility."
+                },
+                {
+                  "source_id": "NCT02956486",
+                  "field": "why_stopped",
+                  "excerpt": "Due to an unfavorable risk-benefit ratio including no evidence of potential efficacy, and the adverse event profile of E2609 being worse than placebo."
+                }
+              ],
+              "relevance": "Indicates that lack of clinical efficacy and unfavorable risk-benefit outcomes occurred across multiple distinct BACE1 inhibitor scaffolds and early-stage trial populations, reducing the likelihood that failure is isolated to a single molecule.",
+              "uncertainty": "Registry termination summaries and truncated publication abstracts do not provide full quantitative endpoint data, target occupancy comparisons, or selectivity profiles for lanabecestat and elenbecestat."
+            },
+            {
+              "claim_id": "DA_CLAIM_4",
+              "text": "It remains unresolved from the provided sources whether the adverse events reported for verified BACE1 inhibitors\u2014such as rash, falls and injuries, sleep disturbance, suicidal ideation, weight loss, and hair-color change with verubecestat, or liver enzyme elevations with atabecestat\u2014reflect on-target BACE1 inhibition or compound-specific off-target effects.",
+              "kind": "unresolved",
+              "concern": "safety",
+              "stance": "context",
+              "citations": [
+                {
+                  "source_id": "MED:29719179",
+                  "field": "abstract",
+                  "excerpt": "Adverse events, including rash, falls and injuries, sleep disturbance, suicidal ideation, weight loss, and hair-color change, were more common in the verubecestat groups than in the placebo group."
+                },
+                {
+                  "source_id": "MED:32410694",
+                  "field": "abstract",
+                  "excerpt": "Elevated liver enzyme adverse events reported in 12 participants on atabecestat resulted in dosage modification and increased frequency of safety monitoring."
+                },
+                {
+                  "source_id": "CHEMBL3301601",
+                  "field": "mechanisms",
+                  "excerpt": "Beta-secretase 1 inhibitor"
+                }
+              ],
+              "relevance": "Distinguishing on-target BACE1 inhibition effects from compound-specific off-target toxicities is necessary to evaluate whether a safe therapeutic window exists for targeting BACE1.",
+              "uncertainty": "The provided clinical trial abstracts and registry records report adverse event occurrences and trial terminations but lack mechanistic toxicology or compound selectivity data."
+            }
+          ],
+          "remaining_uncertainty": [
+            "Whether different dosing regimens or levels of BACE1 inhibition in earlier disease stages could achieve clinical benefit without cognitive worsening.",
+            "Whether the reported clinical adverse events (such as cognitive worsening trends, neuropsychiatric symptoms, hair-color change, and liver enzyme elevations) are driven by on-target BACE1 inhibition or compound-specific off-target effects.",
+            "Full quantitative efficacy and safety outcomes from truncated publication abstracts (such as MED:31764959 for lanabecestat) and unlinked trial interventions (such as CNP520 in NCT03131453) are not available in the provided dataset."
+          ]
+        },
+        "deterministic_objections": {
+          "DA_CLAIM_1": [],
+          "DA_CLAIM_2": [],
+          "DA_CLAIM_3": [],
+          "DA_CLAIM_4": []
+        },
+        "adjudications": [
+          {
+            "claim_id": "DA_CLAIM_1",
+            "verdict": "supported",
+            "finding": "The cited randomized controlled trial abstracts directly support that verubecestat did not slow cognitive or functional decline in mild-to-moderate Alzheimer's disease (MED:29719179) and was associated with a higher rate of progression to dementia than placebo at the 40 mg dose in prodromal Alzheimer's disease (MED:30970186).",
+            "revision_request": ""
+          },
+          {
+            "claim_id": "DA_CLAIM_2",
+            "verdict": "supported",
+            "finding": "MED:32410694 and NCT02569398 directly support that atabecestat achieved dose-proportionate reductions in CSF Abeta fragments and sAPPbeta in predementia Alzheimer's disease but trended toward worse cognitive scores and caused liver enzyme elevations that altered the benefit-risk profile.",
+            "revision_request": ""
+          },
+          {
+            "claim_id": "DA_CLAIM_3",
+            "verdict": "supported",
+            "finding": "The registry why_stopped records for NCT02245737, NCT02783573, and NCT02956486 directly support that trials of lanabecestat and elenbecestat in early and mild Alzheimer's disease were terminated early due to futility or an unfavorable risk-benefit ratio with no evidence of potential efficacy and worse adverse events than placebo.",
+            "revision_request": ""
+          },
+          {
+            "claim_id": "DA_CLAIM_4",
+            "verdict": "supported",
+            "finding": "The cited sources document the specific adverse events for verubecestat (MED:29719179) and atabecestat (MED:32410694) and their BACE1 inhibitor mechanism, while providing no mechanistic toxicology data to resolve whether these toxicities are on-target or compound-specific off-target effects.",
+            "revision_request": ""
+          }
+        ],
+        "accepted_claim_ids": [
+          "DA_CLAIM_1",
+          "DA_CLAIM_2",
+          "DA_CLAIM_3",
+          "DA_CLAIM_4"
+        ]
+      }
+    ],
+    "accepted_claims": [
+      {
+        "claim_id": "DA_CLAIM_1",
+        "text": "In randomized controlled trials of the oral BACE1 inhibitor verubecestat, treatment failed to slow cognitive or functional decline in mild-to-moderate Alzheimer's disease and was associated with higher rates of progression to dementia than placebo at the 40 mg dose in prodromal Alzheimer's disease.",
+        "kind": "interpretation",
+        "concern": "efficacy",
+        "stance": "contradictory",
+        "citations": [
+          {
+            "source_id": "MED:29719179",
+            "field": "abstract",
+            "excerpt": "The estimated mean change from baseline to week 78 in the ADAS-cog score was 7.9 in the 12-mg group, 8.0 in the 40-mg group, and 7.7 in the placebo group (P=0.63 for the comparison between the 12-mg group and the placebo group and P=0.46 for the comparison between the 40-mg group and the placebo group)."
+          },
+          {
+            "source_id": "MED:30970186",
+            "field": "abstract",
+            "excerpt": "The estimated rate of progression to dementia due to Alzheimer's disease was 24.5, 25.5, and 19.3 events per 100 patient-years in the 12-mg group, the 40-mg group, and the placebo group, respectively (hazard ratio for 40 mg vs. placebo, 1.38; 97.51% confidence interval, 1.07 to 1.79, not adjusted for multiple comparisons), favoring placebo."
+          }
+        ],
+        "relevance": "Directly challenges the clinical efficacy hypothesis by demonstrating that BACE1 inhibition with verubecestat did not provide clinical benefit in mild-to-moderate disease and worsened progression metrics in prodromal patients.",
+        "uncertainty": "Published abstracts are truncated and do not establish whether cognitive worsening stems from on-target BACE1 inhibition or compound-specific off-target activity."
+      },
+      {
+        "claim_id": "DA_CLAIM_2",
+        "text": "Pharmacodynamic reductions in cerebrospinal fluid amyloid-beta fragments and sAPPbeta achieved by the BACE1 inhibitor atabecestat did not translate into cognitive benefit in predementia Alzheimer's disease, instead trending toward worse cognitive scores alongside treatment-limiting liver enzyme elevations.",
+        "kind": "interpretation",
+        "concern": "safety",
+        "stance": "contradictory",
+        "citations": [
+          {
+            "source_id": "MED:32410694",
+            "field": "abstract",
+            "excerpt": "CSF A\u03b2 fragments and sAPP\u03b2 were reduced dose-proportionately."
+          },
+          {
+            "source_id": "MED:32410694",
+            "field": "abstract",
+            "excerpt": "Atabecestat was associated with trend toward declines in cognition, and elevation of liver enzymes."
+          },
+          {
+            "source_id": "NCT02569398",
+            "field": "why_stopped",
+            "excerpt": "Change in benefit-risk profile for individuals with early sporadic Alzheimer Disease because of elevations in liver enzymes in subjects receiving atabecestat"
+          }
+        ],
+        "relevance": "Demonstrates a disconnect between biochemical target pathway modulation in cerebrospinal fluid and clinical benefit, while highlighting hepatotoxicity that led to trial termination in asymptomatic at-risk participants.",
+        "uncertainty": "Biomarker reduction confirms pathway activity but does not differentiate whether hepatotoxicity is a compound-specific chemical liability of atabecestat or an on-target consequence."
+      },
+      {
+        "claim_id": "DA_CLAIM_3",
+        "text": "Clinical trials of two additional BACE1 inhibitors, lanabecestat and elenbecestat, in early and mild Alzheimer's disease populations were also terminated early due to futility or an unfavorable risk-benefit profile where adverse events exceeded placebo without evidence of efficacy.",
+        "kind": "interpretation",
+        "concern": "efficacy",
+        "stance": "contradictory",
+        "citations": [
+          {
+            "source_id": "NCT02245737",
+            "field": "why_stopped",
+            "excerpt": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility"
+          },
+          {
+            "source_id": "NCT02783573",
+            "field": "why_stopped",
+            "excerpt": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility."
+          },
+          {
+            "source_id": "NCT02956486",
+            "field": "why_stopped",
+            "excerpt": "Due to an unfavorable risk-benefit ratio including no evidence of potential efficacy, and the adverse event profile of E2609 being worse than placebo."
+          }
+        ],
+        "relevance": "Indicates that lack of clinical efficacy and unfavorable risk-benefit outcomes occurred across multiple distinct BACE1 inhibitor scaffolds and early-stage trial populations, reducing the likelihood that failure is isolated to a single molecule.",
+        "uncertainty": "Registry termination summaries and truncated publication abstracts do not provide full quantitative endpoint data, target occupancy comparisons, or selectivity profiles for lanabecestat and elenbecestat."
+      },
+      {
+        "claim_id": "DA_CLAIM_4",
+        "text": "It remains unresolved from the provided sources whether the adverse events reported for verified BACE1 inhibitors\u2014such as rash, falls and injuries, sleep disturbance, suicidal ideation, weight loss, and hair-color change with verubecestat, or liver enzyme elevations with atabecestat\u2014reflect on-target BACE1 inhibition or compound-specific off-target effects.",
+        "kind": "unresolved",
+        "concern": "safety",
+        "stance": "context",
+        "citations": [
+          {
+            "source_id": "MED:29719179",
+            "field": "abstract",
+            "excerpt": "Adverse events, including rash, falls and injuries, sleep disturbance, suicidal ideation, weight loss, and hair-color change, were more common in the verubecestat groups than in the placebo group."
+          },
+          {
+            "source_id": "MED:32410694",
+            "field": "abstract",
+            "excerpt": "Elevated liver enzyme adverse events reported in 12 participants on atabecestat resulted in dosage modification and increased frequency of safety monitoring."
+          },
+          {
+            "source_id": "CHEMBL3301601",
+            "field": "mechanisms",
+            "excerpt": "Beta-secretase 1 inhibitor"
+          }
+        ],
+        "relevance": "Distinguishing on-target BACE1 inhibition effects from compound-specific off-target toxicities is necessary to evaluate whether a safe therapeutic window exists for targeting BACE1.",
+        "uncertainty": "The provided clinical trial abstracts and registry records report adverse event occurrences and trial terminations but lack mechanistic toxicology or compound selectivity data."
+      }
+    ],
+    "source_urls": {
+      "CHEMBL3301601": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3301601",
+      "CHEMBL3916243": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3916243",
+      "CHEMBL3989948": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3989948",
+      "CHEMBL4204869": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4204869",
+      "NCT02245737": "https://clinicaltrials.gov/study/NCT02245737",
+      "NCT02783573": "https://clinicaltrials.gov/study/NCT02783573",
+      "NCT02956486": "https://clinicaltrials.gov/study/NCT02956486",
+      "NCT02972658": "https://clinicaltrials.gov/study/NCT02972658",
+      "NCT02569398": "https://clinicaltrials.gov/study/NCT02569398",
+      "NCT03131453": "https://clinicaltrials.gov/study/NCT03131453",
+      "MED:29719179": "https://europepmc.org/article/MED/29719179",
+      "MED:30970186": "https://europepmc.org/article/MED/30970186",
+      "MED:31764959": "https://europepmc.org/article/MED/31764959",
+      "MED:32410694": "https://europepmc.org/article/MED/32410694"
+    },
+    "sent_source_ids": [
+      "CHEMBL3301601",
+      "CHEMBL3916243",
+      "CHEMBL3989948",
+      "CHEMBL4204869",
+      "NCT02245737",
+      "NCT02783573",
+      "NCT02956486",
+      "NCT02972658",
+      "NCT02569398",
+      "NCT03131453",
+      "MED:29719179",
+      "MED:30970186",
+      "MED:31764959",
+      "MED:32410694"
+    ],
+    "source_bundle": {
+      "target": {
+        "disease_name": "Alzheimer's disease",
+        "disease_id": null,
+        "target_symbol": "BACE1",
+        "target_id": null
+      },
+      "resolved_target_id": "CHEMBL4822",
+      "sources": {
+        "CHEMBL3301601": {
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3301601",
+          "fields": {
+            "name": "VERUBECESTAT",
+            "mechanisms": "Beta-secretase 1 inhibitor",
+            "synonyms": "MK-8931; SCH 900931; SCH-900931; SCH900931; VERUBECESTAT; VERUBECESTAT (MK-8931); Verubecestat"
+          }
+        },
+        "CHEMBL3916243": {
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3916243",
+          "fields": {
+            "name": "ATABECESTAT",
+            "mechanisms": "Beta-secretase 1 inhibitor",
+            "synonyms": "ATABECESTAT; Atabecestat; JNJ-54861911; JNJ-54861911-AAA; Jnj-54861911; RSC- 385896; RSC-385896"
+          }
+        },
+        "CHEMBL3989948": {
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL3989948",
+          "fields": {
+            "name": "LANABECESTAT",
+            "mechanisms": "Beta-secretase 1 inhibitor",
+            "synonyms": "AZD 3293; AZD-3293; AZD3293; LANABECESTAT; LANABECESTAT (AZD3293); LY-3314814; LY3314814; Lanabecestat"
+          }
+        },
+        "CHEMBL4204869": {
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4204869",
+          "fields": {
+            "name": "ELENBECESTAT",
+            "mechanisms": "Beta-secretase 1 inhibitor",
+            "synonyms": "E-2609; E2609; Elenbecestat"
+          }
+        },
+        "NCT02245737": {
+          "url": "https://clinicaltrials.gov/study/NCT02245737",
+          "fields": {
+            "title": "An Efficacy and Safety Study of Lanabecestat (LY3314814) in Early Alzheimer's Disease",
+            "status": "TERMINATED",
+            "why_stopped": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility",
+            "conditions": "Alzheimer\u00b4s Disease",
+            "interventions": "Lanabecestat; LY3314814; AZD3293; Placebo",
+            "population": "Inclusion Criteria:\n\n* Gradual and progressive change in the participant's memory function over more than 6 months, reported by participant and study partner\n* Mini-Mental State Examination score of 20-30 inclusive at screening\n* Objective impairment in memory as evaluated by memory test performed at screening\n* For a diagnosis of mild Alzheimer's Disease (AD), participant meets the National Institute on Aging and the Alzheimer's Association (NIA-AA) criteria for probable AD\n* For a diagnosis of MCI due to AD, participant meets NIA-AA criteria for MCI due to AD\n\nExclusion Criteria:\n\n* Significant neurological disease affecting the central nervous system, other than AD, that may affect cognition or ability to complete the study, including but not limited to, other dementias, serious infecti",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Change From Baseline on the 13-item Alzheimer's Disease Assessment Scale - Cognitive Subscale (ADAS-Cog13)\", \"description\": \"ADAS-Cog13 (13-item version of ADAS-Cog) is a psychometric instrument that evaluates word recall, ability to follow commands, constructional praxis, naming, ideational praxis, orientation, word recognition, memory, comprehension of spoken language, word-finding, and language ability, with a measure of delayed word recall and concentration/ distractibility. The total score of the 13-item scale ranges from 0 to 85, with an increase in score indicating cognitive worsening. Least Squares (LS) mean was determined by mixed-model repeated measures (MMRM) model with factors for treatment, visit, treatment-by-visit interaction, disease status at"
+          },
+          "applicability": {
+            "compound_matches": {
+              "CHEMBL3989948": "verified"
+            },
+            "compound_ids": [
+              "CHEMBL3989948"
+            ],
+            "relationship": "verified",
+            "disease_match": "matched",
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity."
+          }
+        },
+        "NCT02783573": {
+          "url": "https://clinicaltrials.gov/study/NCT02783573",
+          "fields": {
+            "title": "A Study of Lanabecestat (LY3314814) in Participants With Mild Alzheimer's Disease Dementia",
+            "status": "TERMINATED",
+            "why_stopped": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility.",
+            "conditions": "Alzheimer's Disease",
+            "interventions": "Lanabecestat; LY3314814; AZD3293; Placebo",
+            "population": "Inclusion Criteria:\n\n* Participant must meet the National Institute on Aging (NIA) and the Alzheimer's Association (AA) (NIA-AA) criteria for probable AD dementia.\n* MMSE score of 20 to 26 inclusive at screening visit.\n* For a diagnosis of mild AD dementia, participant must have a CDR global score of 0.5 or 1, with the memory box score \u22650.5 at screening.\n* Evidence of amyloid pathology.\n* The participant must have a reliable study partner with whom he/she cohabits or has regular contact.\n\nExclusion Criteria:\n\n* Significant and/or current neurological disease affecting the central nervous system, other than AD, that may affect cognition or ability to complete the study, including but not limited to, other dementias, repetitive head trauma, serious infection of the brain, Parkinson's disease",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Change From Baseline in Alzheimer\u00b4s Disease Assessment Scale- Cognitive Subscale (ADAS-Cog13) Score\", \"description\": \"ADAS-Cog13 (13-item version of ADAS Cog) is a psychometric instrument that evaluates word recall, ability to follow commands, constructional praxis, naming, ideational praxis, orientation, word recognition, memory, comprehension of spoken language, word-finding, and language ability, with a measure of delayed word recall and concentration/ distractibility. The total score of the 13-item scale ranges from 0 to 85, with an increase in score indicating cognitive worsening. Least Squares (LS) mean was determined by mixed-model repeated measures (MMRM) model with factors for treatment, visit, treatment-by-visit interaction, acetylcholinesterase Inh"
+          },
+          "applicability": {
+            "compound_matches": {
+              "CHEMBL3989948": "verified"
+            },
+            "compound_ids": [
+              "CHEMBL3989948"
+            ],
+            "relationship": "verified",
+            "disease_match": "matched",
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity."
+          }
+        },
+        "NCT02956486": {
+          "url": "https://clinicaltrials.gov/study/NCT02956486",
+          "fields": {
+            "title": "A 24-Month Study to Evaluate the Efficacy and Safety of Elenbecestat (E2609) in Participants With Early Alzheimer's Disease",
+            "status": "TERMINATED",
+            "why_stopped": "Due to an unfavorable risk-benefit ratio including no evidence of potential efficacy, and the adverse event profile of E2609 being worse than placebo.",
+            "conditions": "Alzheimer's Disease",
+            "interventions": "Elenbecestat; E2609; Placebo",
+            "population": "Inclusion Criteria:\n\nCore Study\n\n* Mild cognitive impairment due to Alzheimer's disease (AD) or mild AD dementia including\n\n  1. Mini Mental State Examination score equal to or greater than 24\n  2. Clinical Dementia Rating (CDR) global score of 0.5\n  3. CDR Memory Box score of 0.5 or greater\n* Impaired episodic memory confirmed by a list learning task\n* Positive biomarker for brain amyloid pathology as indicated by either amyloid positron emission tomography or cerebrospinal fluid AD assessment or both\n\nExtension Phase\n\n\u2022 Participants who complete the Core Study\n\nExclusion Criteria:\n\nCore Study\n\n* Females who are breastfeeding or pregnant at Screening or Baseline. Females of child-bearing potential must use a highly effective method of contraception throughout the entire study period and f",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Core Phase: Change From Baseline up to Month 24 in the Clinical Dementia Rating-sum of Boxes (CDR-SB) Score\", \"description\": \"The clinical dementia rating (CDR) scale is a clinical global rating scale that requires interviewing both the participant and an informant who knows and has contact with the participant. The CDR scale is a clinician directed assessment of both cognition and function, and is intended to capture the state and therefore the disease stage of the participant. The CDR scale assesses 6 domains of participant function (memory, orientation, judgement and problem solving, community affairs, home and hobbies and personal care) on a 5-point scale in which no impairment=0, questionable impairment=0.5, mild impairment=1, moderate impairment=2 and s"
+          },
+          "applicability": {
+            "compound_matches": {
+              "CHEMBL4204869": "verified"
+            },
+            "compound_ids": [
+              "CHEMBL4204869"
+            ],
+            "relationship": "verified",
+            "disease_match": "matched",
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity."
+          }
+        },
+        "NCT02972658": {
+          "url": "https://clinicaltrials.gov/study/NCT02972658",
+          "fields": {
+            "title": "A Study of Lanabecestat (LY3314814) in Early Alzheimer's Disease Dementia",
+            "status": "TERMINATED",
+            "why_stopped": "As the feeder study (AZES) was stopped for futility after an independent assessment, this trial was also stopped.",
+            "conditions": "Alzheimer's Disease",
+            "interventions": "Lanabecestat; LY3314814; AZD3293",
+            "population": "Inclusion Criteria:\n\n* Participants previously enrolled in AMARANTH (NCT02245737) who meet eligibility criteria for delayed-start I8D-MC-AZFD.\n\nExclusion Criteria:\n\n* Participants who participate in AMARANTH (NCT02245737) who develop new conditions precluding them from enrolling into I8D-MC-AZFD.",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Change From Baseline Analysis on the 13-item Alzheimer's Disease Assessment Scale - Cognitive Subscale (ADAS-Cog13)\", \"description\": \"ADAS-Cog13 (13-item version of ADAS-Cog) is a psychometric instrument that evaluates word recall, ability to follow commands, constructional praxis, naming, ideational praxis, orientation, word recognition, memory, comprehension of spoken language, word-finding, and language ability, with a measure of delayed word recall and concentration/ distractibility. The total score of the 13-item scale ranges from 0 to 85, with an increase in score indicating cognitive worsening. Least Squares (LS) mean was determined by mixed-model repeated measures (MMRM) model with factors for treatment, visit, treatment\\\\*visit, baseline efficacy sco"
+          },
+          "applicability": {
+            "compound_matches": {
+              "CHEMBL3989948": "verified"
+            },
+            "compound_ids": [
+              "CHEMBL3989948"
+            ],
+            "relationship": "verified",
+            "disease_match": "matched",
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity."
+          }
+        },
+        "NCT02569398": {
+          "url": "https://clinicaltrials.gov/study/NCT02569398",
+          "fields": {
+            "title": "An Efficacy and Safety Study of Atabecestat in Participants Who Are Asymptomatic at Risk for Developing Alzheimer's Dementia",
+            "status": "TERMINATED",
+            "why_stopped": "Change in benefit-risk profile for individuals with early sporadic Alzheimer Disease because of elevations in liver enzymes in subjects receiving atabecestat",
+            "conditions": "Asymptomatic Amyloid-positive",
+            "interventions": "Atabecestat, 5 mg; Atabecestat, 25 mg; Placebo",
+            "population": "Inclusion Criteria:\n\n* Participant must have a global Clinical Dementia Rating Scale- (CDR) score of '0' at Screening\n* Participants 60 to 64 years of age must also have 1 of the following 3 conditions: a) a positive family history for dementia (minimum of 1 first degree relative), b) a previously known apolipoprotein E, \u03b54 allele (APOE \u025b4) genotype, c) a previously known biomarker status demonstrating elevated amyloid accumulation in cerebrospinal fluid (CSF) or positron emission tomography (PET)\n* Participant must be able to read and write and must have adequate hearing and visual acuity to complete the psychometric tests. The legally acceptable representative must also be able to read and write\n* Participants must have evidence of amyloid accumulation by means of either: a) low Cerebros",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Change From Baseline in Preclinical Alzheimer Cognitive Composite (PACC) Score at Endpoint (Month 24)\", \"description\": \"PACC has 4 components: Free and Cued Selective Reminding Test (0 (worst)-48 (best recall); Delayed Paragraph Recall test (Range 0 (worst)-25 (best recall); Wechsler Adult Intelligence scale: (ranges 0 \\\\[none\\\\]-135 \\\\[best performance\\\\]) and Mini Mental State Examination (Range 0 \\\\[worst\\\\] - 30 \\\\[best performance\\\\]). Component scores are transformed using an established normalization method into z-scores. Each of 4 component change scores is divided by baseline sample standard deviation (SD) of that component. These z scores are summed to form the composite score. Thus, a change of 1 baseline standard deviation on each component would "
+          },
+          "applicability": {
+            "compound_matches": {
+              "CHEMBL3916243": "probable"
+            },
+            "compound_ids": [
+              "CHEMBL3916243"
+            ],
+            "relationship": "probable",
+            "disease_match": "uncertain",
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity."
+          }
+        },
+        "NCT03131453": {
+          "url": "https://clinicaltrials.gov/study/NCT03131453",
+          "fields": {
+            "title": "A Study of CNP520 Versus Placebo in Participants at Risk for the Onset of Clinical Symptoms of Alzheimer's Disease",
+            "status": "TERMINATED",
+            "why_stopped": "The study was terminated due to safety issues.",
+            "conditions": "Alzheimers Disease",
+            "interventions": "CNP520 50mg; CNP520 15mg; Matching placebo",
+            "population": "Inclusion Criteria:\n\n* consent to receive disclosure of their risk estimates to develop clinical symptoms of AD based on their APOE genotype and, if Heterozygotes, evidence of elevated brain amyloid.\n* Male or female, age 60 to 75 years inclusive. Females must be considered post-menopausal and not of child bearing potential\n* Cognitively unimpaired as evaluated by memory tests performed at screening.\n* Participant's willingness to have a study partner.\n* Carrier of at least one APOE4 gene if Heterozygotes, elevated brain amyloid (as measured by CSF Abeta or amyloid PET imaging).\n\nExclusion Criteria:\n\n* Any disability that could have prevented the participants from completing all study requirements. -\n* Current medical or neurological condition that could have impacted cognition or performa",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Time to Event (Diagnosis of Mild Cognitive Impairment or Dementia, Due to Alzheimer's Disease (AD))\", \"description\": \"Event was defined as the first confirmed diagnosis of MCI due to Alzheimer's disease (AD) or dementia due to AD (whichever occurred first) after adjudication by the progression adjudication committee (PAC) as triggered either by an investigator diagnosis or an increase in the Clinical Dementia Rating (CDR) global score. An event had to be confirmed by the PAC at two consecutive visits. In case no confirmed event was observed for a participant, the observation was censored, and the censoring date was defined as the last date where the diagnostic classification was assessed. The Study was terminated and only confirmed events collected up to the "
+          },
+          "applicability": {
+            "compound_matches": {},
+            "compound_ids": [],
+            "relationship": "uncertain",
+            "disease_match": "uncertain",
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity."
+          }
+        },
+        "MED:29719179": {
+          "url": "https://europepmc.org/article/MED/29719179",
+          "fields": {
+            "title": "Randomized Trial of Verubecestat for Mild-to-Moderate Alzheimer's Disease.",
+            "abstract": "BackgroundAlzheimer's disease is characterized by the deposition of amyloid-beta (A\u03b2) plaques in the brain. A\u03b2 is produced from the sequential cleavage of amyloid precursor protein by \u03b2-site amyloid precursor protein-cleaving enzyme 1 (BACE-1) followed by \u03b3-secretase. Verubecestat is an oral BACE-1 inhibitor that reduces the A\u03b2 level in the cerebrospinal fluid of patients with Alzheimer's disease.MethodsWe conducted a randomized, double-blind, placebo-controlled, 78-week trial to evaluate verubecestat at doses of 12 mg and 40 mg per day, as compared with placebo, in patients who had a clinical diagnosis of mild-to-moderate Alzheimer's disease. The coprimary outcomes were the change from baseline to week 78 in the score on the cognitive subscale of the Alzheimer's Disease Assessment Scale (ADAS-cog; scores range from 0 to 70, with higher scores indicating worse dementia) and in the score on the Alzheimer's Disease Cooperative Study Activities of Daily Living Inventory scale (ADCS-ADL; scores range from 0 to 78, with lower scores indicating worse function).ResultsA total of 1958 patients underwent randomization; 653 were randomly assigned to receive verubecestat at a dose of 12 mg per day (the 12-mg group), 652 to receive verubecestat at a dose of 40 mg per day (the 40-mg group), and 653 to receive matching placebo. The trial was terminated early for futility 50 months after onset, which was within 5 months before its scheduled completion, and after enrollment of the planned 1958 patients was complete. The estimated mean change from baseline to week 78 in the ADAS-cog score was 7.9 in the 12-mg group, 8.0 in the 40-mg group, and 7.7 in the placebo group (P=0.63 for the comparison between the 12-mg group and the placebo group and P=0.46 for the comparison between the 40-mg group and the placebo group). The estimated mean change from baseline to week 78 in the ADCS-ADL score was -8.4 in the 12-mg group, -8.2 in the 40-mg group, and -8.9 in the placebo group (P=0.49 for the comparison between the 12-mg group and the placebo group and P=0.32 for the comparison between the 40-mg group and the placebo group). Adverse events, including rash, falls and injuries, sleep disturbance, suicidal ideation, weight loss, and hair-color change, were more common in the verubecestat groups than in the placebo group.ConclusionsVerubecestat did not reduce cognitive or functional de"
+          },
+          "caution": "Abstract may be truncated; no full text, causal adjudication or quality assessment."
+        },
+        "MED:30970186": {
+          "url": "https://europepmc.org/article/MED/30970186",
+          "fields": {
+            "title": "Randomized Trial of Verubecestat for Prodromal Alzheimer's Disease.",
+            "abstract": "BackgroundProdromal Alzheimer's disease offers an opportunity to test the effect of drugs that modify the deposition of amyloid in the brain before the onset of dementia. Verubecestat is an orally administered \u03b2-site amyloid precursor protein-cleaving enzyme 1 (BACE-1) inhibitor that blocks production of amyloid-beta (A\u03b2). The drug did not prevent clinical progression in a trial involving patients with mild-to-moderate dementia due to Alzheimer's disease.MethodsWe conducted a randomized, double-blind, placebo-controlled, 104-week trial to evaluate verubecestat at doses of 12 mg and 40 mg per day, as compared with placebo, in patients who had memory impairment and elevated brain amyloid levels but whose condition did not meet the case definition of dementia. The primary outcome was the change from baseline to week 104 in the score on the Clinical Dementia Rating Scale-Sum of Boxes (CDR-SB; scores range from 0 to 18, with higher scores indicating worse cognition and daily function). Secondary outcomes included other assessments of cognition and daily function.ResultsThe trial was terminated for futility after 1454 patients had been enrolled; 485 had been assigned to receive verubecestat at a dose of 12 mg per day (the 12-mg group), 484 to receive verubecestat at a dose of 40 mg per day (the 40-mg group), and 485 to receive placebo. A total of 234 patients, 231 patients, and 239 patients per group, respectively, completed 104 weeks of the trial regimen. The estimated mean change from baseline to week 104 in the CDR-SB score was 1.65 in the 12-mg group, 2.02 in the 40-mg group, and 1.58 in the placebo group (P\u2009=\u20090.67 for the comparison between the 12-mg group and the placebo group and P\u2009=\u20090.01 for the comparison between the 40-mg group and the placebo group), suggesting a worse outcome in the higher-dose group than in the placebo group. The estimated rate of progression to dementia due to Alzheimer's disease was 24.5, 25.5, and 19.3 events per 100 patient-years in the 12-mg group, the 40-mg group, and the placebo group, respectively (hazard ratio for 40 mg vs. placebo, 1.38; 97.51% confidence interval, 1.07 to 1.79, not adjusted for multiple comparisons), favoring placebo. Adverse events were more common in the verubecestat groups than in the placebo group.ConclusionsVerubecestat did not improve clinical ratings of dementia among patients with prodromal Alzheime"
+          },
+          "caution": "Abstract may be truncated; no full text, causal adjudication or quality assessment."
+        },
+        "MED:31764959": {
+          "url": "https://europepmc.org/article/MED/31764959",
+          "fields": {
+            "title": "Efficacy and Safety of Lanabecestat for Treatment of Early and Mild Alzheimer Disease: The AMARANTH and DAYBREAK-ALZ Randomized Clinical Trials.",
+            "abstract": "ImportanceAlzheimer disease (AD) is a neurodegenerative disorder characterized by cognitive deterioration and impaired activities of daily living. Current treatments provide only minor symptomatic improvements with limited benefit duration. Lanabecestat, a brain-permeable inhibitor of human beta-site amyloid precursor protein-cleaving enzyme 1 (BACE1/\u03b2-secretase), was developed to modify the clinical course of AD by slowing disease progression.ObjectiveTo assess whether lanabecestat slows the progression of AD compared with placebo in patients with early AD (mild cognitive impairment) and mild AD dementia.Design, setting, and participantsAMARANTH (first patient visit on September 30, 2014; last patient visit on October 4, 2018) and DAYBREAK-ALZ (first patient visit on July 1, 2016; last patient visit on September 28, 2018) were randomized, placebo-controlled, phase 2/3 and phase 3 clinical trials lasting 104 weeks and 78 weeks, respectively. AMARANTH and DAYBREAK-ALZ were multicenter, global, double-blind studies conducted at 257 and 251 centers, respectively, located in 15 and 18 countries or territories, respectively. A population-based sample of men and women aged 55 to 85 years who met National Institute on Aging-Alzheimer's Association criteria for early AD or mild AD dementia was screened using cognitive assessments, and the presence of amyloid was confirmed. Patients were excluded for unstable medical conditions or medication use, significant cerebrovascular pathologic findings, or a history of vitiligo and/or current evidence of postinflammatory hypopigmentation. AMARANTH screened 6871 patients; 2218 (32.3%) were randomized, and 539 patients completed the study. DAYBREAK-ALZ screened 5706 patients; 1722 (30.2%) were randomized, and 76 patients completed the study.InterventionsPatients were randomized (1:1:1) to once-daily oral doses of lanabecestat (20 mg), lanabecestat (50 mg), or placebo.Main outcomes and measuresThe primary outcome measure was change from baseline on the 13-item Alzheimer Disease Assessment Scale-cognitive subscale. Secondary outcomes included Alzheimer's Disease Cooperative Study-Instrumental Activities of Daily Living Inventory, Clinical Dementia Rating, Functional Activities Questionnaire, Mini-Mental State Examination, and Neuropsychiatric Inventory. Efficacy analyses were conducted on the intent-to-treat population.ResultsAmo"
+          },
+          "caution": "Abstract may be truncated; no full text, causal adjudication or quality assessment."
+        },
+        "MED:32410694": {
+          "url": "https://europepmc.org/article/MED/32410694",
+          "fields": {
+            "title": "Long-term safety and tolerability of atabecestat (JNJ-54861911), an oral BACE1 inhibitor, in early Alzheimer's disease spectrum patients: a randomized, double-blind, placebo-controlled study and a two-period extension study.",
+            "abstract": "BackgroundAtabecestat, a potent brain-penetrable inhibitor of BACE1 activity that reduces CSF amyloid beta (A\u03b2), was developed for oral treatment for Alzheimer's disease (AD). The long-term safety and effect of atabecestat on cognitive performance in participants with predementia AD in two phase 2 studies were assessed.MethodsIn the placebo-controlled double-blind parent ALZ2002 study, participants aged 50 to 85\u2009years were randomized (1:1:1) to placebo or atabecestat 10 or 50\u2009mg once daily (later reduced to 5 and 25\u2009mg) for 6\u00a0months. Participants entered ALZ2004, a 12-month treatment extension with placebo or atabecestat 10 or 25\u2009mg, followed by an open-label phase. Safety, changes in CSF biomarker levels, brain volume, and effects on cognitive performance were assessed.ResultsOf 114 participants randomized in ALZ2002, 99 (87%) completed, 90 entered the ALZ2004 double-blind phase, and 77 progressed to the open-label phase. CSF A\u03b2 fragments and sAPP\u03b2 were reduced dose-proportionately. Decreases in whole brain and hippocampal volumes were greater in participants with mild cognitive impairment (MCI) due to AD than in preclinical AD, but were not affected by treatment. In ALZ2004, change from baseline in RBANS trended toward worse scores for atabecestat versus placebo. Elevated liver enzyme adverse events reported in 12 participants on atabecestat resulted in dosage modification and increased frequency of safety monitoring. Treatment discontinuation normalized ALT or AST in all except one with pretreatment elevation, which remained mildly elevated. No case met ALT/AST >\u20093\u00d7 ULN and total bilirubin >\u20092\u00d7 ULN (Hy's law).ConclusionAtabecestat was associated with trend toward declines in cognition, and elevation of liver enzymes.Trial registrationALZ2002: ClinicalTrials.gov, NCT02260674, registered October 9, 2014; ALZ2004: ClinicalTrials.gov, NCT02406027, registered April 1, 2015."
+          },
+          "caution": "Abstract may be truncated; no full text, causal adjudication or quality assessment."
+        }
+      },
+      "selection": {
+        "trial_records_sent": 6,
+        "trials_retrieved": 27,
+        "publications_sent": 4,
+        "publications_retrieved": 34,
+        "excerpt_character_limit": 2400
+      },
+      "missing_information": [
+        "Target validity cannot be inferred from compound or trial failure alone.",
+        "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+        "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+        "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+      ]
+    },
+    "warnings": [],
+    "reassessment": {
+      "assessment": "Reassessment of the initial hypothesis using accepted claims indicates that multiple verified oral BACE1 inhibitors (verubecestat, atabecestat, lanabecestat, and elenbecestat) consistently failed to provide clinical benefit across asymptomatic, prodromal, early, and mild-to-moderate Alzheimer's disease trials, with several trials terminated for futility or unfavorable risk-benefit profiles (DA_CLAIM_1, DA_CLAIM_2, DA_CLAIM_3). Crucially, although atabecestat achieved dose-proportionate pharmacodynamic reductions in cerebrospinal fluid amyloid-beta (Abeta) fragments and sAPPbeta, treatment was associated with a trend toward cognitive decline and liver enzyme elevations, while verubecestat was associated with worse dementia progression rates at the 40 mg dose in prodromal patients and increased adverse events (DA_CLAIM_1, DA_CLAIM_2, DA_CLAIM_4). These findings confirm that biochemical pathway modulation via BACE1 inhibition did not translate into clinical benefit under the tested regimens; however, target-level invalidity remains unproven because the clinical records cannot resolve whether cognitive worsening and organ toxicities represent on-target consequences of BACE1 inhibition or compound-specific off-target effects (DA_CLAIM_1, DA_CLAIM_2, DA_CLAIM_4).",
+      "evidence_claim_ids": [
+        "DA_CLAIM_1",
+        "DA_CLAIM_2",
+        "DA_CLAIM_3",
+        "DA_CLAIM_4"
+      ],
+      "remaining_uncertainty": [
+        "Whether cognitive worsening observed with verubecestat and atabecestat is an on-target result of BACE1 enzymatic inhibition or an off-target compound liability (DA_CLAIM_1, DA_CLAIM_2).",
+        "Whether treatment-limiting adverse events, including liver enzyme (ALT/AST) elevations with atabecestat and systemic or neuropsychiatric events with verubecestat, are mechanism-based or chemical-scaffold-specific (DA_CLAIM_2, DA_CLAIM_4).",
+        "Whether differences in target occupancy, selectivity, or dosing across lanabecestat and elenbecestat contributed to their unfavorable risk-benefit and futility outcomes (DA_CLAIM_3)."
+      ]
+    },
+    "experiment": {
+      "question": "Do the cognitive decline trends and safety liabilities (such as liver enzyme elevations) observed with clinical BACE1 inhibitors despite reductions in cerebrospinal fluid Abeta fragments and sAPPbeta result from on-target BACE1 loss of function or compound-specific off-target effects?",
+      "competing_explanations": [
+        "Provisional explanation 1 (On-target consequence): Pharmacological inhibition of BACE1 sufficient to lower Abeta fragments and sAPPbeta directly impairs cognitive function and triggers adverse phenotypes through on-target loss of BACE1 activity (DA_CLAIM_1, DA_CLAIM_2, DA_CLAIM_4).",
+        "Provisional explanation 2 (Off-target chemical liability): Cognitive worsening and organ toxicities (such as ALT/AST elevations) are driven by compound-specific off-target interactions of individual BACE1 inhibitor scaffolds independent of BACE1 inhibition (DA_CLAIM_1, DA_CLAIM_2, DA_CLAIM_3, DA_CLAIM_4)."
+      ],
+      "model": "High-level comparative in vivo preclinical study utilizing wild-type and genetically BACE1-deficient animal models exposed to clinically tested BACE1 inhibitors (verubecestat, atabecestat, lanabecestat, and elenbecestat).",
+      "measurement": "Quantification of cerebrospinal fluid Abeta fragments and sAPPbeta levels, longitudinal whole-brain and hippocampal volume assessments, behavioral cognitive performance readouts, and systemic safety biomarkers including serum liver enzymes (ALT and AST).",
+      "controls": [
+        "Vehicle-treated wild-type animals as a baseline reference.",
+        "Vehicle-treated BACE1-deficient animals to define the isolated phenotype of on-target BACE1 loss.",
+        "BACE1-deficient animals treated with each clinical BACE1 inhibitor (verubecestat, atabecestat, lanabecestat, elenbecestat) to detect off-target chemical effects independent of BACE1."
+      ],
+      "possible_results": [
+        "If vehicle-treated BACE1-deficient animals exhibit cognitive deficits matching those of inhibitor-treated wild-type animals, and administering the compounds to BACE1-deficient animals causes no additional cognitive or systemic toxicity, this supports the interpretation that cognitive worsening is an on-target consequence of BACE1 inhibition.",
+        "If administering atabecestat, verubecestat, or other BACE1 inhibitors to BACE1-deficient animals induces cognitive impairment or ALT/AST elevations beyond the genetic knockout baseline, this supports the interpretation that compound-specific off-target effects drive these liabilities.",
+        "If lower levels of genetic or pharmacological BACE1 reduction decrease Abeta fragments and sAPPbeta without causing the cognitive deficits seen at high-dose inhibition, this suggests a potential dosing window issue rather than absolute target invalidity."
+      ],
+      "limitations": [
+        "Preclinical animal models and behavioral readouts may not accurately replicate human prodromal or mild-to-moderate Alzheimer's disease pathology or clinical psychometric scales (such as ADAS-Cog, CDR-SB, or RBANS).",
+        "Species differences in drug metabolism may limit the translatability of preclinical ALT and AST liver enzyme readouts or dermatological and neuropsychiatric adverse events to human patients.",
+        "Gemini interpretation is not independent evidence or expert validation; source sampling and excerpt truncation limit conclusions."
+      ],
+      "decision_impact": "If results indicate that cognitive impairment is strictly an on-target effect tied to Abeta and sAPPbeta reduction, the researcher may consider deprioritizing broad BACE1 inhibition; if toxicities and cognitive deficits are shown to be off-target or restricted to excessive inhibition levels, the researcher may consider evaluating more selective or dose-adjusted strategies. All next steps require human researcher review and approval.",
+      "evidence_ids": [
+        "DA_CLAIM_1",
+        "DA_CLAIM_2",
+        "DA_CLAIM_3",
+        "DA_CLAIM_4"
+      ],
+      "status": "AI-generated unvalidated research proposal; not performed or validated. Researcher approval required."
+    },
+    "human_approval_required": true
+  },
+  "selected_experiment": {
+    "question": "Do the cognitive decline trends and safety liabilities (such as liver enzyme elevations) observed with clinical BACE1 inhibitors despite reductions in cerebrospinal fluid Abeta fragments and sAPPbeta result from on-target BACE1 loss of function or compound-specific off-target effects?",
+    "competing_explanations": [
+      "Provisional explanation 1 (On-target consequence): Pharmacological inhibition of BACE1 sufficient to lower Abeta fragments and sAPPbeta directly impairs cognitive function and triggers adverse phenotypes through on-target loss of BACE1 activity (DA_CLAIM_1, DA_CLAIM_2, DA_CLAIM_4).",
+      "Provisional explanation 2 (Off-target chemical liability): Cognitive worsening and organ toxicities (such as ALT/AST elevations) are driven by compound-specific off-target interactions of individual BACE1 inhibitor scaffolds independent of BACE1 inhibition (DA_CLAIM_1, DA_CLAIM_2, DA_CLAIM_3, DA_CLAIM_4)."
+    ],
+    "model": "High-level comparative in vivo preclinical study utilizing wild-type and genetically BACE1-deficient animal models exposed to clinically tested BACE1 inhibitors (verubecestat, atabecestat, lanabecestat, and elenbecestat).",
+    "measurement": "Quantification of cerebrospinal fluid Abeta fragments and sAPPbeta levels, longitudinal whole-brain and hippocampal volume assessments, behavioral cognitive performance readouts, and systemic safety biomarkers including serum liver enzymes (ALT and AST).",
+    "controls": [
+      "Vehicle-treated wild-type animals as a baseline reference.",
+      "Vehicle-treated BACE1-deficient animals to define the isolated phenotype of on-target BACE1 loss.",
+      "BACE1-deficient animals treated with each clinical BACE1 inhibitor (verubecestat, atabecestat, lanabecestat, elenbecestat) to detect off-target chemical effects independent of BACE1."
+    ],
+    "possible_results": [
+      "If vehicle-treated BACE1-deficient animals exhibit cognitive deficits matching those of inhibitor-treated wild-type animals, and administering the compounds to BACE1-deficient animals causes no additional cognitive or systemic toxicity, this supports the interpretation that cognitive worsening is an on-target consequence of BACE1 inhibition.",
+      "If administering atabecestat, verubecestat, or other BACE1 inhibitors to BACE1-deficient animals induces cognitive impairment or ALT/AST elevations beyond the genetic knockout baseline, this supports the interpretation that compound-specific off-target effects drive these liabilities.",
+      "If lower levels of genetic or pharmacological BACE1 reduction decrease Abeta fragments and sAPPbeta without causing the cognitive deficits seen at high-dose inhibition, this suggests a potential dosing window issue rather than absolute target invalidity."
+    ],
+    "limitations": [
+      "Preclinical animal models and behavioral readouts may not accurately replicate human prodromal or mild-to-moderate Alzheimer's disease pathology or clinical psychometric scales (such as ADAS-Cog, CDR-SB, or RBANS).",
+      "Species differences in drug metabolism may limit the translatability of preclinical ALT and AST liver enzyme readouts or dermatological and neuropsychiatric adverse events to human patients.",
+      "Gemini interpretation is not independent evidence or expert validation; source sampling and excerpt truncation limit conclusions."
+    ],
+    "decision_impact": "If results indicate that cognitive impairment is strictly an on-target effect tied to Abeta and sAPPbeta reduction, the researcher may consider deprioritizing broad BACE1 inhibition; if toxicities and cognitive deficits are shown to be off-target or restricted to excessive inhibition levels, the researcher may consider evaluating more selective or dose-adjusted strategies. All next steps require human researcher review and approval.",
+    "evidence_ids": [
+      "DA_CLAIM_1",
+      "DA_CLAIM_2",
+      "DA_CLAIM_3",
+      "DA_CLAIM_4"
+    ],
+    "status": "AI-generated unvalidated research proposal; not performed or validated. Researcher approval required."
+  }
+}

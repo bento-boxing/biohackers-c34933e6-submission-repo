@@ -1,0 +1,1367 @@
+{
+  "checked_at_utc": "2026-11-07T19:36:35.152709+00:00",
+  "method": "Full API v2 study endpoint without fields projection; inspect field membership separately from its value.",
+  "records": [
+    {
+      "nct_id": "NCT02565511",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02565511",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02565511",
+        "checked_at_utc": "2026-11-07T19:36:26.004187+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2021-07",
+        "overallStatus": "TERMINATED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2015-11-30",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2020-04-30",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2020-04-30",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2015-09-28",
+        "studyFirstSubmitQcDate": "2015-09-29",
+        "studyFirstPostDateStruct": {
+          "date": "2015-10-01",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2021-04-29",
+        "resultsFirstSubmitQcDate": "2021-07-07",
+        "resultsFirstPostDateStruct": {
+          "date": "2021-07-08",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2021-07-07",
+        "lastUpdatePostDateStruct": {
+          "date": "2021-07-08",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT03131453",
+      "registry_url": "https://clinicaltrials.gov/study/NCT03131453",
+      "stop_reason": {
+        "state": "reported",
+        "value": "The study was terminated due to safety issues.",
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT03131453",
+        "checked_at_utc": "2026-11-07T19:36:26.148587+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "The study was terminated due to safety issues.",
+      "status_module": {
+        "statusVerifiedDate": "2021-08",
+        "overallStatus": "TERMINATED",
+        "whyStopped": "The study was terminated due to safety issues.",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2017-08-03",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2020-03-26",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2020-03-26",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2017-04-05",
+        "studyFirstSubmitQcDate": "2017-04-24",
+        "studyFirstPostDateStruct": {
+          "date": "2017-04-27",
+          "type": "ACTUAL"
+        },
+        "resultsFirstSubmitDate": "2021-03-25",
+        "resultsFirstSubmitQcDate": "2021-08-04",
+        "resultsFirstPostDateStruct": {
+          "date": "2021-08-05",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2021-08-04",
+        "lastUpdatePostDateStruct": {
+          "date": "2021-08-05",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "The study was terminated due to safety issues.",
+      "present_value_preserved": true,
+      "display": "The study was terminated due to safety issues."
+    },
+    {
+      "nct_id": "NCT01819545",
+      "registry_url": "https://clinicaltrials.gov/study/NCT01819545",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01819545",
+        "checked_at_utc": "2026-11-07T19:36:26.595863+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2014-02",
+        "overallStatus": "UNKNOWN",
+        "lastKnownStatus": "RECRUITING",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2012-01"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2014-07",
+          "type": "ESTIMATED"
+        },
+        "completionDateStruct": {
+          "date": "2015-12",
+          "type": "ESTIMATED"
+        },
+        "studyFirstSubmitDate": "2013-03-24",
+        "studyFirstSubmitQcDate": "2013-03-24",
+        "studyFirstPostDateStruct": {
+          "date": "2013-03-27",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2014-02-16",
+        "lastUpdatePostDateStruct": {
+          "date": "2014-02-19",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT01739348",
+      "registry_url": "https://clinicaltrials.gov/study/NCT01739348",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01739348",
+        "checked_at_utc": "2026-11-07T19:36:26.964129+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2018-09",
+        "overallStatus": "TERMINATED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2012-11-30",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2017-04-14",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2017-04-14",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2012-11-29",
+        "studyFirstSubmitQcDate": "2012-11-29",
+        "studyFirstPostDateStruct": {
+          "date": "2012-12-03",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2018-04-11",
+        "resultsFirstSubmitQcDate": "2018-04-11",
+        "resultsFirstPostDateStruct": {
+          "date": "2018-05-16",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2018-09-24",
+        "lastUpdatePostDateStruct": {
+          "date": "2018-10-24",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT01496170",
+      "registry_url": "https://clinicaltrials.gov/study/NCT01496170",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01496170",
+        "checked_at_utc": "2026-11-07T19:36:27.211649+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2015-10",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2011-12"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2012-06",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2012-06",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2011-12-06",
+        "studyFirstSubmitQcDate": "2011-12-16",
+        "studyFirstPostDateStruct": {
+          "date": "2011-12-21",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2015-10-22",
+        "lastUpdatePostDateStruct": {
+          "date": "2015-10-23",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT01537757",
+      "registry_url": "https://clinicaltrials.gov/study/NCT01537757",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01537757",
+        "checked_at_utc": "2026-11-07T19:36:27.618794+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2015-01",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2012-03"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2012-05",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2012-05",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2012-02-17",
+        "studyFirstSubmitQcDate": "2012-02-17",
+        "studyFirstPostDateStruct": {
+          "date": "2012-02-23",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2015-01-23",
+        "lastUpdatePostDateStruct": {
+          "date": "2015-01-26",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02910739",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02910739",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02910739",
+        "checked_at_utc": "2026-11-07T19:36:27.893462+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2018-02",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2016-10-11",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2017-04-03",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2017-04-12",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2016-09-20",
+        "studyFirstSubmitQcDate": "2016-09-20",
+        "studyFirstPostDateStruct": {
+          "date": "2016-09-22",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2018-01-11",
+        "resultsFirstSubmitQcDate": "2018-02-07",
+        "resultsFirstPostDateStruct": {
+          "date": "2018-10-01",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2018-02-07",
+        "lastUpdatePostDateStruct": {
+          "date": "2018-10-01",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT01953601",
+      "registry_url": "https://clinicaltrials.gov/study/NCT01953601",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01953601",
+        "checked_at_utc": "2026-11-07T19:36:28.277763+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2019-05",
+        "overallStatus": "TERMINATED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2013-11-05",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2018-04-17",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2018-04-17",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2013-09-25",
+        "studyFirstSubmitQcDate": "2013-09-25",
+        "studyFirstPostDateStruct": {
+          "date": "2013-10-01",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2019-04-15",
+        "resultsFirstSubmitQcDate": "2019-05-15",
+        "resultsFirstPostDateStruct": {
+          "date": "2019-05-17",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2019-05-15",
+        "lastUpdatePostDateStruct": {
+          "date": "2019-05-17",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02197884",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02197884",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02197884",
+        "checked_at_utc": "2026-11-07T19:36:28.646039+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2014-10",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2014-07"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2014-09",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2014-09",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2014-07-22",
+        "studyFirstSubmitQcDate": "2014-07-22",
+        "studyFirstPostDateStruct": {
+          "date": "2014-07-23",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2014-10-13",
+        "lastUpdatePostDateStruct": {
+          "date": "2014-10-15",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02260674",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02260674",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02260674",
+        "checked_at_utc": "2026-11-07T19:36:28.953805+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2025-04",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2014-11"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2016-06",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2016-06",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2014-10-06",
+        "studyFirstSubmitQcDate": "2014-10-06",
+        "studyFirstPostDateStruct": {
+          "date": "2014-10-09",
+          "type": "ESTIMATED"
+        },
+        "dispFirstSubmitDate": "2017-03-01",
+        "dispFirstSubmitQcDate": "2017-03-01",
+        "dispFirstPostDateStruct": {
+          "date": "2017-03-03",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2025-04-25",
+        "lastUpdatePostDateStruct": {
+          "date": "2025-04-29",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02360657",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02360657",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02360657",
+        "checked_at_utc": "2026-11-07T19:36:29.286404+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2019-01",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2015-02-16",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2015-09-08",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2015-09-08",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2015-02-05",
+        "studyFirstSubmitQcDate": "2015-02-05",
+        "studyFirstPostDateStruct": {
+          "date": "2015-02-10",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2019-01-31",
+        "lastUpdatePostDateStruct": {
+          "date": "2019-02-04",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT01978548",
+      "registry_url": "https://clinicaltrials.gov/study/NCT01978548",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01978548",
+        "checked_at_utc": "2026-11-07T19:36:29.656394+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2015-06",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2013-12"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2015-04",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2015-04",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2013-10-31",
+        "studyFirstSubmitQcDate": "2013-10-31",
+        "studyFirstPostDateStruct": {
+          "date": "2013-11-07",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2015-06-24",
+        "lastUpdatePostDateStruct": {
+          "date": "2015-06-25",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02569398",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02569398",
+      "stop_reason": {
+        "state": "reported",
+        "value": "Change in benefit-risk profile for individuals with early sporadic Alzheimer Disease because of elevations in liver enzymes in subjects receiving atabecestat",
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02569398",
+        "checked_at_utc": "2026-11-07T19:36:30.085168+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "Change in benefit-risk profile for individuals with early sporadic Alzheimer Disease because of elevations in liver enzymes in subjects receiving atabecestat",
+      "status_module": {
+        "statusVerifiedDate": "2025-04",
+        "overallStatus": "TERMINATED",
+        "whyStopped": "Change in benefit-risk profile for individuals with early sporadic Alzheimer Disease because of elevations in liver enzymes in subjects receiving atabecestat",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2015-10-29",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2018-12-20",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2018-12-20",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2015-10-05",
+        "studyFirstSubmitQcDate": "2015-10-05",
+        "studyFirstPostDateStruct": {
+          "date": "2015-10-06",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2019-12-20",
+        "resultsFirstSubmitQcDate": "2020-02-03",
+        "resultsFirstPostDateStruct": {
+          "date": "2020-02-10",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2025-04-25",
+        "lastUpdatePostDateStruct": {
+          "date": "2025-04-29",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "Change in benefit-risk profile for individuals with early sporadic Alzheimer Disease because of elevations in liver enzymes in subjects receiving atabecestat",
+      "present_value_preserved": true,
+      "display": "Change in benefit-risk profile for individuals with early sporadic Alzheimer Disease because of elevations in liver enzymes in subjects receiving atabecestat"
+    },
+    {
+      "nct_id": "NCT02180269",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02180269",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02180269",
+        "checked_at_utc": "2026-11-07T19:36:30.382276+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2014-09",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2014-06"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2014-08",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2014-08",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2014-07-01",
+        "studyFirstSubmitQcDate": "2014-07-01",
+        "studyFirstPostDateStruct": {
+          "date": "2014-07-02",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2014-09-11",
+        "lastUpdatePostDateStruct": {
+          "date": "2014-09-12",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT03587376",
+      "registry_url": "https://clinicaltrials.gov/study/NCT03587376",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT03587376",
+        "checked_at_utc": "2026-11-07T19:36:30.794295+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2025-04",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2018-05-30",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2018-08-23",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2018-08-23",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2018-07-04",
+        "studyFirstSubmitQcDate": "2018-07-04",
+        "studyFirstPostDateStruct": {
+          "date": "2018-07-16",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2025-04-25",
+        "lastUpdatePostDateStruct": {
+          "date": "2025-04-27",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02406027",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02406027",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02406027",
+        "checked_at_utc": "2026-11-07T19:36:31.111696+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2025-04",
+        "overallStatus": "TERMINATED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2015-07-02",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2018-06-28",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2018-06-28",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2015-03-27",
+        "studyFirstSubmitQcDate": "2015-03-27",
+        "studyFirstPostDateStruct": {
+          "date": "2015-04-01",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2019-06-25",
+        "resultsFirstSubmitQcDate": "2019-09-05",
+        "resultsFirstPostDateStruct": {
+          "date": "2019-09-09",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2025-04-25",
+        "lastUpdatePostDateStruct": {
+          "date": "2025-04-29",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02211079",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02211079",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02211079",
+        "checked_at_utc": "2026-11-07T19:36:31.398937+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2015-11",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2014-09"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2014-11",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2014-11",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2014-08-05",
+        "studyFirstSubmitQcDate": "2014-08-05",
+        "studyFirstPostDateStruct": {
+          "date": "2014-08-07",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2015-11-23",
+        "lastUpdatePostDateStruct": {
+          "date": "2015-11-24",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT01887535",
+      "registry_url": "https://clinicaltrials.gov/study/NCT01887535",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01887535",
+        "checked_at_utc": "2026-11-07T19:36:31.819482+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2014-01",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2013-05"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2013-12",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2013-12",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2013-06-05",
+        "studyFirstSubmitQcDate": "2013-06-24",
+        "studyFirstPostDateStruct": {
+          "date": "2013-06-27",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2014-01-13",
+        "lastUpdatePostDateStruct": {
+          "date": "2014-01-14",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02260700",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02260700",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02260700",
+        "checked_at_utc": "2026-11-07T19:36:32.125454+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2014-10",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2013-09"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2013-11",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2013-11",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2014-10-06",
+        "studyFirstSubmitQcDate": "2014-10-06",
+        "studyFirstPostDateStruct": {
+          "date": "2014-10-09",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2014-10-06",
+        "lastUpdatePostDateStruct": {
+          "date": "2014-10-09",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT01827982",
+      "registry_url": "https://clinicaltrials.gov/study/NCT01827982",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01827982",
+        "checked_at_utc": "2026-11-07T19:36:32.535699+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2014-11",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2013-03"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2013-07",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2013-07",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2013-04-05",
+        "studyFirstSubmitQcDate": "2013-04-05",
+        "studyFirstPostDateStruct": {
+          "date": "2013-04-10",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2014-11-07",
+        "lastUpdatePostDateStruct": {
+          "date": "2014-11-10",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02783573",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02783573",
+      "stop_reason": {
+        "state": "reported",
+        "value": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility.",
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02783573",
+        "checked_at_utc": "2026-11-07T19:36:33.103237+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility.",
+      "status_module": {
+        "statusVerifiedDate": "2019-10",
+        "overallStatus": "TERMINATED",
+        "whyStopped": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility.",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2016-07-01",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2018-09-28",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2018-09-28",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2016-05-24",
+        "studyFirstSubmitQcDate": "2016-05-24",
+        "studyFirstPostDateStruct": {
+          "date": "2016-05-26",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2019-06-11",
+        "resultsFirstSubmitQcDate": "2019-07-15",
+        "resultsFirstPostDateStruct": {
+          "date": "2019-08-06",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2019-11-19",
+        "lastUpdatePostDateStruct": {
+          "date": "2019-12-03",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility.",
+      "present_value_preserved": true,
+      "display": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility."
+    },
+    {
+      "nct_id": "NCT01795339",
+      "registry_url": "https://clinicaltrials.gov/study/NCT01795339",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01795339",
+        "checked_at_utc": "2026-11-07T19:36:33.340322+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2014-04",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2013-03"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2014-03",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2014-03",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2013-02-18",
+        "studyFirstSubmitQcDate": "2013-02-18",
+        "studyFirstPostDateStruct": {
+          "date": "2013-02-20",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2014-04-02",
+        "lastUpdatePostDateStruct": {
+          "date": "2014-04-03",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02040987",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02040987",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02040987",
+        "checked_at_utc": "2026-11-07T19:36:33.624885+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2014-07",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2014-01"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2014-05",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2014-05",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2014-01-17",
+        "studyFirstSubmitQcDate": "2014-01-17",
+        "studyFirstPostDateStruct": {
+          "date": "2014-01-20",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2014-07-02",
+        "lastUpdatePostDateStruct": {
+          "date": "2014-07-03",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02972658",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02972658",
+      "stop_reason": {
+        "state": "reported",
+        "value": "As the feeder study (AZES) was stopped for futility after an independent assessment, this trial was also stopped.",
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02972658",
+        "checked_at_utc": "2026-11-07T19:36:33.984367+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "As the feeder study (AZES) was stopped for futility after an independent assessment, this trial was also stopped.",
+      "status_module": {
+        "statusVerifiedDate": "2019-11",
+        "overallStatus": "TERMINATED",
+        "whyStopped": "As the feeder study (AZES) was stopped for futility after an independent assessment, this trial was also stopped.",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2017-03-15",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2018-10-02",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2018-10-02",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2016-11-21",
+        "studyFirstSubmitQcDate": "2016-11-21",
+        "studyFirstPostDateStruct": {
+          "date": "2016-11-23",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2019-06-11",
+        "resultsFirstSubmitQcDate": "2019-06-11",
+        "resultsFirstPostDateStruct": {
+          "date": "2019-07-05",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2019-11-19",
+        "lastUpdatePostDateStruct": {
+          "date": "2019-12-03",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "As the feeder study (AZES) was stopped for futility after an independent assessment, this trial was also stopped.",
+      "present_value_preserved": true,
+      "display": "As the feeder study (AZES) was stopped for futility after an independent assessment, this trial was also stopped."
+    },
+    {
+      "nct_id": "NCT02245737",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02245737",
+      "stop_reason": {
+        "state": "reported",
+        "value": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility",
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02245737",
+        "checked_at_utc": "2026-11-07T19:36:34.374471+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility",
+      "status_module": {
+        "statusVerifiedDate": "2019-10",
+        "overallStatus": "TERMINATED",
+        "whyStopped": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2014-09-30",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2018-10-04",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2018-10-04",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2014-09-18",
+        "studyFirstSubmitQcDate": "2014-09-18",
+        "studyFirstPostDateStruct": {
+          "date": "2014-09-22",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2019-06-11",
+        "resultsFirstSubmitQcDate": "2019-07-15",
+        "resultsFirstPostDateStruct": {
+          "date": "2019-08-06",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2019-11-19",
+        "lastUpdatePostDateStruct": {
+          "date": "2019-12-03",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility",
+      "present_value_preserved": true,
+      "display": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility"
+    },
+    {
+      "nct_id": "NCT02126514",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02126514",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02126514",
+        "checked_at_utc": "2026-11-07T19:36:34.681050+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "",
+      "status_module": {
+        "statusVerifiedDate": "2014-06",
+        "overallStatus": "COMPLETED",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2014-05"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2014-05",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2014-05",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2014-04-28",
+        "studyFirstSubmitQcDate": "2014-04-28",
+        "studyFirstPostDateStruct": {
+          "date": "2014-04-30",
+          "type": "ESTIMATED"
+        },
+        "lastUpdateSubmitDate": "2014-06-13",
+        "lastUpdatePostDateStruct": {
+          "date": "2014-06-16",
+          "type": "ESTIMATED"
+        }
+      },
+      "parsed_value": "",
+      "present_value_preserved": null,
+      "display": "Not reported in registry"
+    },
+    {
+      "nct_id": "NCT02956486",
+      "registry_url": "https://clinicaltrials.gov/study/NCT02956486",
+      "stop_reason": {
+        "state": "reported",
+        "value": "Due to an unfavorable risk-benefit ratio including no evidence of potential efficacy, and the adverse event profile of E2609 being worse than placebo.",
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT02956486",
+        "checked_at_utc": "2026-11-07T19:36:35.124044+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "stored_parsed_value": "Due to an unfavorable risk-benefit ratio including no evidence of potential efficacy, and the adverse event profile of E2609 being worse than placebo.",
+      "status_module": {
+        "statusVerifiedDate": "2021-01",
+        "overallStatus": "TERMINATED",
+        "whyStopped": "Due to an unfavorable risk-benefit ratio including no evidence of potential efficacy, and the adverse event profile of E2609 being worse than placebo.",
+        "expandedAccessInfo": {
+          "hasExpandedAccess": false
+        },
+        "startDateStruct": {
+          "date": "2016-10-20",
+          "type": "ACTUAL"
+        },
+        "primaryCompletionDateStruct": {
+          "date": "2020-01-15",
+          "type": "ACTUAL"
+        },
+        "completionDateStruct": {
+          "date": "2020-01-15",
+          "type": "ACTUAL"
+        },
+        "studyFirstSubmitDate": "2016-11-03",
+        "studyFirstSubmitQcDate": "2016-11-03",
+        "studyFirstPostDateStruct": {
+          "date": "2016-11-07",
+          "type": "ESTIMATED"
+        },
+        "resultsFirstSubmitDate": "2021-01-14",
+        "resultsFirstSubmitQcDate": "2021-01-14",
+        "resultsFirstPostDateStruct": {
+          "date": "2021-02-03",
+          "type": "ACTUAL"
+        },
+        "lastUpdateSubmitDate": "2021-01-14",
+        "lastUpdatePostDateStruct": {
+          "date": "2021-02-03",
+          "type": "ACTUAL"
+        }
+      },
+      "parsed_value": "Due to an unfavorable risk-benefit ratio including no evidence of potential efficacy, and the adverse event profile of E2609 being worse than placebo.",
+      "present_value_preserved": true,
+      "display": "Due to an unfavorable risk-benefit ratio including no evidence of potential efficacy, and the adverse event profile of E2609 being worse than placebo."
+    }
+  ]
+}
