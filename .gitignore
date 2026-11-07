@@ -45,3 +45,8 @@ backend/venv/
 backend/__pycache__/
 backend/*.pyc
 backend/.env
+
+# target scout runtime
+backend/cache/
+backend/runs/
+backend/venv/
