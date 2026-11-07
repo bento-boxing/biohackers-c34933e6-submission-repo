@@ -1,0 +1,78 @@
+import json
+from types import SimpleNamespace
+
+import pytest
+
+from pipeline.models import Weights
+from pipeline.scout import rationale as R
+from pipeline.scout.pipeline import rescore, run_scout
+
+ALLOWED = {"symbol", "rank", "components", "weights", "datatype_scores", "potent_count",
+           "has_approved_drug", "literature_hits", "pmids", "tractability_sm_labels", "safety_flags"}
+
+
+@pytest.fixture
+def result(client):
+    return run_scout("Parkinson disease", client=client)
+
+
+def test_evidence_payload_has_only_allowed_keys(result):
+    payload = R.evidence_payload(result, top=10)
+    assert len(payload) == 10
+    for row in payload:
+        assert set(row) == ALLOWED
+
+
+def test_rationale_key_changes_with_weights(result):
+    assert R.rationale_key(result) != R.rationale_key(rescore(result, Weights(1, 0, 0, 0)))
+    assert R.rationale_key(result) == R.rationale_key(rescore(result, Weights(4, 3, 2, 1)))
+
+
+def test_explain_uses_cached_file_without_api(result, tmp_path, monkeypatch):
+    key = R.rationale_key(result)
+    (tmp_path / f"{key}.json").write_text(json.dumps({"items": [
+        {"symbol": "LRRK2", "rationale": "cached text", "evidence_strength": "strong"}]}))
+    monkeypatch.setattr(R, "_client", lambda: (_ for _ in ()).throw(AssertionError("api called")))
+    out = R.explain(result, cache_dir=tmp_path / "w", read_dirs=(tmp_path,))
+    assert out is not None
+    lrrk2 = next(t for t in out.targets if t.evidence.symbol == "LRRK2")
+    assert (lrrk2.rationale, lrrk2.evidence_strength) == ("cached text", "strong")
+
+
+def test_explain_returns_none_without_credentials(result, tmp_path, monkeypatch):
+    monkeypatch.setattr(R, "_client", lambda: None)
+    assert R.explain(result, cache_dir=tmp_path, read_dirs=()) is None
+
+
+def test_explain_returns_none_on_refusal(result, tmp_path, monkeypatch):
+    class FakeMessages:
+        def create(self, **kw):
+            return SimpleNamespace(stop_reason="refusal", content=[])
+
+    fake = SimpleNamespace(beta=SimpleNamespace(messages=FakeMessages()))
+    monkeypatch.setattr(R, "_client", lambda: fake)
+    assert R.explain(result, cache_dir=tmp_path, read_dirs=()) is None
+    assert list(tmp_path.glob("*.json")) == []
+
+
+def test_explain_parses_and_caches_response(result, tmp_path, monkeypatch):
+    captured = {}
+
+    class FakeMessages:
+        def create(self, **kw):
+            captured.update(kw)
+            items = [{"symbol": r["symbol"], "rationale": f"because {r['symbol']}", "evidence_strength": "moderate"}
+                     for r in json.loads(kw["messages"][0]["content"])]
+            return SimpleNamespace(stop_reason="end_turn",
+                                   content=[SimpleNamespace(type="text", text=json.dumps({"items": items}))])
+
+    fake = SimpleNamespace(beta=SimpleNamespace(messages=FakeMessages()))
+    monkeypatch.setattr(R, "_client", lambda: fake)
+    out = R.explain(result, cache_dir=tmp_path, read_dirs=())
+    assert out.targets[0].rationale == f"because {out.targets[0].evidence.symbol}"
+    assert captured["model"] == "claude-opus-5-5" and captured["fallbacks"] == "default"
+    assert captured["betas"] == ["server-side-fallback-2026-07-01"]
+    assert captured["output_config"]["effort"] == "low"
+    assert captured["output_config"]["format"]["type"] == "json_schema"
+    assert "thinking" not in captured
+    assert (tmp_path / f"{R.rationale_key(result)}.json").exists()

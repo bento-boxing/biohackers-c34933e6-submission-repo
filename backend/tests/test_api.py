@@ -80,3 +80,27 @@ def test_approval_unknown_run_404(api):
     body["run_id"] = "nope"
     r = api.post("/api/approvals", json=body)
     assert r.status_code == 404 and "nope" in r.get_json()["error"]
+
+
+def test_rationale_endpoint_unavailable_without_key(api, monkeypatch):
+    from pipeline import api as api_mod
+    monkeypatch.setattr(api_mod, "explain", lambda result, **kw: None)
+    run = scout(api).get_json()
+    r = api.post("/api/rationale", json={"run_id": run["run_id"], "weights": run["default_weights"]})
+    assert r.status_code == 200 and r.get_json()["available"] is False
+
+
+def test_rationale_endpoint_returns_items(api, monkeypatch):
+    from dataclasses import replace
+    from pipeline import api as api_mod
+
+    def fake_explain(result, **kw):
+        ts = [replace(t, rationale="r", evidence_strength="weak") for t in result.targets[:10]] + result.targets[10:]
+        return replace(result, targets=ts)
+
+    monkeypatch.setattr(api_mod, "explain", fake_explain)
+    run = scout(api).get_json()
+    w = {"genetic": 1, "association": 0, "druggability": 0, "literature": 0}
+    r = api.post("/api/rationale", json={"run_id": run["run_id"], "weights": w}).get_json()
+    assert len(r["rationales"]) == 10 and r["rationales"][0]["evidence_strength"] == "weak"
+    assert r["weights"]["genetic"] == 1.0 and r["run_id"] == run["run_id"]

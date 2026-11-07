@@ -57,5 +57,14 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--disease", default="Parkinson disease")
     ap.add_argument("--n", type=int, default=25)
+    ap.add_argument("--rationale", action="store_true",
+                    help="also record the default-weights LLM rationale (needs ANTHROPIC_API_KEY)")
     a = ap.parse_args()
     record(a.disease, a.n)
+    if a.rationale:
+        from pipeline.scout.pipeline import run_scout
+        from pipeline.scout.rationale import DEMO_RATIONALE_DIR, explain
+
+        result = run_scout(a.disease, n=a.n, client=HttpClient(write_dir=DEMO_DIR, ttl_days=36500))
+        out = explain(result, cache_dir=DEMO_RATIONALE_DIR, read_dirs=())
+        print("rationale recorded" if out else "rationale NOT recorded (no key or refusal)")

@@ -14,6 +14,7 @@ from pipeline.clients.opentargets import DiseaseNotFound
 from pipeline.http import CacheMiss, HttpClient, default_client
 from pipeline.models import ScoutResult, Weights
 from pipeline.scout.pipeline import rescore, run_scout
+from pipeline.scout.rationale import explain
 
 RUNS: dict[str, ScoutResult] = {}
 SCORE_KEYS = ("genetic", "association", "druggability", "literature", "total")
@@ -108,6 +109,20 @@ def create_app(client: HttpClient | None = None,
         approval = audit.make_approval(result, target, reason)
         audit.append_jsonl(approvals_path, approval.__dict__)
         return jsonify(approval.__dict__)
+
+    @app.post("/api/rationale")
+    def rationale():
+        body = request.get_json(silent=True) or {}
+        run = RUNS.get(body.get("run_id", ""))
+        if run is None:
+            return error(f"no run {body.get('run_id')}", 404)
+        weights = _weights_from(body.get("weights"))
+        result = explain(rescore(run, weights))
+        if result is None:
+            return jsonify({"available": False, "reason": "no API key or the model declined"})
+        items = [{"symbol": t.evidence.symbol, "rationale": t.rationale, "evidence_strength": t.evidence_strength}
+                 for t in result.targets if t.rationale]
+        return jsonify({"run_id": body["run_id"], "weights": weights.normalised().as_dict(), "rationales": items})
 
     app.config["APPROVALS_PATH"] = approvals_path
     app.config["SHORTLISTS_PATH"] = shortlists_path
