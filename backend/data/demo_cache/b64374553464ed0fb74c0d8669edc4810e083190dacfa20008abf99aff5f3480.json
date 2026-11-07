@@ -1,0 +1,1 @@
+{"ts": 1794075979.8012414, "method": "POST", "url": "https://api.platform.opentargets.org/api/v4/graphql", "params": null, "body": {"query": "\nquery($q:String!){ search(queryString:$q, entityNames:[\"disease\"], page:{index:0,size:5}){ hits{ id name entity } } }\n", "variables": {"q": "zzqxv-not-a-disease"}}, "data": {"data": {"search": {"hits": []}}}}
