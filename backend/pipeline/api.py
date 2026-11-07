@@ -11,7 +11,7 @@ from flask_cors import CORS
 
 from pipeline import audit
 from pipeline.clients.opentargets import DiseaseNotFound
-from pipeline.http import CacheMiss, HttpClient, default_client
+from pipeline.http import CacheMiss, HttpClient, UpstreamError, default_client
 from pipeline.models import ScoutResult, Weights
 from pipeline.scout.pipeline import rescore, run_scout
 from pipeline.scout.rationale import explain
@@ -57,10 +57,20 @@ def screening_json(r: ScreeningResult) -> dict:
             "compounds": [compound_json(c) for c in r.compounds]}
 
 
+class BadInput(ValueError):
+    pass
+
+
 def _weights_from(d: dict | None) -> Weights:
     d = d or {}
-    return Weights(float(d.get("genetic", 0.4)), float(d.get("association", 0.3)),
-                   float(d.get("druggability", 0.2)), float(d.get("literature", 0.1)))
+    try:
+        w = Weights(float(d.get("genetic", 0.4)), float(d.get("association", 0.3)),
+                    float(d.get("druggability", 0.2)), float(d.get("literature", 0.1)))
+    except (TypeError, ValueError):
+        raise BadInput("weights must be numbers")
+    if min(w.as_dict().values()) < 0:
+        raise BadInput("weights must not be negative")
+    return w
 
 
 def create_app(client: HttpClient | None = None,
@@ -74,9 +84,14 @@ def create_app(client: HttpClient | None = None,
         return jsonify({"error": msg}), status
 
     @app.errorhandler(CacheMiss)
+    @app.errorhandler(UpstreamError)
     @app.errorhandler(requests.RequestException)
     def upstream(e):
         return error(f"upstream failure: {e}", 502)
+
+    @app.errorhandler(BadInput)
+    def bad_input(e):
+        return error(str(e), 400)
 
     @app.route("/api/health")
     def health():
@@ -88,7 +103,10 @@ def create_app(client: HttpClient | None = None,
         name = (body.get("disease") or "").strip()
         if not name:
             return error("disease is required", 400)
-        n = max(5, min(50, int(body.get("n") or 25)))
+        try:
+            n = max(5, min(50, int(body.get("n") or 25)))
+        except (TypeError, ValueError):
+            raise BadInput("n must be an integer between 5 and 50")
         try:
             result = run_scout(name, n=n, client=http)
         except DiseaseNotFound:
@@ -106,7 +124,7 @@ def create_app(client: HttpClient | None = None,
         body = request.get_json(silent=True) or {}
         run = RUNS.get(body.get("run_id", ""))
         if run is None:
-            return error(f"no run {body.get('run_id')}", 404)
+            return error(f"no run {body.get('run_id')} (runs expire on server restart: re-run the scout)", 404)
         weights = _weights_from(body.get("weights"))
         result = rescore(run, weights)
         target = next((t for t in result.targets if t.evidence.symbol == body.get("symbol")), None)
@@ -116,9 +134,13 @@ def create_app(client: HttpClient | None = None,
         s = target.scores
         server = {"genetic": s.genetic, "association": s.association, "druggability": s.druggability,
                   "literature": s.literature, "total": s.total}
-        for k in SCORE_KEYS:
-            if k not in posted or abs(float(posted[k]) - server[k]) > SCORE_TOLERANCE:
-                return error("scores do not match server recomputation", 400)
+        try:
+            mismatch = any(k not in posted or abs(float(posted[k]) - server[k]) > SCORE_TOLERANCE
+                           for k in SCORE_KEYS)
+        except (TypeError, ValueError):
+            raise BadInput("scores must be numbers")
+        if mismatch:
+            return error("scores do not match server recomputation", 400)
         reason = (body.get("reason") or "").strip()
         if not reason:
             return error("reason is required", 400)
@@ -131,11 +153,15 @@ def create_app(client: HttpClient | None = None,
         body = request.get_json(silent=True) or {}
         run = RUNS.get(body.get("run_id", ""))
         if run is None:
-            return error(f"no run {body.get('run_id')}", 404)
+            return error(f"no run {body.get('run_id')} (runs expire on server restart: re-run the scout)", 404)
         weights = _weights_from(body.get("weights"))
-        result = explain(rescore(run, weights))
+        try:
+            result = explain(rescore(run, weights))
+        except Exception as e:  # LLM failures must never break the page
+            app.logger.warning("rationale failed: %s", e)
+            return jsonify({"available": False, "reason": f"LLM call failed: {e}"})
         if result is None:
-            return jsonify({"available": False, "reason": "no API key or the model declined"})
+            return jsonify({"available": False, "reason": "no API key, cache-only mode, or the model declined"})
         items = [{"symbol": t.evidence.symbol, "rationale": t.rationale, "evidence_strength": t.evidence_strength}
                  for t in result.targets if t.rationale]
         return jsonify({"run_id": body["run_id"], "weights": weights.normalised().as_dict(), "rationales": items})

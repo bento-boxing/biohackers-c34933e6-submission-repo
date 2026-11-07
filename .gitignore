@@ -50,3 +50,7 @@ backend/.env
 backend/cache/
 backend/runs/
 backend/venv/
+
+# python bytecode anywhere
+__pycache__/
+*.pyc

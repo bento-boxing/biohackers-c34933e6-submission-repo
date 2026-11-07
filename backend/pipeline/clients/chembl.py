@@ -20,9 +20,8 @@ def find_target(client: HttpClient, uniprot: str | None, symbol: str) -> str | N
     if uniprot:
         data = client.get_json(CHEMBL_BASE + "target.json", {
             "target_components__accession": uniprot, "target_type": "SINGLE PROTEIN", "limit": 5})
-        found = _human_single_protein(data.get("targets") or [])
-        if found:
-            return found
+        # Accession lookup is authoritative: never fall back to the ambiguous symbol search.
+        return _human_single_protein(data.get("targets") or [])
     data = client.get_json(CHEMBL_BASE + "target/search.json", {"q": symbol, "limit": 10})
     return _human_single_protein(data.get("targets") or [])
 

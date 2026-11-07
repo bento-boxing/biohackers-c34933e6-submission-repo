@@ -76,3 +76,17 @@ def test_explain_parses_and_caches_response(result, tmp_path, monkeypatch):
     assert captured["output_config"]["format"]["type"] == "json_schema"
     assert "thinking" not in captured
     assert (tmp_path / f"{R.rationale_key(result)}.json").exists()
+
+
+def test_explain_skips_api_in_cache_only_mode(result, tmp_path, monkeypatch):
+    monkeypatch.setenv("SCOUT_CACHE_ONLY", "1")
+    monkeypatch.setattr(R, "_client", lambda: (_ for _ in ()).throw(AssertionError("api called")))
+    assert R.explain(result, cache_dir=tmp_path, read_dirs=()) is None
+
+
+def test_rationale_key_changes_when_evidence_changes(result):
+    from dataclasses import replace
+    t0 = result.targets[0]
+    changed = replace(result, targets=[replace(t0, evidence=replace(t0.evidence, potent_count=t0.evidence.potent_count + 1))]
+                      + result.targets[1:])
+    assert R.rationale_key(result) != R.rationale_key(changed)

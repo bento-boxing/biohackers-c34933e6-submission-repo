@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from dataclasses import replace
 from pathlib import Path
 from typing import Iterable
@@ -65,9 +66,8 @@ def evidence_payload(result: ScoutResult, top: int = 10) -> list[dict]:
 
 
 def rationale_key(result: ScoutResult, top: int = 10) -> str:
-    w = result.weights.normalised().as_dict()
-    symbols = [t.evidence.symbol for t in result.targets[:top]]
-    raw = json.dumps([result.disease.id, w, symbols], sort_keys=True)
+    """Hash of exactly what the model would be shown, so cached text never cites stale numbers."""
+    raw = json.dumps([result.disease.id, evidence_payload(result, top)], sort_keys=True)
     return hashlib.sha256(raw.encode()).hexdigest()
 
 
@@ -106,6 +106,8 @@ def explain(result: ScoutResult, top: int = 10, cache_dir: Path = DEFAULT_CACHE_
     cached = _read_cached(key, [cache_dir, *read_dirs])
     if cached is not None:
         return _apply(result, cached["items"])
+    if os.environ.get("SCOUT_CACHE_ONLY") == "1":
+        return None
     client = _client()
     if client is None:
         return None

@@ -24,7 +24,10 @@ export default function ApprovalForm({
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const t = targets.find((x) => x.symbol === symbol);
-    if (!t) return;
+    if (!t) {
+      setMsg({ ok: false, text: `${symbol || "No target"} is not in the current run; pick a target from the list.` });
+      return;
+    }
     setBusy(true);
     setMsg(null);
     try {

@@ -97,7 +97,8 @@ score mismatch) or 502 (upstream API failure).
 Open Targets GraphQL, Europe PMC REST, ChEMBL REST, AlphaFold DB. Every call goes through one cached
 HTTP client (`backend/pipeline/http.py`): responses land in `backend/cache/` (7-day TTL) and the
 committed snapshot `backend/data/demo_cache/` is read as a fallback. `SCOUT_CACHE_ONLY=1` disables
-the network entirely.
+the network entirely. The committed snapshot covers Parkinson disease (top 25) for stage 1 and
+LRRK2 only for stage 2, so in cache-only mode screening any other approval returns a 502.
 
 Refresh the snapshot (live network, ~2 minutes):
 ```bash

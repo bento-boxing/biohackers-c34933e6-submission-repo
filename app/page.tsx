@@ -97,7 +97,7 @@ export default function ScoutPage() {
               {rationaleNote && <span className="ml-2 text-xs text-amber-700">{rationaleNote}</span>}
             </p>
             <TargetTable targets={ranked} rationales={rationales} rationaleWeights={rationaleWeights} rationaleStale={rationaleStale} />
-            <ApprovalForm runId={run.run_id} targets={ranked} weights={weights} />
+            <ApprovalForm key={run.run_id} runId={run.run_id} targets={ranked} weights={weights} />
           </>
         ) : (
           <p className="text-zinc-500">Enter a disease and run the scout. Every score is a weighted sum of four components you can see and adjust.</p>

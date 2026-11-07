@@ -1,7 +1,7 @@
 """Open Targets Platform GraphQL client (schema verified 2026-11-07)."""
 from __future__ import annotations
 
-from pipeline.http import HttpClient
+from pipeline.http import HttpClient, UpstreamError
 from pipeline.models import Disease, SafetyFlag, TargetEvidence
 
 OT_URL = "https://api.platform.opentargets.org/api/v4/graphql"
@@ -30,7 +30,7 @@ class DiseaseNotFound(Exception):
 def graphql(client: HttpClient, query: str, variables: dict) -> dict:
     data = client.post_json(OT_URL, {"query": query, "variables": variables})
     if data.get("errors"):
-        raise RuntimeError("Open Targets error: " + data["errors"][0].get("message", "?"))
+        raise UpstreamError("Open Targets error: " + data["errors"][0].get("message", "?"))
     return data["data"]
 
 

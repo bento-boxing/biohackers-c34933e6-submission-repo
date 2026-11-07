@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import type { RankedTarget } from "@/lib/score";
 import type { Rationale, Weights } from "@/lib/types";
 
@@ -36,8 +36,8 @@ export default function TargetTable({
           {targets.map((t) => {
             const r = rationales[t.symbol];
             return (
-              <>
-                <tr key={t.symbol} className="border-t border-zinc-200 dark:border-zinc-800">
+              <Fragment key={t.symbol}>
+                <tr className="border-t border-zinc-200 dark:border-zinc-800">
                   <td className="px-2 py-1">{t.rank}</td>
                   <td className="px-2 py-1 font-semibold">
                     <a href={t.open_targets_url} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">{t.symbol}</a>
@@ -77,7 +77,7 @@ export default function TargetTable({
                   </td>
                 </tr>
                 {open === t.symbol && (
-                  <tr key={`${t.symbol}-detail`} className="bg-zinc-50 text-xs dark:bg-zinc-900">
+                  <tr className="bg-zinc-50 text-xs dark:bg-zinc-900">
                     <td colSpan={14} className="px-4 py-2">
                       <p><b>UniProt:</b> {t.uniprot ?? "none"} · <b>ChEMBL target:</b> {t.chembl_target_id ?? "none"}</p>
                       <p><b>SM tractability:</b> {t.tractability_sm_labels.join(", ") || "none"}</p>
@@ -86,7 +86,7 @@ export default function TargetTable({
                     </td>
                   </tr>
                 )}
-              </>
+              </Fragment>
             );
           })}
         </tbody>

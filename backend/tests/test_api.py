@@ -132,3 +132,41 @@ def test_shortlist_endpoint_appends_line(api, tmp_path):
     assert r.status_code == 200 and r.get_json() == {"ok": True}
     line = (tmp_path / "shortlists.jsonl").read_text()
     assert '"CHEMBL2"' in line and a.ts in line
+
+
+def test_scout_upstream_graphql_error_502_json(api, monkeypatch):
+    from pipeline import api as api_mod
+    from pipeline.http import UpstreamError
+
+    def boom(*a, **k):
+        raise UpstreamError("Open Targets error: Cannot query field 'expressions'")
+
+    monkeypatch.setattr(api_mod, "run_scout", boom)
+    r = scout(api)
+    assert r.status_code == 502 and "Cannot query field" in r.get_json()["error"]
+
+
+def test_scout_non_numeric_n_400(api):
+    r = api.post("/api/scout", json={"disease": "Parkinson disease", "n": "lots"})
+    assert r.status_code == 400 and "n" in r.get_json()["error"]
+
+
+def test_approval_non_numeric_weights_400(api):
+    run = scout(api).get_json()
+    body = approval_body(run)
+    body["weights"]["genetic"] = "high"
+    assert api.post("/api/approvals", json=body).status_code == 400
+
+
+def test_rationale_endpoint_explain_raising_gives_available_false(api, monkeypatch):
+    from pipeline import api as api_mod
+
+    def boom(result, **kw):
+        raise ConnectionError("no route to host")
+
+    monkeypatch.setattr(api_mod, "explain", boom)
+    run = scout(api).get_json()
+    r = api.post("/api/rationale", json={"run_id": run["run_id"], "weights": run["default_weights"]})
+    assert r.status_code == 200
+    body = r.get_json()
+    assert body["available"] is False and "no route to host" in body["reason"]

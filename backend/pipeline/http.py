@@ -17,6 +17,10 @@ class CacheMiss(Exception):
     pass
 
 
+class UpstreamError(Exception):
+    """A data source answered, but with an error we cannot use."""
+
+
 class HttpClient:
     def __init__(
         self,

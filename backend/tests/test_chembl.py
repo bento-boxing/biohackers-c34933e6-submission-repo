@@ -30,3 +30,18 @@ def test_molecules_batch_returns_max_phase_string(client):
 def test_urls():
     assert chembl_target_url("CHEMBL1") == "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1/"
     assert chembl_molecule_url("CHEMBL2") == "https://www.ebi.ac.uk/chembl/compound_report_card/CHEMBL2/"
+
+
+class _Stub:
+    def __init__(self):
+        self.calls = []
+
+    def get_json(self, url, params=None):
+        self.calls.append((url, params))
+        return {"targets": []}
+
+
+def test_find_target_with_accession_but_no_hit_does_not_fall_back_to_symbol():
+    stub = _Stub()
+    assert find_target(stub, "P99999", "APP") is None
+    assert len(stub.calls) == 1 and "target.json" in stub.calls[0][0]

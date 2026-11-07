@@ -27,3 +27,15 @@ def test_associated_targets_returns_25_with_lrrk2(client):
 def test_target_safety_lrrk2_has_no_high_expression_flags(client):
     flags = target_safety(client, "ENSG00000188906")
     assert [f for f in flags if f.kind == "expression"] == []
+
+
+def test_graphql_errors_raise_upstream_error():
+    from pipeline.clients.opentargets import graphql
+    from pipeline.http import UpstreamError
+
+    class Stub:
+        def post_json(self, url, body):
+            return {"errors": [{"message": "Cannot query field 'expressions' on type 'Target'."}]}
+
+    with pytest.raises(UpstreamError, match="Open Targets error: Cannot query field"):
+        graphql(Stub(), "{ x }", {})
