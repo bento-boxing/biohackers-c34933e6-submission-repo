@@ -26,12 +26,30 @@ def main(argv: list[str] | None = None) -> int:
     s.add_argument("disease")
     s.add_argument("--n", type=int, default=25)
     s.add_argument("--cache-only", action="store_true")
+    sc = sub.add_parser("screen")
+    sc.add_argument("--latest", action="store_true")
+    sc.add_argument("--cache-only", action="store_true")
     args = ap.parse_args(argv)
     if args.cache_only:
         os.environ["SCOUT_CACHE_ONLY"] = "1"
     if args.cmd == "scout":
         from pipeline.scout.pipeline import run_scout
         print_scout(run_scout(args.disease, n=args.n))
+    elif args.cmd == "screen":
+        from pipeline.audit import read_approvals
+        from pipeline.screening.pipeline import run_screening
+        approvals = read_approvals()
+        if not approvals:
+            print("no approvals yet; approve a target first")
+            return 1
+        r = run_screening(approvals[0])
+        st = r.structure
+        print(f"Target: {r.approval.symbol}  structure: {st.model_id if st else 'none'}"
+              f"{f'  mean pLDDT {st.mean_plddt:.1f}' if st else ''}")
+        print(f"{'#':>2} {'chembl_id':<14}{'pChEMBL':>8}{'phase':>6}{'MW':>8}{'Ro5':>4}  name")
+        for i, c in enumerate(r.compounds, 1):
+            print(f"{i:>2} {c.chembl_id:<14}{c.best_pchembl:>8.2f}{(c.max_phase or '-'):>6}"
+                  f"{(c.mw or 0):>8.1f}{(c.ro5_violations if c.ro5_violations is not None else '-'):>4}  {c.name or ''}")
     return 0
 
 

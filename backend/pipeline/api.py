@@ -15,6 +15,9 @@ from pipeline.http import CacheMiss, HttpClient, default_client
 from pipeline.models import ScoutResult, Weights
 from pipeline.scout.pipeline import rescore, run_scout
 from pipeline.scout.rationale import explain
+from pipeline.screening.pipeline import run_screening
+from pipeline.clients.chembl import chembl_molecule_url
+from pipeline.models import Compound, ScreeningResult
 
 RUNS: dict[str, ScoutResult] = {}
 SCORE_KEYS = ("genetic", "association", "druggability", "literature", "total")
@@ -39,6 +42,19 @@ def scout_run_json(run_id: str, result: ScoutResult, cache_only: bool) -> dict:
         })
     return {"run_id": run_id, "disease": {"id": result.disease.id, "name": result.disease.name},
             "cache_only": cache_only, "default_weights": Weights().as_dict(), "targets": targets}
+
+
+def compound_json(c: Compound) -> dict:
+    return {"chembl_id": c.chembl_id, "name": c.name, "best_pchembl": c.best_pchembl, "assay_type": c.assay_type,
+            "max_phase": c.max_phase, "is_approved": c.is_approved, "mw": c.mw, "alogp": c.alogp,
+            "hbd": c.hbd, "hba": c.hba, "psa": c.psa, "ro5_violations": c.ro5_violations,
+            "lipinski_pass": c.lipinski_pass, "chembl_url": chembl_molecule_url(c.chembl_id)}
+
+
+def screening_json(r: ScreeningResult) -> dict:
+    return {"approval": r.approval.__dict__,
+            "structure": r.structure.__dict__ if r.structure else None,
+            "compounds": [compound_json(c) for c in r.compounds]}
 
 
 def _weights_from(d: dict | None) -> Weights:
@@ -123,6 +139,29 @@ def create_app(client: HttpClient | None = None,
         items = [{"symbol": t.evidence.symbol, "rationale": t.rationale, "evidence_strength": t.evidence_strength}
                  for t in result.targets if t.rationale]
         return jsonify({"run_id": body["run_id"], "weights": weights.normalised().as_dict(), "rationales": items})
+
+    def _find_approval(ts: str):
+        return next((a for a in audit.read_approvals(approvals_path) if a.ts == ts), None)
+
+    @app.post("/api/screen")
+    def screen():
+        body = request.get_json(silent=True) or {}
+        approval = _find_approval(body.get("approval_ts", ""))
+        if approval is None:
+            return error(f"no approval with ts {body.get('approval_ts')}", 404)
+        return jsonify(screening_json(run_screening(approval, client=http)))
+
+    @app.post("/api/shortlists")
+    def shortlist():
+        body = request.get_json(silent=True) or {}
+        approval = _find_approval(body.get("approval_ts", ""))
+        if approval is None:
+            return error(f"no approval with ts {body.get('approval_ts')}", 404)
+        ids = [str(x) for x in body.get("chembl_ids") or []]
+        if not ids:
+            return error("chembl_ids is required", 400)
+        audit.append_shortlist(approval, ids, (body.get("reason") or "").strip(), path=shortlists_path)
+        return jsonify({"ok": True})
 
     app.config["APPROVALS_PATH"] = approvals_path
     app.config["SHORTLISTS_PATH"] = shortlists_path

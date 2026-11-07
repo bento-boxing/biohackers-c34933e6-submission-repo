@@ -10,7 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from pipeline.clients import chembl  # noqa: E402
+from pipeline.clients import alphafold, chembl  # noqa: E402
 from pipeline.clients import europepmc as epmc  # noqa: E402
 from pipeline.clients import opentargets as ot  # noqa: E402
 from pipeline.http import HttpClient  # noqa: E402
@@ -49,6 +49,8 @@ def record(disease_name: str, n: int) -> None:
             top = sorted(best, key=best.get, reverse=True)[:50]
             chembl.molecules(client, top)
             chembl.molecules(client, ["CHEMBL1721885"])
+            if t.uniprot:
+                alphafold.prediction(client, t.uniprot)
             print("stage2", t.symbol, cid, len(acts), len(top))
             break
 

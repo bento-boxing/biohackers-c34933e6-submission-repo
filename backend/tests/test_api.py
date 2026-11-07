@@ -104,3 +104,31 @@ def test_rationale_endpoint_returns_items(api, monkeypatch):
     r = api.post("/api/rationale", json={"run_id": run["run_id"], "weights": w}).get_json()
     assert len(r["rationales"]) == 10 and r["rationales"][0]["evidence_strength"] == "weak"
     assert r["weights"]["genetic"] == 1.0 and r["run_id"] == run["run_id"]
+
+
+def test_screen_endpoint_lrrk2(api, tmp_path):
+    from pipeline.audit import append_jsonl
+    from tests.test_screening_pipeline import approval
+    a = approval()
+    append_jsonl(tmp_path / "approvals.jsonl", a.__dict__)
+    r = api.post("/api/screen", json={"approval_ts": a.ts})
+    assert r.status_code == 200, r.get_json()
+    body = r.get_json()
+    assert body["approval"]["symbol"] == "LRRK2" and body["structure"]["mean_plddt"] > 0
+    assert len(body["compounds"]) == 50
+    c = body["compounds"][0]
+    for k in ("chembl_id", "name", "best_pchembl", "assay_type", "max_phase", "is_approved", "mw", "alogp",
+              "hbd", "hba", "psa", "ro5_violations", "lipinski_pass", "chembl_url"):
+        assert k in c
+    assert api.post("/api/screen", json={"approval_ts": "nope"}).status_code == 404
+
+
+def test_shortlist_endpoint_appends_line(api, tmp_path):
+    from pipeline.audit import append_jsonl
+    from tests.test_screening_pipeline import approval
+    a = approval()
+    append_jsonl(tmp_path / "approvals.jsonl", a.__dict__)
+    r = api.post("/api/shortlists", json={"approval_ts": a.ts, "chembl_ids": ["CHEMBL1", "CHEMBL2"], "reason": "potent"})
+    assert r.status_code == 200 and r.get_json() == {"ok": True}
+    line = (tmp_path / "shortlists.jsonl").read_text()
+    assert '"CHEMBL2"' in line and a.ts in line
