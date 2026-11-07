@@ -17,8 +17,8 @@ class Weights:
         total = self.genetic + self.association + self.druggability + self.literature
         if total <= 0:
             return Weights()
-        return Weights(self.genetic / total, self.association / total,
-                       self.druggability / total, self.literature / total)
+        return Weights(round(self.genetic / total, 6), round(self.association / total, 6),
+                       round(self.druggability / total, 6), round(self.literature / total, 6))
 
     def as_dict(self) -> dict[str, float]:
         return asdict(self)
