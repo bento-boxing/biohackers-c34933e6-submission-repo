@@ -1,4 +1,4 @@
-import type { Approval, RationaleResponse, ScoutRun, Scores, Weights } from "./types";
+import type { Approval, RationaleResponse, ScoutRun, Scores, ScreeningResult, Weights } from "./types";
 
 async function call<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
@@ -30,4 +30,12 @@ export function getApprovals(): Promise<Approval[]> {
 
 export function postRationale(run_id: string, weights: Weights): Promise<RationaleResponse> {
   return call("/api/rationale", { method: "POST", body: JSON.stringify({ run_id, weights }) });
+}
+
+export function postScreen(approval_ts: string): Promise<ScreeningResult> {
+  return call("/api/screen", { method: "POST", body: JSON.stringify({ approval_ts }) });
+}
+
+export function postShortlist(body: { approval_ts: string; chembl_ids: string[]; reason: string }): Promise<{ ok: true }> {
+  return call("/api/shortlists", { method: "POST", body: JSON.stringify(body) });
 }

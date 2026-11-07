@@ -59,3 +59,35 @@ export type Rationale = {
 export type RationaleResponse =
   | { available: false; reason: string }
   | { available?: true; run_id: string; weights: Weights; rationales: Rationale[] };
+
+export type Structure = {
+  uniprot: string;
+  model_id: string;
+  pdb_url: string;
+  cif_url: string;
+  mean_plddt: number;
+  fraction_confident: number;
+};
+
+export type Compound = {
+  chembl_id: string;
+  name: string | null;
+  best_pchembl: number;
+  assay_type: string | null;
+  max_phase: string | null;
+  is_approved: boolean;
+  mw: number | null;
+  alogp: number | null;
+  hbd: number | null;
+  hba: number | null;
+  psa: number | null;
+  ro5_violations: number | null;
+  lipinski_pass: boolean | null;
+  chembl_url: string;
+};
+
+export type ScreeningResult = {
+  approval: Approval;
+  structure: Structure | null;
+  compounds: Compound[];
+};
