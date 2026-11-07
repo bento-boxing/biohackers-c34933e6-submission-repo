@@ -2,13 +2,19 @@
 from __future__ import annotations
 
 import hashlib
+import logging
 import json
 import os
+import tempfile
 import time
 from pathlib import Path
 from typing import Any, Iterable
 
 import requests
+
+from pipeline.settings import BACKEND_DIR, data_dir
+
+log = logging.getLogger(__name__)
 
 RETRY_BACKOFF_SECONDS = (1, 2, 4)
 
@@ -59,7 +65,10 @@ class HttpClient:
             f = d / f"{key}.json"
             if not f.exists():
                 continue
-            entry = json.loads(f.read_text())
+            try:
+                entry = json.loads(f.read_text())
+            except (OSError, ValueError):
+                continue  # unreadable or half-written entry: treat as a miss
             if d == self.write_dir and time.time() - entry["ts"] > self.ttl_seconds:
                 continue
             return True, entry["data"]
@@ -68,11 +77,15 @@ class HttpClient:
     def _write_cache(self, key: str, method: str, url: str, params, body, data) -> None:
         if not self.write_dir:
             return
-        self.write_dir.mkdir(parents=True, exist_ok=True)
-        tmp = self.write_dir / f"{key}.json.tmp"
-        tmp.write_text(json.dumps({"ts": time.time(), "method": method, "url": url,
-                                   "params": params, "body": body, "data": data}))
-        tmp.replace(self.write_dir / f"{key}.json")
+        try:
+            self.write_dir.mkdir(parents=True, exist_ok=True)
+            with tempfile.NamedTemporaryFile("w", dir=self.write_dir, suffix=".tmp", delete=False) as f:
+                json.dump({"ts": time.time(), "method": method, "url": url,
+                           "params": params, "body": body, "data": data}, f)
+            Path(f.name).replace(self.write_dir / f"{key}.json")
+        except OSError as e:
+            # A cache is an optimisation: a read-only or full disk must never fail the request.
+            log.warning("cache write skipped for %s: %s", url, e)
 
     def _request(self, method: str, url: str, params: dict | None, body: dict | None) -> Any:
         key = self.cache_key(method, url, params, body)
@@ -104,8 +117,8 @@ class HttpClient:
 
 
 def default_client() -> HttpClient:
-    write_dir = Path(os.environ.get("SCOUT_CACHE_DIR", "cache"))
-    demo = Path(__file__).resolve().parent.parent / "data" / "demo_cache"
+    write_dir = Path(os.environ["SCOUT_CACHE_DIR"]) if os.environ.get("SCOUT_CACHE_DIR") else data_dir("cache")
+    demo = BACKEND_DIR / "data" / "demo_cache"
     return HttpClient(
         write_dir=write_dir,
         read_dirs=[write_dir, demo],

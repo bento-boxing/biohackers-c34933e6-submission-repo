@@ -81,3 +81,19 @@ def test_retries_on_500_then_succeeds(tmp_path, monkeypatch):
     c = HttpClient(write_dir=tmp_path)
     assert c.post_json("https://x/p", {"b": 1}) == {"ok": 1}
     assert len(calls) == 3
+
+
+def test_cache_write_failure_is_not_fatal(tmp_path, monkeypatch):
+    blocker = tmp_path / "not-a-dir"
+    blocker.write_text("x")  # mkdir under a file raises OSError, like a read-only filesystem
+    patch_session(monkeypatch, [FakeResponse(200, {"ok": 1})])
+    c = HttpClient(write_dir=blocker / "cache")
+    assert c.get_json("https://x/ro") == {"ok": 1}
+
+
+def test_corrupt_cache_entry_is_treated_as_miss(tmp_path, monkeypatch):
+    key = HttpClient.cache_key("GET", "https://x/bad", None, None)
+    (tmp_path / f"{key}.json").write_text("{truncated")
+    patch_session(monkeypatch, [FakeResponse(200, "fresh")])
+    c = HttpClient(write_dir=tmp_path)
+    assert c.get_json("https://x/bad") == "fresh"
