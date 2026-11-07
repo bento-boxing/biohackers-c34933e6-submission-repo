@@ -112,6 +112,7 @@ class Experiment(BaseModel):
     limitations: list[str]
     decision_impact: str
     evidence_ids: list[str]
+    hypothesis_evidence: list[list[str]] = Field(default_factory=list)
     status: str = 'Proposed only; not performed or validated.'
 
 class AICitation(BaseModel):
@@ -164,11 +165,15 @@ class AICall(BaseModel):
     success: bool
     error: str = ''
     usage: dict[str, int] = Field(default_factory=dict)
+    started_at: float | None = None
+    duration_seconds: float | None = None
+    payload_bytes: int | None = None
 
 class AIReport(BaseModel):
     enabled: bool = False
     provider: str = 'google'
     model: str = ''
+    thinking_level: str | None = None
     status: Literal['disabled', 'skipped', 'completed', 'failed'] = 'disabled'
     calls: list[AICall] = Field(default_factory=list)
     rounds: list[AIAuditRound] = Field(default_factory=list)

@@ -3,6 +3,8 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { api } from '@/lib/api';
+import { ClaimText } from './evidence-trace';
+import type { AIReport } from '@/lib/contracts';
 import { DEFAULT_WEIGHTS, rankTargets } from '@/lib/contracts';
 import type { Config, Job, Mode, ScoutRun, ScoutTarget, Weights } from '@/lib/contracts';
 
@@ -122,8 +124,24 @@ export function PageTitle({eyebrow,title,description}:{eyebrow:string;title:stri
 export function Badge({children,tone='neutral'}:{children:React.ReactNode;tone?:string}){return <span className={`badge ${tone}`}>{children}</span>;}
 export function EmptyState({title,children}:{title:string;children:React.ReactNode}) {return <section className="panel empty-state"><div className="empty-symbol">◎</div><h2>{title}</h2><p>{children}</p><Link className="button secondary" href="/">Open Target Discovery →</Link></section>;}
 export function SelectionBar(){const {target,run,job}=useWorkbench();const input=job?.selection.target_input;return <div className="selection-bar"><span className="target-symbol">{target?.symbol||input?.target_symbol||'No target selected'}</span><span>{run?.disease.name||input?.disease_name}</span><span className="mono muted">{target?.target_id||input?.target_id}</span>{target?.chembl_target_id&&<Badge>{target.chembl_target_id}</Badge>}</div>;}
-export function Progress(){const {job,busy,cancel}=useWorkbench();if(!job||!busy)return null;const done=job.progress.calls.filter(c=>c.success).length;return <section className="panel progress-panel" aria-live="polite"><div className="spinner"/><div><h3>{job.progress.stage}</h3><p>{done} model calls completed · {job.progress.calls.length} attempted. The investigation continues on the backend if you leave this page.</p><small>Cancellation stops future calls. An in-flight provider request may complete and be billed.</small></div><button className="button secondary" disabled={job.state==='cancel_requested'} onClick={()=>void cancel()}>Stop after current call</button></section>;}
-export function Bullets({items}:{items:string[]}){return <ul className="report-list">{items.map((item,i)=><li key={i}>{item}</li>)}</ul>;}
+export function Progress(){
+  const {job,busy,cancel}=useWorkbench();
+  const [now,setNow]=useState(0);
+  useEffect(()=>{if(!busy)return;const timer=setInterval(()=>setNow(Date.now()/1000),1000);return()=>clearInterval(timer);},[busy]);
+  if(!job||!busy)return null;
+  const done=job.progress.calls.filter(c=>c.success).length;
+  const call=job.progress.calls.at(-1);
+  const started=call?.duration_seconds==null?call?.started_at:undefined;
+  const elapsed=started&&now?Math.max(0,now-started):null;
+  const retrieval=job.progress.retrieval;
+  return <section className="panel progress-panel" aria-live="polite"><div className="spinner"/><div><h3>{job.progress.stage}</h3><p>{done} model calls completed · {job.progress.calls.length} attempted. The investigation continues on the backend if you leave this page.</p>
+    {elapsed!==null&&<p>Current model request: {elapsed.toFixed(1)} s elapsed (backend start timestamp).</p>}
+    {retrieval&&<p>{retrieval.source} · {retrieval.state} · retry policy: at most {retrieval.retry_policy_max_attempts} attempts per request{retrieval.retries_observed!=null?` · ${retrieval.retries_observed} retries observed`:''}</p>}
+    {retrieval?.state==='request'&&retrieval.started_at&&now>0&&<p>Current public-data request: {Math.max(0,now-retrieval.started_at).toFixed(1)} s elapsed, including any retry wait.</p>}
+    {job.progress.timings?.retrieval&&<p>Retrieval measured so far: {job.progress.timings.retrieval.total_seconds.toFixed(2)} s · {job.progress.timings.retrieval.completed_requests} requests completed · {job.progress.timings.retrieval.cache_hits} cache hits.</p>}
+    <small>Cancellation stops future calls. An in-flight provider request may complete and be billed.</small></div><button className="button secondary" disabled={job.state==='cancel_requested'} onClick={()=>void cancel()}>Stop after current call</button></section>;
+}
+export function Bullets({items,ai}:{items:string[];ai?:AIReport|null}){return <ul className="report-list">{items.map((item,i)=><li key={i}>{ai?<ClaimText text={item} ai={ai}/>:item}</li>)}</ul>;}
 export function selectedScore(target:ScoutTarget,weights:Weights){return rankTargets([target],weights)[0].total;}
 
 export function RecentJobs(){const {mode,job,resume}=useWorkbench();const [items,setItems]=useState<{job_id:string;state:string;target:{target_symbol:string;disease_name:string}}[]>([]);useEffect(()=>{let active=true;void api<typeof items>('/api/investigations',mode).then(data=>{if(active)setItems(data);}).catch(()=>{});return()=>{active=false;};},[mode,job?.state]);if(!items.length)return null;return <details className="panel panel-content"><summary>Recent investigations · resume a saved job</summary><div className="recent-jobs">{items.map(item=><button key={item.job_id} className="mini-card" onClick={()=>void resume(item.job_id)}><strong>{item.target.target_symbol}</strong><span>{item.target.disease_name}</span><Badge>{item.state}</Badge></button>)}</div></details>;}

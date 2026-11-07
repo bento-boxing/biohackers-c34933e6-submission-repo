@@ -415,6 +415,13 @@ No real patient-level data are collected. Biomedical retrieval needs no API key.
 Optional Gemini reasoning loads its key from environment variables; the key is
 excluded from Git, model inputs, logs and downloaded reports.
 
+## Presentation and profiling
+
+The Next.js Evidence Trace, Medium/High configuration, measured timings,
+bounded retrieval budget, isolated browser QA and reproducible packet-size
+comparison are documented in [the workbench README](../frontend/README.md).
+Historical source fixtures and scientific evidence records remain unchanged.
+
 ## Implementation validation
 
 Validated on Python 3.13 on 7 November 2026. See `validation/live_report.json`

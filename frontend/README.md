@@ -5,6 +5,72 @@ Devil's Advocate pipelines. The root Next.js application, original backend
 entry point and Streamlit backup are preserved. No ranking/scoring algorithm
 was replaced. This workspace uses Next 16.4.5, React 19.3.1 and Tailwind 4.3.5.
 
+## Evidence presentation and latency instrumentation
+
+Readable scientific text uses labelled Evidence references. Each opens the
+collapsible Evidence Trace, which retains accepted claim text, exact excerpts,
+source identifiers and registry/publication links. Internal claim IDs remain in
+the technical disclosures and structured audit; historical reports are rendered
+without rewriting their scientific records. Hypotheses sharing the same claim
+are explicitly marked as sharing motivating evidence rather than independent
+confirmation. New synthesis requests map each hypothesis to accepted claim IDs.
+
+`AI_THINKING_LEVEL=medium` is the demo default; `high` remains supported.
+`AI_MODEL` remains configurable. Python loads the root `.env` with
+`override=False`, so an existing process environment takes precedence. The
+Google SDK receives the normalized level in `generation_config.thinking_level`.
+An already running backend retains its environment until you choose to restart
+it. No restart or paid model request is required to run the offline tests.
+
+New jobs record retrieval and per-agent attempt durations with a monotonic
+clock, plus serialized input bytes (not tokens). The UI displays the current
+public source/API path, elapsed request time, completed requests, observed
+retries where available, cache hits, and a durations table. Historical missing
+timings display “Not recorded”. Safe retrieval diagnostics are also appended to
+`devils_advocate/runtime/retrieval-events.jsonl`; query parameters and secrets
+are excluded. Requests retain 5-second connection / 20-second read timeouts,
+at most three attempts, and bounded backoff. A 300-second retrieval phase budget
+is checked between requests and after a response: it does not interrupt an
+in-flight request or guarantee a hard DNS/slow-stream wall-clock limit. Budget
+exhaustion produces an explicit error and starts no Gemini call.
+
+The existing 15-minute in-process public-response cache is reused by the worker.
+Adjudication still receives the full selected evidence packet; the experiment
+designer receives accepted claims and their supporting records. Revision input
+no longer duplicates the preceding draft inside feedback. Fully accepted claims
+proceed directly to design, retaining strict deterministic checks, adjudication,
+the paid-call cap and researcher approval requirements.
+
+Measured validation is recorded in
+`../devils_advocate/validation/presentation_latency.json`. Reconstructed BACE1
+request shapes shrink revision input from 43,107 to 35,272 bytes and designer
+input from 32,328 to 25,186 bytes. A single public ChEMBL lookup took 1.281246 s
+uncached and 0.005617 s cached; caching already existed. These measurements do
+not establish an end-to-end speedup or a Medium-versus-High latency comparison.
+No paid Gemini calls were made for this validation.
+
+Reproduce the packet-size check without network/model calls:
+
+```powershell
+.\.venv\Scripts\python.exe -m devils_advocate.profile_latency
+# Optional public ChEMBL request, never Gemini:
+.\.venv\Scripts\python.exe -m devils_advocate.profile_latency --live-cache-check
+```
+
+Browser QA can use an isolated AI-disabled backend and temporary database:
+
+```powershell
+# Terminal 1, repository root
+.\.venv\Scripts\python.exe scripts/qa_workbench_server.py
+# Terminal 2, frontend directory
+$env:RESEARCH_BUILD_DIR='.next-qa'
+$env:RESEARCH_BACKEND_URL='http://127.0.0.1:5051'
+npm.cmd exec -- next dev --hostname 127.0.0.1 --port 3001
+# Terminal 3, frontend directory
+$env:PLAYWRIGHT_BASE_URL='http://127.0.0.1:3001'
+npm.cmd run test:e2e
+```
+
 ## Windows setup and startup
 
 Requirements: Python 3.11+, Node 20.9+ (tested with Python 3.13 / Node 24.13),

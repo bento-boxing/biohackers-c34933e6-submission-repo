@@ -1,0 +1,37 @@
+{
+  "method": "Reconstructed request shapes using existing recorded BACE1 audit. No scientific records changed.",
+  "packets": {
+    "initial_challenge": {
+      "before_bytes": 26274,
+      "after_bytes": 25985,
+      "bytes_removed": 289
+    },
+    "revision": {
+      "before_bytes": 43107,
+      "after_bytes": 35272,
+      "bytes_removed": 7835
+    },
+    "experimental_challenger": {
+      "before_bytes": 32328,
+      "after_bytes": 25186,
+      "bytes_removed": 7142
+    }
+  },
+  "live_gemini_calls": 0,
+  "limitation": "Packet byte reductions do not measure provider latency or token savings. No High-versus-Medium paid comparison was performed.",
+  "cache_check": {
+    "uncached_seconds": 1.281246,
+    "cached_seconds": 0.005617,
+    "profile": {
+      "started_at": 1794094758.9190464,
+      "total_seconds": 1.286882,
+      "requests": 1,
+      "cache_hits": 1,
+      "completed_requests": 1,
+      "source_seconds": {
+        "ChEMBL": 1.273478
+      }
+    },
+    "note": "Actual single-endpoint timings for this run; cache behavior already existed and is now instrumented."
+  }
+}

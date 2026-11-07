@@ -1,10 +1,12 @@
 """Local SQLite worker; model calls are isolated from frontend HTTP lifetime."""
 import threading
+import time
+import json
 from .ai_config import load_ai_settings
 from .ai_reasoning import run_ai_reasoning
 from .devil_advocate import investigate_target
 from .experiment_designer import propose_experiment
-from .http_client import JsonClient
+from .http_client import JsonClient, RetrievalDeadlineExceeded
 from .job_store import JobStore
 from .models import TargetInput
 from .workbench_demo import load_recorded
@@ -29,10 +31,24 @@ class JobWorker:
             self.store.progress(identifier, 'Retrieving recorded evidence' if payload['mode'] == 'offline' else 'Retrieving live biomedical evidence')
             target = TargetInput.model_validate(payload['selection']['target_input'])
             recorded_ai = False
+            retrieval_started = time.monotonic()
             if payload['mode'] == 'offline':
                 result, recorded_ai = load_recorded(target)
+                timings = {'recorded_playback_seconds': round(time.monotonic() - retrieval_started, 6)}
             else:
-                result = self.investigator(target, client=self.client)
+                def retrieval_progress(event):
+                    stage = f"{event['source']}: {event['operation']} ({event['state']})"
+                    self.store.progress(identifier, stage, retrieval=event, timings={'retrieval': event['profile']})
+                    try:
+                        with (self.store.path.parent / 'retrieval-events.jsonl').open('a', encoding='utf-8') as log:
+                            log.write(json.dumps({'job_id': identifier, **event}) + '\n')
+                    except OSError:
+                        pass  # SQLite remains authoritative if diagnostic logging fails.
+                with self.client.tracking(retrieval_progress, budget_seconds=300,
+                        should_cancel=lambda: self.store.cancelled(identifier)) as measured:
+                    result = self.investigator(target, client=self.client)
+                timings = {'retrieval': measured}
+                self.store.progress(identifier, 'Biomedical evidence retrieved', timings=timings)
                 if self.store.cancelled(identifier):
                     self.store.finish(identifier, 'cancelled')
                     return
@@ -47,9 +63,14 @@ class JobWorker:
             report = {'investigation': result.model_dump(mode='json'),
                       'experiment': propose_experiment(result).model_dump(mode='json'),
                       'recorded_ai': recorded_ai, 'selection': payload['selection'],
+                      'timings': timings,
                       'weights': payload['weights'], 'mode': payload['mode']}
-            self.store.progress(identifier, 'Report ready for researcher review')
+            self.store.progress(identifier, 'Report ready for researcher review', timings=timings)
             self.store.finish(identifier, 'completed', result=report)
+        except RetrievalDeadlineExceeded as exc:
+            state = 'cancelled' if self.store.cancelled(identifier) else 'failed'
+            self.store.progress(identifier, 'Biomedical retrieval stopped', timings={'retrieval': measured} if 'measured' in locals() else {})
+            self.store.finish(identifier, state, error=str(exc))
         except ValueError:
             self.store.finish(identifier, 'failed', error='Input identity or recorded-demo selection could not be validated. No alternate target was substituted.')
         except Exception:

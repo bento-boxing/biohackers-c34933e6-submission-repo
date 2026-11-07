@@ -86,9 +86,13 @@ class JobStore:
         with self.connect() as db:
             db.execute("UPDATE jobs SET lease=? WHERE id=? AND state IN ('running','cancel_requested')", (time.time() + 45, identifier))
 
-    def progress(self, identifier, stage, calls=None):
+    def progress(self, identifier, stage, calls=None, *, retrieval=None, timings=None):
         old = self.get(identifier)
-        value = {'stage': stage, 'calls': calls if calls is not None else old['progress'].get('calls', [])}
+        value = {**old['progress'], 'stage': stage, 'calls': calls if calls is not None else old['progress'].get('calls', [])}
+        if stage != old['progress'].get('stage'):
+            value['stage_started_at'] = time.time()
+        if retrieval is not None: value['retrieval'] = retrieval
+        if timings is not None: value['timings'] = timings
         with self.connect() as db:
             db.execute('UPDATE jobs SET progress=?,updated=? WHERE id=?', (json.dumps(value), time.time(), identifier))
 

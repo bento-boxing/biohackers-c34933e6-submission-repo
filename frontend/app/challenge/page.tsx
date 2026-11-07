@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { AIReview, EvidenceReport } from '@/components/reports';
+import { StageDurations } from '@/components/stage-durations';
 import { Badge, PageTitle, Progress, RecentJobs, SelectionBar, useWorkbench } from '@/components/workbench';
 
 export default function Challenge(){const {mode,target}=useWorkbench();return <ChallengeForm key={`${mode}:${target?.target_id||'manual'}`}/>;}
@@ -23,7 +24,7 @@ function ChallengeForm(){
     {investigation&&<><div className="metric-grid"><div className="metric"><span>ChEMBL target identity</span><strong className="metric-word mono">{investigation.resolved_target_id||'Unresolved'}</strong><small>{investigation.resolution_status}</small></div><div className="metric"><span>Retrieved evidence</span><strong>{investigation.trials.length}<em>trials</em></strong><small>{investigation.compounds.length} compounds · {investigation.publications.length} publications</small></div><div className="metric"><span>AI reasoning</span><strong className="metric-word">{report.recorded_ai?'Recorded':investigation.ai?.status||'Disabled'}</strong><small>{report.recorded_ai?'Historical output · 0 new paid calls':`${investigation.ai?.calls.filter(c=>c.success).length||0} completed / ${investigation.ai?.calls.length||0} attempted`}</small></div></div>
       {investigation.retrieval_errors.map((e,i)=><div className="notice error" key={i}>A biomedical source could not be retrieved. Report completeness is limited.<details><summary>Public source diagnostic</summary>{e}</details></div>)}
       <section className="panel panel-content initial-assessment"><div className="eyebrow">INITIAL ASSESSMENT · DETERMINISTIC EVIDENCE RULES</div><p>{investigation.conclusion}</p><Badge tone={mode==='offline'?'recorded':'live'}>{mode==='offline'?'RECORDED EVIDENCE':'LIVE / API CACHE'}</Badge></section>
-      <AIReview ai={investigation.ai} recorded={report.recorded_ai}/><EvidenceReport investigation={investigation}/>
+      <StageDurations timings={report.timings} ai={investigation.ai} recorded={report.recorded_ai}/><AIReview ai={investigation.ai} recorded={report.recorded_ai}/><EvidenceReport investigation={investigation}/>
       <div className="next-step"><div><h3>Turn uncertainty into a testable question.</h3><p>Review the proposed experiment before recording a research decision.</p></div><Link className="button primary" href="/experiment">Review experiment →</Link></div>
     </>}
   </>;

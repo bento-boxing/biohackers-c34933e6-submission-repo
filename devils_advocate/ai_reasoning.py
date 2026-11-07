@@ -55,7 +55,28 @@ competing explanations when justified (otherwise explicitly provisional), model,
 controls, readouts, possible results with interpretations, limitations and
 decision impact. Experiment evidence_ids must be accepted claim IDs. Make
 no new historical/scientific finding. Proposed explanations and decisions are
-interpretations, not established causes. No autonomous stop decision.'''
+interpretations, not established causes. No autonomous stop decision.
+Keep internal claim IDs ONLY in evidence_claim_ids, evidence_ids and the
+hypothesis_evidence arrays, never in readable paragraphs. Describe the scientific
+finding in prose instead. hypothesis_evidence is parallel to competing_explanations
+and lists the accepted claim IDs motivating each hypothesis. Shared background
+evidence is allowed; if both hypotheses use it, say in limitations that this is
+not independent evidence for either hypothesis. Never invent distinct sources.'''
+
+def experimental_evidence(bundle: dict, claims: list[AIClaim]) -> dict:
+    """The designer receives accepted context; adjudication still sees all sources.
+
+    Keep entire selected records (not quote-only snippets), including compound
+    links from cited trials. The original bundle stays unchanged in the audit.
+    """
+    required = {citation.source_id for claim in claims for citation in claim.citations}
+    for identifier in list(required):
+        required.update(bundle['sources'].get(identifier, {}).get('applicability', {}).get('compound_ids', []))
+    sources = {key: value for key, value in bundle['sources'].items() if key in required}
+    return {**bundle, 'sources': sources, 'selection': {**bundle.get('selection', {}),
+        'trial_records_sent': sum(key.startswith('NCT') for key in sources),
+        'publications_sent': sum(key.startswith(('MED:', 'PMC:')) for key in sources),
+        'context_scope': 'Accepted claims and supporting records; original complete bundle retained in audit.'}}
 
 def evidence_bundle(result: Investigation, settings: AISettings) -> dict:
     sources = {}
@@ -115,7 +136,7 @@ def validate_ai_claim(claim: AIClaim, bundle: dict) -> list[str]:
 
 def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = None, runner=None, on_progress=None, should_cancel=None) -> AIReport:
     settings = settings or load_ai_settings()
-    report = AIReport(enabled=settings.enabled, provider=settings.provider, model=settings.model)
+    report = AIReport(enabled=settings.enabled, provider=settings.provider, model=settings.model, thinking_level=settings.thinking_level)
     # This guard runs before constructing a runner or SDK client.
     if result.mode == 'offline':
         report.status = 'skipped'
@@ -160,17 +181,23 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
             if needs_revision and round_number == 0 and room >= 3:
                 draft = runner.generate('Devils Advocate revision', CHALLENGER,
                     {**payload, 'previous_draft': draft.model_dump(mode='json'),
-                     'revision_feedback': report.rounds[-1].model_dump(mode='json')}, ChallengeDraft)
+                     'revision_feedback': {'deterministic_objections': checks,
+                                           'adjudications': batch.model_dump(mode='json')['findings']}}, ChallengeDraft)
                 continue
             if needs_revision:
                 report.warnings.append('Unaccepted claims were removed; no additional revision beyond the single-round limit or call budget.')
             report.accepted_claims = accepted
             break
         final = runner.generate('Experimental Challenger', EXPERIMENTER,
-            {'evidence': bundle, 'initial_rule_based_assessment': result.conclusion,
+            {'evidence': experimental_evidence(bundle, report.accepted_claims), 'initial_rule_based_assessment': result.conclusion,
              'accepted_claims': [c.model_dump(mode='json') for c in report.accepted_claims]}, ExperimentalResponse)
         allowed = {c.claim_id for c in report.accepted_claims}
-        refs = set(final.reassessment.evidence_claim_ids + final.experiment.evidence_ids)
+        if set(re.findall(r'\bDA_CLAIM_\d+\b', final.model_dump_json())) - allowed:
+            raise AIError('Final synthesis introduced an unaccepted internal claim reference; output rejected.')
+        hypotheses = final.experiment.hypothesis_evidence
+        if hypotheses and len(hypotheses) != len(final.experiment.competing_explanations):
+            raise AIError('Hypothesis evidence mapping does not match the proposed explanations; output rejected.')
+        refs = set(final.reassessment.evidence_claim_ids + final.experiment.evidence_ids + [ref for group in hypotheses for ref in group])
         if not refs.issubset(allowed) or (allowed and not final.reassessment.evidence_claim_ids):
             raise AIError('Final assessment or experiment lacks valid accepted-claim anchors; output rejected.')
         cited_sources = {ref.source_id for c in report.accepted_claims for ref in c.citations}

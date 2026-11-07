@@ -84,3 +84,25 @@ test('BACE1 archived Gemini output is visibly recorded with zero new calls',asyn
   await expect(page.getByText('RECORDED GEMINI PROPOSAL',{exact:true})).toBeVisible();
   await expect(page.getByText('UNVALIDATED RESEARCH PROPOSAL',{exact:true})).toBeVisible();
 });
+
+test('experiment prose uses labelled evidence while the trace retains source records',async({page})=>{
+  await page.goto('/challenge');
+  await page.getByRole('button',{name:/Challenge this target/}).click();
+  await expect(page.getByText('Historical output · 0 new paid calls')).toBeVisible({timeout:40_000});
+  await page.getByRole('link',{name:/Review experiment/}).click();
+  const prose=page.locator('.question-card, .hypothesis-card');
+  await expect(prose.first()).toBeVisible();
+  expect((await prose.allInnerTexts()).join(' ')).not.toMatch(/DA_CLAIM_\d+/);
+  const trace=page.locator('details.evidence-trace');
+  await expect(trace).not.toHaveAttribute('open','');
+  await page.locator('.hypothesis-card a.inline-reference').first().click();
+  await expect(trace).toHaveAttribute('open','');
+  await trace.locator('summary').first().click();
+  await trace.locator('summary').first().click();
+  await expect(trace.locator('article').first()).toBeVisible();
+  await expect(trace.locator('a.source-link').first()).toHaveAttribute('href',/^https:\/\//);
+  await trace.getByText('Internal audit reference',{exact:true}).first().click();
+  await expect(trace.locator('code').first()).toHaveText(/DA_CLAIM_\d+/);
+  await page.getByText('Measured stage durations & request sizes',{exact:true}).click();
+  await expect(page.getByText('Not recorded',{exact:true}).first()).toBeVisible();
+});

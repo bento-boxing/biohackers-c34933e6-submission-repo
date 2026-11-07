@@ -46,7 +46,9 @@ class GeminiRunner:
                 raise AIError('Cancellation requested; no further model call made. An in-flight request may still be billed.')
             if len(self.calls) >= self.settings.max_calls:
                 raise AIError('Paid-call budget exhausted; no additional model call made.')
-            call = AICall(role=role, success=False)
+            wire_payload = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
+            started = time.monotonic()
+            call = AICall(role=role, success=False, started_at=time.time(), payload_bytes=len(wire_payload.encode('utf-8')))
             self.calls.append(call)
             self._progress()
             try:
@@ -55,7 +57,7 @@ class GeminiRunner:
                     self.client = genai.Client(api_key=self.settings.api_key.get_secret_value(),
                         http_options={'timeout': self.settings.timeout_seconds * 1000, 'retry_options': {'attempts': 1}})
                 response = self.client.interactions.create(model=self.settings.model,
-                    system_instruction=instruction, input=json.dumps(payload, ensure_ascii=False),
+                    system_instruction=instruction, input=wire_payload,
                     store=False, automatic_continuation=False,
                     timeout=self.settings.timeout_seconds,
                     generation_config={'thinking_level': self.settings.thinking_level,
@@ -84,6 +86,7 @@ class GeminiRunner:
                     raise AIError(call.error) from None
                 time.sleep(0.5)
             finally:
+                call.duration_seconds = round(time.monotonic() - started, 6)
                 self._progress()
         raise AIError('Gemini request did not complete.')
 
