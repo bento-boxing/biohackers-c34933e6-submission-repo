@@ -10,6 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from pipeline.clients import europepmc as epmc  # noqa: E402
 from pipeline.clients import opentargets as ot  # noqa: E402
 from pipeline.http import HttpClient  # noqa: E402
 
@@ -28,7 +29,8 @@ def record(disease_name: str, n: int) -> None:
     print("targets", len(targets))
     for t in targets:
         ot.target_safety(client, t.target_id)
-        print("safety", t.symbol)
+        count, _ = epmc.literature_hits(client, t.symbol, disease.name)
+        print("safety+lit", t.symbol, count)
 
 
 if __name__ == "__main__":
