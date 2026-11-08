@@ -7,7 +7,8 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 
-from pipeline.models import Approval, ScoredTarget, ScoutResult
+from pipeline.models import Approval, ScoredTarget, ScoutResult, Weights
+from pipeline.scout.scoring import weighted_total
 from pipeline.settings import data_dir
 
 RUNS_DIR = data_dir("runs")  # /tmp on Vercel: ephemeral
@@ -52,3 +53,19 @@ def append_shortlist(approval: Approval, chembl_ids: list[str], reason: str,
                      path: Path = SHORTLISTS_PATH) -> None:
     append_jsonl(path, {"ts": _now(), "approval_ts": approval.ts, "symbol": approval.symbol,
                         "chembl_ids": list(chembl_ids), "reason": reason, "shortlisted_by": _user()})
+
+
+def approval_from_components(disease_id: str, disease_name: str, target: dict, weights: Weights,
+                             reason: str) -> Approval:
+    """Build an approval from a scout target JSON (components are weight-independent)."""
+    c = target["components"]
+    comps = {k: float(c[k]) for k in ("genetic", "association", "druggability", "literature")}
+    total = weighted_total(comps["genetic"], comps["association"], comps["druggability"],
+                           comps["literature"], weights)
+    return Approval(
+        ts=_now(), disease_id=disease_id, disease_name=disease_name,
+        target_id=target["target_id"], symbol=target["symbol"], uniprot=target.get("uniprot"),
+        chembl_target_id=target.get("chembl_target_id"), weights=weights.normalised().as_dict(),
+        scores={**comps, "total": total},
+        safety_flags=[f["detail"] for f in target.get("safety_flags", [])], reason=reason, approved_by=_user(),
+    )

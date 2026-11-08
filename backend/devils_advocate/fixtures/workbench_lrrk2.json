@@ -1,0 +1,1242 @@
+{
+  "target": {
+    "disease_name": "Parkinson's disease",
+    "disease_id": null,
+    "target_symbol": "LRRK2",
+    "target_id": null
+  },
+  "mode": "live",
+  "resolved_target_id": "CHEMBL1075104",
+  "compounds": [],
+  "trials": [
+    {
+      "nct_id": "NCT07681219",
+      "title": "LRRK2 (Leucine-Rich Repeat Kinase 2) Parkinson's Disease Fingerprint",
+      "status": "NOT_YET_RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinsons Disease (PD)",
+        "LRRK2"
+      ],
+      "interventions": [
+        "The interventions of the study are the study of blood biomarkers and neuroimaging and neurophysiological data"
+      ],
+      "population": "Inclusion Criteria:\n\n* age 30-80 years,\n* clinically established diagnosis of PD according to the Movement Disorders Society (MDS) diagnostic criteria,\n* Hoehn \\& Yahr (H\\&Y) stage between 1 and 3,\n* 10 patients with a LRRK2 associated parkinsonism and 10 with sporadic PD tested with a NGS panel and MLPA for PD associated genes,\n* ability to provide informed consent.\n\nExclusion Criteria:\n\n* Active or history of other neurological disorders,\n* active infectious disease or history within the previous 4 weeks,\n* continuative therapy (at least 1 week) with NSAIDs or steroids within the previous 12 weeks,\n* active malignancy, autoinflammatory or autoimmune diseases or history within the previous 3 years;\n* alcohol or drug abuse or dependence\n* any contraindication to the execution of the MRI (including claustrophobia).",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "uncertain",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT07681219"
+    },
+    {
+      "nct_id": "NCT04919356",
+      "title": "Parkinson's Disease G2019S LRRK2 Genetic Testing Program",
+      "status": "TERMINATED",
+      "why_stopped": "Sponsor stopped the study",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [
+        "G2019S LRRK2"
+      ],
+      "population": "Participants include those with a clinical diagnosis of Parkinson's, in particular those who have a first- or second-degree relative with Parkinson's, or who have young onset Parkinson's (age less than 50 at diagnosis) or are of Ashkenazi Jewish or North African Berber descent, or have a relative with a known genetic mutation in the LRRK2 gene, or who have a genetic mutation in the LRRK2 gene.\n\nInclusion Criteria:\n\nParticipant eligible for enrollment in the program must meet all of the following criteria:\n\n1. Participant must be a person diagnosed with Parkinson's disease who is 18 years or older.\n2. Participant is under the care of a physician for their Parkinson's disease.\n3. Participant is able to read, write and understand English, and reside in a country where the shipment of biological samples is allowed.\n4. Participant is able to grant informed consent.\n5. In the case of participants, willing to participate in a free genetic testing program to determine if they carry the G2019S LRRK2 mutation.\n6. Willing to be notified of eligibility for clinical studies (if appropriate).\n7. Particpants who already believe they have tested positive for the mutation will be allowed to be retested through this program and be notified of potential eligibility for studies.\n\nExclusion Criteria:\n\n1. Inability to meet any of the inclusion criteria.\n2. Participant has received on of the following advanced treatments to manage their Parkinson's: gene therapy, deep brain stimulation (DBS), injections into the brain, continuous infusion of medication into their stomach/intestines with a pump.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT04919356"
+    },
+    {
+      "nct_id": "NCT06814431",
+      "title": "Study on the Incidence of Malignant Neoplasms in Patients With Parkinson's Disease and Heterozygous Mutation of the GBA Gene",
+      "status": "RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Idiopathic Parkinson&#39;s Disease (PD)"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n* \\>18 years\n* Diagnosis of Parkinson's Disease through the United Kingdom Parkinson's Disease Society Brain Bank Diagnostic Criteria for Parkinson's Disease.\n\nExclusion Criteria:\n\n* Uncertain diagnosis",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT06814431"
+    },
+    {
+      "nct_id": "NCT01730599",
+      "title": "A Longitudinal Study in Parkinson's Disease (PD) Patients",
+      "status": "UNKNOWN",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [
+        "neurological exam"
+      ],
+      "population": "Inclusion Criteria:\n\n* parkinson'd disease patients that already participated in a pasr cross sectional study\n\nExclusion Criteria:\n\n* subjects with cognitive decline by the parameters defined in Diagnostic and Statistical Manual of Mental Disorders (DSM)- IV\n* subjects with psychiatric disorder\n* subjects unable to sign a consent form",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT01730599"
+    },
+    {
+      "nct_id": "NCT03976349",
+      "title": "A Study to Evaluate the Safety, Tolerability, and Pharmacokinetics of BIIB094 in Adults With Parkinson's Disease",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [
+        "BIIB094",
+        "Placebo"
+      ],
+      "population": "Key Inclusion Criteria:\n\n* Ability to understand the purpose and risks of the study and provide signed and dated informed consent and authorization to use confidential health information in accordance with national and local participant privacy regulations.\n* Diagnosed with PD within 7 years at the time of initial enrollment (i.e., at time of SAD enrollment for rollover participants), without major motor fluctuations or dyskinesia that may interfere with study treatment and assessments in the opinion of the investigator after consultation with the Sponsor.\n* Modified Hoehn and Yahr Stage \u2264 3.\n\nKey Exclusion Criteria:\n\n* Montreal Cognitive Assessment (MoCA) score less than (\\<) 23, dementia, or other significant cognitive impairment that, in the opinion of the Investigator, would interfere with study evaluation.\n* History of any brain surgery for PD or a history of focused ultrasound treatment at any time; or history of neuromodulation procedures.\n* Transient ischemic attack or stroke or any unexplained loss of consciousness within 1 year before Screening.\n* History of unstable angina, myocardial infarction, chronic heart failure, or clinically significant conduction abnormalities within 1 year before Screening.\n* Poorly controlled diabetes mellitus, as defined by having dosage adjustment of diabetic medication within 3 months before dosing (Day 1) or glycosylated hemoglobin value greater than or equal to (\u2265) 8 percent (%) at Screening.\n* History or positive test result at Screening for human immunodeficiency virus.\n* History or positive test result at Screening for hepatitis C virus antibody.\n\nNOTE: Other protocol defined Inclusion/Exclusion criteria may apply.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT03976349"
+    },
+    {
+      "nct_id": "NCT04349865",
+      "title": "LRRK2 Activity and Markers of Parkinson's Disease in G2385R Carriers",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n1. PD patients:\n\n   * A diagnosis of Parkinson's disease according to the 2015 MDS PD diagnostic criteria.\n   * Willingness to take genetic testing.\n2. Unaffected subjects:\n\n   * Individuals aged 55 years or older without a diagnosis of PD.\n   * Willingness to take genetic testing.\n\nExclusion Criteria:\n\n\u25a1 Clinically significant neurological disorders.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT04349865"
+    },
+    {
+      "nct_id": "NCT05349019",
+      "title": "A Natural History Study of Patients With G2019S LRRK2 Parkinson's Disease",
+      "status": "TERMINATED",
+      "why_stopped": "Sponsor stopped the study",
+      "conditions": [
+        "Patients With Parkinson's Disease (PD) Caused by the p.Gly2019Ser (G2019S) Pathogenic Mutation of the Leucine-Rich Repeat Kinase 2 (LRRK2) Gene"
+      ],
+      "interventions": [
+        "Observational"
+      ],
+      "population": "Part A Inclusion Criteria (Healthy Volunteers)\n\nIndividuals eligible to participate in Part A of this study will meet all the following criteria:\n\n1. Willing and able to provide informed consent after the nature of the study has been explained\n2. 18-35 years of age inclusive at Screening (sub cohort A1) or 65-80 years of age inclusive at Screening (sub cohort A2)\n3. Willing and able to comply with all study procedures\n4. Sub cohort A3 participants must match the age \u00b1 0.5 years and sex of match participant in Part B\n5. Participant must be healthy as per the investigator's assessment with no underlying clinically significant diseases (participants with hypertension, diabetes, hypercholesterolemia, and other chronic diseases associated with aging but not thought to interfere with the performance of the mTUG or other study measures may be allowed after consultation with the Medical Monitor)\n6. Participant must be able to use the Technology as described in the protocol\n7. Have access to a minimum indoor space of 6 meters by 2 meters (or approximately 20 feet by 7 feet) to carry out the mTUG\n8. Agree to retain the same level of activity throughout the study and not have plans to stop/start or increase or decrease any exercise programs\n9. Have reliable access to working WiFi internet or willingness to use a provided cellular internet connection device\n10. Agree to refrain from all alcohol and cannabinoid products within 24 hours prior to performing the mTUG assessment (i.e., three non consecutive days during study Week two, and Weeks two and three of the run in period)\n\nPart A Exclusion Criteria (Healthy Volunteers)\n\nIndividuals who meet any of the following exclusion criteria will not be eligible to participate in the study:\n\n1. History of mobility, gait, or ambulation problems (defined as mobility limitations that impact walking on a daily basis)\n2. History of neurological disease\n3. Any elective surgery planned during the study duration, approximately 12-15 months from Screening\n4. History of significant head injury within the past 5 years (head injury with loss of consciousness or requiring greater than 24 hours in hospital in relation to head injury)\n5. History of alcohol use disorder or other substance abuse disorder (excluding tobacco use), according to the Diagnostic and Statistical Manual of Mental Disorders 5th Edition (DSM-5) in the past 10 years\n6. Body Mass Index (BMI) (calculated from self reported height and weight) of greater than 35\n7. Pregnant or planning to become pregnant in the next 24 months\n8. Has a concurrent disease or condition that, in the view of the investigator, places the subject at high risk of poor treatment compliance or of not completing the study, or would interfere with study participation or would affect safety\n\nPart B Inclusion Criteria (PD Patients)\n\nIndividuals eligible to participate in Part B of this study must meet all the following criteria:\n\n1. Willing and able to provide informed consent after the nature of the study has been explained\n2. Willing and able to comply with all study procedures\n3. Have confirmed diagnosis of PD documented in medical records according to UK Brain Bank criteria\n4. Confirmed G2019S mutation(s) in the LRRK2 gene either by evidence recorded in medical record with report from accredited laboratory, or through another accredited genetic testing program, or other partner laboratory. Up to 10 participants with homozygous mutations may be enrolled in addition to the 60 participants with heterozygous mutation\n5. Hoehn and Yahr Scale Score 1-3\n6. Physically and cognitively able to complete protocol specified tasks independently or with some assistance\n7. If assistance is required for completion of tasks (e.g., help with the Technology), a caregiver or volunteer must be fully available to assist the participant for the duration of the study\n8. Ability to complete the mTUG without the use of a cane or walker and without a personal assistant\n9. Ability to complete the mTUG which is not impacted by comorbidities (e.g., participant should not have underlying, clinically significant cardiac or respiratory disease, or musculoskeletal disease). Non-progressive diseases of these organ systems must be approved by the Medical Monitor prior to enrollment; for example, mild to moderate osteoarthritis may be allowable\n10. Have access to a minimum indoor space of 6 meters by 2 meters (or approximately 20 feet by 7 feet) to carry out the mTUG\n11. A helper or participant is required to be present during the performance of mTUG, if the participant has had more than one fall in the past 12 months\n12. The participant's general health status is acceptable for participation in the study (per their physician)\n13. Working WiFi internet or willing to use a provided cellular internet connection device\n14. Participant must agree to refrain from all alcohol and cannabinoid products within 24 hours prior to performing the mTUG (i.e., three non consecutive days during study Week two, and Weeks two and four of the run in period)\n\nPart B Exclusion Criteria (PD Patients)\n\nIndividuals who meet any of the following exclusion criteria will not be eligible to participate in the study:\n\n1. Any mobility, gait, or ambulation problems other than those related to PD\n2. Any deep brain stimulation in situ or planned during the study duration, approximately 12-15 months from Screening\n3. Any planned changes in physiotherapy or exercise therapy\n4. Planned initiation of, or changes in, cognitive behavioral therapy\n5. Any elective planned surgery during the study duration, approximately 12-15 months from Screening\n6. History of significant head injury within the past 5 years (head injury with loss of consciousness or requiring greater than 24 hours in hospital in relation to head injury)\n7. History of frequent falls (classified as one fall every 1 month)\n8. Any other genetic PD causing mutations, for example, a pathogenic GBA mutation\n9. History of alcohol use disorder or other substance abuse disorder (excluding tobacco use), according to the DSM-5 in the past 10 years\n10. Any other serious concomitant diseases unrelated to PD (e.g., other neurological diseases of any kind, renal failure, liver failure, active cancer)\n11. BMI (calculated from self reported height and weight) of greater than 35\n12. Pregnant or planning to become pregnant in the next 24 months\n13. Has a concurrent disease or condition that, in the view of the investigator, places the subject at high risk of poor treatment compliance or of not completing the study, or would interfere with study participation or would affect safety",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT05349019"
+    },
+    {
+      "nct_id": "NCT04436848",
+      "title": "LRRK2 G2385R Leucocyte and Urine Biomarker Study",
+      "status": "UNKNOWN",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "This is a non-interventional study"
+      ],
+      "population": "Inclusion Criteria:\n\n* Diagnosis of Parkinson's disease assigned by a movement disorder specialist according to clinical diagnostic criteria\n* Age above 18 year-old\n* Provision of a written informed consent\n\nExclusion Criteria:\n\n\\- Physical or mental incapacity to complete study protocol",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT04436848"
+    },
+    {
+      "nct_id": "NCT03782753",
+      "title": "Molecular Pathology and Neuronal Networks in LRRK2 Parkinson's Disease",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease, PARK8",
+        "Parkinson Disease",
+        "Idiopathic Parkinson Disease"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\nAll groups\n\n* Women of child-bearing potential must use protocol-defined contraceptive measures and must have a negative \u03b2-hCG test at screening. For sexually active subjects (except females of non-childbearing potential), condoms should be used in addition to other birth control methods during the study, for 15 days after the last dose of investigational drug, and for 3 months after the last administration of PET or SPECT ligands. All male subjects must agree to refrain from donating sperm during the study, for 15 days following the last dose of investigational drug, and for 3 months after the last administration of PET or SPECT ligands. It is important that male subjects not impregnate others while in the study.\n* Adequate visual and auditory acuity to complete the psychological testing.\n\nIdiopathic PD group\n\n* Clinical diagnosis of Parkinson's disease meeting the Movement Disorder Society Clinical Diagnostic Criteria (i.e. not induced by drugs or other diseases or carriers of PD risk genes such as LRRK2, SNCA, PARK2 etc.).\n* Hoehn and Yahr scale stage 1 or 2.\n* Patients who are drug-na\u00efve (never been treated with dopamine agonists or levodopa) or on dopamine replacement therapy.\n* Patients who have received the diagnosis of idiopathic PD within three years for drug-na\u00efve patients or within eight years for patients on dopamine replacement therapy.\n\nLRRK2 PD group\n\n* Clinical diagnosis of Parkinson's disease meeting the Movement Disorder Society Clinical Diagnostic Criteria and genetic confirmation of being carriers of LRRK2 PD risk genes, diagnosed after the age of 30 years.\n* Hoehn and Yahr scale stage 1 or 2.\n* Patients who are drug-na\u00efve (never been treated with dopamine agonists or levodopa) or on dopamine replacement therapy.\n* Patients who have received the diagnosis of idiopathic PD within three years for drug-na\u00efve patients or within eight years for patients on dopamine replacement therapy.\n\nExclusion Criteria:\n\n* Patients who had previous surgery for PD (including but not limited to deep brain stimulation \\[DBS\\] or cell transplantation).\n* Patients who are treated with duodopa or apomorphine.\n* Patients taking serotonin acting drugs such as antidepressants (i.e. tricyclic or selective serotonin reuptake inhibitors etc.)\n* Patients taking drugs acting on SV2A such as antiepileptics (i.e. levetiracetam or brivaracetam etc.)\n* Pregnancy or breastfeeding.\n* Patients with current or a recent history of drug or alcohol abuse/dependence.\n* Patients who have other neurological disorders and known intracranial co-morbidities such as stroke, haemorrhage, space-occupying lesions.\n* Presence of any clinically significant medical condition (including cardiovascular, respiratory, cerebrovascular, hematological, hepatic, renal, gastrointestinal, or other disease) that, based on the judgment of the investigator, is clinically unstable, is likely to deteriorate during the course of the study, could put the patient at risk because of participation in the study, could affect the subject's ability to complete the study, or could influence the study results.\n* History of suicidal behavior or active suicidal ideation.\n* Within 1 year prior to screen or between screen and baseline (Day -1), any of the following: myocardial infarction; hospitalization for congestive heart failure; hospitalization for, or symptoms of, unstable angina; or syncope not related to PD.\n* History or presence of renal disease or impaired renal function.\n* Clinically important infection (e.g., chronic, persistent, or acute infection) within 30 days prior to screen or between screen and baseline (Day -1).\n* History of cancer within the last 5 years, with the exception of nonmetastatic basal cell carcinoma of the skin.\n* Clinically significant blood clotting or bleeding disorder, including clinically significant abnormal findings in laboratory assessments of coagulation or hematology.\n* Use of antipsychotic medication within 3 months prior to screen or between screen and baseline (Day -1).\n* Use of any anticoagulant within 30 days prior to baseline PET scan.\n* Use of any oral corticosteroid within 30 days prior to baseline PET scan.\n* Use of metoclopramide within 30 days prior to baseline (Day -1).\n* Use of any thyroid medication within 30 days prior to baseline (Day -1).\n* Regular use (e.g., taken \\> 3 days/week) of narcotic pain medications within 30 days prior to baseline (Day -1).\n* Presence of any of the following MRI contraindications: pacemaker; cardiac defibrillator; spinal cord or vagus nerve stimulator; aneurysm clip; artificial heart valve; recent coronary or carotid stent; ear implant; CSF shunt; other implanted medical device (e.g., Swan-Ganz catheter, insulin pump); or metal fragments or foreign objects in the eyes, skin, or body.\n* Negative Allen test in both hands, unless the brachial artery is used for arterial cannulation.\n* Claustrophobia and history of back pain that makes prolonged laying on the PET or MRI scanner intolerable.\n* Initiation or change in pharmacologic therapy for symptoms of PD within 30 days prior to screen or between screen and baseline (Day -1).\n\nIn addition, the following are exclusionary for subjects participating in CSF sampling:\n\n\\- Any spinal malformations or other aspects (e.g., tattoos) or other clinical findings (e.g., papilledema seen with ophthalmoscopy) that may complicate or contraindicate lumbar puncture, as judged by the investigator.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT03782753"
+    },
+    {
+      "nct_id": "NCT01618383",
+      "title": "Study of the Enteric Nervous System Using Colonic Biopsies in Parkinson Patients With LRRK2 Mutation",
+      "status": "TERMINATED",
+      "why_stopped": "Lack of patients",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [
+        "colonoscopy or rectosigmoidoscopy"
+      ],
+      "population": "Inclusion Criteria:\n\n* Patients aged 30-80, both genders\n* Parkinson's disease patients\n* Parkinson's disease patients with G2019S mutations\n* Controls: patient at risk of colic cancer for whom a coloscopy is required",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT01618383"
+    },
+    {
+      "nct_id": "NCT04056689",
+      "title": "Study to Evaluate DNL151 in Subjects With Parkinson's Disease",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [
+        "DNL151",
+        "Placebo"
+      ],
+      "population": "Key Inclusion Criteria:\n\n* Body mass index (BMI) between 18 and 35.0 kg/m2, inclusive\n* Clinical diagnosis of Parkinson's disease meeting UK Brain Bank criteria and H\\&Y Stage I, II, or III.\n* Able to hold Parkinson's disease medications 8 hours (overnight) prior to specific study assessments\n\nKey Exclusion Criteria:\n\n* Any history of clinically significant asthma, chronic obstructive pulmonary disease, or emphysema within 5 years of screening, or other clinically significant pulmonary disease within 6 months of screening\n* Abnormal Vitals including Respiratory Rate, Body Temperature, Blood Pressure, and Pulse Rate\n* Pulmonary Function Tests (PFTs) (FVC \\<60% predicted, FEV1 \\<50% predicted, FEV1:FVC ratio \\<0.6, DLCO \\<70% predicted)\n* Clinically significant neurologic disorder other than Parkinson's disease, including history of stroke within 12 months of screening, cognitive impairment, seizure within 5 years of screening, or head trauma with loss of consciousness within 6 months of screening\n* Montreal Cognitive Assessment (MoCA) score of \\<24 at screening\n\nNOTE: Other protocol defined Inclusion/Exclusion criteria may apply",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT04056689"
+    },
+    {
+      "nct_id": "NCT04893083",
+      "title": "A Non-interventional Study for the Collection of Biospecimens From Patients With Parkinson's Disease",
+      "status": "TERMINATED",
+      "why_stopped": "Business decision",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n* Male or female \u226540\n* Clinical diagnosis of Parkinson's disease meeting United Kingdom Brain Bank criteria and modified Hoehn and Yahr Stage I, II, or III;\n* Willing to undergo genetic testing for neurologic genotyping panel; -If being treated for Parkinson's disease, must have been on a stable dose of anti- Parkinson's disease medications for a minimum of 30 days prior to Day 1;\n* If taking statins, fibrates, antipsychotic or anticonvulsant medications at Day 1, must have been on a stable dose for a minimum of 30 days, and are not likely to require a change in dosage for the remainder of the study;\n\nExclusion Criteria:\n\n* Any major medical illness or unstable medical condition within 6 months of screening that, in the opinion of the Investigator or Sponsor, may interfere with the subject's ability to comply with study procedures or abide by study restrictions.\n* Diagnosis of a significant central nervous system disease other than Parkinson's disease(eg, Huntington's disease, frontotemporal dementia, multi-infarct dementia, normal pressure hydrocephalus, multiple system atrophy, progressive supranuclear palsy, drug- induced parkinsonism, Alzheimer's disease)\n* History of stroke;\n* History of epilepsy or seizure disorder other than febrile seizures as a child, or any seizure or unexpected loss of consciousness (eg, syncope) within 6 months prior to Day 1;\n* History of traumatic brain injury with residual neurological deficit; -If taking anti-Parkinson's disease medication(s)and are likely to require a change in anti- Parkinson's disease medication(s) during the study;\n* Known active infectious disease or active infections within 30 days prior to Day 1;\n* Any vaccination within 21 days prior to Day 1;\n* Currently taking, or planning to take, anti-coagulant medications or antiplatelet medications during the study;\n* Allergy to Lidocaine (xylocaine) or its derivatives or any other LP contraindications;\n* Any other condition which could interfere with, or the treatment for which might interfere with, the conduct of the study or which would, in the opinion of the Investigator, unacceptably increase the subject's risk by participating in the study; -Any systemic glucocorticoids taken within 14 days prior to Day 1 or non-steroidal anti- inflammatory drugs taken within 4 days prior to Day 1;\n* Received blood products within 30 days prior to Day 1;\n* Donated blood within 30 days prior to Day 1.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT04893083"
+    },
+    {
+      "nct_id": "NCT01759888",
+      "title": "Development of a Novel 18F-DTBZ PET Imaging as a Biomarker to Monitor Neurodegeneration of PARK6 and PARK8 Parkinsonism",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [
+        "18F-DTBZ"
+      ],
+      "population": "Inclusion Criteria:\n\n1. Both genders and 20\\~80 years old.\n2. Written and dated informed consent by self or by legal representative, to be obtained before any of the study procedures.\n3. Twenty PD patients were proved carrying LRRK2 G2385R mutation by our genetic laboratory. Patients didn't have other mutations that may contribute to the parkinsonism, such as LRRK2 G2019S, LRRK2 R1628P, PARK2, PARK6, and SCA2.\n4. Twenty PARK6 PD patients were proved carrying PINK1 mutation by our genetic laboratory. Patients didn't have other mutations that may contribute to the parkinsonism, such as LRRK2, PARK2, and SCA2.\n5. Twenty idiopathic PD patients were proved that they did not carry any known mutations, which may contribute to the parkinsonism, such as LRRK2, PARK2, PARK6, and SCA2. The age of disease onset should be more than 50 years, and no known familial history of parkinsonism or spinocerebellar atrophy.\n6. All the subjects should be fulfilled the UK Parkinson's Disease Society Brain Bank criteria of \"possible\" or \"probable\" PD.\n\nExclusion Criteria:\n\n1. Pregnant or becoming pregnant during the study or current breast feeding.\n2. Any subject who has a clinically significant abnormal laboratory values, and/or clinically significant or unstable medical or psychiatric illness.\n\n   1. Clinically significant hepatic, renal, pulmonary, metabolic, or endocrine disturbances, especially thyroid disease.\n   2. Current clinically significant cardiovascular disease. (cardiac surgery or myocardial infarction within the last 6 months; unstable angina; decompensated congestive heart failure; significant cardiac arrhythmia; congenital heart disease.\n3. History of drug or alcohol abuse within the last year, or prior prolonged hi story of abuse.\n4. History or presence of QTc prolongation.\n5. History of intracranial operation, including thalamotomy, pallidotomy, and/or deep brain stimulation.\n6. Any documented abnormality in the brain by CT or MRI of brain, which might contribute to the motor function, such as hydrocephalus, multiple infarction and encephalomalacia, will be excluded. Mild cortical atrophy and non-specific white matter changes will be allowed.\n7. Any evidence of secondary parkinsonism (multiple infarcts, intoxication, and hydrocephalus, etc).\n8. General PET exclusion criteria.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT01759888"
+    },
+    {
+      "nct_id": "NCT02305147",
+      "title": "Cohort Study to Identify Predictor Factors of Onset and Progression of Parkinson's Disease",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "Clinical, biological and imaging followup"
+      ],
+      "population": "Inclusion Criteria:\n\n* All subjects: Male or female age 18 years and older, MMSE score \\> 26, negative pregnancy test in potentially child-bearing women (contraindication to SPECT with DatScan).\n* Idiopathic Parkinson disease subjects: diagnosis confirmed according to UK Parkinson's Disease Society Brain Bank criteria (UKPDSBB); disease duration less than 3 years.\n* Genetic Parkinson disease subjects: parkinson diagnosis confirmed and mutation in parkin, LRRK2, SNCA or GBA genes.\n* Prodromal subjects: subjects with identified relative with PD genetically confirmed or subjects with diagnosis of idiopathic Rem sleep Behavior Disorder (iRBD); neurological examination normal (no signs of parkinsonism).\n* Healthy subjects: neurological examination normal\n\nExclusion Criteria:\n\n* All subjects: Psychiatric disorder or any progressive life-threatening disease, impairment precluding appropriate information and instructions given concerning participation to the study; contra-indication to MRI or SPECT scan.\n* Parkinson disease subjects: no dopamine transporter deficit at SPECT scan; parkinsonism induced by neuroleptics; neuroleptics intake within 6 months; atypical parkinson syndrom (MSA, PSP, CBD...)\n* Parkinson disease subjects with mutation in Parkin, LRRK2, SNCA or GBA gene: atypical parkinson disease syndromes due to either drugs (e.g., metoclopramide, flunarizine, neuroleptics) or metabolic disorders (e.g., Wilson's disease), encephalitis or degenerative diseases (e.g., progressive supranuclear palsy) or currently taking neuroleptics or has taken neuroleptics within 6 months of baseline or any biological anomaly.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT02305147"
+    },
+    {
+      "nct_id": "NCT05837130",
+      "title": "Non-drug Treatment Study in Parkinson's Disease Patients and Healthy Volunteers to Collect Biological Samples in Order to Assess ex Vivo the Activity of Candidate Therapies and Develop Novel Analytical Methods for Biomarkers",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "Blood sample collection and an optional cerebrospinal fluid (CSF) collection",
+        "Blood sample collection"
+      ],
+      "population": "Inclusion Criteria:\n\n* Women of childbearing potential (WOCBP) must have a negative pregnancy test\n* Parkinson's disease (PD) patients must be at least 40 years old\n* Healthy volunteers must be at least 30 years old\n* PD patients must have a PD diagnosis, according to the 2015 Movement Disorder Society criteria, with bradykinesia, and at least one of the following: muscular rigidity, or resting tremor with no other suspected cause of Parkinsonism\n* The LRRK2 G2019S symptomatic carrier PD patients must have a documented G2019S mutation on the leucine-rich repeat kinase 2 gene (LRRK2)\n\nExclusion Criteria:\n\n* Pregnant or lactating women\n* Have participated in an investigational drug trial within 30 days\n* Are SARS-CoV-2, COVID-19, positive within 15 days prior to blood sample collection\n* Have another active disease that the investigator believes could interfere with study results",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT05837130"
+    },
+    {
+      "nct_id": "NCT05009199",
+      "title": "Occupancy of Adenosine A2A Receptors Using the PET Radiotracer [18F]MNI-444",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Healthy Volunteer"
+      ],
+      "interventions": [
+        "[18F]MNI-444"
+      ],
+      "population": "Inclusion Criteria:\n\nParticipants are eligible for inclusion in this study only if they meet all of the following criteria:\n\n* Participant is able to provide written informed consent, which must be obtained before any assessment is performed.\n* Female participants must not be of childbearing potential, or if they are of childbearing potential, must agree to use contraception and not donate eggs. At the discretion of the Investigator, participants without documentation of non-childbearing potential may receive pregnancy testing.\n\n  * A woman is considered to be of childbearing potential if she is postmenarchal, has not reached a postmenopausal state (12 continuous months of amenorrhea with no identified cause other than menopause), and is not permanently infertile due to surgery (ie, removal of ovaries, fallopian tubes, and/or uterus, tubal ligation) or another cause as determined by the Investigator (eg, M\u00fcllerian agenesis).\n  * Women of childbearing potential must commit to remain abstinent (refrain from heterosexual intercourse) or use 2 forms of birth control, 1 of which is a barrier contraception method, for the duration of the study and 30 days after study completion. Periodic abstinence (eg, calendar, ovulation, symptothermal, or postovulation methods) and withdrawal are not adequate methods of contraception.\n  * Women of childbearing potential must commit to not donate ovum for the duration of the study and 30 days after study completion.\n* Male participants with partners of childbearing potential must commit to the use of 2 methods of contraception, 1 of which is a barrier method for male participants for the study duration and 90 days after study completion.\n* Male participants must not donate sperm for the study duration and for 90 days after study completion.\n* Willing and able to cooperate with study procedures.\n* Males and females aged \u2265 30 years.\n* Healthy with no clinically relevant finding on physical examination at Screening.\n* No personal history of clinically significant neurologic and/or psychiatric disorders, including PD.\n* No history of dopamine transporter deficit on DaTscan for any previously acquired DaTscan.\n* No cognitive impairment as judged by the Investigator.\n* Has a sequence variation in the LRKK2 gene that is a genetic risk factor for the development of PD (based on previous genetic testing in medical history).\n\nExclusion Criteria:\n\nParticipants fulfilling any of the following criteria are not eligible for inclusion in this study:\n\n* Current or prior history of any alcohol or drug abuse in the past 2 years.\n* Laboratory tests with clinically significant abnormalities and/or clinically significant unstable medical illness.\n* Participant has received an investigational drug within 30 days or five half-lives prior to the baseline assessments, whichever is longer.\n* Prior participation in other research protocols or clinical care during the past year that would result in radiation exposure to an effective radiation dose exceeding the acceptable annual limit established by the US Federal Guidelines (effective dose of 50 mSv, including the procedures in this clinical protocol).\n* Pregnant, lactating or breastfeeding.\n* Evidence of clinically significant gastrointestinal, cardiovascular, hepatic, renal, hematological, neoplastic, endocrine, alternative neurological, immunodeficiency, pulmonary, or other disorder or disease.\n* Unsuitable veins for repeated venipuncture.\n* Brain MRI with clinically significant structural abnormalities.\n* Has a medical condition or takes a medication likely to interfere with assessment of brain A2A receptor levels by PET in the opinion of the Investigator.\n* Implants such as implanted cardiac pacemakers or defibrillators, insulin pumps, cochlear implants, metallic ocular foreign body, implanted neural stimulators, CNS aneurysm clips and other medical implants that have not been certified for MRI, or history of claustrophobia in MRI, unless a previous MRI is used.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "uncertain",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT05009199"
+    },
+    {
+      "nct_id": "NCT01424475",
+      "title": "LRRK2 Mutation and Parkinson's Disease",
+      "status": "TERMINATED",
+      "why_stopped": "Following extensive efforts to increase recruitment, it will not be possible to complete the study protocol within a reasonable time",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "Healthy",
+        "PKD Patients"
+      ],
+      "population": "Any Subject:\n\nInclusion Criteria:\n\n* Male or female, age: \\>18 years.\n* Capable of giving written informed consent, which includes compliance with the requirements and restrictions listed in the consent form.\n* Sufficiently fluent in English that they are able to understand written and spoken instructions in the opinion of the investigator.\n\nExclusion Criteria:\n\n* Subjects with previous or current drug or alcohol dependence within 2 years of screening.\n* Subjects who are unable to tolerate study procedures including MRI, or who are unable to perform the study procedures (e.g. due to severe musculoskeletal disease).\n* Use of other prescription or non-prescription centrally acting drugs, including herbal (eg khat) and dietary supplements within 7 days or 5 half-lives (whichever is longer) prior to the procedures of Day 1, unless in the opinion of the Investigator and GSK Medical Monitor the medication will not interfere with the study procedures or compromise subject safety.\n* Pregnant females as determined by positive serum or urine hCG test at screening.\n* Lactating females.\n* Unwillingness or inability to follow the procedures outlined in the protocol.\n* Subject is mentally or legally incapacitated.\n* Subject meets any of the MRI exclusion criteria.\n* Subject is left-handed.\n\nPKD Patients:\n\nInclusion Criteria:\n\n* Diagnosis of Parkinson's disease according to the following criteria derived from the UKPD Society brain bank diagnostic criteria for PD (Hughes AJ et al., 1992):\n\n  a) Bradykinesia must be present b) At least one of the following: muscular rigidity Resting tremor postural instability not caused by primary visual, vestibular, cerebellar or proprioceptive dysfunction c) Supportive prospective positive criteria for Parkinson's Disease (three of the following required for definite diagnosis): Resting tremor unilateral onset progressive disorder in first 5 years following onset, persistent asymmetry affecting side on which symptoms first appeared excellent response (70-100%) to levodopa in the clinical judgement of the investigator, based on the medical notes or during standard care d) None of the following clinical features which suggest a diagnosis other than Parkinson's disease: History of repeated strokes with stepwise symptom progression History of repeated head injury History of definite encephalitis Neuroleptic treatment at symptom onset Sustained remission Strictly unilateral features after 3 years Supranuclear gaze palsy Cerebellar signs In first five years following onset, early severe autonomic involvement such as orthostatic hypotension, impotence and bladder dysfunction Early (within 2 years on symptom onset) severe dementia with disturbed memory, language, praxis Babinski sign CT/MRI scan evidence of tumour or hydrocephalus Negative response to 1000mg of levodopa daily in divided doses.\n\n  1-methyl-4-phenyl-1,2,3,6-tetrahydropyridine (MPTP) exposure\n* Parkinson's disease in Hoehn \\& Yahr criteria Stages I-III.\n* Confirmed ascertainment as having the G2019S mutation in the LRRK2 gene.\n\nExclusion Criteria:\n\n* Subjects with clinically significant condition(s) other than Parkinson's disease which, in the opinion of the investigator, would render the subject unsuitable for the study (e.g. psychiatric, haematological, renal, hepatic, endocrinology, neurological \\[other than Parkinson's disease\\], cardiovascular, or active malignancy \\[other than benign skin malignancies\\]).\n* Subjects with prior or current major psychosis (e.g. schizophrenia or psychotic depression) as assessed by the MINI neuropsychiatric interview.\n* Subjects with severe clinical dementia as measured by UPDRS.\n* Patients who are on centrally acting anti-cholinergic medication that is likely to impair cognitive function.\n* Patients with positive drug screen results may still be included at the discretion of the investigator following a discussion of the result with the subject, and following a discussion with the sponsor.\n\nHealthy Subjects (Controls):\n\nInclusion Criteria:\n\n* Matched to patients with LRRK2 mutation for age, gender, premorbid reading IQ, handedness and smoking status (number of cigarettes smoked per day (0-10, 11-20, 21-30 or 30+)).\n* None of the clinical symptoms or signs of Parkinson's disease listed in section 5.2.2.1.\n* No family history of more than one first-degree relative with Parkinson's disease to suggest that the subject may be a carrier of one of the genetic mutations of Parkinson's disease.\n* Confirmed ascertainment as not having LRRK2 mutation.\n* Subject is not a genetically-related family member of a subject with LRRK2 mutation recruited into this study as per criteria above.\n* Subject is healthy as determined by a responsible and experienced physician, based on a medical evaluation including medical history, physical examination, laboratory tests and cardiac monitoring. A subject with a clinical abnormality or laboratory parameters outside the reference range for the population being studied may be included only if the Investigator and the GSK Medical Monitor agree that the finding is unlikely to introduce additional risk factors and will not interfere with the study procedures.\n* No current or past history of Axis I psychiatric disorders as determined by MINI interview.\n\nExclusion Criteria:\n\n* A positive pre-study drug/alcohol screen.\n* Currently taking any prescription medication, in particular medication with a central mechanism of action, unless in the opinion of the Investigator and GSK Medical Monitor the medication will not interfere with the study procedures or compromise subject safety.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT01424475"
+    },
+    {
+      "nct_id": "NCT06993142",
+      "title": "Slow-SPEED: Slowing Parkinson's Early Through Exercise Dosage",
+      "status": "RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease",
+        "Prodromal Stage",
+        "Neurodegenerative Diseases",
+        "Basal Ganglia Diseases",
+        "Central Nervous System Diseases",
+        "Synucleinopathies",
+        "Nervous System Diseases",
+        "Cerebral Disorder",
+        "Brain Diseases",
+        "Parkinsonian Disorders",
+        "Genetic Predisposition"
+      ],
+      "interventions": [
+        "Increase of physical activity volume and intensity with the use of a motivational smartphone application"
+      ],
+      "population": "Inclusion criteria\n\n1. previously identified LRRK2 G2019S or GBA N370S variant based on genotyping\n2. aged 50 years or older\n3. able to understand the English language\n4. being able to walk independently inside the home without the use of a walking aid\n5. in possession of a suitable smartphone (screen size minimum 4.6 inch), (Android version 9 or iOS version 15 or newer)\n6. Not in a high physical activity range during the 4-week eligibility and baseline period\n\nExclusion criteria\n\n1. clinically diagnosed or self-reported diagnosis neurodegenerative disease\n2. self-reported falls of three or more per year\n3. dexterity problems or cognitive impairments hampering smartphone use\n4. if they are not aware of and do not wish to be informed about an increased risk of developing diseases associated with the LRRK2 or GBA1 risk variant\n5. if individual is not community-dwelling\n6. in possession of one of the following devices: Huawei P8 Lite; Huawei P9 Lite; Xiaomi Mi 6; Huawei P20 Lite (Fitbit is incompatible)",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT06993142"
+    },
+    {
+      "nct_id": "NCT00467090",
+      "title": "Characteristics of Parkinson s Disease Associated With the LRRK-2 Gene Mutation",
+      "status": "TERMINATED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [],
+      "population": "* INCLUSION CRITERIA:\n\n  1. Subjects at least 18 years of age.\n  2. Ability to provide consent or have appointed a Durable Power of Attorney able to provide consent.\n  3. Patients with a diagnosis of PD with a known LRRK2 mutation.\n\n     OR\n  4. First degree relatives without a diagnosis of PD with a family history suggestive of inherited PD due to LRRK2 mutations.\n\nEXCLUSION CRITERIA:\n\n1. Subjects with a history of severe head injury, encephalitis, chronic use of drugs that cause parkinsonism or a clinical history of strokes.\n2. For the magnetic resonance imaging (MRI), exclusion criteria include the following: pregnancy, pacemakers or other implanted electrical devices, brain stimulators, dental implants, aneurysm clips (metal clips on the wall of a large artery), metallic prostheses (including metal pins and rods, heart valves, and cochlear implants), permanent eyeliner, implanted delivery pump, or shrapnel fragments. Patients will be screened for these conditions prior to having the MRI scan performed.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT00467090"
+    },
+    {
+      "nct_id": "NCT01860118",
+      "title": "LRRK2 and Other Novel Exosome Proteins in Parkinson's Disease",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\nParkinson's disease inclusion criteria:\n\nInclusion criteria will be based on UK Brain Bank criteria for the clinical diagnosis of PD. These require 1) the presence of bradykinesia and either rest tremor or rigidity; 2) asymmetric onset; 3) progressive motor symptoms 4) age at onset 21-99 years.\n\nControl inclusion criteria: ages of between 21-99 years, a lack of PD in first-degree blood relatives, and a lack of positive responses on more than 3 items on the PD Screening Questionnaire.\n\nExclusion Criteria:\n\nFor all subjects:\n\ninclude atypical features indicative of a Parkinson-Plus disorder (Progressive Supranuclear Palsy (PSP), Multiple System Atrophy (MSA), Corticobasal Degeneration (CBD)) including cerebellar signs, supranuclear gaze palsy, apraxia and other cortical signs, or prominent autonomic failure, neuroleptic treatment at time of onset of parkinsonism, active treatment with a neuroleptic at time of study entry, History of repeated strokes with stepwise progression of parkinsonism, history of repeated head injury, history of definite encephalitis, prominent gait imbalance early in the course (\\< 5 years), dementia, known severe anemia (hematocrit \\<30), history of kidney disease and/or current or past glomerular filtration rate (GFR) \\<60 possibly indicative of kidney disease, or a serious comorbidity that may interfere with participation in the study.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT01860118"
+    },
+    {
+      "nct_id": "NCT06680830",
+      "title": "A Phase 2 Study and Open-Label Extension of NEU-411 in Companion Diagnostic-Positive Participants With Early Parkinson's Disease",
+      "status": "RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease",
+        "Parkinson",
+        "Idiopathic Parkinson Disease",
+        "Early Parkinson Disease (Early PD)",
+        "Parkinson Disease, Idiopathic"
+      ],
+      "interventions": [
+        "NEU-411",
+        "Placebo"
+      ],
+      "population": "Inclusion Criteria:\n\n1. Aged 40-80 years at time of screening, inclusive\n2. Diagnosis of clinically established or clinically probable Parkinson's Disease (PD)\n3. LRRK2-driven PD using the investigational companion diagnostic genetic test (CDx)\n4. Modified Hoehn and Yahr (mH\\&Y) of 1 to 2.5\n\nExclusion Criteria:\n\n1. Secondary or atypical parkinsonian syndromes\n2. Uncontrolled diabetes mellitus with hemoglobin A1c (HbA1c) \\>8%\n3. Other significant medical conditions (as determined by medical history, examination, or clinical investigations at screening)\n\nAdditional inclusion and exclusion criteria for the RCP and OLE are outlined in the full study protocol.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT06680830"
+    },
+    {
+      "nct_id": "NCT06151002",
+      "title": "PD Frontline (Part of RAPSODI GD) Remote Assessment of People With Parkinson's",
+      "status": "RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n* Formal diagnosis of Parkinson Disease\n\nExclusion Criteria:\n\n* Confirmation that the individual carries a GBA1 variant (GBA positive). These individuals will be referred to sister-study, RAPSODI.\n* History of Parkinsonism (progressive supranuclear palsy, multiple system atrophy, traumatic, manganese toxicity, postencephalitic, vascular PD; drug induced PD; corticobasal degeneration)\n* Individuals with another neurological disorder including: dementia, movement disorders, and motor neurone disease.\n* Individuals on drugs known to be associated with parkinsonism, including neuroleptic agents (Amisulpride, Chlorpromazine Hydrochloride, Flupenthixol, Fluphenazine Hydrochloride, Haloperidol, Methotrimeprazine, Levomepromazine, Olanzapine, Oxypertine, Pericyazine, Perphenazine, Pimozide, Pipotiazine, Prochlorperazine, Promazine Hydrochloride, Reserpine, Risperidone, Sulpiride, Thioridazine, Trifluoperazine, Zuclopenthixol acetate, Zotepine), plus Bupropion, , Lithium, Methyldopa, Metoclopramide and Sodium Valproate).",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT06151002"
+    },
+    {
+      "nct_id": "NCT03775447",
+      "title": "Fox BioNet Project: ECV-003",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "Lumbar Puncture",
+        "Biofluid Samplings: Blood"
+      ],
+      "population": "Inclusion Criteria:\n\nParkinson's Disease Patients:\n\n* A diagnosis of Parkinson's disease in the opinion of the enrolling investigator\n* Disease duration: any\n* Male or female age 18 years or older at time of PD diagnosis.\n\nHealthy Controls:\n\n\u2022Male or female age 18 years or older at Screening.\n\nExclusion Criteria:\n\nParkinson's Disease Patients:\n\n* Inability to provide informed consent\n* Current treatment with anticoagulants (e.g., coumadin, heparin) that might preclude safe completion of the lumbar puncture.\n* Condition that precludes the safe performance of routine lumbar puncture, such as prohibitive lumbar spinal disease, bleeding diathesis, or clinically significant coagulopathy or thrombocytopenia.\n* Participation in a blinded clinical trial of any kind or an unblinded trial of an investigational product that is not currently approved for use in humans.\n\nHealthy Controls:\n\n* Inability to provide informed consent\n* Current treatment with anticoagulants (e.g., coumadin, heparin) that might preclude safe completion of the lumbar puncture.\n* Condition that precludes the safe performance of routine lumbar puncture, such as prohibitive lumbar spinal disease, bleeding diathesis, or clinically significant coagulopathy or thrombocytopenia.\n* Participation in a blinded clinical trial of any kind or an unblinded trial of an investigational product that is not currently approved for use in humans.\n* Currently pregnant (female participants)",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT03775447"
+    },
+    {
+      "nct_id": "NCT04214509",
+      "title": "LIPAD - LRRK2 International Parkinson's Disease Study",
+      "status": "UNKNOWN",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson's Disease and Parkinsonism"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n* Informed consent is obtained from the participant.\n* The participant is clinically diagnosed with Parkinson's disease or the individual is a family member of a participant with LRRK2 parkinsonism or is a member of a high risk population with an early PD onset.\n* The participant is equal to or older than 18 years old.\n\nExclusion Criteria:\n\n* Inability to provide informed consent.\n* The participant is not suffering from Parkinson's disease or the individual is not a family member of a participant with LRRK2 parkinsonism or is not a member of a high risk population.\n* The participant is younger than 18 years old.\n* Previously enrolled in the study.\n* Participant in custody.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT04214509"
+    },
+    {
+      "nct_id": "NCT07642908",
+      "title": "Striatal and Extra-Striatal Cholinergic Terminal Density in LRRK2-PD Mutation",
+      "status": "RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n1. Male or Female, age 45 years and over.\n2. Diagnosis of PD based on the United Kingdom Parkinson's Disease Society Brain Bank Diagnostic Research Criteria (Hughes et al., 1992).\n3. Presence of LRRK2 mutation as confirmed by referral from UM Movement Disorders clinic, medical record review, or participation in the PDGENEration study.\n\nExclusion Criteria:\n\n1. Evidence of atypical parkinsonism.\n2. Contra-indications to MR imaging including but not limited to pacemakers, aneurysm clips, intraocular metal, cochlear implant, or severe claustrophobia.\n3. Evidence of large vessel stroke or mass lesion on MRI.\n4. Regular use of typical anti-cholinergic drugs or cholinesterase inhibitors.\n5. History of deep brain stimulation surgery.\n6. Pregnant or nursing.\n7. Suicidal ideation, as indicated by a response of 2 or 3 on question 9 of the Beck Depression Inventory.\n8. Cognitive impairment that results in the inability to give consent, as demonstrated by the Decision Making Capacity Tool.\n9. Any other condition or criterion that would preclude safe and meaningful participation in the study.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT07642908"
+    },
+    {
+      "nct_id": "NCT03523104",
+      "title": "Chinese PD-LRRK2 Registry",
+      "status": "RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n* Patients diagnosed with PD by the United Kingdom Parkinson's Disease Society Brain Bank clinical diagnostic criteria or other standard criteria; PD patients detected with positive LRRK2 variants\n\nExclusion Criteria:\n\n\\-",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT03523104"
+    },
+    {
+      "nct_id": "NCT04228172",
+      "title": "Genotypic Influences on Network Progression in Parkinson's Disease",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [
+        "DNA/GeneticTesting",
+        "FDG PET scan",
+        "MRI scan",
+        "Clinical and neuropsychological assessments"
+      ],
+      "population": "Inclusion Criteria:\n\n* Diagnosis of PD made according to United Kingdom (UK) Parkinson's Disease Society Brain Bank Criteria\n* Ability to provide written informed consent\n* Age 40-75\n* Stable dose of antiparkinsonian medication for \\>1 month prior to study entry\n\nExclusion Criteria:\n\n* Subjects with pathogenic mutations in LRRK2 related PD mutations (subjects with variants of uncertain significance (VUS) are eligible\n* History of known causative factors such as encephalitis or neuroleptic treatment\n* Patients with dementia (defined as Mini-Mental Status Exam score \\<24 or a Telephone Interview for Cognitive Status score \\<26)\n* Atypical parkinsonian features including oculomotor abnormalities, incontinence, ataxia, sensory loss, or pyramidal signs\n* Known structural brain lesions\n* Patients with history of stroke, head injury, high intracranial pressure or severe headaches\n* Psychiatric disorder, including a history of major depression in the past 36 months\n* Pregnant or breastfeeding women (female subjects of child-bearing potential will be screened for pregnancy before imaging).",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT04228172"
+    },
+    {
+      "nct_id": "NCT06602193",
+      "title": "Safety and Pharmacodynamic Effects of BIIB122 in Participants With LRRK2-Associated Parkinson's Disease (LRRK2-PD)",
+      "status": "ACTIVE_NOT_RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "BIIB122 225 mg",
+        "DNL151",
+        "BIIB122-Matching Placebo"
+      ],
+      "population": "Inclusion Criteria:\n\n* For heterozygous pathogenic LRRK2 mutation carriers: \u2265 30 to \u2264 80 years\n* For homozygous pathogenic LRRK2 mutation carriers: \u2265 30 years\n* Have screening genetic test results verifying the presence of a pathogenic LRRK2 variant.\n* Have a clinical diagnosis of PD meeting the Movement Disorder Society Clinical Diagnostic Criteria.\n\nExclusion Criteria:\n\n* Have a history of any clinically significant neurological disorder other than PD, including, but not limited to, stroke and dementia, in the opinion of the investigator, within 5 years of the screening visit.\n* Have clinical evidence of atypical parkinsonism (eg, multiple-system atrophy or progressive supranuclear palsy) or evidence of drug-induced parkinsonism.\n* Have previously participated or are currently participating in the BIIB122 LUMA study (Study 283PD201).\n* Have previously participated or are currently participating in a gene therapy study for PD.\n* Have a history of brain surgical intervention for PD (eg, deep-brain stimulation, pallidotomy).\n* Have any physical condition that may confound the motor assessment (MDS-UPDRS) over time (eg, severe arthritis, severe dyskinesias, traumatic injuries with permanent physical disability).\n* Abnormal vitals including Blood Pressure, Heart Rate, or Body Temperature\n* Have abnormal PFT results at screening\n\nNote: Other protocol defined Inclusion/Exclusion criteria may apply",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT06602193"
+    },
+    {
+      "nct_id": "NCT03545425",
+      "title": "Fox BioNet Project: LRRK2-002",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "Biofluid samplings"
+      ],
+      "population": "Inclusion Criteria:\n\nLRRK2 Parkinson Disease (PD) Subjects:\n\n* Patients must have confirmed LRRK2 mutation\n* Patients must meet the MDS criteria for Parkinson's disease\n* Disease duration: any\n* Male or female age 30 years or older at time of PD diagnosis.\n\nIdiopathic PD Subjects:\n\n* Patients must meet the MDS criteria for Parkinson's disease.\n* Disease duration: any\n* Male or female age 30 years or older at time of PD diagnosis.\n\nNon-manifesting LRRK2 mutation carriers:\n\n* Patients must have confirmed LRRK2 mutation\n* Male or female age 30 years or older at Screening.\n\nControl (C) Subjects:\n\n* Male or female age 30 years or older at Screening.\n\nExclusion Criteria:\n\nLRRK2 Parkinson Disease (PD) Subjects:\n\n* Inability to provide informed consent\n* Participation in a blinded clinical trial of any kind or an unblinded trial of an investigational product that is not currently approved for use in humans.\n* Treatment for cancer in the last 5 years.\n\nIdiopathic PD Subjects:\n\n* Inability to provide informed consent\n* Participation in a blinded clinical trial of any kind or an unblinded trial of an investigational product that is not currently approved for use in humans.\n* Treatment for cancer in the last 5 years.\n\nNon-manifesting LRRK2 mutation carriers:\n\n* Inability to provide informed consent\n* Participation in a blinded clinical trial of any kind or an unblinded trial of an investigational product that is not currently approved for use in humans.\n* Treatment for cancer in the last 5 years.\n\nControl Subjects:\n\n* Inability to provide informed consent\n* Participation in a blinded clinical trial of any kind or an unblinded trial of an investigational product that is not currently approved for use in humans.\n* Treatment for cancer in the last 5 years",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT03545425"
+    },
+    {
+      "nct_id": "NCT04603326",
+      "title": "FoxBioNet: ECV (Extracellular Vesicle) 004",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "Lumbar Puncture",
+        "Whole Blood Collection"
+      ],
+      "population": "Non-manifesting LRRK2 mutation carriers\n\nInclusion:\n\n* Ability to provide informed consent\n* Confirmed LRRK2 G2019S mutation\n* Age 30 years or older at date of informed consent.\n\nExclusion:\n\n* Inability to provide informed consent\n* Known GBA mutation carrier\n* Participation in a blinded clinical trial of any kind or an unblinded trial of an investigational product that is not currently approved for use in humans. Participants that have had a 6 - month washout period between ending participation in a clinical trial with an investigational agent and enrollment into the ECV-004 study are eligible.\n* The presence of rest tremor, bradykinesia or rigidity.\n* The presence of any other neurological sign that in the opinion of the site investigator raises suspicion for an atypical parkinsonian syndrome (e.g. supranuclear gaze palsy)\n* Treatment for cancer in the last 5 years or cancer patient receiving immunotherapy or targeted therapy. Individuals with cancers that have not been treated with systemic chemotherapy, immunotherapy, targeted therapies or radiation therapy are eligible to enroll in the study.\n* Diagnosis of an autoimmune disorder\n* Current treatment with anticoagulants that might preclude safe completion of the lumbar puncture and that cannot be safely paused in the opinion of the site investigator.\n* Any condition that, in the investigator's opinion, precludes the safe performance of routine lumbar puncture, such as prohibitive lumbar spinal disease, bleeding diathesis, or clinically significant coagulopathy or thrombocytopenia.\n* Diagnosis of dementia\n* Pregnant females, if fluoroscopy is needed to obtain the spinal fluid sample\n\nLRRK2 Parkinson Disease (PD) Participants:\n\nInclusion:\n\n* Ability to provide informed consent\n* Confirmed LRRK2 G2019S mutation\n* Meet the MDS criteria for Parkinson's disease\n* Disease duration: any\n* Age 30 years or older at time of PD diagnosis.\n\nExclusion:\n\n* Known GBA mutation carrier\n* Participation in a blinded clinical trial of any kind or an unblinded trial of an investigational product that is not currently approved for use in humans. Participants that have had a 6 - month washout period between ending participation in a clinical trial with an investigational agent and enrollment into the ECV-004 study are eligible.\n* Treatment for cancer in the last 5 years or cancer patient receiving immunotherapy or targeted therapy. Individuals with cancers that have not been treated with systemic chemotherapy, immunotherapy, targeted therapies or radiation therapy are eligible to enroll in the study.\n* Diagnosis of an autoimmune disorder\n* Current treatment with anticoagulants that might preclude safe completion of the lumbar puncture and that cannot be safely paused in the opinion of the site investigator.\n* Any condition that, in the investigator's opinion, precludes the safe performance of routine lumbar puncture, such as prohibitive lumbar spinal disease, bleeding diathesis, or clinically significant coagulopathy or thrombocytopenia.\n* Diagnosis of dementia\n* Pregnant females, if fluoroscopy is needed to obtain the spinal fluid sample\n\nIdiopathic PD (iPD) Particpants:\n\nInclusion:\n\n* Ability to provide informed consent\n* Meet the MDS criteria for Parkinson's disease.\n* Disease duration: any\n* Age 30 years or older at time of PD diagnosis.\n\nExclusion:\n\n* Known LRRK2 G2019S and/or GBA mutation carrier\n* Participation in a blinded clinical trial of any kind or an unblinded trial of an investigational product that is not currently approved for use in humans. Participants that have had a 6 - month washout period between ending participation in a clinical trial with an investigational agent and enrollment into the ECV-004 study are eligible.\n* Treatment for cancer in the last 5 years or cancer patient receiving immunotherapy or targeted therapy. Individuals with cancers that have not been treated with systemic chemotherapy, immunotherapy, targeted therapies or radiation therapy are eligible to enroll in the study.\n* Diagnosis of an autoimmune disorder\n* Current treatment with anticoagulants that might preclude safe completion of the lumbar puncture and that cannot be safely paused in the opinion of the site investigator.\n* Any condition that, in the investigator's opinion, precludes the safe performance of routine lumbar puncture, such as prohibitive lumbar spinal disease, bleeding diathesis, or clinically significant coagulopathy or thrombocytopenia.\n* Diagnosis of dementia\n* Pregnant females, if fluoroscopy is needed to obtain the spinal fluid sample\n\nControl (C) Participants:\n\nInclusion:\n\n* Ability to provide informed consent\n* Age 30 years or older at date of informed consent.\n\nExclusion:\n\n* Known GBA mutation carrier\n* In the absence of prior genetic testing for LRRK2 G2019S mutations: Family history of Parkinson's disease is an exclusion criterion. If genetic testing for LRRK2 G2019S mutations has been performed and is negative, individuals with a family history of PD may be enrolled.\n* The presence of rest tremor, bradykinesia or rigidity.\n* The presence of any other neurological sign that in the opinion of the site investigator raises suspicion for an atypical parkinsonian syndrome (e.g. supranuclear gaze palsy)\n* Treatment for cancer in the last 5 years or cancer patient receiving immunotherapy or targeted therapy. Individuals with cancers that have not been treated with systemic chemotherapy, immunotherapy, targeted therapies or radiation therapy are eligible to enroll in the study.\n* Diagnosis of an autoimmune disorder.\n* Current treatment with anticoagulants that might preclude safe completion of the lumbar puncture and that cannot be safely paused in the opinion of the site investigator.\n* Any condition that, in the investigator's opinion, precludes the safe performance of routine lumbar puncture, such as prohibitive lumbar spinal disease, bleeding diathesis, or clinically significant coagulopathy or thrombocytopenia.\n* Diagnosis of dementia\n* Pregnant females, if fluoroscopy is needed to obtain the spinal fluid sample",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT04603326"
+    },
+    {
+      "nct_id": "NCT03710707",
+      "title": "Study to Evaluate DNL201 in Subjects With Parkinson's Disease",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "DNL201",
+        "Placebo"
+      ],
+      "population": "Key Inclusion Criteria:\n\n* Body mass index (BMI) between 18 and 35.0 kg/m2, inclusive\n* Clinical diagnosis of Parkinson's disease meeting UK Brain Bank criteria and H\\&Y Stage I, II, or III.\n* sPD subgroup without a LRRK2 mutation; PD LRRK2 subgroup with LRRK2 mutation\n* Screening dopamine transporter (DAT) SPECT scan with a DAT deficit consistent with Parkinson's disease\n* Able to hold Parkinson's disease medications 8 hours (overnight) prior to specific study assessments\n\nKey Exclusion Criteria:\n\n* Any history of clinically significant asthma, chronic obstructive pulmonary disease, or emphysema within 5 years of screening, or other clinically significant pulmonary disease within 6 months of screening\n* Abnormal Vitals including Respiratory Rate, Body Temperature, and Blood Pressure\n* Pulmonary Function Tests (PFTs) (FVC \\<60% predicted, FEV1 \\<50% predicted, FEV1:FVC ratio \\<0.6, DLCO \\<70% predicted)\n* Clinically significant neurologic disorder other than Parkinson's disease, including history of stroke, cognitive impairment, seizure within 5 years of screening, or head trauma with loss of consciousness within 6 months of screening\n* Montreal Cognitive Assessment (MoCA) score of \\<24 at screening",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT03710707"
+    },
+    {
+      "nct_id": "NCT04668898",
+      "title": "LRRK2, GBA and Other Genetic Biomarkers in Eastern European (Ashkenazi) Jews With and Without Parkinson's Disease",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease",
+        "LRRK2",
+        "GBA Gene Mutation"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n* Parkinson disease patients and their family members and is limited to participants of Ashkenazi (Eastern European) Jewish descent with GBA and LRRK2 mutations, or with 3 or more family members with PD\n* Participants must be local to the New York City area and willing to come to Mount Sinai Downtown for annual 2 hour study visits which include obtaining personal medical and family history information, blood, urine and spinal fluid samples, neurological exam and neuropsychiatric testing. Spinal fluid collection is encouraged but optional.\n\nExclusion Criteria:\n\n-Patients who do not have Parkinson disease or family members of Ashkenazi (Eastern European) Jewish descent who either has a GBA or LRRK2 mutations OR who has 3 or more family members with PD.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT04668898"
+    },
+    {
+      "nct_id": "NCT05418673",
+      "title": "A Study to Assess if BIIB122 Tablets Are Safe and Can Slow Worsening of Early-Stage Parkinson's Disease in Participants With Specific LRRK2 Genetic Variants Between the Ages of 30 and 80 Using the Movement Disorder Society-Unified Parkinson's Disease Rating Scale",
+      "status": "TERMINATED",
+      "why_stopped": "Sponsor Decision",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [
+        "BIIB122",
+        "DNL151",
+        "BIIB122-Matching Placebo"
+      ],
+      "population": "Key Inclusion Criteria:\n\n* Clinical diagnosis of PD meeting the Movement Disorder Society Clinical Diagnostic Criteria within 5 years of the Screening Visit, inclusive, and at least 30 years of age at the time of diagnosis\n* Modified Hoehn and Yahr scale (mHY), Stages 1 to 2.5 (in OFF state), inclusive, at Screening\n* MDS-UPDRS Parts II and III (in OFF state) combined score \u226440 at Screening\n* Screening genetic test results verifying the presence of a pathogenic leucine-rich repeat kinase 2 (LRRK2) variant\n\nKey Exclusion Criteria:\n\n* Clinically significant neurologic disorder other than PD, including, but not limited to, stroke, dementia, or seizure within 5 years of Screening Visit, in the opinion of the Investigator\n* Clinical evidence of atypical parkinsonism (e.g., multiple-system atrophy or progressive supranuclear palsy) or evidence of drug-induced parkinsonism\n\nNOTE: Other protocol defined Inclusion/Exclusion criteria may apply.",
+      "has_results": true,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [
+        {
+          "type": "PRIMARY",
+          "title": "Time to Confirmed Worsening in Movement Disorder Society Unified Parkinson's Disease Rating Scale (MDS-UPDRS) Parts II and III",
+          "description": "Time to confirmed worsening is defined as a worsening event sustained over 2 consecutive assessments. MDS-UPDRS is a multimodal scale assessing impairment and disability consisting of 4 parts. Part II assesses motor experiences of daily living (range 0-52). It contains 13 questions which are to be completed by the participant. Part III assesses the motor signs of PD and is administered by the rater (range 0-132). Part III contains 33 scores based on 18 items. For each question, a numeric score is assigned between 0-4, where 0 = Normal, 1 = Slight, 2 = Mild, 3 = Moderate, 4 = Severe. MDS-UPDRS Part II and III combined score equals the sum of Parts II and III (range 0-184). A higher score indicates more severe symptoms of Parkinson's disease (PD).",
+          "populationDescription": "Based on the low enrolment number and to protect and maintain participant privacy/confidentiality, no data is reported, as only 1 participant completed post-baseline visit for clinical efficacy outcomes.",
+          "reportingStatus": "POSTED",
+          "timeFrame": "From Week 96 to Week 180",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Placebo",
+              "description": "Participants received BIIB122-matching placebo tablets, orally, QD for up to 290 days."
+            },
+            {
+              "id": "OG001",
+              "title": "BIIB122 225 mg",
+              "description": "Participants received BIIB122 225 mg tablets, orally, QD for up to 290 days."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "0"
+                },
+                {
+                  "groupId": "OG001",
+                  "value": "0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SECONDARY",
+          "title": "Number of Participants With Treatment-Emergent Adverse Events (TEAEs) and Serious Adverse Events (SAEs)",
+          "description": "An adverse event (AE) is any untoward medical occurrence in a participant or clinical investigation participant administered a pharmaceutical product and that does not necessarily have a causal relationship with this treatment. An AE can therefore be any unfavorable and unintended sign (including an abnormal laboratory finding), symptom, or disease temporally associated with the use of a medicinal (investigational) product, whether or not related to the medicinal (investigational) product. An SAE is any untoward medical occurrence that at any dose results in death; in the view of the investigator, places the participant at immediate risk of death (a life-threatening event); requires inpatient hospitalization or prolongation of existing hospitalization; results in persistent or significant disability/incapacity; results in a congenital anomaly/birth defect or is a medically important event.",
+          "populationDescription": "Safety analysis set included all randomized participants who had received at least 1 dose of study treatment.",
+          "reportingStatus": "POSTED",
+          "paramType": "COUNT_OF_PARTICIPANTS",
+          "unitOfMeasure": "Participants",
+          "timeFrame": "From the first dose (Day 1) of the study drug up to the end of follow-up (up to 336 days)",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Placebo",
+              "description": "Participants received BIIB122-matching placebo tablets, orally, QD for up to 290 days."
+            },
+            {
+              "id": "OG001",
+              "title": "BIIB122 225 mg",
+              "description": "Participants received BIIB122 225 mg tablets, orally, QD for up to 290 days."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "3"
+                },
+                {
+                  "groupId": "OG001",
+                  "value": "4"
+                }
+              ]
+            }
+          ],
+          "classes": [
+            {
+              "title": "AEs",
+              "categories": [
+                {
+                  "measurements": [
+                    {
+                      "groupId": "OG000",
+                      "value": "2"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "3"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "SAEs",
+              "categories": [
+                {
+                  "measurements": [
+                    {
+                      "groupId": "OG000",
+                      "value": "0"
+                    },
+                    {
+                      "groupId": "OG001",
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SECONDARY",
+          "title": "Time to Confirmed Worsening in MDS-UPDRS Part II Score",
+          "description": "Time to confirmed worsening is defined as a worsening event sustained over 2 consecutive assessments. MDS-UPDRS is a multimodal scale assessing impairment and disability consisting of 4 parts. Part II assesses motor experiences of daily living (range 0-52). It contains 13 questions which are to be completed by the participant. For each question, a numeric score is assigned between 0-4, where 0 = Normal, 1 = Slight, 2 = Mild, 3 = Moderate, 4 = Severe. MDS-UPDRS Part II score ranges from 0-52. A higher score indicates more severe symptoms of PD.",
+          "populationDescription": "Based on the low enrolment number and to protect and maintain participant privacy/confidentiality, no data is reported, as only 1 participant completed post-baseline visit for clinical efficacy outcomes.",
+          "reportingStatus": "POSTED",
+          "timeFrame": "From Week 96 to Week 180",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Placebo",
+              "description": "Participants received BIIB122-matching placebo tablets, orally, QD for up to 290 days."
+            },
+            {
+              "id": "OG001",
+              "title": "BIIB122 225 mg",
+              "description": "Participants received BIIB122 225 mg tablets, orally, QD for up to 290 days."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "0"
+                },
+                {
+                  "groupId": "OG001",
+                  "value": "0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SECONDARY",
+          "title": "Change From Baseline in MDS-UPDRS Parts II and III Combined Score at Week 96",
+          "description": "MDS-UPDRS is a multimodal scale assessing impairment and disability consisting of 4 parts. Part II assesses motor experiences of daily living (range 0-52). It contains 13 questions which are to be completed by the participant. Part III assesses the motor signs of PD and is administered by the rater (range 0-132). Part III contains 33 scores based on 18 items. For each question, a numeric score is assigned between 0-4, where 0 = Normal, 1 = Slight, 2 = Mild, 3 = Moderate, 4 = Severe. MDS-UPDRS Part II and III combined score equals the sum of Parts II and III (range 0-184). A higher score indicates more severe symptoms of PD.",
+          "populationDescription": "Due to the early termination of the study (before week 48), sufficient data were not collected for the outcome measure analysis.",
+          "reportingStatus": "POSTED",
+          "timeFrame": "Baseline, Week 96",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Placebo",
+              "description": "Participants received BIIB122-matching placebo tablets, orally, QD for up to 290 days."
+            },
+            {
+              "id": "OG001",
+              "title": "BIIB122 225 mg",
+              "description": "Participants received BIIB122 225 mg tablets, orally, QD for up to 290 days."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "0"
+                },
+                {
+                  "groupId": "OG001",
+                  "value": "0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SECONDARY",
+          "title": "Time to Confirmed Worsening in Modified Schwab and England Activities of Daily Living Scale (mSE-ADL) Score",
+          "description": "Time to confirmed worsening is defined as a worsening event sustained over 2 consecutive assessments. The mSE-ADL scale reflects the speed, ease, and independence with which an individual performs daily activities or personal chores with 100% indicating total independence, falling to 0%, which indicates a state of complete dependence. The individual is asked to rate his or her function using an 11-point scale (10% increments), from 100% (completely independent; able to do all chores without slowness, difficulty, or impairment; essentially normal; unaware of any difficulty) to 0% (vegetative functions such as swallowing, bladder and bowels are not functioning; bedridden). The lower the score, the worse the functional status.",
+          "populationDescription": "Based on the low enrolment number and to protect and maintain participant privacy/confidentiality, no data is reported, as only 1 participant completed post-baseline visit for clinical efficacy outcomes.",
+          "reportingStatus": "POSTED",
+          "timeFrame": "From Week 96 to Week 180",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Placebo",
+              "description": "Participants received BIIB122-matching placebo tablets, orally, QD for up to 290 days."
+            },
+            {
+              "id": "OG001",
+              "title": "BIIB122 225 mg",
+              "description": "Participants received BIIB122 225 mg tablets, orally, QD for up to 290 days."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "0"
+                },
+                {
+                  "groupId": "OG001",
+                  "value": "0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SECONDARY",
+          "title": "Change From Baseline in MDS-UPDRS Parts I, II, and III Combined Score at Week 96",
+          "description": "The MDS-UPDRS is a multimodal scale consisting of four parts. Part I assessed non-motor experiences of daily living and has 2 components (Range 0-52). Part IA contains 6 questions and are assessed by the examiner (Range 0-24). Part IB contains 7 questions on non-motor experiences of daily living which was completed by the participant (Range 0-28). Part II assessed motor experiences of daily living (Range 0-52). It contained 13 questions completed by the participant. Part III assessed the motor signs of PD and was administered by the rater (Range 0-132). Part III contained 33 scores based on 18 items. For each question a numeric score is assigned between 0-4, where 0 = Normal, 1 = Slight, 2 = Mild, 3 = Moderate, 4 = Severe. The MDS-UPDRS Total Score equals the sum of Parts I,II, and III (Range: 0-236). A higher score indicated more severe symptoms of PD.",
+          "populationDescription": "Due to the early termination of the study (before week 48), sufficient data were not collected for the outcome measure analysis.",
+          "reportingStatus": "POSTED",
+          "timeFrame": "Baseline, Week 96",
+          "groups": [
+            {
+              "id": "OG000",
+              "title": "Placebo",
+              "description": "Participants received BIIB122-matching placebo tablets, orally, QD for up to 290 days."
+            },
+            {
+              "id": "OG001",
+              "title": "BIIB122 225 mg",
+              "description": "Participants received BIIB122 225 mg tablets, orally, QD for up to 290 days."
+            }
+          ],
+          "denoms": [
+            {
+              "units": "Participants",
+              "counts": [
+                {
+                  "groupId": "OG000",
+                  "value": "0"
+                },
+                {
+                  "groupId": "OG001",
+                  "value": "0"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "url": "https://clinicaltrials.gov/study/NCT05418673"
+    },
+    {
+      "nct_id": "NCT03866603",
+      "title": "Rostock International Parkinson's Disease Study (ROPAD)",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson\u00b4s Disease"
+      ],
+      "interventions": [],
+      "population": "* Informed consent is obtained from the participant\n* The participant has been clinically diagnosed with Parkinson's disease within the last 5 years (\u2264 5 years)\n* The participant is between 30 and 80 years old",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT03866603"
+    },
+    {
+      "nct_id": "NCT01536821",
+      "title": "PROGENI (Parkinson's Research: The Organized Genetics Initiative) Family Study of LRRK2 (Leucine-rich Repeat Kinase 2)",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\nPositive for a LRRK2 mutation",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT01536821"
+    },
+    {
+      "nct_id": "NCT01085227",
+      "title": "Clinical, Molecular and by Neuroimaging of LRRK2 Mutations",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n* To be over 18 years old\n* Diagnosis of Parkinson's disease\n* To be a first-degree relative to a LRRK2 patient\n* Ability to understand the aim of the study\n* Ability to sign the consent form\n\nExclusion Criteria:\n\n* Non ability to understand the aim of the study\n* Non ability to sign the consent form\n* Inability to do a MRI\n* Pregnant women or absence of an effective contraception",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT01085227"
+    },
+    {
+      "nct_id": "NCT07020026",
+      "title": "Evaluation of Tau-Pathology in Sporadic and LRRK2 Parkinson's Disease",
+      "status": "RECRUITING",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson's Disease"
+      ],
+      "interventions": [
+        "[18F]PI-2620"
+      ],
+      "population": "Inclusion Criteria:\n\nGeneral inclusion criteria include the following:\n\n1. Ability to comply with the study procedures and attend follow-up visits.\n2. Written informed consent from the participant or legal guardian.\n3. Male or Female between 45 years and 85 years of age (Females must meet additional criteria specified below, as applicable) a. Females must be of non-childbearing potential or using a highly effective method of birth control 14 days prior to until at least 24 hours after injection of \\[18F\\]PI-2620 or DaTscan.\n\ni. Non-childbearing potential is defined as a female that must be either postmenopausal (no menses for at least 12 months prior to PET scan) or surgically sterile (bilateral tubal ligation, bilateral oophorectomy or hysterectomy).\n\nii. Highly effective method of birth control is defined as practicing at least one of the following: A birth control method that results in a less than 1% per year failure rate when used consistently and correctly, such as oral contraceptives for at least 3 months prior to injection, an intrauterine device (IUD) for at least 2 months prior to injection, or barrier methods, e.g., diaphragm or combination condom and spermicide. Periodic abstinence (e.g., calendar, ovulation, symptothermal, post-ovulation methods) is not acceptable.\n\nb. Females of childbearing potential must not be pregnant, breastfeeding or lactating, or planning pregnancy during the duration of the study.\n\nc. Non PPMI participant females of childbearing potential must have a negative serum pregnancy test at Screening and all females of childbearing potential must have negative urine pregnancy test prior to \\[18F\\]PI-2620 injection on day of Baseline PET scan.\n\nd. Non PPMI participant females of childbearing potential must have a negative urine pregnancy test prior to Screening Visit DaTscan injection.\n\nHealthy Controls:\n\na) Enrolled in the PPMI study as a healthy subject.\n\nDisease specific inclusion criteria:\n\na) Parkinson's disease\n\na. Enrolled in the PPMI study as a sporadic PD or LRRK2 PD participant. b. Known CSF alpha synuclein seeding amplification assay status. c. Known Plasma phosphorylated Tau217 status. b) Progressive Supranuclear Palsy (PSP):\n\n1. Diagnosis of progressive supranuclear palsy (PSP) based on the Clinical diagnosis of progressive supranuclear palsy: The movement disorder society criteria (H\u00f6glinger et al., 2017).\n2. Symptom onset within 2-5 years prior to screening.\n3. Progressive motor symptoms including vertical supranuclear gaze palsy, postural instability, and other signs of parkinsonism.\n4. Evidence of striatal degeneration in form of abnormal DaTscan (previously obtained DaTscan since onset of motor symptoms may be used).\n\nc) Corticobasal Syndrome (CBS):\n\n1. Diagnosis of corticobasal syndrome (CBS) based on clinical criteria, with asymmetric motor and cognitive dysfunction (Armstrong et al., 2013).\n2. Presence of limb apraxia, dystonia, alien limb phenomenon, and/or parkinsonism (e.g., rigidity, bradykinesia).\n3. Cognitive decline as indicated by impairment in attention, executive function, or memory.\n4. Evidence of striatal degeneration in form of abnormal DaTscan (previously obtained DaTscan since onset of motor symptoms may be used).\n\nExclusion Criteria:\n\n1. Any other medical or psychiatric condition or lab abnormality, which in the opinion of the investigator might preclude participation.\n2. For those receiving Screening DaTscan:\n\n   \u2022 Received any of the following medications that could interfere with the imaging and unwilling or medically unable to hold them for five half-lives before SPECT imaging: alpha methyldopa, methylphenidate, amphetamine derivatives or modafinil, bupropion, phentermine, phencyclidine, fentanyl, or medication commonly considered to interfere with Ioflupane binding per standard clinical practice.\n3. Received any of the following drugs: dopamine receptor blockers (neuroleptics), metoclopramide and reserpine, within 6 months of Screening Visit for non-PPMI participants or within 6 months of Baseline Visit for PPMI participants.\n4. Any structural abnormality or finding on previously obtained or screening brain MRI suggestive of clinically significant neurological disorders other than the diseases of interest (in the opinion of the investigator).\n5. Any other reason that in the opinion of the investigator, including abnormal labs, that could interfere with the safety with radiotracer injection, would render the participant unsuitable for the study enrollment.",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT07020026"
+    },
+    {
+      "nct_id": "NCT03421899",
+      "title": "A Study Into the Underlying Biochemical Pathways Involved in Parkinson's Disease, Such as Mitochondrial (Cellular \"Powerhouse\") Dysfunction",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "conditions": [
+        "Parkinson Disease",
+        "Parkinsonism"
+      ],
+      "interventions": [],
+      "population": "Inclusion Criteria:\n\n1. Diagnosed with PD, or a related condition (e.g. Parkinson's plus, dystonia, tremor) or healthy control participant\n2. Age 18 years or over\n\nExclusion Criteria:\n\n1\\. Lack of capacity to consent to participate in the project",
+      "has_results": false,
+      "compound_ids": [],
+      "relationship": "uncertain",
+      "match_reason": "No intervention alias match",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT03421899"
+    }
+  ],
+  "publications": [
+    {
+      "identifier": "MED:41388619",
+      "title": "LRRK2 as a Potential Disease-Modifying Target in Sporadic Parkinson's Disease.",
+      "abstract": "A growing understanding of the role that leucine-rich repeat kinase 2 (LRRK2) plays in Parkinson's disease (PD) supports continued focus on this enzyme as a therapeutic target for PD. Accumulating evidence suggests that there are phenotypic, neuropathologic, and biological similarities between sporadic PD (sPD) and familial forms in which LRRK2 variants are inherited in an autosomal-dominant pattern with variable penetrance (LRRK2-PD). Further, genome-wide association studies have found specific non-coding variants that are risk factors for sPD. In this review, we describe the current state of knowledge as it relates to LRRK2's role in sPD, with a focus on comparing the physiology and pathology of sPD with LRRK2-PD. As in LRRK2-PD, LRRK2 activity may also be increased in sPD, possibly through interactions between genetics and the environment. Increased activity of LRRK2 and associated endolysosomal dysfunction have been observed in sPD patients, including evidence from postmortem brains of patients with sPD and animal models showing increased LRRK2 activity. Additionally, beneficial effects of LRRK2 inhibitors, such as improved lysosomal function, reduced \u03b1-synuclein accumulation, and amelioration of neurodegeneration, have been demonstrated in animal models of sPD. Therefore, inhibition of LRRK2 kinase activity may be a promising approach to disease modification for sPD and LRRK2-PD. Ongoing and future clinical studies examining LRRK2 kinase inhibitors will aim to elucidate their clinical efficacy in PD and to assess their potential effects on lysosomal function. \u00a9 2025 The Author(s). Movement Disorders published by Wiley Periodicals LLC on behalf of International Parkinson and Movement Disorder Society.",
+      "doi": "10.1002/mds.70100",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/41388619"
+    },
+    {
+      "identifier": "MED:41876647",
+      "title": "LRRK2-targeting antisense oligonucleotide in Parkinson's disease: a phase 1 randomized controlled trial.",
+      "abstract": "LRRK2 (encoding leucine-rich repeat kinase 2) variants are the most common genetic cause of Parkinson's disease (PD). Lowering LRRK2 levels and/or inhibiting LRRK2 activity may modify PD-associated neuropathology. BIIB094 (ION859), an antisense oligonucleotide, targets LRRK2 mRNA for degradation. REASON was a first-in-human randomized phase 1 study investigating the safety, tolerability, pharmacokinetics and pharmacodynamics of intrathecal BIIB094 in patients with PD. In part A, 40 participants received single doses of BIIB094 10-150\u2009mg or placebo. In part B, 42 participants, stratified by LRRK2 variant status, received four doses of BIIB094 40-120\u2009mg or placebo every 4 weeks. Adverse events were reported by 64.5% (20/31) of participants in part A and by 84.8% (28/33) of participants in part B. The events were mainly mild to moderate and not dose limiting. No serious adverse events related to BIIB094 were reported in either part A or B. Systemic BIIB094 exposure increased with dose. Cerebrospinal fluid (CSF) LRRK2 and phosphorylated Rab10 levels were lowered by up to 59% and up to 50%, respectively, irrespective of LRRK2 variant status. Concomitant reductions in CSF lysosomal protein levels suggested a potential mechanism whereby LRRK2 therapeutics may impact underlying PD pathophysiology. ClinicalTrials.gov identifier, NCT03976349 ; EudraCT number, 2018-002995-42.",
+      "doi": "10.1038/s41591-026-04262-4",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/41876647"
+    },
+    {
+      "identifier": "MED:41821671",
+      "title": "Advancing Development of LRRK2-Targeted Therapeutics for Parkinson's Disease: Conference Proceedings and Roadmap for Research.",
+      "abstract": "In June 2025, the Michael J. Fox Foundation for Parkinson's Research (MJFF) hosted an in-person workshop, LRRK2-Targeted Therapeutics Roundtable: Advancing Clinical Development for Parkinson's Disease, convening researchers, clinicians, industry representatives, and funders to discuss opportunities for communication, coordination, and collaboration to advance the development of therapeutics that target leucine-rich repeat kinase 2 (LRRK2). The purpose of this multistakeholder workshop was to create a collaborative platform for researchers, clinicians, industry representatives, and funders to discuss the trade-offs and opportunities in using various clinical trial strategies, including trade-offs and opportunities related to target populations, endpoints, treatment durations, and target labels. By fostering precompetitive dialogue on clinical development for LRRK2-targeted therapies, MJFF sought to ensure that sponsors design robust and informative clinical trials that can accelerate drug development and meaningfully advance efforts to deliver effective treatments to patients. In this study, the authors highlight the topics discussed in the workshop and outline the roundtable participants' immediate- and medium-term goals for advancing LRRK2-targeted research and therapeutic development. Key immediate actions mentioned during the roundtable include developing a comprehensive inventory of existing LRRK2 cohorts and their associated clinical and biologic data and biospecimens to find opportunities for data acquisition and harmonization. The authors also discuss what participants cited as the need to develop and validate LRRK2 pathway biomarkers to facilitate population identification and assessment of therapeutic efficacy, and to use these biomarkers to identify \"LRRK2-like\" individuals with idiopathic Parkinson's disease who exhibit LRRK2 pathway dysfunction.",
+      "doi": "10.7249/rhq-13-02-02",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/41821671"
+    },
+    {
+      "identifier": "MED:41703390",
+      "title": "Pathological Protein Targets in Parkinson's Disease: Progress Towards the Development of Disease-Modifying Therapies.",
+      "abstract": "Parkinson's disease (PD) is a common neurodegenerative movement disorder that currently has no disease-modifying therapies. Over the past two decades, there has been a substantial acceleration in the knowledge of how genetics underlies PD risk. This has given rise to pathological protein targets that can be therapeutically targeted. In particular, there is compelling evidence for developing therapeutic strategies targeting alpha-synuclein, leucine-rich repeat kinase 2 (LRRK2) and glucocerebrosidase (GCase). These proteins are implicated in lysosomal function and may contribute to the accumulation of the hallmark pathological forms of alpha-synuclein that define PD. This review highlights current progress on PD therapies targeting these proteins as they attempt to make their way through the clinical trial pipeline, with unique and distinctive approaches being used for each target. Progress is being made in both immunotherapy and small molecule approaches to reduce aggregated forms of alpha-synuclein in the brain, with the aim to stop the propagation of disease. Pathogenic mutations in LRRK2 result in overactivation of the enzyme's catalytic kinase activity, and consequently kinase inhibitors that aim to reduce LRRK2 activity are in late phase clinical trials. In contrast, PD-associated mutations in GCase generally result in impaired lysosomal GCase activity, and thus small molecule chaperones and allosteric activators of GCase are in advanced development and clinical trials. Although these approaches seem to be generally tolerated by participants in phase I studies, challenges remain in progressing these promising therapies through phase II and beyond.",
+      "doi": "10.1007/s40263-026-01275-y",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/41703390"
+    },
+    {
+      "identifier": "MED:42737506",
+      "title": "LRRK2: Molecular Mechanisms in Parkinson's Disease.",
+      "abstract": "Leucine-rich repeat kinase 2 (LRRK2) has emerged as a central molecular node linking genetic risk, membrane trafficking, lysosomal homeostasis, and immune signalling in Parkinson's disease (PD). Rather than functioning as a conventional protein kinase, LRRK2 operates as a conformationally regulated, Rab-directed signalling machine whose activity is governed by long-range interdomain communication, membrane recruitment, and cooperative interactions with small GTPases. Converging advances in cryo-electron microscopy, quantitative phosphoproteomics, and human genetics indicate that pathogenic mutations, lysosomal stress, and pharmacological inhibitors do not simply alter catalytic output, but reshape the conformational landscape of LRRK2, biasing it toward distinct structural states with divergent cellular consequences. A defining feature of this system is the selective phosphorylation of Rab GTPases at low stoichiometry-most prominently Rab8 and Rab10-yet with disproportionate functional impact on vesicle trafficking, ciliogenesis, autophagy, and organelle positioning. The identification of Rab-directed phosphatases, particularly PPM1H, further establishes that LRRK2 signalling is governed by a dynamically balanced kinase-phosphatase circuit operating in space and time. These observations, together with emerging evidence linking LRRK2 activation to lysosomal damage and immune pathways, support a unifying hypothesis: PD-associated LRRK2 dysfunction arises from maladaptive stabilization of specific conformational and spatial states within a membrane-responsive signalling network, leading to persistent misregulation of Rab-dependent trafficking and organelle homeostasis, rather than from kinase hyperactivity alone. In this review, we integrate structural, biochemical, and cellular evidence to advance this framework and discuss its implications for disease mechanisms and therapy. We highlight key unresolved challenges-including conformation-selective drug targeting, spatial control of Rab phosphorylation, and context-dependent immune-neuronal crosstalk-and propose that restoring physiological regulation of LRRK2, rather than simply inhibiting its activity, will be essential for achieving mechanism-based disease modification in Parkinson's disease.",
+      "doi": "10.3390/ijms27177606",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42737506"
+    },
+    {
+      "identifier": "MED:42162439",
+      "title": "Recent Developments in the Drug Treatment of Parkinson's Disease.",
+      "abstract": "Parkinson's disease (PD) is a common neurodegenerative disorder caused by a spread of misfolded \u03b1-synuclein and ascending neuronal degeneration mainly in dopaminergic neurons, leading to progressive nigrostriatal dysfunction and disruption of other pathways. It is clinically defined by its cardinal motor features of bradykinesia, rest tremor and rigidity, which are usually accompanied by a variety of non-motor symptoms. Here we provide a review on recent developments in the pharmacological treatment of PD with a focus on recently approved drugs, new modes of delivery and agents that are in advanced stages of clinical development. Pharmacological dopamine substitution remains the mainstay of symptomatic treatment approaches to control PD motor symptoms. While levodopa is still considered the gold-standard of symptomatic efficacy, its chronic use is associated with the development of response oscillations and drug-induced dyskinesias in a majority of patients. Thus, much effort has been put into developing more continuous ways of levodopa delivery. Novel formulations and modes of application include extended-release (ER) oral levodopa (IPX203), levodopa powder for inhalation, and levodopa infusion therapies through subcutaneous (foslevodopa/foscarbidopa, ND0612) or intrajejunal pumps (levodopa [entacapone] carbidopa intestinal gel). Additionally, different preparations for subcutaneous and sublingual administration of apomorphine, a dopamine agonist with equivalent efficacy to levodopa, are available for the treatment of PD motor fluctuations. Novel dopamine agonists have been developed and tavapadon, a selective dopamine D1/D5 receptor partial\u00a0agonist, was shown to be efficacious as monotherapy in early PD and adjunct to levodopa in patients with motor fluctuations. In addition, new data on the early use of the COMT-inhibitor opicapone have emerged. This expanding drug armamentarium is complemented by an increasing number of drugs targeting non-dopaminergic pathways with increasing evidence for amantadine's symptomatic efficacy in treating levodopa-induced dyskinesia and motor fluctuations. Beyond the approval of different botulinum toxin preparations for the treatment of sialorrhea, efforts to address the plethora of non-motor symptoms of the disease have not translated to novel PD-specific approvals over the last few years. PD symptoms can usually be satisfactorily controlled in the early to mid-stages, but the progressive course of the disease inevitably leads to increasing functional disability underlining the yet unmet need for disease-modifying therapies. While there is currently no conclusive evidence for disease-modifying efficacy on any of the numerous efforts, we summarize recent late-stage clinical trial evidence focusing on glucagon-like peptide 1 (GLP1) agonists, approaches targeting the glucocerebrosidase (GBA) pathway and inhibition of the leucine-rich repeat kinase 2 (LRRK2), as well as \u03b1-synuclein based treatments.",
+      "doi": "10.1007/s40265-026-02327-9",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42162439"
+    },
+    {
+      "identifier": "MED:41082301",
+      "title": "Progress in Disease-Modifying Therapies for Parkinson's Disease.",
+      "abstract": "Parkinson's disease (PD) is a highly prevalent neurodegenerative disorder, and current therapeutic approaches fail to prevent the progressive loss of dopaminergic neurons. To date, no disease-modifying therapies (DMTs) have been approved for PD. Developing effective DMTs remains the foremost objective in PD research. Here, we review the rationale for \u03b1-synuclein, LRRK2, GBA1, the PINK1-Parkin axis, and GLP-1R as potential therapeutic targets for PD. Additionally, we summarize the functional alterations observed in cellular organelles, including mitochondria, lysosomes, and the endoplasmic reticulum, in the context of PD. We also highlight the progress in drug development targeting these therapeutic candidates and the associated organelles. Furthermore, we discuss the advancements in stem cell-based therapeutic strategies in the field of PD research. It is believed that deepening understanding of disease mechanisms, combined with the development of novel technologies, offers promising potential for more effective solutions to this debilitating condition.",
+      "doi": "10.14336/ad.2025.0627",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/41082301"
+    },
+    {
+      "identifier": "MED:41782203",
+      "title": "Role of LRRK2 in physiological activities, diseases, and therapy.",
+      "abstract": "AbstractLeucine-rich repeat kinase 2 (LRRK2) is a critical target for the treatment of Parkinson's disease (PD) and potentially other diseases. LRRK2 is involved in intracellular signaling, immune response, and inflammation, with key roles in both the central nervous system and peripheral tissues. LRRK2 mutations are linked to cellular dysfunction including mitochondrial and neuronal damage and can disrupt signaling pathway balance, thereby contributing to PD and other disorders. Inhibiting LRRK2 kinase activity shows potential for treating PD by correcting cellular imbalances and reducing neuronal damage. However, risks associated with regulating a multifunctional protein must be addressed. Further research on the molecular partners and tissue-specific functions of LRRK2 is essential for developing targeted therapies and improving treatment options for related diseases. This review offers a comprehensive analysis of LRRK2, with a focus on its physiological functions, disease involvement, and emerging therapeutic strategies.",
+      "doi": "10.1097/cm9.0000000000003989",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/41782203"
+    },
+    {
+      "identifier": "MED:42750142",
+      "title": "Disrupted TFEB/GDNF-cAMP/ATP Coupling Underlies Astrocytic Dysfunction and Depression in LRRK2 G2019S Parkinson's Mice.",
+      "abstract": "The LRRK2 G2019S mutation, a Parkinson's disease-linked variant, has been associated with depression-like phenotypes, but mechanisms remain unclear. We chart age-dependent behavioral changes and astrocyte reactivity in G2019S mice and define a pathway connecting LRRK2 to TFEB/GDNF signaling, cellular energetics, and inflammation. From \u223c25\u00a0weeks, G2019S carriers show robust depressive-like behaviors with reduced hippocampal GDNF, exaggerated astrocytic inflammation, diminished ATP, and increased neuronal apoptosis; pharmacologic LRRK2 kinase inhibition reverses these abnormalities. Single-cell transcriptomics identifies 507 differentially expressed genes enriched for adenylyl cyclase/cAMP signaling, oxidative phosphorylation/ATP metabolism, calcium/ion homeostasis, and cytokine pathways, indicating disrupted cAMP-ATP coupling and perturbed neuroimmune signaling. Mechanistically, LRRK2 G2019S binds and suppresses TFEB while elevating Ser211 phosphorylation, lowering astrocytic GDNF, amplifying inflammation, and reducing ATP. Critically, TFEB overexpression restores GDNF, elevates astrocytic ATP, attenuates inflammatory mediators, and improves depressive-like behaviors. Enhancing effector nodes is therapeutic: bilateral hippocampal forskolin rapidly (within 6\u00a0h) raises cAMP and reverses multiple behavioral measures, and ATP supplementation (systemic or hippocampal) yields comparable benefits. These findings position a LRRK2\u2192TFEB/GDNF\u2192cAMP/ATP axis as a driver of astrocytic inflammation and energetic imbalance underlying depression in G2019S mice and highlight convergent therapeutic strategies targeting LRRK2, TFEB, and ATP/cAMP.",
+      "doi": "10.1002/advs.202522066",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42750142"
+    },
+    {
+      "identifier": "MED:42837290",
+      "title": "Parkinson's disease-associated LRRK2 risk variant, G2385R, enhances Rab substrate phosphorylation and impairs neuronal integrity.",
+      "abstract": "Mutations in the LRRK2 gene are the most frequent cause of familial Parkinson's disease (PD) whereas common variants are associated with an increased risk for sporadic PD. LRRK2 encodes a multi-domain protein displaying two functional enzymatic activities: GTPase and kinase. In addition to familial mutations, several common LRRK2 coding variants have been associated with PD risk in different ethnic populations. Little is known about how these coding variants modulate the risk of developing PD. In this study, we aimed to evaluate the properties of a collection of LRRK2 coding risk variants (A419V, N551K, R1398H, R1628P, M1646T, S1647T, G2385R). With the exception of G2385R, we find that coding risk variants have minimal impact on LRRK2 protein levels, GTP-binding, LRRK2 phosphorylation, and subcellular localization in human cells and primary neurons. G2385R LRRK2 exhibits reduced phosphorylation at Ser910/Ser935 and Ser1292, consistent with diminished kinase activity. Notably, however, LRRK2 variants associated with increased PD risk (R1628P, M1646T, and G2385R) significantly elevate the levels of LRRK2-mediated Rab10 phosphorylation by >two-fold in cells. In contrast, LRRK2 variants associated with reduced PD risk (N551K, R1398H, and N551K-R1398H) do not alter pRab10 levels. The G2385R LRRK2 variant significantly inhibits neurite outgrowth in primary cortical neurons compared to wild-type LRRK2. Our study indicates that LRRK2-dependent Rab phosphorylation represents a relevant readout of PD risk induced by LRRK2 variants and demonstrates that the G2385R variant creates a hyperactive kinase that can impair neuronal integrity at comparable levels to the effects of G2019S LRRK2.",
+      "doi": "10.1093/hmg/ddag103",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42837290"
+    },
+    {
+      "identifier": "MED:42072468",
+      "title": "Synergistic Effects of Multi-Kinase Inhibition on &lt;i&gt;LRRK2&lt;/i&gt;-G2019S and Alpha-Synuclein Pathologies in Models of Parkinson's Disease.",
+      "abstract": "Introduction: Pathogenic mutations in leucine-rich repeat protein kinase-2 (LRRK2), particularly G2019S, constitute the most common cause of autosomal dominant PD. Methods: Mouse models encoding human mutant alpha-synuclein (SNCA A53T) and LRRK2 G2019S were treated with a brain-penetrant kinase inhibitor (BK40196). Behavior, nigrostriatal and mesolimbic dopamine (DA) pathways were examined. Results: Mice harboring LRRK2 G2019S do not show age-dependent motor symptoms, but mice encoding SNCA A53T display motor deficits, while both strains exhibit anxiety-like behavior and BK40196 improves motor and behavioral defects. BK40196, a multi-kinase inhibitor of Abelson (Abl), Discoidin domain receptor (DDR)-1, c-KIT and FYN, alters microglial morphology and alpha-synuclein levels in SNCA A53T mice and improves DA neurotransmission, primarily via the nigrostriatal system. BK40196 inhibits brain LRRK2 G2019S (IC50 of 89nM) and does not affect phosphorylated or total peripheral LRRK2 levels (lungs, kidneys, liver, etc.). LRRK2 G2019S mice treated with BK40196 exhibit distinct increases in DA in mesolimbic neurons such as the nucleus accumbens (NAcc), suggesting differential mechanisms of DA neurotransmission in mutant alpha-synuclein and LRRK2 models of PD. Conclusions: LRRK2 G2019S may primarily involve mesolimbic pathways leading to nonmotor symptoms independent of the motor and behavioral manifestations associated with alpha-synuclein via the nigrostriatal system. BK40196 may provide a comprehensive and synergistic therapeutic approach that addresses multiple mechanisms to reduce the pathologies related to LRRK2 G2019S and/or SNCA in PD. The multiple pathologies of PD necessitate a holistic approach that simultaneously targets inflammation and autophagy and LRRK2 inhibition.",
+      "doi": "10.3390/biomedicines14040927",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42072468"
+    },
+    {
+      "identifier": "MED:42074107",
+      "title": "LRRK2 I1371V Mutation Drives Astrocytic Glucose Metabolism Failure and Induces Integrated ER-Mitochondria-Lysosome Dysfunction in Parkinson's Disease.",
+      "abstract": "Although LRRK2 mutations modulate systemic glucose homeostasis and metabolic dysfunction precedes Parkinson's disease (PD) motor symptoms; the way in which pathogenic variants of LRRK2 disrupt astrocytic glucose metabolism and organellar homeostasis remains poorly understood. Here, we demonstrate that LRRK2-I1371V mutation causes profound metabolic and organellar dysfunction in LRRK2-I1371V PD-iPSC-derived astrocytes and U87 cells overexpressing I1371V variant. LRRK2-I1371V astrocytes exhibit significantly reduced GLUT1 expression and cell surface localization, resulting in impaired glucose uptake and decreased lactate production. This metabolic insufficiency correlates with cascading mitochondrial dysfunction, characterized by membrane depolarization, elevated reactive oxygen species, enhanced ubiquitination and reduced proteasomal activity. Reduced LAMP1/LAMP2 expression, impaired lysosomal acidification, and selective cathepsin D deficiency were observed. Accumulation of undegraded cargo was confirmed by transmission electron microscopy upon \u03b1-synuclein exposure. ER stress was evident by upregulation of GADD34/CHOP, increased phospho-PERK, and reduced nascent protein synthesis. Increased ER-mitochondrial contact via MAMs and enhanced STIM1-ORAI3 clustering reflect compensatory but ultimately insufficient responses to energy stress. Our results reveal that LRRK2-I1371V induces glucose uptake deficits, leading to energy depletion and integrated ER-mitochondria-lysosome dysfunction, thus indicating restoration of astrocytic metabolic capacity as a potential therapeutic strategy for LRRK2-associated PD.",
+      "doi": "10.3390/ijms27083463",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42074107"
+    },
+    {
+      "identifier": "PPR:PPR1235730",
+      "title": "Rare biallelic loss-of-function variants in the  <i>LRRK2</i>  kinase cause interstitial lung disease",
+      "abstract": "Summary  We report that biallelic  LRRK2 loss-of-function (LoF) causes a Mendelian form of interstitial lung disease characterized by alveolar epithelial cell dysfunction and lung fibrosis in two brothers with a homozygous nonsense variant. Integrated clinical, imaging, histopathological, and biomarker analyses showed absent LRRK2 protein, reduced Rab10 phosphorylation, impaired alveolar type 2 cell function, and disrupted surfactant homeostasis. Consistent with a recessive genetic disorder, heterozygous LoF carriers have not been reported to have a lung phenotype. Additional biallelic  LRRK2 LoF cases were identified in ILD cohorts, linking LRRK2 LoF to lung disease, in contrast to heterozygous activating missense variants that cause Parkinson\u2019s disease (PD).",
+      "doi": "10.64898/2026.05.15.26352763",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/PPR/PPR1235730"
+    },
+    {
+      "identifier": "MED:42270006",
+      "title": "Systemic characterization of aging-related phenotypes induced by wild-type and G2019S LRRK2 in Caenorhabditis elegans.",
+      "abstract": "BackgroundLeucine-rich repeat kinase 2 (LRRK2), initially identified as a gene implicated in Parkinson's disease, is increasingly recognized for its influence on aging and associated disorders. However, its systemic roles in biological aging remain poorly understood.MethodsTo assess its physiological roles, we utilized Caenorhabditis elegans models with pan-neuronal expression of either wild-type or G2019S-mutant human LRRK2. Aging-related phenotypes were evaluated through analyses of development, metabolic activity, oxidative stress response, behavior, neuronal integrity, and proteostasis. Transcriptomic and untargeted metabolomic profiling were conducted to elucidate the molecular consequences of LRRK2 expression and mutation.ResultsWild-type LRRK2 enhanced organismal growth, metabolic activity, and resistance to oxidative and heat stress, while simultaneously inducing mild neurodegenerative alterations. In contrast, the G2019S mutation substantially aggravated aging-associated phenotypes, including reduced lifespan, increased lipid and lipofuscin accumulation, and heightened dopaminergic vulnerability under stress conditions. Multi-omics analyses further showed that wild-type LRRK2 predominantly upregulated pathways related to energy metabolism and specific components of proteostasis, whereas G2019S resulted in diminished amino acid availability, disrupted protein homeostasis, and more pronounced metabolic dysregulation.ConclusionsOur findings support a bidirectional role of LRRK2 in aging: wild-type LRRK2 promotes systemic metabolic activation and stress resistance but increases neuronal susceptibility, while the G2019S mutation further amplifies metabolic and structural vulnerability. These effects are strongly tissue-dependent and modulated by mutational background. Collectively, this study expands the role of LRRK2 from a Parkinson's disease-associated protein to a multisystem regulator of aging, providing mechanistic insight and a basis for tissue-selective LRRK2-targeted interventions for age-related disorders.",
+      "doi": "10.1016/j.expneurol.2026.115873",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42270006"
+    },
+    {
+      "identifier": "MED:42559947",
+      "title": "LRRK2 regulates synaptic function through modulation of actin cytoskeletal dynamics.",
+      "abstract": "Parkinson's disease (PD) is a multisystemic disorder that manifests through motor and non-motor symptoms. Motor dysfunction results from the degeneration of dopamine-producing neurons in the substantia nigra pars compacta. Increasing evidence suggests that synapse dysfunction precedes neuronal loss by years. Still, early synaptic alterations in PD remain poorly understood. Here, we integrate literature meta-analysis and multi-omics with biochemical, imaging, and electrophysiological measurements in Lrrk2 mouse models and human iPSC-derived neurons lacking LRRK2. We demonstrate that brain-derived neurotrophic factor (BDNF) activates LRRK2 in differentiated SH-SY5Y cells and primary mouse neurons, reshaping the LRRK2 interactome toward a network of actin cytoskeleton-related proteins. Gene-ontology analyses of both literature-curated LRRK2 interactors and phospho-proteome from striatal tissues with elevated LRRK2 activity highlight synapse-actin remodeling as major affected pathways. We further observed that loss of LRRK2 impairs BDNF signaling and alters postsynaptic density architecture. Young Lrrk2 knockout mice display structural alterations in dendritic protrusions, a phenotype that normalizes with age. In human iPSC-derived neurons, LRRK2 knockout affects maturation and BDNF-dependent regulation of spontaneous synaptic activity. Taken together, our study discloses a critical role of LRRK2 in BDNF-dependent synaptic modulation and identifies the synaptic actin cytoskeleton as a convergent site of LRRK2-associated pathophysiological processes in PD.",
+      "doi": "10.7554/elife.95987",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42559947"
+    },
+    {
+      "identifier": "MED:42696457",
+      "title": "Protocol to quantify LRRK2-mediated Rab10 phosphorylation using high-content imaging.",
+      "abstract": "Rab10 phosphorylation at Thr73 (pRab10) is a well-established readout of the kinase LRRK2, a protein whose mutations are associated with Parkinson's disease. Here, we present a protocol for high-content quantification of endogenous pRab10-positive vesicles in primary astrocyte-enriched cultures using the Operetta CLS system. We describe steps for cell culture, immunofluorescence, image acquisition, and quantitative analysis using Harmony software. This protocol is applicable to other LRRK2-expressing cells and offers a scalable platform for quantitative studies of LRRK2 physiological and pathological activity.",
+      "doi": "10.1016/j.xpro.2026.104819",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42696457"
+    },
+    {
+      "identifier": "PPR:PPR1263597",
+      "title": "R1398 is the GTP-\ud835\udefe-phosphate sensor that drives the ROC G-domain switching mechanism unique to Parkinson's disease-associated LRRK2",
+      "abstract": "Abstract  Mutations in leucine-rich repeat kinase 2 (LRRK2) are the most common genetic cause of Parkinson\u2019s disease (PD). Strategies that directly inhibit the LRRK2 kinase active site have not demonstrated disease-modifying efficacy in recent clinical testing. A naturally occurring protective variant, R1398H, provides an alternative route for understanding how reduced disease risk may be achieved by tuning the regulatory GTPase domain rather than the kinase domain itself. Here, we combine structural, computational, biochemical, and cell-based analyses to define how R1398H alters the Ras of complex proteins (ROC) G domain of LRRK2. Purified ROC carrying R1398H is folded but resolves as a stable homodimer corresponding to the GDP-bound off state previously defined for wild-type ROC. A 2.0 \u00c5 crystal structure shows unambiguous density for H1398 and reveals close superposition with the GDP-bound wild-type ROC dimer. Molecular dynamics modeling predicts that R1398 engages the \ud835\udefe-phosphate of GTP to stabilize switch-region interactions required for activation, whereas histidine at this position weakens \ud835\udefe-phosphate sensing. Consistent with this model, R1398H reduces GTP hydrolysis, selectively weakens GTP-state stabilization while preserving GDP binding, and decreases Rab29-dependent trans-Golgi recruitment of full-length LRRK2. These findings identify R1398 as a \ud835\udefe-phosphate sensor that couples nucleotide chemistry to ROC conformational switching and suggest a genetics-anchored strategy for stabilizing a protective off-state conformation of LRRK2.",
+      "doi": "10.21203/rs.3.rs-10121216/v1",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/PPR/PPR1263597"
+    },
+    {
+      "identifier": "MED:40914459",
+      "title": "Current therapeutic strategies in Parkinson's disease: Future perspectives.",
+      "abstract": "Parkinson's disease (PD) is a progressive neurodegenerative disorder characterized by the loss of dopaminergic neurons and the accumulation of misfolded \u03b1-synuclein. Current treatments, including dopaminergic medications and deep brain stimulation, provide symptomatic relief but do not halt disease progression. Recent advances in molecular research have enabled the development of disease-modifying strategies targeting key pathogenic mechanisms, such as \u03b1-synuclein aggregation, mitochondrial dysfunction, and genetic mutations, including LRRK2 and GBA1. In parallel, pluripotent stem cell-derived dopaminergic neurons have emerged as a scalable and ethically viable source for cell replacement therapy. Early-phase clinical trials have demonstrated the safety and functional integration of these grafts. Ongoing research is now focused on enhancing graft purity, immune compatibility, and anatomical precision, including homotopic transplantation and circuit-level reconstruction. Together, these emerging strategies offer the potential to shift PD treatment paradigms by combining symptomatic control with long-term neural restoration. This review summarizes current therapeutic approaches and highlights recent advances in disease-modifying and regenerative interventions for PD.",
+      "doi": "10.1016/j.mocell.2025.100274",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/40914459"
+    },
+    {
+      "identifier": "PPR:PPR1137902",
+      "title": "Disease\u2011Modifying Therapies for Parkinson\u2019s Disease: Biological Mechanisms, Pharmacological Strategies, and Clinical Pipeline",
+      "abstract": "Parkinson\u2019s disease (PD) is a biologically heterogeneous neurodegenerative disorder characterized by progressive motor and non-motor symptoms. Despite decades of research, no pharmacologic intervention has conclusively demonstrated disease-modifying efficacy in late-phase randomized controlled trials. Current strategies primarily target pathogenic mechanisms such as \u03b1-synuclein aggregation, mitochondrial dysfunction, impaired autophagy, and neuroinflammation, alongside genetic contributors including LRRK2 and GBA variants. Therapeutic approaches under investigation encompass monoclonal antibodies, small molecules, gene therapy, and metabolic modulators; however, pivotal trials of agents such as isradipine, cinpanemab, prasinezumab, exenatide, and inosine have failed to alter long-term progression, underscoring limitations in trial design, biomarker validation, and patient stratification. Repurposing of approved drugs\u2014representing approximately one-third of disease-modifying therapy trials\u2014offers a cost-efficient strategy, with candidates including GLP-1 receptor agonists, \u03b11-adrenergic antagonists, and lysosomal enhancers such as ambroxol. Emerging paradigms emphasize biomarker-driven and genotype-enriched designs to improve internal validity and enable precision medicine, particularly for GBA- and LRRK2-associated PD. Despite these advances, major unmet needs persist, including validated progression biomarkers, robust adaptive trial frameworks, and strategies for early or prodromal intervention. This review synthesizes biological mechanisms, pharmacological strategies, and clinical pipeline trends, highlighting lessons from past failures and opportunities for translational innovation. Accelerating progress will require global platform trials, integration of molecular staging, and harmonization of regulatory pathways to bridge mechanistic insights with clinically meaningful outcomes.",
+      "doi": "10.20944/preprints202512.2271.v1",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/PPR/PPR1137902"
+    },
+    {
+      "identifier": "MED:42931991",
+      "title": "At the Crossroads of Synapses and Signaling: The Role of LRRK2 in Neuronal Communication.",
+      "abstract": "Precise control of membrane protein localization and turnover is essential for synaptic function and circuit stability. Disruption of these processes alters the surface expression of receptors and transporters, ultimately impacting the excitatory/inhibitory (E/I) balance. Leucine-rich repeat kinase 2 (LRRK2) is emerging as a key regulator of these membrane-associated processes, acting at the interface between intracellular trafficking and synaptic signaling. LRRK2 integrates kinase activity with scaffolding functions to coordinate Rab-dependent vesicular trafficking, endosomal recycling, cytoskeletal dynamics, and endolysosomal pathways. Through these mechanisms, it controls the surface expression and distribution of synaptic receptors and neurotransmitter transporters in both neuronal and glial compartments. Pathogenic LRRK2 variants associated with Parkinson's disease (PD), converge on kinase hyperactivation and lead to sustained alterations in trafficking networks, resulting in selective mislocalization of membrane proteins. In this review, we examine how LRRK2-dependent trafficking mechanisms regulate key components of synaptic transmission, including glutamatergic and GABAergic receptors, as well as astrocytic transporters. We highlight how disruption of these processes affects neurotransmitter clearance, receptor activation, and ultimately E/I balance. Notably, accumulating evidence indicates that LRRK2 functions as an upstream coordinator of membrane organization at the crossroads of synaptic signaling and neurotransmitter homeostasis. Understanding how LRRK2 regulates trafficking pathways across cellular compartments provides mechanistic insight into circuit vulnerability in PD and highlights membrane-targeted strategies as potential approaches for restoring synaptic stability.",
+      "doi": "10.1007/s10571-026-01793-9",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42931991"
+    },
+    {
+      "identifier": "MED:42233523",
+      "title": "Leucine-rich repeat kinase 2 (LRRK2): balancing cellular homeostasis and Parkinson's disease (PD) pathogenesis.",
+      "abstract": "BackgroundLeucine-rich repeat kinase 2 (LRRK2) is a kinase with multi-signalling function that regulates various processes essential for neuronal and systemic physiology. It is involved in autophagy, vesicular trafficking, mitochondrial dynamics, and immune response. Pathogenic mutations of LRRK2 can significantly interfere with these physiological pathways essential for neuronal homeostasis, inducing degeneration of dopaminergic neurons-a characteristic feature of Parkinson's disease (PD).ObjectiveThis review comprehensively summarizes the normal cellular functions of LRRK2 and the potential impact of its dysregulation on various physiological pathways, predisposing individuals to familial and sporadic PD. The mechanistic connections between LRRK2's kinase hyperactivity, disturbances in vesicular trafficking and redox status, systemic and neuronal inflammation, and metabolic disorders will be thoroughly discussed.ResultsDysregulation of vesicular trafficking, mitochondrial redox balance, inflammatory pathways, and metabolism promotes \u03b1-synuclein accumulation and contributes to the degeneration of nigrostriatal dopaminergic neurons, a central pathological feature of PD. Understanding the physiological role of LRRK2 across neuronal and peripheral tissues uncovers its connection with multiple pathways to maintain homeostasis. Its dysfunction disseminates local stresses into broader neurodegenerative changes.ConclusionLRRK2 is implicated in multiple pathways that control neuronal integrity and neurodegeneration. Therefore, therapeutic targeting of LRRK2 could potentially help in restoring physiological function and management of PD.",
+      "doi": "10.1080/07853890.2026.2677288",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42233523"
+    },
+    {
+      "identifier": "MED:42630748",
+      "title": "Subtype-specific secretion of extracellular vesicles by LRRK2 and Rab GTPases under lysosomal stress.",
+      "abstract": "LRRK2, the Parkinson's disease-associated kinase, phosphorylates a subset of Rab GTPases and regulates membrane dynamics. We previously reported that lysosomal stress activates LRRK2 and thereby induces the exocytic secretion of lysosomal contents, but the detailed secretion mechanism remained unclear. Here we found that, under lysosomal stress, endolysosomal luminal and membrane components were secreted with extracellular vesicles (EVs) via LRRK2. Bis(monoacylglycerol)phosphate, an endolysosomal lipid and a urinary marker of LRRK2 activity, was similarly secreted via LRRK2, whereas CD9-positive EVs were not involved. Further dissection of the secreted EVs revealed that Alix-positive EVs were secreted via Rab8a as well as the ESCRT component VPS4, whereas LAMP1/cathepsin B-positive EVs were secreted via Rab10/Rab35, and SNARE proteins syntaxin 2 and VAMP8 regulated the secretion of both EV subtypes. These findings suggest a distinctive stress-induced secretory mechanism whereby LRRK2 facilitates the secretion of multiple EV subtypes by controlling Rab GTPases involved in each pathway.",
+      "doi": "10.1016/j.isci.2026.117203",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42630748"
+    },
+    {
+      "identifier": "MED:42504881",
+      "title": "The LRRK2 G2019S variant rewires Rab GTPase phosphorylation after lysosomal damage and promotes cell death in human macrophages.",
+      "abstract": "Variants in leucine-rich repeat kinase 2 (LRRK2) are the most common genetic cause of Parkinson's disease, yet how these variants alter immune cell function remains unclear. Because LRRK2 is activated by lysosomal damage in macrophages, we investigated how the pathogenic G2019S variant affects macrophage responses to lysosomal damage. Here, we show that LRRK2 G2019S has an effect during lysosomal damage through kinase-dependent and kinase-independent mechanisms. Phosphoproteomic analysis revealed that lysosomal damage induces selective rewiring of LRRK2-dependent Rab GTPase phosphorylation, characterised by increased Rab12 phosphorylation and reduced Rab35 phosphorylation without global kinase hyperactivation. Strikingly, LRRK2 G2019S macrophages showed increased susceptibility to apoptosis following lysosomal damage. This increase in cell death occurred independently of the kinase activity, indicating a distinct kinase-independent role of LRRK2 in regulating cell survival. We generated isogenic induced pluripotent stem cells from patients carrying the LRRK2 G2019S variant and confirmed that LRRK2 G2019S macrophages are more susceptible to cell death in a kinase-independent manner. Together, our findings support a model in which the LRRK2 G2019S variant selectively changes the phosphorylation of Rab GTPases in macrophages and increases cell death after lysosomal damage in macrophages.",
+      "doi": "10.1242/jcs.265083",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/42504881"
+    },
+    {
+      "identifier": "MED:41880688",
+      "title": "Targeting of kinases to treat neurodegenerative diseases.",
+      "abstract": "Neurodegenerative diseases, including Alzheimer, Parkinson, and multiple sclerosis, represent a growing global health crisis with limited therapeutic options that address disease progression. Protein kinases, which are crucial regulators of diverse cellular processes such as endolysosomal trafficking, neuroinflammation, and mitochondrial homeostasis, are frequently dysregulated in these conditions, making them attractive drug targets. This review explores the therapeutic potential of targeting key kinases implicated in neurodegeneration, specifically p38 MAPK, BTK, c-Abl/ABL1, CDK5, GSK3, JNK, LRRK2, and PINK1. We delve into their specific roles in disease pathophysiology, current therapeutic strategies, and the structural insights guiding our understanding of these kinases and the development of more selective inhibitors. Although significant challenges remain, particularly regarding selectivity and drug delivery to the brain, the advancements in our understanding of kinase biology and novel therapeutic modalities offer substantial promise for developing disease-modifying treatments. This review highlights the urgent need for continued research to identify new targets and translate these scientific breakthroughs into effective therapies for patients. SIGNIFICANCE STATEMENT: This review outlines the roles of protein kinases in neurodegenerative diseases and highlights emerging strategies for their therapeutic modulation. By integrating current knowledge of kinase signaling, drug development, and pharmacokinetics, this work provides a timely and practical framework to guide the development of disease-modifying treatments in an area of pressing clinical need.",
+      "doi": "10.1016/j.pharmr.2026.100128",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/41880688"
+    },
+    {
+      "identifier": "MED:41977401",
+      "title": "miR-369-3p Modulates LRRK2-Mediated Inflammation and Autophagy in RAW264.7 Macrophages.",
+      "abstract": "Leucine-rich-repeat kinase 2 (LRRK2) is a multidomain protein highly expressed in immune cells and implicated in the regulation of immune functions including immune signaling, cytokine release and autophagy. LRRK2 is one of the therapeutic targets in Parkinson's Disease (PD). Aberrant activation of LRRK2 can also contribute to intestinal inflammation, mainly in inflammatory bowel disease (IBD). Hence the modulation of LRRK2 may influence gut inflammation providing an improvement in disease outcomes. Over the years, microRNAs (miRNAs) have acquired much attention thanks to their potential as therapeutic targets in several pathological conditions, including inflammatory disorders. In this study, we aimed to examine the ability of miR-369-3p in the modulation of autophagy targeting LRRK2 expression. Bioinformatics analysis revealed that Lrrk2 is a target gene of miR-369-3p, and LRRK2 expression was increased in ulcerative colitis patients compared with that in a healthy control. In in vitro analysis, we validated that mimic transfection with miR-369-3p in Raw264.7 significantly reduced the expression of LRRK2 both in basal and inflammatory conditions. Moreover, the inhibition of LRRK2 limited the nuclear translocation of Nuclear factor kappa B (NF-\u03baB) induced by lipopolysaccharide (LPS) stimulation. In turn, we found that, in inflammatory conditions, the intracellular increase in miR-369-3p precluded the inhibition of autophagy by LRRK2 by restoring autophagy marker light chain 3 (LC3)II/I ratio, BECLIN-1 and decreasing p62 expression. Furthermore, we detected that the upregulation of miR-369-3p decreased the release of pro-inflammatory mediators Tumor necrosis factor (TNF), C-C motif ligand 2/Monocyte chemoattractant protein-1 (CCL2/MCP-1), C-C motif ligand 3/Macrophage inflammatory protein-1 alpha (CCL3/MIP-1\u03b1) and C-C motif ligand 5/Regulated on activation, normal T-cell expressed and secreted (CCL5/RANTES) and increased the anti-inflammatory cytokine interleukin 10 (IL-10) in response to LPS. This study supports the anti-inflammatory potential of miR-369-3p in immune cells and suggests the potential of miR-369-3p as a therapeutic agent in the treatment of acute intestinal inflammatory conditions such as ulcerative colitis.",
+      "doi": "10.3390/ijms27073220",
+      "relevance": "Target/curated compound explicitly named: True; disease explicitly named: True. Lexical applicability only; study population, mechanism, direction of effect and study quality need review.",
+      "url": "https://europepmc.org/article/MED/41977401"
+    }
+  ],
+  "missing_information": [
+    "No curated ChEMBL mechanism compounds retrieved. This is not evidence that no relevant compounds exist; trial compound links remain unverified.",
+    "Target validity cannot be inferred from compound or trial failure alone.",
+    "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+    "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+    "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+  ],
+  "retrieval_notes": [
+    "RECORDED PUBLIC EVIDENCE: captured in the earlier 7 November 2026 validation; no live request in offline playback.",
+    "Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review."
+  ],
+  "retrieval_errors": [],
+  "conclusion": "insufficient evidence"
+}

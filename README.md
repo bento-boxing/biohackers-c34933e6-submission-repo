@@ -4,8 +4,8 @@ Evidence-ranked drug targets with a human checkpoint, then compound screening fo
 A **Next.js + Flask** monorepo built for Agentverse 2026.
 
 ```
-/                   ← Next.js 16 frontend (TypeScript + Tailwind): app/, lib/
-/backend            ← Flask API + the Python pipeline: backend/pipeline/
+/frontend           ← Next.js 16 research workbench (TypeScript + Tailwind)
+/backend            ← Flask API: Target Scout pipeline + Target Challenger (backend/devils_advocate/)
 ```
 
 ## What it does
@@ -27,7 +27,7 @@ total = w_gen · genetic + w_assoc · association + w_drug · druggability + w_l
 | literature   | log-scaled Europe PMC hits for `"SYMBOL" AND "disease"`                 |
 
 Default weights are 0.4 / 0.3 / 0.2 / 0.1. The sliders re-rank in the browser; nothing is hidden.
-Safety flags are shown, never scored. An optional LLM rationale (Claude) is written from the fetched
+Safety flags are shown, never scored. An optional LLM rationale (Gemini) is written from the fetched
 evidence only, on an explicit button, and is cached per weight setting.
 
 **Human checkpoint.** Approving a target records who, when, why, the weights and the scores shown to
@@ -37,64 +37,82 @@ evidence only, on an explicit button, and is cached per weight setting.
 and the 50 most potent ChEMBL compounds (pChEMBL ≥ 6, i.e. ≤ 1 µM) with phase, Lipinski data and
 approved-drug flags. A second checkpoint writes a shortlist to `backend/runs/shortlists.jsonl`.
 
+## Repository layout
+
+```
+frontend/                   Next.js 16 research workbench (the only UI): discovery → challenge → experiment → decision
+backend/app.py              The one Flask app (local :5050 and the Vercel Function): stateless workbench server
+backend/pipeline/           Target Scout: evidence retrieval, transparent ranking, approvals, screening
+backend/devils_advocate/    Target Challenger: evidence pipeline, Gemini reasoning, experiment designer, server.py
+scripts/                    demo.sh (bash) and Windows .cmd launchers
+```
+
 ## Getting started
 
-### Backend (Flask)
+### Backend
 ```bash
 cd backend
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+python -m venv venv && source venv/bin/activate      # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-pytest                          # 58 tests, fully offline
-python app.py                   # live data, http://localhost:5000
+python -m pytest tests devils_advocate/tests -q      # Scout + Challenger + workbench tests, offline
+python -m devils_advocate.server --port 5050         # the server the UI talks to (same app as app.py)
 ```
 
-For the offline demo (no network needed, instant):
+### Frontend
 ```bash
-SCOUT_CACHE_ONLY=1 python app.py
-```
-
-Optional LLM rationale: set `ANTHROPIC_API_KEY` (or put it in `backend/.env`). Without it the button
-reports "LLM rationale off".
-
-### Frontend (Next.js)
-```bash
+cd frontend
 npm install
-npm test                        # vitest: client-side scoring
-npm run dev                     # http://localhost:3000, proxies /api/* to Flask on :5000
+npm test            # vitest: client-side scoring
+npm run dev         # http://localhost:3000, proxies /api/* to :5050
 ```
 
-### One-shot demo
-```bash
-bash scripts/demo.sh            # runs both test suites, then both servers (cache-only)
-```
+`bash scripts/demo.sh` runs all of the above in one go.
 
-### Command line
-```bash
-cd backend && source venv/bin/activate
-python -m pipeline.cli scout "Parkinson disease"          # live
-python -m pipeline.cli scout "Parkinson disease" --cache-only
-python -m pipeline.cli screen --latest                     # newest approval
-```
+### AI configuration (one set of keys for everything)
+Both the Scout ranking rationale and the Challenger's reasoning use Gemini, configured in the
+repository-root `.env` (see `backend/devils_advocate/ai.env.example`): `GEMINI_API_KEY`, `AI_MODEL`,
+`AI_ENABLED=true`, `AI_THINKING_LEVEL`. No Anthropic key is used anywhere. In recorded/offline mode
+no paid call is ever made.
 
 ## Deploying to Vercel
 
-The repo is a two-service Vercel project (`vercel.json`): Next.js at the root and Flask in
-`backend/`, with `/api/*` routed to Flask. Flask receives the full `/api/...` path.
+The whole workbench runs on Vercel alone (`vercel.json`, framework preset **Services**): the Next.js
+app in `frontend/` and a Python Function built from `backend/` (`app:app`), with `/api/*` routed to
+the Function. There is no database, queue or second host.
+
+**How it stays stateless.** Vercel Functions keep nothing between requests, so the server holds no
+state: an investigation runs to completion inside one request and returns the finished report; the
+browser keeps the scout run, report and decisions in `localStorage`; a screening request carries the
+HMAC-signed approval object the server issued. Audit logs written under `/tmp` are best-effort only.
+The downloadable research report is the durable record.
 
 - **Only the `prod` branch deploys.** `git.deploymentEnabled` allows `prod` and blocks every other
   branch (`**` also covers names with slashes such as `feat/x`). In the Vercel dashboard set
   *Settings → Git → Production Branch* to `prod`, otherwise pushes to `prod` become previews.
-- Set the framework preset to **Services** (dashboard, or `vercel project update --framework services`).
-- Environment variables: `ANTHROPIC_API_KEY` (optional, for rationales). Leave `SCOUT_CACHE_ONLY`
-  unset so every disease runs live.
-- Vercel Functions can only write to `/tmp`. When `VERCEL=1` the HTTP cache, approval log and
-  shortlist log go to `/tmp/target-scout/`. That storage is per-instance and is wiped when an
-  instance is recycled, so on Vercel the audit logs are **ephemeral** and a scout run can expire if
-  the Approve click lands on a different instance (the page then asks you to re-run the scout).
-- An uncached live scout of 25 targets takes about 25 s and a new screening about 12 s, well under
-  Vercel's function time limit. Parkinson disease is instant because its responses ship in
-  `backend/data/demo_cache/`. Repeat runs on a warm instance are instant too.
+- **Environment variables** (Project Settings → Environment Variables):
+  `WORKBENCH_SECRET` (any long random string; signs approvals so all instances agree),
+  `GEMINI_API_KEY`, `AI_MODEL`, `AI_ENABLED=true`, `AI_THINKING_LEVEL` (optional, for Gemini
+  rationale and challenger reasoning). Leave `SCOUT_CACHE_ONLY` unset so every disease runs live.
+  Browser origins: the deployment's own `VERCEL_URL` / production URL are allowed automatically;
+  add custom domains to `WORKBENCH_ORIGINS` (comma-separated).
+- **Time budget.** Vercel's default function limit is 300 s (Hobby and Pro). Live retrieval is
+  capped at `RESEARCH_RETRIEVAL_BUDGET_SECONDS` (default 240 s, or 150 s when Gemini reasoning is
+  authorized). The whole request has a deadline of `RESEARCH_REQUEST_BUDGET_SECONDS` (default 280):
+  each Gemini call is clamped to the time left and no new paid call starts within 5 s of it. When the budget runs short, the challenger verifies the full
+  registry record of stopped trials first and labels the rest "not verified" instead of failing;
+  only if even the searches cannot finish does the investigation fail with an explicit message.
+  Measured: EGFR / NSCLC (501 trials, the worst case we found) completes in about 215 s; LRRK2 in
+  under a minute. An uncached 25-target scout takes about 25 s, a screening about 12 s. Parkinson
+  disease / LRRK2 are instant from the recorded snapshot.
+- **Payload sizes.** Reports never travel back to the server: the investigation response carries a
+  signed digest (`report_sig`) and each scout target a signed `sig`, and the decision request posts
+  only those tokens. Trial outcome tables and eligibility text are dropped from responses (the UI
+  never renders them), which brings the worst live case (EGFR, 501 trials) from 7.0 MB to about
+  1.5 MB, under Vercel's 4.5 MB response limit. Request bodies are capped at 1 MB; a 25-target
+  scout run with evidence is about 130 KB.
+- **`WORKBENCH_SECRET` is required on Vercel.** Without it each instance would sign with its own
+  random key and screening would fail at random, so the server refuses to issue approvals (503 with
+  an explicit message) when `VERCEL=1` and the secret is unset.
 
 ## API
 
@@ -105,11 +123,14 @@ score mismatch) or 502 (upstream API failure).
 |--------|------------------|---------------------------------------|---------|
 | GET    | /api/health      |                                       | `{status}` |
 | POST   | /api/scout       | `{disease, n?}`                       | run_id, disease, cache_only, default_weights, targets[] with components |
-| POST   | /api/rationale   | `{run_id, weights}`                   | `{rationales: [{symbol, rationale, evidence_strength}]}` or `{available: false}` |
+| POST   | /api/rationale   | `{run_id, run?, weights}`             | `{rationales: [{symbol, rationale, evidence_strength}]}` or `{available: false}` |
 | GET    | /api/approvals   |                                       | approvals, newest first |
 | POST   | /api/approvals   | `{run_id, symbol, weights, scores, reason}` | the stored approval |
-| POST   | /api/screen      | `{approval_ts}`                       | approval, structure, compounds[] |
-| POST   | /api/shortlists  | `{approval_ts, chembl_ids, reason}`   | `{ok: true}` |
+| POST   | /api/screen      | `{approval_ts}` (Scout app) · `{approval}` signed (workbench) | approval, structure, compounds[] |
+| POST   | /api/shortlists  | `{approval_ts, chembl_ids, reason}`   | `{ok: true}` (Scout app only) |
+| POST   | /api/investigations | `{run, symbol}` or `{target_input}`, `use_ai`, `paid_authorized`, `weights` | the finished job: `{job_id, state, result, error, selection, weights, report_sig}` |
+| POST   | /api/research-decisions | `{decision_id, job_id, action, rationale, confirmed, report_sig, target_sig?}` | the decision; `approve_screening` adds a signed `approval` |
+| GET    | /api/workbench/config | | public AI settings, modes |
 
 ## Data sources and caching
 

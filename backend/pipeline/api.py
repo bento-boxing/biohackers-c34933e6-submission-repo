@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import os
 import uuid
+from dataclasses import asdict
 from pathlib import Path
 
 import requests
@@ -15,6 +16,7 @@ from pipeline.http import CacheMiss, HttpClient, UpstreamError, default_client
 from pipeline.models import ScoutResult, Weights
 from pipeline.scout.pipeline import rescore, run_scout
 from pipeline.scout.rationale import explain
+from pipeline.scout.restore import result_from_run_json
 from pipeline.screening.pipeline import run_screening
 from pipeline.clients.chembl import chembl_molecule_url
 from pipeline.models import Compound, ScreeningResult
@@ -39,6 +41,8 @@ def scout_run_json(run_id: str, result: ScoutResult, cache_only: bool) -> dict:
             "tractability_sm_labels": [x["label"] for x in e.tractability
                                        if x.get("modality") == "SM" and x.get("value")],
             "open_targets_url": f"https://platform.opentargets.org/target/{e.target_id}",
+            # raw evidence so a stateless client can post the run back (see scout/restore.py)
+            "evidence": asdict(e),
         })
     return {"run_id": run_id, "disease": {"id": result.disease.id, "name": result.disease.name},
             "cache_only": cache_only, "default_weights": Weights().as_dict(), "targets": targets}
@@ -148,15 +152,25 @@ def create_app(client: HttpClient | None = None,
         audit.append_jsonl(approvals_path, approval.__dict__)
         return jsonify(approval.__dict__)
 
+    def _run_from_body(body: dict) -> ScoutResult | None:
+        run = RUNS.get(body.get("run_id", ""))
+        if run is None and isinstance(body.get("run"), dict):
+            try:
+                run = result_from_run_json(body["run"])
+            except ValueError as e:
+                raise BadInput(str(e))
+        return run
+
     @app.post("/api/rationale")
     def rationale():
         body = request.get_json(silent=True) or {}
-        run = RUNS.get(body.get("run_id", ""))
+        run = _run_from_body(body)
         if run is None:
             return error(f"no run {body.get('run_id')} (runs expire on server restart: re-run the scout)", 404)
         weights = _weights_from(body.get("weights"))
         try:
-            result = explain(rescore(run, weights))
+            # cache-only (offline / recorded) mode must never make a paid model call
+            result = explain(rescore(run, weights), offline=http.cache_only)
         except Exception as e:  # LLM failures must never break the page
             app.logger.warning("rationale failed: %s", e)
             return jsonify({"available": False, "reason": f"LLM call failed: {e}"})

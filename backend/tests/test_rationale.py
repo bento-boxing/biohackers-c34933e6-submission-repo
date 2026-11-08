@@ -40,41 +40,47 @@ def test_explain_uses_cached_file_without_api(result, tmp_path, monkeypatch):
 
 
 def test_explain_returns_none_without_credentials(result, tmp_path, monkeypatch):
-    monkeypatch.setattr(R, "_client", lambda: None)
+    for k in ("AI_ENABLED", "AI_MODEL", "GEMINI_API_KEY"):
+        monkeypatch.delenv(k, raising=False)
+    monkeypatch.setattr(R, "load_dotenv", lambda *a, **k: None)
+    assert R._client() is None
     assert R.explain(result, cache_dir=tmp_path, read_dirs=()) is None
 
 
-def test_explain_returns_none_on_refusal(result, tmp_path, monkeypatch):
-    class FakeMessages:
+def test_explain_returns_none_when_gemini_incomplete(result, tmp_path, monkeypatch):
+    class FakeInteractions:
         def create(self, **kw):
-            return SimpleNamespace(stop_reason="refusal", content=[])
+            return SimpleNamespace(status="incomplete", output_text="")
 
-    fake = SimpleNamespace(beta=SimpleNamespace(messages=FakeMessages()))
-    monkeypatch.setattr(R, "_client", lambda: fake)
+    monkeypatch.setattr(R, "_client", lambda: SimpleNamespace(interactions=FakeInteractions()))
     assert R.explain(result, cache_dir=tmp_path, read_dirs=()) is None
     assert list(tmp_path.glob("*.json")) == []
 
 
-def test_explain_parses_and_caches_response(result, tmp_path, monkeypatch):
+def test_explain_offline_never_calls_gemini(result, tmp_path, monkeypatch):
+    monkeypatch.setattr(R, "_client", lambda: (_ for _ in ()).throw(AssertionError("api called")))
+    assert R.explain(result, cache_dir=tmp_path, read_dirs=(), offline=True) is None
+
+
+def test_explain_parses_and_caches_gemini_response(result, tmp_path, monkeypatch):
     captured = {}
 
-    class FakeMessages:
+    class FakeInteractions:
         def create(self, **kw):
             captured.update(kw)
+            rows = json.loads(kw["input"])
             items = [{"symbol": r["symbol"], "rationale": f"because {r['symbol']}", "evidence_strength": "moderate"}
-                     for r in json.loads(kw["messages"][0]["content"])]
-            return SimpleNamespace(stop_reason="end_turn",
-                                   content=[SimpleNamespace(type="text", text=json.dumps({"items": items}))])
+                     for r in rows]
+            return SimpleNamespace(status="completed", output_text=json.dumps({"items": items}))
 
-    fake = SimpleNamespace(beta=SimpleNamespace(messages=FakeMessages()))
-    monkeypatch.setattr(R, "_client", lambda: fake)
+    monkeypatch.setenv("AI_ENABLED", "true"); monkeypatch.setenv("AI_MODEL", "gemini-test"); monkeypatch.setenv("GEMINI_API_KEY", "k")
+    monkeypatch.setattr(R, "load_dotenv", lambda *a, **k: None)
+    monkeypatch.setattr(R, "_client", lambda: SimpleNamespace(interactions=FakeInteractions()))
     out = R.explain(result, cache_dir=tmp_path, read_dirs=())
     assert out.targets[0].rationale == f"because {out.targets[0].evidence.symbol}"
-    assert captured["model"] == "claude-opus-5-5" and captured["fallbacks"] == "default"
-    assert captured["betas"] == ["server-side-fallback-2026-07-01"]
-    assert captured["output_config"]["effort"] == "low"
-    assert captured["output_config"]["format"]["type"] == "json_schema"
-    assert "thinking" not in captured
+    assert captured["model"] == "gemini-test" and captured["store"] is False
+    assert captured["response_format"][0]["schema"] == R.RATIONALE_SCHEMA
+    assert captured["system_instruction"] == R.SYSTEM_PROMPT
     assert (tmp_path / f"{R.rationale_key(result)}.json").exists()
 
 

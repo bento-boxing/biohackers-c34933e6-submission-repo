@@ -1,0 +1,22 @@
+[
+  {
+    "url": "https://www.ebi.ac.uk/chembl/api/data/target/search.json?q=BACE1&limit=30",
+    "status": 200,
+    "content_type": "application/json",
+    "response_count": 5,
+    "record": null,
+    "exact_target_ids": [
+      "CHEMBL3297642",
+      "CHEMBL4822",
+      "CHEMBL4593",
+      "CHEMBL3259473",
+      "CHEMBL2111390"
+    ]
+  },
+  {
+    "url": "https://www.ebi.ac.uk/chembl/api/data/target/CHEMBL4822.json",
+    "status": 500,
+    "content_type": "text/html",
+    "error_type": "JSONDecodeError"
+  }
+]

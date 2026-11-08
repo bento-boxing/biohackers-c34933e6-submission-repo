@@ -1,0 +1,18 @@
+{
+  "retrieved_at_utc": "2026-11-07T19:05:35.169553+00:00",
+  "chembl_status": {
+    "activities": 24527044,
+    "chembl_db_version": "ChEMBL_37",
+    "chembl_release_date": "2026-05-01",
+    "compound_records": 3824604,
+    "disinct_compounds": 2921148,
+    "publications": 101100,
+    "status": "UP",
+    "targets": 18552
+  },
+  "sources": [
+    "https://www.ebi.ac.uk/chembl/",
+    "https://clinicaltrials.gov/about-site/terms-conditions",
+    "https://europepmc.org/Copyright"
+  ]
+}

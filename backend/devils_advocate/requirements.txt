@@ -1,0 +1,2 @@
+# Optional Streamlit demo (devils_advocate/demo_app.py). The workbench server needs only ../requirements.txt.
+streamlit>=1.40,<2

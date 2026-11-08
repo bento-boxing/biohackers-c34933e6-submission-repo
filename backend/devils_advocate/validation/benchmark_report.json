@@ -1,0 +1,742 @@
+{
+  "description": "Nine manually inspectable registry/claim regression cases; not an independent clinical benchmark or LLM comparison.",
+  "pipeline": {
+    "cases": 9,
+    "missing_predictions": 0,
+    "concern_accuracy": 1.0,
+    "relevant_failure_accuracy": 1.0,
+    "unsupported_accuracy": 1.0
+  },
+  "extract_only_summary_baseline": {
+    "cases": 9,
+    "missing_predictions": 0,
+    "concern_accuracy": 0.4444444444444444,
+    "relevant_failure_accuracy": 0.7777777777777778,
+    "unsupported_accuracy": 0.8888888888888888
+  },
+  "labels": [
+    {
+      "id": "NCT01739348:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": true
+    },
+    {
+      "id": "NCT02783573:outcome",
+      "concern": "efficacy",
+      "relevant_failure": true,
+      "unsupported": false
+    },
+    {
+      "id": "NCT02972658:outcome",
+      "concern": "other",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT03331666:outcome",
+      "concern": "operational",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT02443337:outcome",
+      "concern": "efficacy",
+      "relevant_failure": true,
+      "unsupported": false
+    },
+    {
+      "id": "NCT05241873:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT06704724:outcome",
+      "concern": "operational",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "fabricated-target-invalidity:support",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": true
+    },
+    {
+      "id": "documented-status:support",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    }
+  ],
+  "pipeline_predictions": [
+    {
+      "id": "NCT01739348:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": true
+    },
+    {
+      "id": "NCT02783573:outcome",
+      "concern": "efficacy",
+      "relevant_failure": true,
+      "unsupported": false
+    },
+    {
+      "id": "NCT02972658:outcome",
+      "concern": "other",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT03331666:outcome",
+      "concern": "operational",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT02443337:outcome",
+      "concern": "efficacy",
+      "relevant_failure": true,
+      "unsupported": false
+    },
+    {
+      "id": "NCT05241873:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT06704724:outcome",
+      "concern": "operational",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "fabricated-target-invalidity:support",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": true
+    },
+    {
+      "id": "documented-status:support",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    }
+  ],
+  "baseline_predictions": [
+    {
+      "id": "NCT01739348:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": true
+    },
+    {
+      "id": "NCT02783573:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT02972658:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT03331666:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT02443337:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT05241873:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "NCT06704724:outcome",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "fabricated-target-invalidity:support",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    },
+    {
+      "id": "documented-status:support",
+      "concern": "unknown",
+      "relevant_failure": false,
+      "unsupported": false
+    }
+  ],
+  "shared_source_cases": [
+    {
+      "cases": [
+        {
+          "id": "NCT01739348:outcome",
+          "type": "trial_outcome",
+          "source_id": "NCT01739348"
+        }
+      ],
+      "target": {
+        "disease_name": "Alzheimer's disease",
+        "disease_id": null,
+        "target_symbol": "BACE1",
+        "target_id": null,
+        "chembl_target_id": null,
+        "uniprot": null
+      },
+      "trial": {
+        "nct_id": "NCT01739348",
+        "title": "An Efficacy and Safety Trial of Verubecestat (MK-8931) in Mild to Moderate Alzheimer's Disease (P07738)",
+        "status": "TERMINATED",
+        "why_stopped": "",
+        "stop_reason": {
+          "state": "unverified",
+          "value": null,
+          "full_record_checked": false,
+          "source_url": "",
+          "checked_at_utc": null,
+          "detail": "",
+          "search_value": null,
+          "search_state": null
+        },
+        "conditions": [
+          "Alzheimer's Disease"
+        ],
+        "interventions": [
+          "Verubecestat (Part I and Part II)",
+          "SCH 900931",
+          "Verubecestat (Part I and Part II)",
+          "SCH 900931",
+          "Verubecestat (Part I and Part II)",
+          "SCH 900931",
+          "Placebo (Part I)",
+          "Verubecestat (Part II)",
+          "SCH 900931"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL3301601"
+        ],
+        "compound_matches": {},
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT01739348"
+      },
+      "baseline_summary": [
+        {
+          "id": "NCT01739348:outcome",
+          "text": "TERMINATED. Stop reason: Stop reason not verified against a full registry record",
+          "source_url": "https://clinicaltrials.gov/study/NCT01739348"
+        }
+      ]
+    },
+    {
+      "cases": [
+        {
+          "id": "NCT02783573:outcome",
+          "type": "trial_outcome",
+          "source_id": "NCT02783573"
+        }
+      ],
+      "target": {
+        "disease_name": "Alzheimer's disease",
+        "disease_id": null,
+        "target_symbol": "BACE1",
+        "target_id": null,
+        "chembl_target_id": null,
+        "uniprot": null
+      },
+      "trial": {
+        "nct_id": "NCT02783573",
+        "title": "A Study of Lanabecestat (LY3314814) in Participants With Mild Alzheimer's Disease Dementia",
+        "status": "TERMINATED",
+        "why_stopped": "An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility.",
+        "stop_reason": {
+          "state": "unverified",
+          "value": null,
+          "full_record_checked": false,
+          "source_url": "",
+          "checked_at_utc": null,
+          "detail": "",
+          "search_value": null,
+          "search_state": null
+        },
+        "conditions": [
+          "Alzheimer's Disease"
+        ],
+        "interventions": [
+          "Lanabecestat",
+          "LY3314814",
+          "AZD3293",
+          "Placebo"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL3989948"
+        ],
+        "compound_matches": {},
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT02783573"
+      },
+      "baseline_summary": [
+        {
+          "id": "NCT02783573:outcome",
+          "text": "TERMINATED. Stop reason: Recorded stop reason (full record not rechecked): An independent assessment concluded the trial was not likely to meet the primary endpoint upon completion and therefore, trial stopped for futility.",
+          "source_url": "https://clinicaltrials.gov/study/NCT02783573"
+        }
+      ]
+    },
+    {
+      "cases": [
+        {
+          "id": "NCT02972658:outcome",
+          "type": "trial_outcome",
+          "source_id": "NCT02972658"
+        }
+      ],
+      "target": {
+        "disease_name": "Alzheimer's disease",
+        "disease_id": null,
+        "target_symbol": "BACE1",
+        "target_id": null,
+        "chembl_target_id": null,
+        "uniprot": null
+      },
+      "trial": {
+        "nct_id": "NCT02972658",
+        "title": "A Study of Lanabecestat (LY3314814) in Early Alzheimer's Disease Dementia",
+        "status": "TERMINATED",
+        "why_stopped": "As the feeder study (AZES) was stopped for futility after an independent assessment, this trial was also stopped.",
+        "stop_reason": {
+          "state": "unverified",
+          "value": null,
+          "full_record_checked": false,
+          "source_url": "",
+          "checked_at_utc": null,
+          "detail": "",
+          "search_value": null,
+          "search_state": null
+        },
+        "conditions": [
+          "Alzheimer's Disease"
+        ],
+        "interventions": [
+          "Lanabecestat",
+          "LY3314814",
+          "AZD3293"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL3989948"
+        ],
+        "compound_matches": {},
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT02972658"
+      },
+      "baseline_summary": [
+        {
+          "id": "NCT02972658:outcome",
+          "text": "TERMINATED. Stop reason: Recorded stop reason (full record not rechecked): As the feeder study (AZES) was stopped for futility after an independent assessment, this trial was also stopped.",
+          "source_url": "https://clinicaltrials.gov/study/NCT02972658"
+        }
+      ]
+    },
+    {
+      "cases": [
+        {
+          "id": "NCT03331666:outcome",
+          "type": "trial_outcome",
+          "source_id": "NCT03331666"
+        }
+      ],
+      "target": {
+        "disease_name": "Hypercholesterolemia",
+        "disease_id": null,
+        "target_symbol": "PCSK9",
+        "target_id": null,
+        "chembl_target_id": null,
+        "uniprot": null
+      },
+      "trial": {
+        "nct_id": "NCT03331666",
+        "title": "Impact of LDL-cholesterol Lowering on Platelet Activation",
+        "status": "TERMINATED",
+        "why_stopped": "Terminated Prematurely due to COVID-19",
+        "stop_reason": {
+          "state": "unverified",
+          "value": null,
+          "full_record_checked": false,
+          "source_url": "",
+          "checked_at_utc": null,
+          "detail": "",
+          "search_value": null,
+          "search_state": null
+        },
+        "conditions": [
+          "Familial Hypercholesterolemia"
+        ],
+        "interventions": [
+          "Evolocumab",
+          "REPATHA"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL2364655"
+        ],
+        "compound_matches": {},
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT03331666"
+      },
+      "baseline_summary": [
+        {
+          "id": "NCT03331666:outcome",
+          "text": "TERMINATED. Stop reason: Recorded stop reason (full record not rechecked): Terminated Prematurely due to COVID-19",
+          "source_url": "https://clinicaltrials.gov/study/NCT03331666"
+        }
+      ]
+    },
+    {
+      "cases": [
+        {
+          "id": "NCT02443337:outcome",
+          "type": "trial_outcome",
+          "source_id": "NCT02443337"
+        }
+      ],
+      "target": {
+        "disease_name": "Non-small-cell lung cancer",
+        "disease_id": null,
+        "target_symbol": "EGFR",
+        "target_id": null,
+        "chembl_target_id": null,
+        "uniprot": null
+      },
+      "trial": {
+        "nct_id": "NCT02443337",
+        "title": "A Study of LY3023414 and Necitumumab in Squamous Lung Cancer",
+        "status": "TERMINATED",
+        "why_stopped": "The study stopped due to lack of efficacy.",
+        "stop_reason": {
+          "state": "unverified",
+          "value": null,
+          "full_record_checked": false,
+          "source_url": "",
+          "checked_at_utc": null,
+          "detail": "",
+          "search_value": null,
+          "search_state": null
+        },
+        "conditions": [
+          "Non-small Cell Lung Cancer Metastatic"
+        ],
+        "interventions": [
+          "LY3023414",
+          "Necitumumab",
+          "LY3012211",
+          "IMC-11F8"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL1743047"
+        ],
+        "compound_matches": {},
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT02443337"
+      },
+      "baseline_summary": [
+        {
+          "id": "NCT02443337:outcome",
+          "text": "TERMINATED. Stop reason: Recorded stop reason (full record not rechecked): The study stopped due to lack of efficacy.",
+          "source_url": "https://clinicaltrials.gov/study/NCT02443337"
+        }
+      ]
+    },
+    {
+      "cases": [
+        {
+          "id": "NCT05241873:outcome",
+          "type": "trial_outcome",
+          "source_id": "NCT05241873"
+        }
+      ],
+      "target": {
+        "disease_name": "Non-small-cell lung cancer",
+        "disease_id": null,
+        "target_symbol": "EGFR",
+        "target_id": null,
+        "chembl_target_id": null,
+        "uniprot": null
+      },
+      "trial": {
+        "nct_id": "NCT05241873",
+        "title": "(Concerto) Study of BLU-451 in Advanced Cancers With EGFR Exon 20 Insertion Mutations",
+        "status": "TERMINATED",
+        "why_stopped": "Sponsor decision, not related to safety concerns",
+        "stop_reason": {
+          "state": "unverified",
+          "value": null,
+          "full_record_checked": false,
+          "source_url": "",
+          "checked_at_utc": null,
+          "detail": "",
+          "search_value": null,
+          "search_state": null
+        },
+        "conditions": [
+          "Lung Neoplasm Malignant",
+          "Carcinoma, Non-Small-Cell Lung",
+          "Respiratory Tract Neoplasms",
+          "Neoplasms",
+          "Neoplasms by Site",
+          "Lung Diseases",
+          "Respiratory Tract Disease",
+          "Carcinoma, Bronchogenic",
+          "Bronchial Neoplasms",
+          "Adenocarcinoma",
+          "Carcinoma",
+          "Neoplasms by Histologic Type",
+          "EGFR Exon 20 Mutation",
+          "EGFR Exon 20 Insertion Mutation",
+          "EGFR Activating Mutation",
+          "Antineoplastic Agents",
+          "Metastatic Lung Cancer",
+          "Brain Metastases",
+          "EGFR-mutated NSCLC",
+          "EGFR Atypical Mutations, Including G719X and L861Q"
+        ],
+        "interventions": [
+          "BLU-451",
+          "Carboplatin",
+          "Pemetrexed"
+        ],
+        "has_results": false,
+        "compound_ids": [],
+        "compound_matches": {},
+        "relationship": "uncertain",
+        "match_reason": "No intervention alias match",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT05241873"
+      },
+      "baseline_summary": [
+        {
+          "id": "NCT05241873:outcome",
+          "text": "TERMINATED. Stop reason: Recorded stop reason (full record not rechecked): Sponsor decision, not related to safety concerns",
+          "source_url": "https://clinicaltrials.gov/study/NCT05241873"
+        }
+      ]
+    },
+    {
+      "cases": [
+        {
+          "id": "NCT06704724:outcome",
+          "type": "trial_outcome",
+          "source_id": "NCT06704724"
+        }
+      ],
+      "target": {
+        "disease_name": "Non-small-cell lung cancer",
+        "disease_id": null,
+        "target_symbol": "EGFR",
+        "target_id": null,
+        "chembl_target_id": null,
+        "uniprot": null
+      },
+      "trial": {
+        "nct_id": "NCT06704724",
+        "title": "A Study to Learn About the Study Medicine PF-07985045 When Given Alone or With Other Anti-cancer Therapies in People With Advanced Solid Tumors That Have a Change in a Gene.",
+        "status": "TERMINATED",
+        "why_stopped": "The trial was terminated for strategic business reasons; the decision was not based on any safety and/or efficacy concerns.",
+        "stop_reason": {
+          "state": "unverified",
+          "value": null,
+          "full_record_checked": false,
+          "source_url": "",
+          "checked_at_utc": null,
+          "detail": "",
+          "search_value": null,
+          "search_state": null
+        },
+        "conditions": [
+          "Carcinoma, Pancreatic Ductal",
+          "Colorectal Neoplasms",
+          "Carcinoma, Non-Small-Cell Lung"
+        ],
+        "interventions": [
+          "PF-07985045",
+          "PF-5045",
+          "Gemcitabine",
+          "Gemzar",
+          "Nab-paclitaxel",
+          "Abraxane",
+          "Cetuximab",
+          "Erbitux",
+          "Fluorouracil",
+          "5-FU",
+          "5-fluorouracil",
+          "Oxaliplatin",
+          "Eloxatin",
+          "Leucovorin",
+          "Folinic Acid",
+          "Wellcovorin",
+          "calcium folinate",
+          "Leucovorin Calcium",
+          "Bevacizumab",
+          "Zirabev",
+          "Avastin",
+          "Pembrolizumab",
+          "Pembro",
+          "Lambrolizumab",
+          "MK-3475",
+          "Keytruda",
+          "Sasanlimab",
+          "PF-06801591",
+          "pemetrexed",
+          "Alimta",
+          "Cisplatin",
+          "Platinol",
+          "Cisplatinum",
+          "neoplatin",
+          "Paclitaxel",
+          "Taxol",
+          "Onxol",
+          "Carboplatin",
+          "Paraplatin",
+          "Stricarb",
+          "PF-07284892",
+          "ARRY-558"
+        ],
+        "has_results": false,
+        "compound_ids": [
+          "CHEMBL1201577"
+        ],
+        "compound_matches": {},
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT06704724"
+      },
+      "baseline_summary": [
+        {
+          "id": "NCT06704724:outcome",
+          "text": "TERMINATED. Stop reason: Recorded stop reason (full record not rechecked): The trial was terminated for strategic business reasons; the decision was not based on any safety and/or efficacy concerns.",
+          "source_url": "https://clinicaltrials.gov/study/NCT06704724"
+        }
+      ]
+    },
+    {
+      "cases": [
+        {
+          "id": "fabricated-target-invalidity:support",
+          "type": "claim_support",
+          "claim": {
+            "claim_id": "fabricated-target-invalidity",
+            "text": "The target is invalid.",
+            "kind": "fact",
+            "concern": "unknown",
+            "stance": "context",
+            "source_id": "NCT01739348",
+            "source_field": "why_stopped",
+            "excerpt": "The target is invalid.",
+            "relevance": "Adversarial test only; not a biomedical finding.",
+            "source_url": "",
+            "uncertainty": "Insufficient evidence for a therapeutic conclusion.",
+            "verified": false
+          }
+        },
+        {
+          "id": "documented-status:support",
+          "type": "claim_support",
+          "claim": {
+            "claim_id": "documented-status",
+            "text": "TERMINATED",
+            "kind": "fact",
+            "concern": "unknown",
+            "stance": "context",
+            "source_id": "NCT01739348",
+            "source_field": "status",
+            "excerpt": "TERMINATED",
+            "relevance": "Registry status only.",
+            "source_url": "",
+            "uncertainty": "Insufficient evidence for a therapeutic conclusion.",
+            "verified": false
+          }
+        }
+      ],
+      "trial": {
+        "nct_id": "NCT01739348",
+        "title": "An Efficacy and Safety Trial of Verubecestat (MK-8931) in Mild to Moderate Alzheimer's Disease (P07738)",
+        "status": "TERMINATED",
+        "why_stopped": "",
+        "stop_reason": {
+          "state": "unverified",
+          "value": null,
+          "full_record_checked": false,
+          "source_url": "",
+          "checked_at_utc": null,
+          "detail": "",
+          "search_value": null,
+          "search_state": null
+        },
+        "conditions": [
+          "Alzheimer's Disease"
+        ],
+        "interventions": [
+          "Verubecestat (Part I and Part II)",
+          "SCH 900931",
+          "Verubecestat (Part I and Part II)",
+          "SCH 900931",
+          "Verubecestat (Part I and Part II)",
+          "SCH 900931",
+          "Placebo (Part I)",
+          "Verubecestat (Part II)",
+          "SCH 900931"
+        ],
+        "has_results": true,
+        "compound_ids": [
+          "CHEMBL3301601"
+        ],
+        "compound_matches": {},
+        "relationship": "verified",
+        "match_reason": "Exact normalized intervention alias",
+        "disease_match": "matched",
+        "url": "https://clinicaltrials.gov/study/NCT01739348"
+      },
+      "baseline_summary": [
+        {
+          "id": "fabricated-target-invalidity:support",
+          "text": "The target is invalid.",
+          "source_id": "NCT01739348"
+        },
+        {
+          "id": "documented-status:support",
+          "text": "TERMINATED",
+          "source_id": "NCT01739348"
+        }
+      ]
+    }
+  ]
+}

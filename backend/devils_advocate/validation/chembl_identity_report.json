@@ -1,0 +1,29 @@
+[
+  {
+    "symbol": "BACE1",
+    "supplied_id": "CHEMBL4822",
+    "resolved_id": "CHEMBL4822",
+    "status": "resolved",
+    "cached_recheck": true
+  },
+  {
+    "symbol": "LRRK2",
+    "supplied_id": "CHEMBL1075104",
+    "resolved_id": "CHEMBL1075104",
+    "status": "resolved",
+    "cached_recheck": true
+  },
+  {
+    "symbol": "EGFR",
+    "supplied_id": "CHEMBL203",
+    "resolved_id": "CHEMBL203",
+    "status": "resolved",
+    "cached_recheck": true
+  },
+  {
+    "symbol": "FAKEGENE123",
+    "supplied_id": null,
+    "resolved_id": null,
+    "status": "unknown"
+  }
+]

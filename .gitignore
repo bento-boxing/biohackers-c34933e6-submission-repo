@@ -41,6 +41,9 @@ yarn-error.log*
 next-env.d.ts
 
 # python
+.venv/
+__pycache__/
+.pytest_cache/
 backend/venv/
 backend/__pycache__/
 backend/*.pyc
@@ -54,3 +57,10 @@ backend/venv/
 # python bytecode anywhere
 __pycache__/
 *.pyc
+
+.env
+.env.*
+!.env.example
+
+# workbench runtime (api cache, approvals log)
+backend/runtime/

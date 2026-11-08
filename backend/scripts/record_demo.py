@@ -60,7 +60,7 @@ if __name__ == "__main__":
     ap.add_argument("--disease", default="Parkinson disease")
     ap.add_argument("--n", type=int, default=25)
     ap.add_argument("--rationale", action="store_true",
-                    help="also record the default-weights LLM rationale (needs ANTHROPIC_API_KEY)")
+                    help="also record the default-weights LLM rationale (needs GEMINI_API_KEY, AI_MODEL and AI_ENABLED=true in the root .env)")
     a = ap.parse_args()
     record(a.disease, a.n)
     if a.rationale:
