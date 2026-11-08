@@ -23,6 +23,8 @@ export type ScoutTarget = {
   safety_flags: SafetyFlag[];
   tractability_sm_labels: string[];
   open_targets_url: string;
+  /** Raw TargetEvidence from the server; posted back verbatim for stateless rationale. */
+  evidence?: Record<string, unknown>;
 };
 
 export type ScoutRun = {
