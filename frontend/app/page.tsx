@@ -80,11 +80,7 @@ export default function Discovery() {
 
   return (
     <>
-      <PageTitle
-        eyebrow="TARGET DISCOVERY"
-        title="Start your Hypothesis"
-        description="Describe a disease or indication to retrieve and rank candidate protein targets. Adjust the evidence weights to explore a different ranking."
-      />
+      <PageTitle title="Discover Targets" />
 
       {/* Discovery Input Panel */}
       <section className="panel discovery-form">
@@ -169,7 +165,6 @@ export default function Discovery() {
             <div className="empty-table">
               <div className="empty-symbol">⌘</div>
               <h3>Evidence before commitment.</h3>
-              <p>Your ranked target shortlist will appear here. Choose a disease above to begin.</p>
             </div>
           ) : (
             <div className="table-scroll">
@@ -258,16 +253,13 @@ export default function Discovery() {
           )}
 
           <div className="table-note">
-            Ranking scores summarize retrieved evidence. They are not clinical success probabilities.
+            Ranking scores summarise retrieved evidence. They are not clinical success probabilities.
           </div>
         </section>
 
         {/* Weights Sidebar */}
         <aside className="panel weights-panel">
           <h2>Adjust research ranking </h2>
-          <p>
-            Adjust the evidence weights to suit your research.  The weights are normalized to sum to 1. The formula for the weighted total is shown below.
-          </p>
 
           {(Object.keys(weights) as (keyof Weights)[]).map((key) => (
             <label className="weight-row" key={key}>

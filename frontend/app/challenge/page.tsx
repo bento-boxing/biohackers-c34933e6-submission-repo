@@ -32,11 +32,7 @@ function ChallengeForm() {
 
   return (
     <>
-      <PageTitle
-        eyebrow="02 / SCIENTIFIC CHALLENGE"
-        title="Put the hypothesis under pressure."
-        description="Investigate historical programmes, verify scientific objections, and make uncertainty visible."
-      />
+      <PageTitle title="Challenge your selected target" />
 
       <SelectionBar />
 
@@ -114,7 +110,6 @@ function ChallengeForm() {
       {!target && (
         <details className="panel panel-content manual">
           <summary>Investigate a target directly</summary>
-          <p>Useful for a known protein or when discovery sources are unavailable.</p>
           <div className="manual-fields">
             <label>
               Disease
@@ -161,16 +156,7 @@ function ChallengeForm() {
       {/* Authorize & Launch Investigation Panel */}
       <section className="panel authorize-panel">
         <div>
-          <div className="eyebrow">RESEARCHER-INITIATED INVESTIGATION</div>
           <h2>{mode === 'offline' ? 'Open the recorded investigation.' : 'Challenge this target.'}</h2>
-          <p>
-            {mode === 'offline'
-              ? 'Recorded public evidence with zero paid calls. BACE1 includes clearly labelled historical Gemini output; LRRK2 uses a deterministic proposal.'
-              : `Gemini ${config?.ai.model || 'configuration unavailable'} · ${
-                  config?.ai.thinking_level || 'medium'
-                } thinking · maximum ${config?.ai.max_calls || 5} paid request attempts.`}
-          </p>
-
           {mode === 'live' && (
             <label className="checkbox-row">
               <input
@@ -222,18 +208,6 @@ function ChallengeForm() {
       )}
 
       <RecentJobs />
-
-      {job && !busy && (
-        <button
-          className="text-button"
-          onClick={() => {
-            reset();
-            setPaid(false);
-          }}
-        >
-          Start a fresh investigation (new authorization required for paid AI)
-        </button>
-      )}
 
       {error && (
         <p className="fine-print">
@@ -291,7 +265,6 @@ function ChallengeForm() {
           ))}
 
           <section className="panel panel-content initial-assessment">
-            <div className="eyebrow">INITIAL ASSESSMENT · DETERMINISTIC EVIDENCE RULES</div>
             <p>{investigation.conclusion}</p>
             <Badge tone={mode === 'offline' ? 'recorded' : 'live'}>
               {mode === 'offline' ? 'RECORDED EVIDENCE' : 'LIVE / API CACHE'}
@@ -311,10 +284,6 @@ function ChallengeForm() {
           <EvidenceReport investigation={investigation} />
 
           <div className="next-step">
-            <div>
-              <h3>Turn uncertainty into a testable question.</h3>
-              <p>Review the proposed experiment before recording a research decision.</p>
-            </div>
             <Link className="button primary" href="/experiment">
               Review experiment →
             </Link>

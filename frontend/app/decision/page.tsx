@@ -68,11 +68,7 @@ function DecisionForm() {
 
   return (
     <>
-      <PageTitle
-        eyebrow="04 / RESEARCHER DECISION"
-        title="Evidence informs. You decide."
-        description="Record a considered research decision with a rationale and a preserved audit trail."
-      />
+      <PageTitle title="Evidence informs. You decide." />
 
       <SelectionBar />
 
@@ -86,7 +82,6 @@ function DecisionForm() {
           <div key={job?.job_id} className="report-grid">
             {/* Record Decision Column */}
             <section className="panel panel-content">
-              <div className="eyebrow">HUMAN CHECKPOINT</div>
               <h2>What should happen next?</h2>
 
               <div className="decision-options">
@@ -157,7 +152,6 @@ function DecisionForm() {
 
             {/* Preserved Audit Trail Column */}
             <section className="panel panel-content">
-              <div className="eyebrow">PRESERVED AUDIT TRAIL</div>
               <h2>Decision history</h2>
 
               {!job?.decisions.length ? (
@@ -210,7 +204,6 @@ function DecisionForm() {
           <section className="panel panel-content">
             <div className="panel-heading inline">
               <div>
-                <div className="eyebrow">OPTIONAL / EXISTING TARGET SCOUT WORKFLOW</div>
                 <h2>Protein screening</h2>
                 <p>
                   {approval

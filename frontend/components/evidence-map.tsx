@@ -286,9 +286,7 @@ export function EvidenceMap({ investigation }: { investigation: Investigation })
     <section className={`panel ${styles.mapPanel}`} aria-labelledby="evidence-map-title">
       <div className="panel-heading">
         <div>
-          <div className="eyebrow">FILTERED EVIDENCE NEIGHBORHOOD</div>
           <h2 id="evidence-map-title">Evidence Map</h2>
-          <p>A focused evidence constellation around the selected target. Drag nodes, pan, zoom, or select a node for its source context.</p>
         </div>
         <span className="badge">{graph.nodes.length} nodes</span>
       </div>

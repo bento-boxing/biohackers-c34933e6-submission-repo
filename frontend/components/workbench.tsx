@@ -18,7 +18,7 @@ type State = {
 };
 const Context = createContext<State|null>(null);
 export function useWorkbench() { const state=useContext(Context); if(!state) throw new Error('Workbench context missing'); return state; }
-const steps = [{href:'/',label:'Target discovery',number:'01'}, {href:'/challenge',label:"Devil’s Advocate",number:'02'}, {href:'/experiment',label:'Experimental Challenger',number:'03'}, {href:'/decision',label:'Researcher decision',number:'04'}];
+const steps = [{href:'/',label:'Discover Targets',number:'01'}, {href:'/challenge',label:"Challenge Targets",number:'02'}, {href:'/experiment',label:'Clarify Experiment',number:'03'}, {href:'/decision',label:'Researcher decision',number:'04'}];
 const terminal = new Set(['completed','failed','cancelled','interrupted']);
 
 export function Workbench({children}:{children:React.ReactNode}) {
@@ -120,7 +120,7 @@ export function Workbench({children}:{children:React.ReactNode}) {
   </Context.Provider>;
 }
 
-export function PageTitle({eyebrow,title,description}:{eyebrow:string;title:string;description:string}) {return <div className="page-title"><div className="eyebrow">{eyebrow}</div><h1>{title}</h1><p>{description}</p></div>;}
+export function PageTitle({title}:{title:string}) {return <div className="page-title"><h1>{title}</h1></div>;}
 export function Badge({children,tone='neutral'}:{children:React.ReactNode;tone?:string}){return <span className={`badge ${tone}`}>{children}</span>;}
 export function EmptyState({title,children}:{title:string;children:React.ReactNode}) {return <section className="panel empty-state"><div className="empty-symbol">◎</div><h2>{title}</h2><p>{children}</p><Link className="button secondary" href="/">Open Target Discovery →</Link></section>;}
 export function SelectionBar(){const {target,run,job}=useWorkbench();const input=job?.selection.target_input;return <div className="selection-bar"><span className="target-symbol">{target?.symbol||input?.target_symbol||'No target selected'}</span><span>{run?.disease.name||input?.disease_name}</span><span className="mono muted">{target?.target_id||input?.target_id}</span>{target?.chembl_target_id&&<Badge>{target.chembl_target_id}</Badge>}</div>;}

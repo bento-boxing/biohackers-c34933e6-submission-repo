@@ -21,11 +21,7 @@ export default function Experiment() {
 
   return (
     <>
-      <PageTitle
-        eyebrow="03 / EXPERIMENTAL CHALLENGER"
-        title="One experiment. A clearer decision."
-        description="A proposed study to separate competing explanations, with its assumptions and limitations in view."
-      />
+      <PageTitle title="Clarify Experiment" />
 
       <SelectionBar />
       <Progress />
@@ -62,7 +58,6 @@ export default function Experiment() {
                 : 'DETERMINISTIC PROPOSAL'}
             </Badge>
 
-            <div className="eyebrow section-gap">RESEARCH QUESTION</div>
             <h2>
               <ClaimText text={e.question} ai={report.investigation.ai} />
             </h2>
@@ -96,7 +91,6 @@ export default function Experiment() {
           <div className="report-grid">
             {/* Study Design Column */}
             <section className="panel panel-content">
-              <div className="eyebrow">STUDY DESIGN</div>
               <h2>Model &amp; measurements</h2>
 
               <h3>Proposed model</h3>
@@ -115,7 +109,6 @@ export default function Experiment() {
 
             {/* Interpretation Column */}
             <section className="panel panel-content">
-              <div className="eyebrow">INTERPRETATION</div>
               <h2>Possible results &amp; implications</h2>
               <Bullets items={e.possible_results} ai={report.investigation.ai} />
 
@@ -151,10 +144,6 @@ export default function Experiment() {
           />
 
           <div className="next-step">
-            <div>
-              <h3>The researcher makes the decision.</h3>
-              <p>Record your rationale. Protein screening remains gated by explicit approval.</p>
-            </div>
             <Link href="/decision" className="button primary">
               Record decision →
             </Link>
