@@ -155,10 +155,10 @@ function buildGraph(investigation: Investigation, enabled: Set<Kind>) {
       label,
       type: 'straight',
       animated: false,
-      labelStyle: { fill: '#9db0c6', fontSize: 10 },
-      labelBgStyle: { fill: '#111a25', fillOpacity: 0.92 },
+      labelStyle: { fill: '#232C33', fontSize: 10 },
+      labelBgStyle: { fill: '#E8EEF2', fillOpacity: 0.96 },
       labelBgPadding: [4, 2],
-      style: { stroke: '#5f748a', strokeWidth: 1.25 },
+      style: { stroke: '#232C3380', strokeWidth: 1.25 },
     });
   };
   const claims = claimItems(investigation).slice(0, 6);
@@ -313,8 +313,8 @@ export function EvidenceMap({ investigation }: { investigation: Investigation })
           edgesFocusable
           proOptions={{ hideAttribution: true }}
         >
-          <Background gap={20} size={1} color="#263749" />
-          <MiniMap pannable zoomable nodeColor={(node) => ({ target: '#84dec4', compound: '#9eb8ea', trial: '#e7bc78', publication: '#b7a9e8', claim: '#ef9fb8' })[node.data.kind as Kind] || '#71869e'} />
+          <Background gap={20} size={1} color="#232C3322" />
+          <MiniMap pannable zoomable nodeColor={(node) => ({ target: '#3D78D8', compound: '#C7D3DD', trial: '#E8EEF2', publication: '#3D78D8', claim: '#C7D3DD' })[node.data.kind as Kind] || '#E8EEF2'} />
           <Controls showInteractive={false} />
         </ReactFlow>
       </div>

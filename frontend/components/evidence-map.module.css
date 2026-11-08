@@ -9,7 +9,7 @@
   flex-wrap: wrap;
   padding: 14px 25px;
   border-bottom: 1px solid var(--line);
-  background: #101822;
+  background: var(--surface-soft);
 }
 
 .filter {
@@ -17,9 +17,9 @@
   align-items: center;
   gap: 6px;
   padding: 5px 9px;
-  border: 1px solid #35465a;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  color: #aebed0;
+  color: #232c33;
   font-size: 10px;
   cursor: pointer;
 }
@@ -38,18 +38,18 @@
 
 .canvas {
   height: 590px;
-  background: radial-gradient(circle at center, #19333a 0, #142431 22%, #0c131c 61%);
+  background: var(--surface-soft);
 }
 
 .node {
   width: 136px;
   height: 136px;
   padding: 17px 13px;
-  border: 1px solid #44576d;
+  border: 1px solid #232c3355;
   border-radius: 50%;
-  background: #172230;
-  color: #e7eef6;
-  box-shadow: 0 6px 20px #0006;
+  background: #e8eef2;
+  color: var(--text);
+  box-shadow: 0 3px 12px #232c3318;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,8 +61,8 @@
 .selected {
   scale: 1.2;
   border-width: 2px;
-  border-color: #4f8f7b;
-  box-shadow: 0 0 0 7px #84dec414, 0 0 34px #84dec438, 0 8px 22px #0008;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px #3d78d855, 0 0 24px #3d78d866, 0 5px 16px #232c3320;
   transition:
     scale 0.22s cubic-bezier(0.2, 0.9, 0.25, 1.2),
     border-width 0.22s ease,
@@ -84,14 +84,14 @@
   max-width: 104px;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #9eb0c3;
+  color: var(--muted);
   font-size: 8px;
 }
 
 .nodeKind {
   display: block;
   margin-bottom: 4px;
-  color: #9eb0c3;
+  color: var(--muted);
   font-size: 8px;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -105,60 +105,60 @@
 }
 
 .target {
-  border-color: #4f8f7b;
-  background: #17322d;
-  box-shadow: 0 0 0 7px #84dec414, 0 0 34px #84dec438, 0 8px 22px #0008;
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 6px #3d78d844, 0 0 24px #3d78d855, 0 5px 16px #232c331a;
   animation: evidenceBloom 0.5s cubic-bezier(0.2, 0.9, 0.25, 1.15) var(--enter-delay) both, targetPulse 3.5s ease-in-out 0.6s infinite;
 }
 
 .target .nodeKind,
 .target.filter,
 .target.detailKind {
-  color: #84dec4;
+  color: #232c33;
 }
 
 .compound {
-  border-color: #526c9a;
-  background: #1a263b;
+  border-color: #232c3355;
+  background: #c7d3dd;
 }
 
 .compound .nodeKind,
 .compound.filter,
 .compound.detailKind {
-  color: #a9c3f5;
+  color: #232c33;
 }
 
 .trial {
-  border-color: #866a3a;
-  background: #322b20;
+  border-color: #2e2f2f77;
+  background: #e8eef2;
 }
 
 .trial .nodeKind,
 .trial.filter,
 .trial.detailKind {
-  color: #e7bc78;
+  color: #2e2f2f;
 }
 
 .publication {
-  border-color: #715c9e;
-  background: #29233a;
+  border-color: #3d78d899;
+  background: #e8eef2;
 }
 
 .publication .nodeKind,
 .publication.filter,
 .publication.detailKind {
-  color: #c2b6ee;
+  color: #232c33;
 }
 
 .claim {
-  border-color: #8d586b;
-  background: #35222c;
+  border-color: #2e2f2f77;
+  background: #c7d3dd;
 }
 
 .claim .nodeKind,
 .claim.filter,
 .claim.detailKind {
-  color: #f0a2b5;
+  color: #2e2f2f;
 }
 
 .detail {
@@ -167,7 +167,7 @@
   gap: 14px;
   padding: 17px 25px;
   border-top: 1px solid var(--line);
-  background: #131d29;
+  background: var(--surface);
 }
 
 .detailKind {
@@ -186,7 +186,7 @@
 
 .detail p {
   margin: 2px 0 0;
-  color: #aebdcd;
+  color: #2e2f2f;
   font-size: 11px;
   line-height: 1.65;
 }
@@ -227,12 +227,41 @@
 @keyframes targetPulse {
   0%,
   100% {
-    box-shadow: 0 0 0 7px #84dec414, 0 0 30px #84dec430, 0 8px 22px #0008;
+    box-shadow: 0 0 0 6px #3d78d844, 0 0 22px #3d78d855, 0 5px 16px #232c331a;
   }
 
   50% {
-    box-shadow: 0 0 0 13px #84dec40b, 0 0 46px #84dec450, 0 8px 22px #0008;
+    box-shadow: 0 0 0 10px #3d78d833, 0 0 32px #3d78d866, 0 5px 16px #232c331a;
   }
+}
+
+.mapPanel :global(.react-flow__controls) {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px #232c3318;
+}
+
+.mapPanel :global(.react-flow__controls-button) {
+  width: 28px;
+  height: 28px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.mapPanel :global(.react-flow__controls-button:hover) {
+  background: var(--surface-muted);
+}
+
+.mapPanel :global(.react-flow__controls-button svg) {
+  fill: #232c33;
+}
+
+.mapPanel :global(.react-flow__minimap) {
+  overflow: hidden;
+  background: var(--surface) !important;
+  border: 1px solid var(--line);
+  border-radius: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {

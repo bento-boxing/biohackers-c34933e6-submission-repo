@@ -2,6 +2,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { api } from '@/lib/api';
 import { ClaimText } from './evidence-trace';
 import type { AIReport } from '@/lib/contracts';
@@ -32,6 +33,7 @@ export function Workbench({children}:{children:React.ReactNode}) {
   const [error,setError]=useState('');
   const [submitting,setSubmitting]=useState(false);
   const [hydrated,setHydrated]=useState(false);
+  const [sidebarCollapsed,setSidebarCollapsed]=useState(false);
   const requestId=useRef<string|null>(null);
   const generation=useRef(0);
   const submittingRef=useRef(false);
@@ -103,13 +105,33 @@ export function Workbench({children}:{children:React.ReactNode}) {
   const cancel=async()=>{if(jobId){await api(`/api/investigations/${jobId}/cancel`,mode,{method:'POST'});await refresh();}};
   const resume=async(identifier:string)=>{try{clear();const current=generation.current;const updated=await api<Job>(`/api/investigations/${identifier}`,mode);let restored:ScoutRun|null=null;if(updated.selection.run_id)restored=await api<ScoutRun>(`/api/workbench/runs/${updated.selection.run_id}`,mode);if(current!==generation.current)return;setRunState(restored);setTarget(restored?.targets.find(t=>t.target_id===updated.selection.target_input.target_id)||null);setWeightsState(updated.weights);setJob(updated);}catch(e){setError((e as Error).message);}};
   return <Context.Provider value={{mode,setMode,run,setRun,weights,setWeights,target,select,job,config,error,setError,busy:active||submitting,challenge,cancel,refresh,refreshConfig,reset:clear,resume}}>
-    <div className="workspace">
+    <div className={`workspace${sidebarCollapsed?' sidebar-collapsed':''}`}>
       <aside className="sidebar">
-        <Link href="/" className="brand"><span className="brand-symbol">✳</span><span>AGENTVERSE<small>RESEARCH WORKBENCH</small></span></Link>
+        <div className="sidebar-header">
+          <Link href="/" className="brand" aria-label="AgentVerse Research Workbench">
+            <Image
+              className="brand-logo"
+              src="/agentverse-logo.png"
+              alt=""
+              width={40}
+              height={40}
+              priority
+            />
+            <span className="brand-copy">AGENTVERSE<small>RESEARCH WORKBENCH</small></span>
+          </Link>
+          <button
+            type="button"
+            className="sidebar-toggle"
+            aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            aria-expanded={!sidebarCollapsed}
+            aria-controls="workbench-navigation"
+            onClick={() => setSidebarCollapsed((collapsed) => !collapsed)}
+          >
+            {sidebarCollapsed ? '›' : '‹'}
+          </button>
+        </div>
         <div className="nav-label">TARGET VALIDATION</div>
-        <nav>{steps.map(s=><Link key={s.href} href={s.href} className={pathname===s.href?'nav-item selected':'nav-item'}><span>{s.number}</span>{s.label}</Link>)}</nav>
-        <div className="sidebar-note"><span className="status-dot"/> Human judgment, supported.<p>Trace every claim.<br/>Challenge every assumption.</p></div>
-        <div className="sidebar-foot">AGENTVERSE 2026<span>Biotech research prototype</span></div>
+        <nav id="workbench-navigation">{steps.map(s=><Link key={s.href} href={s.href} title={s.label} aria-label={s.label} className={pathname===s.href?'nav-item selected':'nav-item'}><span className="nav-number">{s.number}</span><span className="nav-text">{s.label}</span></Link>)}</nav>
       </aside>
       <div className="main-frame">
         <header className="topbar"><span>Research workspace <span className="muted">/ Target validation</span></span><div className="top-actions"><span className={`badge ${mode==='live'?'live':'recorded'}`}>{mode==='live'?'LIVE DATA':'RECORDED DEMO'}</span><label className="mode-switch">Data source<select aria-label="Research data mode" value={mode} onChange={e=>setMode(e.target.value as Mode)} disabled={submitting}><option value="offline">Recorded demo</option><option value="live">Live APIs</option></select></label></div></header>
