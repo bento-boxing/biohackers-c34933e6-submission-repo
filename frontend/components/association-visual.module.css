@@ -89,7 +89,7 @@
 
 .entity small,
 .ontology small {
-  color: #656D88;
+  color: var(--muted);
   font-size: 8px;
   font-weight: 700;
   letter-spacing: .8px;
@@ -216,7 +216,7 @@
 .sourceList small {
   display: block;
   margin-top: 5px;
-  color: #656D88;
+  color: var(--muted);
   font-size: 9px;
   line-height: 1.5;
 }
@@ -242,7 +242,7 @@
 .noSources,
 .sourceLimit {
   margin: 12px 0 0;
-  color: #656D88;
+  color: var(--muted);
   font-size: 10px;
 }
 
@@ -311,7 +311,7 @@
 
 .caveat {
   margin: 10px 0 0;
-  color: #656D88;
+  color: var(--muted);
   font-size: 9px;
   line-height: 1.6;
 }

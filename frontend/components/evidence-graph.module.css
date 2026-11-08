@@ -289,7 +289,7 @@
 
 .sourceList li p {
   margin: 6px 0 0;
-  color: #656D88;
+  color: var(--muted);
   font-size: 10px;
 }
 

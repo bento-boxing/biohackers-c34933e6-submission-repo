@@ -19,7 +19,7 @@ type State = {
 };
 const Context = createContext<State|null>(null);
 export function useWorkbench() { const state=useContext(Context); if(!state) throw new Error('Workbench context missing'); return state; }
-const steps = [{href:'/',label:'Target discovery',number:'01'}, {href:'/challenge',label:"Devil’s Advocate",number:'02'}, {href:'/experiment',label:'Experimental Challenger',number:'03'}, {href:'/decision',label:'Researcher decision',number:'04'}];
+const steps = [{href:'/',label:'Target Discovery',number:'01'}, {href:'/challenge',label:"Target Challenger",number:'02'}, {href:'/experiment',label:'Experimental Challenger',number:'03'}, {href:'/decision',label:'Researcher Decision',number:'04'}];
 
 export function Workbench({children}:{children:React.ReactNode}) {
   // Live APIs by default; the recorded demo (no network, two pre-captured investigations) is opt-in.
@@ -78,11 +78,10 @@ export function Workbench({children}:{children:React.ReactNode}) {
     <div className="workspace">
       <aside className="sidebar">
         <Link href="/" className="brand"><Image className="brand-symbol" src="/site-logo.png" alt="" aria-hidden="true" width={40} height={40}/><span>AGENTVERSE<small>RESEARCH WORKBENCH</small></span></Link>
-        <div className="nav-label">TARGET VALIDATION</div>
         <nav>{steps.map(s=><Link key={s.href} href={s.href} className={pathname===s.href?'nav-item selected':'nav-item'}><span>{s.number}</span>{s.label}</Link>)}</nav>
       </aside>
       <div className="main-frame">
-        <header className="topbar"><span>Research workspace <span className="muted">/ Target validation</span></span><div className="top-actions"><span className={`badge ${mode==='live'?'live':'recorded'}`}>{mode==='live'?'LIVE DATA':'RECORDED DEMO'}</span><label className="mode-switch">Data source<select aria-label="Research data mode" value={mode} onChange={e=>setMode(e.target.value as Mode)} disabled={submitting}><option value="offline">Recorded demo</option><option value="live">Live APIs</option></select></label></div></header>
+        <header className="topbar"><div className="top-actions"><span className={`badge ${mode==='live'?'live':'recorded'}`}>{mode==='live'?'LIVE DATA':'RECORDED DEMO'}</span><label className="mode-switch">Data source<select aria-label="Research data mode" value={mode} onChange={e=>setMode(e.target.value as Mode)} disabled={submitting}><option value="offline">Recorded demo</option><option value="live">Live APIs</option></select></label></div></header>
         <main>{error&&<div role="alert" className="notice error">{error}<button className="text-button" onClick={()=>setError('')}>Dismiss</button></div>}{children}</main>
         <footer>Public research evidence only <span>ChEMBL · Open Targets · Europe PMC · ClinicalTrials.gov</span><span>Research use · Expert review required</span></footer>
       </div>
