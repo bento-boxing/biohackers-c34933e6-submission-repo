@@ -75,8 +75,9 @@ def run_investigation(payload: dict, *, investigator=investigate_target, ai_reas
             def past_deadline():
                 return time.monotonic() > deadline - 5
 
+            # Each Gemini call is also clamped inside the runner to the time left before `deadline`.
             result.ai = ai_reasoner(result, settings=settings, on_progress=progress, should_cancel=past_deadline,
-                                    prior_art_client=client)
+                                    prior_art_client=client, deadline=deadline)
             if result.ai is not None and not calls:
                 calls[:] = [c.model_dump(mode='json') for c in result.ai.calls]
         return {'investigation': result.model_dump(mode='json'),

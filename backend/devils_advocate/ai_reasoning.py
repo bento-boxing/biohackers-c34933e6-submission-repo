@@ -265,7 +265,7 @@ def validate_ai_claim(claim: AIClaim, bundle: dict) -> list[str]:
         objections.append('Relevance and uncertainty must be explicit.')
     return list(dict.fromkeys(objections))
 
-def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = None, runner=None, on_progress=None, should_cancel=None, prior_art_client=None, on_stage=None) -> AIReport:
+def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = None, runner=None, on_progress=None, should_cancel=None, prior_art_client=None, on_stage=None, deadline=None) -> AIReport:
     settings = settings or load_ai_settings()
     report = AIReport(enabled=settings.enabled, provider=settings.provider, model=settings.model, thinking_level=settings.thinking_level)
     # This guard runs before constructing a runner or SDK client.
@@ -296,7 +296,7 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
     report.sent_source_ids = list(bundle['sources'])
     report.source_urls = {key: value['url'] for key, value in bundle['sources'].items()}
     owned = runner is None
-    runner = runner or GeminiRunner(settings, on_progress=on_progress, should_cancel=should_cancel)
+    runner = runner or GeminiRunner(settings, on_progress=on_progress, should_cancel=should_cancel, deadline=deadline)
     report.calls = runner.calls
     try:
         payload = {'evidence': bundle, 'initial_rule_based_assessment': result.conclusion}

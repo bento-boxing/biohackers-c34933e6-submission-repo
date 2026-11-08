@@ -1,3 +1,4 @@
+import time
 from unittest.mock import Mock
 
 import pytest
@@ -58,3 +59,48 @@ def test_gemini_phase_is_cancelled_and_clamped_when_the_request_deadline_is_near
     kwargs = reasoner.call_args.kwargs
     assert kwargs['should_cancel']() is True  # deadline already passed: no paid call may start
     assert kwargs['settings'].timeout_seconds == 5  # clamped to the floor, never 120 s past the deadline
+
+
+def _runner_with_fake_client(deadline):
+    from types import SimpleNamespace
+    from pydantic import BaseModel, SecretStr
+    from devils_advocate.ai_client import GeminiRunner
+    from devils_advocate.ai_config import AISettings
+
+    class Tiny(BaseModel):
+        ok: bool
+
+    seen = {}
+
+    def create(**kwargs):
+        seen.update(kwargs)
+        return SimpleNamespace(status='completed', output_text='{"ok": true}', usage=None)
+
+    settings = AISettings(enabled=True, model='gemini-test', api_key=SecretStr('k'), timeout_seconds=120)
+    runner = GeminiRunner(settings, deadline=deadline)
+    runner.client = SimpleNamespace(interactions=SimpleNamespace(create=create), close=lambda: None)
+    return runner, Tiny, seen
+
+
+def test_gemini_call_timeout_is_clamped_to_the_time_left_before_the_request_deadline():
+    runner, schema, seen = _runner_with_fake_client(deadline=time.monotonic() + 40)
+    assert runner.generate('role', 'instruction', {}, schema).ok is True
+    assert 30 <= seen['timeout'] <= 35  # 40 s left minus a safety margin, never the 120 s default
+
+
+def test_gemini_call_is_refused_when_the_deadline_is_too_close_to_finish():
+    from devils_advocate.ai_client import AIError
+    runner, schema, seen = _runner_with_fake_client(deadline=time.monotonic() + 10)
+    with pytest.raises(AIError, match='deadline'):
+        runner.generate('role', 'instruction', {}, schema)
+    assert seen == {} and runner.calls == []  # nothing billed
+
+
+def test_investigation_passes_the_request_deadline_to_the_reasoner():
+    target = TargetInput.model_validate(EGFR)
+    investigator = Mock(return_value=Investigation(target=target, mode='live', resolved_target_id='CHEMBL203', resolution_status='resolved'))
+    reasoner = Mock(return_value=None)
+    run_investigation(payload(EGFR, 'live', use_ai=True), investigator=investigator, ai_reasoner=reasoner,
+                      budget_seconds=5, request_budget_seconds=100)
+    deadline = reasoner.call_args.kwargs['deadline']
+    assert 90 < deadline - time.monotonic() <= 100
