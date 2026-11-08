@@ -94,7 +94,7 @@ export function Workbench({children}:{children:React.ReactNode}) {
   return <Context.Provider value={{mode,setMode,run,setRun,weights,setWeights,target,select,job,config,error,setError,busy:submitting,progress,challenge,addDecision,refreshConfig,reset:clear,screening,setScreening}}>
     <div className="workspace">
       <aside className="sidebar">
-        <Link href="/" className="brand"><Image className="brand-symbol" src="/site-logo.png" alt="" aria-hidden="true" width={40} height={40}/><span>LEADS<small>RESEARCH WORKBENCH</small></span></Link>
+        <Link href="/" className="brand"><Image className="brand-symbol" src="/site-logo.png" alt="" aria-hidden="true" width={40} height={40} unoptimized/><span>LEADS<small>RESEARCH WORKBENCH</small></span></Link>
         <nav>{steps.map(s=><Link key={s.href} href={s.href} className={pathname===s.href?'nav-item selected':'nav-item'}><span>{s.number}</span>{s.label}</Link>)}</nav>
       </aside>
       <div className="main-frame">
