@@ -184,3 +184,23 @@ def test_rationale_endpoint_passes_offline_flag_for_cache_only_client(api, monke
     run = scout(api).get_json()
     api.post("/api/rationale", json={"run_id": run["run_id"], "weights": run["default_weights"]})
     assert seen["offline"] is True  # the test fixture's client is cache-only
+
+
+def test_scout_targets_include_raw_evidence(api):
+    target = scout(api).get_json()["targets"][0]
+    assert "datatype_scores" in target["evidence"] and target["evidence"]["symbol"] == target["symbol"]
+
+
+def test_rationale_rebuilds_result_from_posted_run(api, monkeypatch):
+    from dataclasses import replace
+    from pipeline import api as api_mod
+
+    def fake_explain(result, **kw):
+        return replace(result, targets=[replace(t, rationale="r", evidence_strength="weak") for t in result.targets])
+
+    monkeypatch.setattr(api_mod, "explain", fake_explain)
+    run = scout(api).get_json()
+    api_mod.RUNS.clear()  # simulate a different (cold) server instance
+    r = api.post("/api/rationale", json={"run_id": run["run_id"], "run": run, "weights": run["default_weights"]})
+    assert r.status_code == 200, r.get_json()
+    assert r.get_json()["rationales"][0]["symbol"] == run["targets"][0]["symbol"]
