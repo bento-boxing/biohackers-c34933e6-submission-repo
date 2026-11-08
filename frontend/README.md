@@ -27,7 +27,7 @@ clock, plus serialized input bytes (not tokens). The UI displays the current
 public source/API path, elapsed request time, completed requests, observed
 retries where available, cache hits, and a durations table. Historical missing
 timings display “Not recorded”. Safe retrieval diagnostics are also appended to
-`devils_advocate/runtime/retrieval-events.jsonl`; query parameters and secrets
+`backend/runtime/` (live API cache); query parameters and secrets
 are excluded. Requests retain 5-second connection / 20-second read timeouts,
 at most three attempts, and bounded backoff. A 300-second retrieval phase budget
 is checked between requests and after a response: it does not interrupt an
@@ -86,7 +86,7 @@ Two terminals:
 ```powershell
 # Terminal 1: Flask + persistent local job worker
 .\scripts\workbench-backend.cmd
-# Equivalent: .\.venv\Scripts\python.exe -m devils_advocate.server --port 5050
+# Equivalent: .\.venv\Scripts\python.exe -m devils_advocate.server --port 5050  (run from backend/)
 ```
 
 ```powershell
@@ -154,17 +154,15 @@ timeout. Source retrieval remains deterministic; the existing three Gemini
 roles, one revision round and citation checks are reused. No new paid test was
 required to validate this UI migration; network/AI failures are tested with mocks.
 
-Jobs return quickly, then the frontend polls their actual backend stage and
-completed/attempted call counts. No invented percentage is displayed. Model
-calls are not held open through a frontend proxy request. Failed AI reasoning
-preserves retrieved evidence and a labelled deterministic fallback proposal.
+An investigation is one request: the page shows an indeterminate "investigating" state until the
+finished report arrives (typically one to three minutes live; instant in recorded mode). No
+invented percentage is displayed. Failed AI reasoning preserves retrieved evidence and a labelled
+deterministic fallback proposal; a failed retrieval returns an explicit error, never recorded data.
 
-**Stop after current call** prevents subsequent calls once cancellation is
-observed. An in-flight provider request cannot reliably be recalled and may
-finish/be billed. Refreshing or navigating does not terminate a job. Recent
-investigations can be resumed from the Challenge page. Mode/target changes clear
-the visible report, experiment, approval and decision form; old asynchronous
-responses cannot overwrite the newly selected target.
+There is no cancel button: a request in flight runs to its bounded completion. Refreshing the page
+restores the last run, report and decisions from `localStorage`. Mode/target changes clear the
+visible report, experiment, approval and decision form; old asynchronous responses cannot overwrite
+the newly selected target.
 
 ## ChEMBL fix and measured diagnostics
 
@@ -197,28 +195,21 @@ returned unknown. See `validation/chembl_identity_report.json` for exact outcome
 
 - `backend/app.py` and `backend/pipeline/api.py`: original Flask service and
   Scout, approvals and screen contracts. Scientific ranking functions are intact.
-- `devils_advocate/server.py`: thin Flask integration, source-mode boundaries,
-  nested Scout adapter, durable runs and researcher decisions; no FastAPI duplicate.
-- `devils_advocate/job_store.py`: SQLite jobs, idempotency keys, worker leases,
-  persisted Scout runs and decision audit.
-- `devils_advocate/job_worker.py`: background deterministic retrieval + existing
-  Gemini workflow, cancellation between paid requests and recorded playback.
+- `backend/devils_advocate/server.py`: thin, stateless Flask integration, source-mode
+  boundaries, nested Scout adapter, signed approvals; no FastAPI duplicate.
+- `backend/devils_advocate/investigation.py`: runs deterministic retrieval + the existing
+  Gemini workflow (or recorded playback) to completion inside the request.
 - `frontend/`: App Router pages, accessible native controls and reusable report
   components. Ranking calls the existing `lib/score.ts` helpers unchanged.
 
 | Endpoint | Purpose |
 |---|---|
-| POST `/api/scout` | Existing nested Scout response, persisted run and cache provenance |
+| POST `/api/scout` | Existing nested Scout response with raw evidence and cache provenance |
 | GET `/api/approvals` | Existing mode-specific researcher approvals |
-| POST `/api/screen` | Existing pipeline, only after an actual researcher approval |
-| POST `/api/shortlists` | Existing approved-target shortlist API |
+| POST `/api/screen` | Existing pipeline, only with a server-signed researcher approval |
 | GET `/api/workbench/config` | Public model/provider/call-cap settings; no key |
-| GET `/api/workbench/runs/:id` | Restore a persisted Scout response |
-| POST `/api/investigations` | Validate source selection/consent, enqueue once |
-| GET `/api/investigations/:id` | Status, progress, result and decision history |
-| GET `/api/investigations` | Recent mode-specific jobs for recovery |
-| POST `/api/investigations/:id/cancel` | Cooperative cancellation |
-| POST `/api/research-decisions` | Rationale, decision and explicit screening confirmation |
+| POST `/api/investigations` | Validate source selection/consent, run the investigation, return the report |
+| POST `/api/research-decisions` | Rationale, decision and explicit screening confirmation; issues the signed approval |
 
 The nested Scout response is flattened by the existing adapter module:
 `flatten_scout_selection(run, symbol)`. Target identity is server-authoritative;
@@ -227,25 +218,20 @@ Original association, weighted score, components, safety flags, PMIDs,
 Ensembl/ChEMBL/UniProt IDs and run/cache provenance are retained separately.
 Association and ranking scores are never treated as success probabilities.
 
-POST investigations requires a stable `Idempotency-Key`. SQLite transactionally
-deduplicates retries and active matching target investigations. Keys cannot be
-reused for a different request. Duplicate UI clicks are also blocked. Browser
-refresh restores the job ID and original Scout run, while recent jobs provide a
-second recovery path. Server restart recovers queued jobs; an expired running
-lease becomes **interrupted** and is never automatically replayed, because a
-previous provider request may already have completed. A new paid attempt requires
-fresh researcher action. Decisions persist across restarts and are idempotent.
+The server keeps no state between requests, so it runs unchanged on a laptop and on Vercel.
+An investigation runs to completion inside one request (bounded by the retrieval budget and the
+Gemini timeout). The browser keeps the Scout run, the report and the decision history in
+`localStorage` and restores them on refresh without any backend call. Duplicate clicks are blocked
+in the UI while a request is in flight. Screening requires the approval object the server returned
+from a Researcher Decision; it is HMAC-signed (`WORKBENCH_SECRET`) and any edit invalidates it.
 
-Runtime data stay under ignored `devils_advocate/runtime/`: SQLite plus separate
-live/offline approval and shortlist JSONL files. The existing Scout approval
-handler recomputes weighted scores before approval. Direct approval creation
-through this integration is gated through Researcher Decision; the original
-standalone Scout API remains unchanged.
+Runtime data (live HTTP cache, best-effort approval log) stay under ignored `backend/runtime/`
+locally and `/tmp` on Vercel. The downloadable research report is the durable record.
 
 ## Validation commands
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest devils_advocate/tests backend/tests -q
+.\.venv\Scripts\python.exe -m pytest tests devils_advocate/tests -q  (from backend/)
 npm.cmd --prefix frontend run typecheck
 npm.cmd --prefix frontend run lint
 npm.cmd --prefix frontend run build
@@ -273,13 +259,10 @@ excluded from job payloads, reports, Git and browser responses. The new frontend
 forwards Scout's optional Gemini rationale endpoint (`/api/rationale`), which is cache-only in recorded mode. All decisions and
 experiments still require researcher review; no experiment executes automatically.
 
-SQLite is durable, not an in-memory job store. This is a **single-machine local
-MVP**, not a production deployment: add authentication/authorization, protected
-storage, a production WSGI host, retention policies and a managed worker system
-before exposing it to others or scaling to multiple machines. Approval JSONL
-and SQLite writes do not form a distributed transaction; local serialized
-decision handling is suitable for the hackathon, not a multi-host service.
-Long source retrievals and in-flight model calls can remain slow or fail.
+This is a **hackathon prototype**, not a production deployment: there is no authentication, the
+server-side audit log is ephemeral, and the browser is the only store of runs and decisions. Add
+authentication/authorization, durable storage and retention policies before exposing it to others.
+Long source retrievals and in-flight model calls can remain slow or fail; the UI reports the failure.
 
 Recorded/lexically matched evidence is not proof of scientific applicability.
 Full-record trial checks, exact citation checks and an LLM adjudicator do not

@@ -7,13 +7,13 @@ No Target Scout dependency or patient records. Deterministic and offline modes
 need no LLM key; optional genuine Gemini reasoning uses the repository-root `.env`.
 The existing backend and teammate files remain separate.
 
-## Run locally (PowerShell, repository root)
+## Run locally (PowerShell, from `backend/`)
 
 Python 3.11+ is required. A local `.venv` is ignored by Git.
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r devils_advocate/requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt -r devils_advocate/requirements.txt
 .\.venv\Scripts\python.exe -m streamlit run devils_advocate/demo_app.py
 ```
 

@@ -4,8 +4,8 @@ Evidence-ranked drug targets with a human checkpoint, then compound screening fo
 A **Next.js + Flask** monorepo built for Agentverse 2026.
 
 ```
-/                   ← Next.js 16 frontend (TypeScript + Tailwind): app/, lib/
-/backend            ← Flask API + the Python pipeline: backend/pipeline/
+/frontend           ← Next.js 16 research workbench (TypeScript + Tailwind)
+/backend            ← Flask API: Target Scout pipeline + Target Challenger (backend/devils_advocate/)
 ```
 
 ## What it does
@@ -40,10 +40,11 @@ approved-drug flags. A second checkpoint writes a shortlist to `backend/runs/sho
 ## Repository layout
 
 ```
-frontend/          Next.js 16 research workbench (the only UI): discovery → challenge → experiment → decision
-devils_advocate/   Target Challenger: Flask server on :5050 that wraps the Scout API, plus the evidence pipeline
-backend/           Target Scout pipeline + Flask API (library used by devils_advocate.server; runnable alone on :5000)
-scripts/           demo.sh (bash) and Windows .cmd launchers
+frontend/                   Next.js 16 research workbench (the only UI): discovery → challenge → experiment → decision
+backend/app.py              The one Flask app (local :5050 and the Vercel Function): stateless workbench server
+backend/pipeline/           Target Scout: evidence retrieval, transparent ranking, approvals, screening
+backend/devils_advocate/    Target Challenger: evidence pipeline, Gemini reasoning, experiment designer, server.py
+scripts/                    demo.sh (bash) and Windows .cmd launchers
 ```
 
 ## Getting started
@@ -52,10 +53,9 @@ scripts/           demo.sh (bash) and Windows .cmd launchers
 ```bash
 cd backend
 python -m venv venv && source venv/bin/activate      # Windows: venv\Scripts\activate
-pip install -r requirements.txt -r ../devils_advocate/requirements.txt
-pytest                                               # Target Scout tests, offline
-cd .. && python -m pytest devils_advocate/tests -q   # Challenger + workbench tests, offline
-python -m devils_advocate.server --port 5050         # the server the UI talks to
+pip install -r requirements.txt
+python -m pytest tests devils_advocate/tests -q      # Scout + Challenger + workbench tests, offline
+python -m devils_advocate.server --port 5050         # the server the UI talks to (same app as app.py)
 ```
 
 ### Frontend
@@ -70,32 +70,37 @@ npm run dev         # http://localhost:3000, proxies /api/* to :5050
 
 ### AI configuration (one set of keys for everything)
 Both the Scout ranking rationale and the Challenger's reasoning use Gemini, configured in the
-repository-root `.env` (see `devils_advocate/ai.env.example`): `GEMINI_API_KEY`, `AI_MODEL`,
+repository-root `.env` (see `backend/devils_advocate/ai.env.example`): `GEMINI_API_KEY`, `AI_MODEL`,
 `AI_ENABLED=true`, `AI_THINKING_LEVEL`. No Anthropic key is used anywhere. In recorded/offline mode
 no paid call is ever made.
 
 ## Deploying to Vercel
 
-The repo is a two-service Vercel project (`vercel.json`): the Next.js workbench in `frontend/` and a
-Python API service, with `/api/*` routed to the API. **Current limitation:** the API service points
-at the Target Scout Flask app in `backend/`, which works as a Vercel Function. The workbench's
-challenge, experiment and decision pages need `devils_advocate.server`, which runs a background
-worker and SQLite and therefore needs a long-lived host (Railway, Render, Fly). Until that is
-deployed and `/api/*` is rewritten to it, only the discovery page works on Vercel.
+The whole workbench runs on Vercel alone (`vercel.json`, framework preset **Services**): the Next.js
+app in `frontend/` and a Python Function built from `backend/` (`app:app`), with `/api/*` routed to
+the Function. There is no database, queue or second host.
+
+**How it stays stateless.** Vercel Functions keep nothing between requests, so the server holds no
+state: an investigation runs to completion inside one request and returns the finished report; the
+browser keeps the scout run, report and decisions in `localStorage`; a screening request carries the
+HMAC-signed approval object the server issued. Audit logs written under `/tmp` are best-effort only.
+The downloadable research report is the durable record.
 
 - **Only the `prod` branch deploys.** `git.deploymentEnabled` allows `prod` and blocks every other
   branch (`**` also covers names with slashes such as `feat/x`). In the Vercel dashboard set
   *Settings → Git → Production Branch* to `prod`, otherwise pushes to `prod` become previews.
-- Set the framework preset to **Services** (dashboard, or `vercel project update --framework services`).
-- Environment variables: `GEMINI_API_KEY`, `AI_MODEL`, `AI_ENABLED` (optional, for rationales). Leave `SCOUT_CACHE_ONLY`
-  unset so every disease runs live.
-- Vercel Functions can only write to `/tmp`. When `VERCEL=1` the HTTP cache, approval log and
-  shortlist log go to `/tmp/target-scout/`. That storage is per-instance and is wiped when an
-  instance is recycled, so on Vercel the audit logs are **ephemeral** and a scout run can expire if
-  the Approve click lands on a different instance (the page then asks you to re-run the scout).
-- An uncached live scout of 25 targets takes about 25 s and a new screening about 12 s, well under
-  Vercel's function time limit. Parkinson disease is instant because its responses ship in
-  `backend/data/demo_cache/`. Repeat runs on a warm instance are instant too.
+- **Environment variables** (Project Settings → Environment Variables):
+  `WORKBENCH_SECRET` (any long random string; signs approvals so all instances agree),
+  `GEMINI_API_KEY`, `AI_MODEL`, `AI_ENABLED=true`, `AI_THINKING_LEVEL` (optional, for Gemini
+  rationale and challenger reasoning). Leave `SCOUT_CACHE_ONLY` unset so every disease runs live.
+  Browser origins: the deployment's own `VERCEL_URL` / production URL are allowed automatically;
+  add custom domains to `WORKBENCH_ORIGINS` (comma-separated).
+- **Time budget.** Vercel's default function limit is 300 s (Hobby and Pro). Live retrieval is
+  capped at `RESEARCH_RETRIEVAL_BUDGET_SECONDS` (default 150) and a Gemini call at 120 s, so an
+  investigation finishes in time or fails with an explicit message. An uncached 25-target scout takes
+  about 25 s, a screening about 12 s. Parkinson disease / LRRK2 are instant from the recorded snapshot.
+- **Request bodies.** Scout runs and reports travel in request bodies (a few hundred KB at most);
+  the server accepts up to 4 MB, under Vercel's 4.5 MB limit.
 
 ## API
 
@@ -106,11 +111,14 @@ score mismatch) or 502 (upstream API failure).
 |--------|------------------|---------------------------------------|---------|
 | GET    | /api/health      |                                       | `{status}` |
 | POST   | /api/scout       | `{disease, n?}`                       | run_id, disease, cache_only, default_weights, targets[] with components |
-| POST   | /api/rationale   | `{run_id, weights}`                   | `{rationales: [{symbol, rationale, evidence_strength}]}` or `{available: false}` |
+| POST   | /api/rationale   | `{run_id, run?, weights}`             | `{rationales: [{symbol, rationale, evidence_strength}]}` or `{available: false}` |
 | GET    | /api/approvals   |                                       | approvals, newest first |
 | POST   | /api/approvals   | `{run_id, symbol, weights, scores, reason}` | the stored approval |
-| POST   | /api/screen      | `{approval_ts}`                       | approval, structure, compounds[] |
-| POST   | /api/shortlists  | `{approval_ts, chembl_ids, reason}`   | `{ok: true}` |
+| POST   | /api/screen      | `{approval_ts}` (Scout app) · `{approval}` signed (workbench) | approval, structure, compounds[] |
+| POST   | /api/shortlists  | `{approval_ts, chembl_ids, reason}`   | `{ok: true}` (Scout app only) |
+| POST   | /api/investigations | `{run, symbol}` or `{target_input}`, `use_ai`, `paid_authorized`, `weights` | the finished job: `{job_id, state, result, error, selection, weights}` |
+| POST   | /api/research-decisions | `{decision_id, job_id, action, rationale, confirmed, report, target?}` | the decision; `approve_screening` adds a signed `approval` |
+| GET    | /api/workbench/config | | public AI settings, modes |
 
 ## Data sources and caching
 
