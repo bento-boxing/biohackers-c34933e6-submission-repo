@@ -204,3 +204,30 @@ def test_rationale_rebuilds_result_from_posted_run(api, monkeypatch):
     r = api.post("/api/rationale", json={"run_id": run["run_id"], "run": run, "weights": run["default_weights"]})
     assert r.status_code == 200, r.get_json()
     assert r.get_json()["rationales"][0]["symbol"] == run["targets"][0]["symbol"]
+
+
+def test_disease_suggestions_require_query(api):
+    assert api.get("/api/diseases").status_code == 400
+    assert api.get("/api/diseases?q=%20").status_code == 400
+
+
+def test_disease_suggestions_offline_list_recorded_diseases_only(api):
+    body = api.get("/api/diseases?q=Parkinson").get_json()
+    assert body["query"] == "Parkinson"
+    assert body["diseases"] == [{"id": "MONDO_0005180", "name": "Parkinson disease"}]
+
+
+def test_disease_suggestions_live_use_open_targets_search(tmp_path):
+    class FakeClient:
+        cache_only = False
+
+        def post_json(self, url, body):
+            assert body["variables"] == {"q": "diabetes", "n": 8}
+            return {"data": {"search": {"hits": [
+                {"id": "MONDO_0005015", "name": "diabetes mellitus", "entity": "disease"},
+                {"id": "MONDO_0005147", "name": "type 1 diabetes mellitus", "entity": "disease"},
+                {"id": "ENSG1", "name": "INS", "entity": "target"}]}}}
+
+    app = create_app(client=FakeClient(), approvals_path=tmp_path / "a.jsonl", shortlists_path=tmp_path / "s.jsonl")
+    body = app.test_client().get("/api/diseases?q=diabetes").get_json()
+    assert [d["name"] for d in body["diseases"]] == ["diabetes mellitus", "type 1 diabetes mellitus"]

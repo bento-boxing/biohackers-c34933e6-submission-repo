@@ -22,4 +22,4 @@ export type Report = {timings?:Timings;investigation:Investigation;experiment:Ex
 export type Decision = {decision_id:string;job_id:string;action:string;rationale:string;confirmed:boolean;mode:Mode;approval?:import('./scout-types').Approval};
 export type Job = {job_id:string;state:string;progress:{stage:string;calls:Call[];stage_started_at?:number;timings?:Timings;retrieval?:{source:string;operation:string;state:string;started_at?:number;at:number;retry_policy_max_attempts:number;retries_observed?:number|null}};result:Report|null;error:string|null;mode:Mode;selection:Report['selection'];weights:import('./scout-types').Weights;decisions:Decision[];report_sig?:string};
 export type { SavedState } from './workbench-storage';
-export type Config = {ai:{enabled:boolean;provider:string;model:string;thinking_level:string;max_calls:number;timeout_seconds:number}};
+export type Config = {ai:{enabled:boolean;provider:string;model:string;thinking_level:string;max_calls:number;timeout_seconds:number};demo_targets?:string[]};

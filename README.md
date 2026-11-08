@@ -122,6 +122,7 @@ score mismatch) or 502 (upstream API failure).
 | Method | Path             | Body                                  | Returns |
 |--------|------------------|---------------------------------------|---------|
 | GET    | /api/health      |                                       | `{status}` |
+| GET    | /api/diseases    | `?q=partial name`                     | `{query, diseases: [{id, name}]}` from Open Targets search (recorded list offline) |
 | POST   | /api/scout       | `{disease, n?}`                       | run_id, disease, cache_only, default_weights, targets[] with components |
 | POST   | /api/rationale   | `{run_id, run?, weights}`             | `{rationales: [{symbol, rationale, evidence_strength}]}` or `{available: false}` |
 | GET    | /api/approvals   |                                       | approvals, newest first |

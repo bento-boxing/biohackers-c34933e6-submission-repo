@@ -11,6 +11,9 @@ SAFETY_TISSUES = ("heart", "liver", "kidney")
 SEARCH_QUERY = """
 query($q:String!){ search(queryString:$q, entityNames:["disease"], page:{index:0,size:5}){ hits{ id name entity } } }
 """
+SUGGEST_QUERY = """
+query($q:String!,$n:Int!){ search(queryString:$q, entityNames:["disease"], page:{index:0,size:$n}){ hits{ id name entity } } }
+"""
 TARGETS_QUERY = """
 query($id:String!,$n:Int!){ disease(efoId:$id){ associatedTargets(page:{index:0,size:$n}){
   rows{ score datatypeScores{ id score }
@@ -40,6 +43,12 @@ def resolve_disease(client: HttpClient, name: str) -> Disease:
         if h["entity"] == "disease":
             return Disease(id=h["id"], name=h["name"])
     raise DiseaseNotFound(name)
+
+
+def suggest_diseases(client: HttpClient, query: str, limit: int = 8) -> list[Disease]:
+    """Disease names Open Targets matches for a partial query (fuzzy search, best hits first)."""
+    hits = graphql(client, SUGGEST_QUERY, {"q": query, "n": limit})["search"]["hits"]
+    return [Disease(id=h["id"], name=h["name"]) for h in hits if h["entity"] == "disease"]
 
 
 def _has_approved_drug(tractability: list[dict]) -> bool:

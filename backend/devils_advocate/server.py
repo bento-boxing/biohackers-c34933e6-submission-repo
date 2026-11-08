@@ -99,7 +99,7 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
 
     def child_dispatch():
         with apps[mode()].test_client() as client:
-            return client.open(request.path, method=request.method, query_string=request.query_string,
+            return client.open(request.path, method=request.method, query_string=request.query_string.decode(),
                                data=request.get_data(cache=True), content_type=request.content_type)
 
     @app.before_request
@@ -128,7 +128,7 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
 
     @app.route('/api/<path:legacy>', methods=['GET', 'POST'])
     def legacy_api(legacy):
-        if legacy not in ['health', 'scout', 'rationale', 'approvals']:
+        if legacy not in ['health', 'scout', 'diseases', 'rationale', 'approvals']:
             return jsonify(error='Unknown endpoint.'), 404
         body = request.get_json(silent=True) or {}
         if not isinstance(body, dict):
