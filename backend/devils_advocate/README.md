@@ -134,7 +134,7 @@ Gemini output. Disabling AI also preserves the existing workflow.
 
 ### Cost, latency and privacy controls
 
-Optional settings (defaults): `AI_MAX_CALLS=5` (allowed 3–5),
+Optional settings (defaults): `AI_MAX_CALLS=7` (allowed 3–10; one retry of a malformed response is billed),
 `AI_MAX_PUBLICATIONS=4` (1–10), `AI_MAX_TRIALS=6` (1–20),
 `AI_EXCERPT_CHARS=2400` (500–4000), `AI_MAX_OUTPUT_TOKENS=8192` (512–16384),
 `AI_TIMEOUT_SECONDS=120` (5–120), `AI_RETRIES=1` (0–1).

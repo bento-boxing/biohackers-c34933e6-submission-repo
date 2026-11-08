@@ -27,9 +27,9 @@ def classify_concern(text: str) -> str:
     text = re.sub(r'\bnot (?:based on|related to|due to) (?:any )?safety(?: and/or efficacy)? concerns?\b', '', text)
     categories = []
     for category, pattern in [
-        ('safety', r'\b(toxicity|adverse events?|safety (?:concerns?|issues)|hepatotoxicity|lack of tolerability|elevations in liver enzymes)\b'),
-        ('efficacy', r'\b(futility|lack of (?:promising )?efficacy|no (?:clinical benefit|evidence of potential efficacy)|did not improve|failed to improve|did not demonstrate (?:clinical )?(?:efficacy|benefit)|failed to demonstrate (?:clinical )?(?:efficacy|benefit))\b'),
-        ('operational', r'\b(recruitment|(?:slow|low) accrual|accrual limitations|enrollment difficulties|funding|business (?:decision|reasons|priorities|planning)|administrative|covid-19)\b')]:
+        ('safety', r'\b(toxicity|hepatoxicity|adverse events?|safety (?:concerns?|issues|reasons)|hepatotoxicity|liver (?:injury|enzyme)|lack of tolerability|elevations in liver enzymes)\b'),
+        ('efficacy', r'\b(futility|lack of (?:promising |clinical )?(?:efficacy|benefit)|no (?:clinical benefit|evidence of potential efficacy)|did not improve|failed to improve|did not demonstrate (?:clinical )?(?:efficacy|benefit)|failed to demonstrate (?:clinical )?(?:efficacy|benefit))\b'),
+        ('operational', r'\b(recruitment|(?:slow|low|poor|insufficient|inadequate) (?:accrual|enrol?lment)|accrual limitations|enrol?lment (?:difficulties|issues|problems)|funding|business (?:decision|reasons|priorities|planning)|administrative|covid-19)\b')]:
         if re.search(pattern, text):
             categories.append(category)
     return categories[0] if len(categories) == 1 else 'other' if categories else 'unknown'

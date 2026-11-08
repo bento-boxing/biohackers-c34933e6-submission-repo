@@ -26,7 +26,11 @@ def record(reason='', status='TERMINATED', intervention='MK-8931'):
     ('TERMINATED', 'unknown'), ('COMPLETED', 'unknown'), ('futility', 'efficacy'),
     ('safety concerns', 'safety'), ('recruitment difficulties', 'operational'),
     ('business decision', 'operational'), ('futility and safety concerns', 'other'),
-    ('No reason supplied', 'unknown')])
+    ('No reason supplied', 'unknown'),
+    # Phrasing taken from live ClinicalTrials.gov records, including the registry's own misspelling.
+    ('Poor enrollment', 'operational'), ('low enrollment', 'operational'), ('Sponsor decision', 'unknown'),
+    ('The study was terminated due to hepatoxicity of compound', 'safety'), ('lack of clinical benefit', 'efficacy'),
+    ('See termination reason in detailed description.', 'unknown')])
 def test_classification(text, expected):
     assert classify_concern(text) == expected
 

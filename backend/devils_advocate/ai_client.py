@@ -8,6 +8,24 @@ from .models import AICall
 class AIError(RuntimeError):
     pass
 
+def trim_to_schema(data, schema: dict, definitions: dict | None = None):
+    """Gemini's structured mode honours enums and object shapes but not string/list length caps.
+    Cut over-long strings and lists to the schema's declared limits instead of rejecting the whole response."""
+    definitions = definitions if definitions is not None else schema.get('$defs', {})
+    while '$ref' in schema:
+        schema = definitions.get(schema['$ref'].rsplit('/', 1)[-1], {})
+    if isinstance(data, str) and isinstance(schema.get('maxLength'), int):
+        return data[:schema['maxLength']]
+    if isinstance(data, list):
+        items = schema.get('items', {})
+        if isinstance(schema.get('maxItems'), int):
+            data = data[:schema['maxItems']]
+        return [trim_to_schema(item, items, definitions) for item in data]
+    if isinstance(data, dict):
+        properties = schema.get('properties', {})
+        return {key: trim_to_schema(value, properties.get(key, {}), definitions) for key, value in data.items()}
+    return data
+
 def safe_error(exc: Exception) -> tuple[str, bool]:
     code = getattr(exc, 'code', None) or getattr(exc, 'status_code', None)
     messages = {400: 'Request rejected; check model configuration and output schema.',
@@ -85,7 +103,10 @@ class GeminiRunner:
                         call.usage[field] = value
                 if response.status != 'completed':
                     raise AIError('Gemini response incomplete; output was not accepted. Check output-token limit.')
-                parsed = schema.model_validate_json(response.output_text)
+                try:
+                    parsed = schema.model_validate_json(response.output_text)
+                except ValidationError:
+                    parsed = schema.model_validate(trim_to_schema(json.loads(response.output_text), schema.model_json_schema()))
                 call.success = True
                 return parsed
             except AIError as exc:
@@ -93,7 +114,8 @@ class GeminiRunner:
                 raise
             except (ValidationError, json.JSONDecodeError):
                 call.error = 'Gemini returned invalid structured output; response rejected.'
-                raise AIError(call.error) from None
+                if attempt == self.settings.retries:
+                    raise AIError(call.error) from None
             except Exception as exc:
                 call.error, retryable = safe_error(exc)
                 if not retryable or attempt == self.settings.retries:
