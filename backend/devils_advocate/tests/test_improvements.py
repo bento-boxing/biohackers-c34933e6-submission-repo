@@ -20,7 +20,7 @@ def test_invalid_target_does_not_retrieve_disease_only_evidence():
     result = investigate_target({'disease_name': "Alzheimer's disease", 'target_symbol': 'FAKEGENE123'},
                                 client=FakeClient([{'targets': []}]))
     assert not result.trials and not result.publications and not result.retrieval_errors
-    assert result.conclusion == 'insufficient evidence'
+    assert result.conclusion.startswith('INSUFFICIENT COVERAGE')
 
 def test_failure_stays_live_and_never_loads_offline_fixture():
     result = investigate_target(TARGET, client=FakeClient([RetrievalError('https://example.org: Timeout')]))

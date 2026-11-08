@@ -24,12 +24,25 @@ def safe_error(exc: Exception) -> tuple[str, bool]:
     return message, isinstance(code, int) and code in [429, 500, 502, 503, 504]
 
 class GeminiRunner:
-    def __init__(self, settings: AISettings, on_progress=None, should_cancel=None):
+    DEADLINE_MARGIN_SECONDS = 5   # left for parsing, verification and the response itself
+    MINIMUM_CALL_SECONDS = 15     # a shorter window cannot finish a thinking call; do not bill it
+
+    def __init__(self, settings: AISettings, on_progress=None, should_cancel=None, deadline: float | None = None):
         self.settings = settings
         self.calls: list[AICall] = []
         self.client = None
         self.on_progress = on_progress
         self.should_cancel = should_cancel
+        self.deadline = deadline  # time.monotonic() value after which the whole request is lost (Vercel kill)
+
+    def _call_timeout(self) -> int:
+        """Per-call timeout: the configured limit, or whatever the request deadline still allows."""
+        if self.deadline is None:
+            return self.settings.timeout_seconds
+        remaining = self.deadline - time.monotonic() - self.DEADLINE_MARGIN_SECONDS
+        if remaining < self.MINIMUM_CALL_SECONDS:
+            raise AIError('Request deadline too close to finish another model call; no further call made.')
+        return max(5, min(self.settings.timeout_seconds, int(remaining)))
 
     def _progress(self):
         if self.on_progress:
@@ -46,6 +59,7 @@ class GeminiRunner:
                 raise AIError('Cancellation requested; no further model call made. An in-flight request may still be billed.')
             if len(self.calls) >= self.settings.max_calls:
                 raise AIError('Paid-call budget exhausted; no additional model call made.')
+            timeout = self._call_timeout()
             wire_payload = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
             started = time.monotonic()
             call = AICall(role=role, success=False, started_at=time.time(), payload_bytes=len(wire_payload.encode('utf-8')))
@@ -59,7 +73,7 @@ class GeminiRunner:
                 response = self.client.interactions.create(model=self.settings.model,
                     system_instruction=instruction, input=wire_payload,
                     store=False, automatic_continuation=False,
-                    timeout=self.settings.timeout_seconds,
+                    timeout=timeout,
                     generation_config={'thinking_level': self.settings.thinking_level,
                                        'max_output_tokens': self.settings.max_output_tokens},
                     response_format=[{'type': 'text', 'mime_type': 'application/json',

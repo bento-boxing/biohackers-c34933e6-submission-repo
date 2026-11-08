@@ -11,7 +11,7 @@ class AISettings(BaseModel):
     model: str = ''
     api_key: SecretStr = Field(default=SecretStr(''), exclude=True)
     thinking_level: Literal['low', 'medium', 'high'] = 'medium'
-    max_calls: int = Field(default=5, ge=3, le=5)
+    max_calls: int = Field(default=5, ge=3, le=10)
     max_publications: int = Field(default=4, ge=1, le=10)
     max_trials: int = Field(default=6, ge=1, le=20)
     excerpt_chars: int = Field(default=2400, ge=500, le=4000)

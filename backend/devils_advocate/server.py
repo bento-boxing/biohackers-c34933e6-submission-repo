@@ -31,6 +31,7 @@ from pipeline.settings import data_dir
 from .ai_config import load_ai_settings
 from .ai_reasoning import run_ai_reasoning
 from .approval_signing import configured as signing_configured, sign, sign_payload, verify, verify_token
+from .build_info import runtime_info
 from .devil_advocate import investigate_target
 from .investigation import InvestigationFailed, run_investigation
 from .models import TargetInput
@@ -74,6 +75,43 @@ class DecisionRequest(BaseModel):
 class ScreenRequest(BaseModel):
     model_config = ConfigDict(extra='forbid')
     approval: dict
+
+
+MAX_ASSESSMENTS_IN_RESPONSE = 150
+MAX_CLAIMS_IN_RESPONSE = 200
+
+
+def trim_report(report: dict) -> dict:
+    """Shrink the response body (not the science) so a popular target fits Vercel's 4.5 MB limit
+    and the browser's localStorage. The full Investigation was already used for reasoning."""
+    investigation = report.get('investigation', {})
+    for trial in investigation.get('trials', []):
+        trial.pop('outcome_records', None)
+        trial.pop('population', None)
+    assessments = investigation.get('assessments', [])
+    if len(assessments) > MAX_ASSESSMENTS_IN_RESPONSE:
+        ranked = sorted(assessments, key=lambda a: a.get('recommendation') != 'revise')
+        investigation['assessments'] = ranked[:MAX_ASSESSMENTS_IN_RESPONSE]
+        investigation['assessments_omitted'] = len(assessments) - MAX_ASSESSMENTS_IN_RESPONSE
+    claims = investigation.get('claims', [])
+    if len(claims) > MAX_CLAIMS_IN_RESPONSE:
+        ranked = sorted(claims, key=lambda c: not c.get('verified'))
+        investigation['claims'] = ranked[:MAX_CLAIMS_IN_RESPONSE]
+        investigation['claims_omitted'] = len(claims) - MAX_CLAIMS_IN_RESPONSE
+    retrieval = (report.get('timings') or {}).get('retrieval') or {}
+    provenance = retrieval.pop('response_provenance', None)
+    if provenance is not None:
+        summary: dict = {}
+        for item in provenance:
+            key = f"{item.get('source', 'Public API')} · {item.get('provenance') or item.get('state')}"
+            entry = summary.setdefault(key, {'count': 0, 'first_fetched_at': None, 'last_fetched_at': None})
+            entry['count'] += 1
+            fetched = item.get('fetched_at')
+            if isinstance(fetched, (int, float)):
+                entry['first_fetched_at'] = fetched if entry['first_fetched_at'] is None else min(entry['first_fetched_at'], fetched)
+                entry['last_fetched_at'] = fetched if entry['last_fetched_at'] is None else max(entry['last_fetched_at'], fetched)
+        retrieval['response_provenance_summary'] = summary
+    return report
 
 
 def create_app(runtime: Path | None = None, *, investigator=investigate_target, ai_reasoner=run_ai_reasoning):
@@ -124,7 +162,8 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
         settings = load_ai_settings()
         return jsonify(ai={k: v for k, v in settings.model_dump(mode='json').items()
                            if k in ['enabled', 'provider', 'model', 'thinking_level', 'max_calls', 'timeout_seconds']},
-                       demo_targets=['LRRK2', 'BACE1'], server='Flask (stateless)', modes=['live', 'offline'])
+                       demo_targets=['LRRK2', 'BACE1'], server='Flask (stateless)', modes=['live', 'offline'],
+                       backend=runtime_info())
 
     @app.route('/api/<path:legacy>', methods=['GET', 'POST'])
     def legacy_api(legacy):
@@ -153,14 +192,6 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
                 'cache_only': run['cache_only'], 'target_id': target['target_id'], 'symbol': target['symbol'],
                 'components': target['components'], 'chembl_target_id': target.get('chembl_target_id'),
                 'uniprot': target.get('uniprot'), 'safety_flags': target.get('safety_flags', [])}
-
-    def trim_report(report: dict) -> dict:
-        """Drop per-trial bulk the UI never renders (outcome tables, eligibility text): a popular
-        target otherwise exceeds Vercel's 4.5 MB response limit."""
-        for trial in report['investigation'].get('trials', []):
-            trial.pop('outcome_records', None)
-            trial.pop('population', None)
-        return report
 
     def parse_weights(raw: dict) -> Weights:
         if set(raw) - WEIGHT_KEYS:

@@ -3,6 +3,8 @@ import json
 import re
 from .ai_client import AIError, GeminiRunner
 from .ai_config import AISettings, load_ai_settings
+from .coverage import check_coverage, select_evidence, target_level_objections
+from .prior_art import prior_art_context,check_prior_art
 from .models import (AIClaim, AIReport, AIAuditRound, AdjudicationBatch, ChallengeDraft,
                      ExperimentalResponse, Investigation)
 
@@ -19,7 +21,18 @@ insufficient evidence. Citation IDs/field/excerpt must exactly match supplied
 source fields. Never provide detailed wet-lab instructions or imply experiments
 were performed. Researcher approval is required before any next action.
 Return only the requested structured JSON, with concise text. Model agreement
-does not constitute independent evidence. Do not emit private reasoning traces.'''
+does not constitute independent evidence. Do not emit private reasoning traces.
+Explicitly acknowledge retrieved therapeutic/approval precedent with disease,
+population and combination-treatment restrictions; phase 4 alone does not prove
+benefit for the requested indication. Lack of retrieved evidence is not lack of
+efficacy. A bounded packet never establishes overall target invalidity. Separate
+compound, mechanism, population and disease effects. Direction signals are
+unadjudicated retrieval triage, not clinical findings. Mixed evidence stays mixed.'''
+COMMON+=''' Gene replacement, transcript/splicing modification and protein binding
+are distinct mechanisms. A curated compound-protein association or shared protein
+sequence does not prove regulation of the requested gene. Inspect mechanism
+metadata and official label mechanism_of_action; distinguish restored gene from
+the requested paralog and do not transfer clinical precedent between mechanisms.'''
 
 CHALLENGER = COMMON + '''
 Role A: Devil's Advocate. Independently challenge the initial target hypothesis
@@ -32,6 +45,10 @@ Do not assign therapeutic support based on methods/background or status alone.
 If revision_feedback is supplied, revise once to remove/correct unsupported
 claims and preserve stable claim IDs where possible. Do not merely restate a
 rejected claim. An empty claims list and insufficient evidence are valid.'''
+CHALLENGER += ''' Balance the challenge: when approved-compound precedent and
+clinical support are supplied, include a scoped precedent/support claim as well
+as unresolved concerns. Do not omit established success to manufacture objections.
+Describe exact indication, combination treatment and population restrictions.'''
 
 ADJUDICATOR = COMMON + '''
 Role B: Evidence Adjudicator. Independently assess EVERY supplied claim against
@@ -44,6 +61,14 @@ or clinical extrapolation from preclinical findings. Scrutinize negation,
 background/methods, population, statistical outcomes and incomplete excerpts.
 Give a concise finding and an actionable revision_request (empty if supported).
 Respect deterministic objections; they cannot be overruled by model opinion.'''
+ADJUDICATOR += ''' Reject target-level negative conclusions from missing literature,
+sampling, terminated status or individual-compound failures. Check every objection
+against supportive clinical and indication records too. Missing/limited coverage
+cannot be transformed into proof that an established treatment is ineffective.'''
+ADJUDICATOR+=''' A bounded packet cannot establish that a question has never been
+studied, remains untested in vivo, or is the first/novel experiment. Reject or
+qualify such absence claims in uncertainty/relevance as well as the claim text;
+distinguish not established by these sources from no research.'''
 
 EXPERIMENTER = COMMON + '''
 Role C: Experimental Challenger. Reassess the initial hypothesis using ONLY the
@@ -61,7 +86,42 @@ hypothesis_evidence arrays, never in readable paragraphs. Describe the scientifi
 finding in prose instead. hypothesis_evidence is parallel to competing_explanations
 and lists the accepted claim IDs motivating each hypothesis. Shared background
 evidence is allowed; if both hypotheses use it, say in limitations that this is
-not independent evidence for either hypothesis. Never invent distinct sources.'''
+not independent evidence for either hypothesis. Never invent distinct sources.
+Check existing clinical conclusions and indication records before choosing a
+question: do not repeat an already established treatment-benefit question. Focus
+on a specific unresolved population, resistance, mechanism or safety question
+that could change a research decision. Document knowledge_review (what the
+retrieved sources already establish and their scope) and unresolved_gap (what
+remains unanswered); anchor them through experiment evidence_ids. These are
+bounded interpretations, not proof of novelty or an independent literature review.
+If novelty/uncertainty cannot be grounded,
+return an experiment with status='INSUFFICIENT EVIDENCE FOR EXPERIMENT', explain
+the missing knowledge review, and leave hypotheses/design/measurements empty.'''
+
+PATHWAY_RULES=''' Use assessment_pathway and biological_association first.
+For preclinical_validation: this is a LIMITED PRECLINICAL TARGET-VALIDATION
+ANALYSIS, not clinical failure adjudication. Challenge whether the disease-target
+link is causal, a compensatory response, a locus-to-gene misassignment or a
+context-specific expression marker. Compare competing biological explanations.
+No clinical programmes is not clinical failure. Do not assume the target is valid
+or infer the direction to modulate it. Unrelated drug approval establishes only
+pharmacological tractability, never efficacy for this indication. Distinguish
+direct disease-specific primary biology, indirect mechanisms and unrelated
+target pharmacology. Ground proposed experiments in direct biological sources
+and accepted uncertainties; resolve causality/model suitability before treatments.
+For clinical_precedent: examine disease/population-matched efficacy, operational,
+safety and compound-specific evidence fairly, including established successes.
+Source-scope triage and association scores are not proof of causality or efficacy.'''
+CHALLENGER+=PATHWAY_RULES
+ADJUDICATOR+=PATHWAY_RULES
+EXPERIMENTER+=PATHWAY_RULES
+EXPERIMENTER+=''' Document scientific_claim, mechanism and context for prior-art
+checking. Review supplied question-relevant prior_art_records before declaring
+a gap. Cite exact source fields in prior_art_citations when acknowledging known
+findings, while evidence_ids continue to reference accepted claims. A missing
+answer in the selected packet is not proof that the literature has no answer.
+Do not claim absolute absence below assay detection limits or an only-effective
+therapy/mechanism. Preserve population differences and nonexclusive explanations.'''
 
 def experimental_evidence(bundle: dict, claims: list[AIClaim]) -> dict:
     """The designer receives accepted context; adjudication still sees all sources.
@@ -70,6 +130,10 @@ def experimental_evidence(bundle: dict, claims: list[AIClaim]) -> dict:
     links from cited trials. The original bundle stays unchanged in the audit.
     """
     required = {citation.source_id for claim in claims for citation in claim.citations}
+    # Preserve counterbalancing precedent and clinical evidence even when the
+    # challenger did not cite it. A negative claim must not erase positive context.
+    required.update(key for key,value in bundle['sources'].items() if
+        value.get('precedent') or value.get('clinical_context') or value.get('biological_context'))
     for identifier in list(required):
         required.update(bundle['sources'].get(identifier, {}).get('applicability', {}).get('compound_ids', []))
     sources = {key: value for key, value in bundle['sources'].items() if key in required}
@@ -83,28 +147,65 @@ def evidence_bundle(result: Investigation, settings: AISettings) -> dict:
     def add(identifier, url, fields):
         sources[identifier] = {'url': url, 'fields': fields}
     for compound in result.compounds:
+        indications=sorted(compound.indications,key=lambda r:(r.get('disease_match') not in ['identifier','lexical'],
+            not r.get('approval_precedent'),str(r.get('efo_id',''))))[:4]
+        selected_indications=[{k:v for k,v in r.items() if k in ['drugind_id','efo_id','efo_term','mesh_id','mesh_heading',
+            'max_phase_for_ind','disease_match','approval_precedent','source_url']} for r in indications]
         add(compound.chembl_id, compound.url, {'name': compound.name,
-            'mechanisms': '; '.join(compound.mechanisms), 'synonyms': '; '.join(compound.synonyms)[:settings.excerpt_chars]})
-    trials = sorted(result.trials, key=lambda t: (not bool(t.why_stopped), t.relationship != 'verified',
-                                                t.disease_match != 'matched', t.nct_id))[:settings.max_trials]
+            'mechanisms': '; '.join(compound.mechanisms), 'synonyms': '; '.join(compound.synonyms)[:settings.excerpt_chars],
+            'regulatory_approval_metadata':json.dumps(compound.regulatory_approvals,ensure_ascii=False),
+            'mechanism_metadata':json.dumps({'molecule_type':compound.molecule_type,
+                'curated_links':[{k:r.get(k) for k in ['target_chembl_id','action_type','direct_interaction','molecular_mechanism']} for r in compound.mechanism_records[:5]],
+                'links_retrieved':len(compound.mechanism_records),'links_omitted':max(0,len(compound.mechanism_records)-5),
+                'caution':'Curated target links do not establish physical binding or gene-specific regulation. Distinguish gene replacement, transcript/splicing modification, activation and inhibition.'}),
+            'approval_metadata':json.dumps({'max_phase':compound.max_phase,'withdrawn_flag':compound.withdrawn_flag,
+                'first_approval':compound.first_approval,'source':compound.approval_source_url,
+                'indications':selected_indications,'indications_retrieved':len(compound.indications),
+                'indications_omitted':len(compound.indications)-len(indications),
+                'selection':'Disease match then indication phase; first four. All retrieved records remain in the investigation.',
+                'search_state':compound.indication_search_state},ensure_ascii=False)})
+        sources[compound.chembl_id]['precedent']=(compound.max_phase==4 and any(r.get('disease_match') in ['identifier','lexical'] and r.get('approval_precedent') for r in compound.indications)) or any(r.get('disease_match')=='lexical' for r in compound.regulatory_approvals)
+        sources[compound.chembl_id]['caution']='Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.'
+    trials,pubs,reasons=select_evidence(result,settings.max_trials,settings.max_publications)
     for trial in trials:
         fields = {name: getattr(trial, name) for name in ['title', 'status', 'why_stopped']}
         fields.update(conditions='; '.join(trial.conditions), interventions='; '.join(trial.interventions),
                       population=trial.population[:min(settings.excerpt_chars, 800)],
-                      outcome_records=json.dumps(trial.outcome_records, ensure_ascii=False)[:min(settings.excerpt_chars, 800)])
+                      phases='; '.join(trial.phases),
+                      outcome_records=json.dumps({'record_count':len(trial.outcome_records),
+                        'outcome_index':[{'title':o.get('title',''),'type':o.get('type','')} for o in trial.outcome_records],
+                        'scope':'Complete endpoint-title index only. Numerical results remain in the full Investigation/source; this index cannot establish efficacy or safety.'},ensure_ascii=False,separators=(',',':')))
         add(trial.nct_id, trial.url, fields)
         sources[trial.nct_id]['applicability'] = {'compound_matches': trial.compound_matches,
             'compound_ids': trial.compound_ids, 'relationship': trial.relationship, 'disease_match': trial.disease_match,
             'stop_reason_provenance': trial.stop_reason.model_dump(mode='json'),
+            'numerical_results_in_packet':False,
             'caution': 'Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity.'}
-    pubs = sorted(result.publications, key=lambda p: (not bool(re.search(r'\b(trial|randomized)\b', p.title, re.I)), p.identifier))[:settings.max_publications]
     for pub in pubs:
-        add(pub.identifier, pub.url, {'title': pub.title, 'abstract': pub.abstract[:settings.excerpt_chars]})
+        add(pub.identifier, pub.url, {'title': pub.title, 'abstract': pub.abstract[:settings.excerpt_chars],
+            'conclusion_excerpt':pub.conclusion_excerpt[:settings.excerpt_chars]})
+        sources[pub.identifier]['clinical_context']=pub.clinical_candidate
+        sources[pub.identifier]['biological_context']=pub.evidence_scope=='direct_biological'
+        sources[pub.identifier]['direction_signals']=pub.direction_signals
+        sources[pub.identifier]['applicability']={'disease_match':pub.disease_match,'detail':pub.relevance,
+            'evidence_scope':pub.evidence_scope,'biological_signals':pub.biological_signals,'scope_reason':pub.scope_reason}
         sources[pub.identifier]['caution'] = 'Abstract may be truncated; no full text, causal adjudication or quality assessment.'
+    for record in result.regulatory_records:
+        if result.coverage and result.coverage.pathway=='preclinical_validation':
+            continue  # Preserve in full audit, but unrelated labels do not ground biological hypotheses.
+        add(record['id'],record['url'],{k:v[:settings.excerpt_chars] for k,v in record['fields'].items() if isinstance(v,str)})
+        sources[record['id']]['precedent']=bool(result.coverage and result.coverage.pathway=='clinical_precedent')
+        sources[record['id']]['caution']=record['caution']+' Fields may be truncated.'
     return {'target': result.target.model_dump(mode='json'), 'resolved_target_id': result.resolved_target_id,
+            'assessment_pathway':result.coverage.pathway if result.coverage else 'historical',
+            'biological_association':{'strength':result.association.strength,'explanation':result.association.explanation,
+                'evidence_types':result.association.evidence_types,'limitations':result.association.limitations} if result.association else {},
             'sources': sources, 'selection': {'trial_records_sent': len(trials), 'trials_retrieved': len(result.trials),
              'publications_sent': len(pubs), 'publications_retrieved': len(result.publications),
-             'excerpt_character_limit': settings.excerpt_chars},
+             'excerpt_character_limit': settings.excerpt_chars,'reasons':reasons,
+             'omitted_count':len(result.trials)-len(trials)+len(result.publications)-len(pubs)},
+            'coverage':{'status':result.coverage.status,'pathway':result.coverage.pathway,'gaps':result.coverage.gaps,
+                'caution':result.coverage.caution,'limits':[{'source':a.source,'operation':a.operation,'state':a.state,'total':a.total} for a in result.search_audit if a.state in ['failed','limit_reached','not_searched']]} if result.coverage else {'status':'not assessed for historical fixture'},
             'missing_information': result.missing_information}
 
 def identifier_objections(narrative: str, cited: set[str]) -> list[str]:
@@ -124,17 +225,47 @@ def validate_ai_claim(claim: AIClaim, bundle: dict) -> list[str]:
         field = source.get('fields', {}).get(citation.field) if source else None
         if not isinstance(field, str) or not citation.excerpt.strip() or citation.excerpt not in field:
             objections.append('Unknown source, invalid field or excerpt absent from the exact supplied evidence.')
+        if citation.field=='outcome_records' and claim.stance!='context' and claim.concern in ['efficacy','safety']:
+            objections.append('An endpoint-title index does not establish outcome direction; cite actual results or a clinical publication.')
     if claim.kind == 'fact' and not any(claim.text == c.excerpt for c in claim.citations):
         objections.append('Direct fact must be an exact cited quotation; paraphrases require interpretation kind.')
     # Recognizable IDs cannot be smuggled into narrative without citation.
     cited = {c.source_id for c in claim.citations}
     narrative = ' '.join([claim.text, claim.relevance, claim.uncertainty])
+    if (re.search(r'\b(?:remains? untested|never (?:been )?(?:tested|studied|investigated)|no studies (?:have|exist)|first ever)\b',narrative,re.I)
+            and not re.search(r'\b(?:provided|supplied|bounded|selected|cited)\s+(?:packet|sources|evidence)|not established by',narrative,re.I)):
+        objections.append('Unqualified literature-absence claim: bounded evidence cannot establish that a question is untested; qualify the gap to the cited sources and retain prior-art uncertainty.')
     objections.extend(identifier_objections(narrative, cited))
+    objections.extend(target_level_objections(narrative))
+    source_text=' '.join(str(bundle['sources'].get(c.source_id,{}).get('fields',{}).get(c.field,'')) for c in claim.citations)
+    if re.search(r'(?:treatment|antiretroviral)[ -]naive',claim.text,re.I) and re.search(r'treatment[ -]experienced',source_text,re.I) and not re.search(r'treatment[ -]experienced|different population|separate cohort',claim.text,re.I):
+        objections.append('Population applicability: distinguish treatment-naive findings from treatment-experienced source context; do not imply same-cohort causality.')
+    if (re.search(r'(?:treatment|antiretroviral)[ -]naive',claim.text,re.I)
+            and re.search(r'treatment[ -]experienced',claim.text,re.I)
+            and re.search(r'\b(?:due to|because|attribut\w* to|explain\w* by)\b',claim.text,re.I)):
+        objections.append('Cross-population causal attribution requires revision: separate outcomes and explanatory evidence by cohort; naming both populations does not establish a shared cause across trials.')
+    if re.search(r'approv|regulator',claim.text,re.I):
+        if re.search(r'\b(?:lack\w*|no|without|not)\b.{0,70}\bapprov',claim.text,re.I) and not re.search(r'\b(?:historical|as of|not established|unverified|unknown|not proof|does not establish)\b',claim.uncertainty,re.I):
+            objections.append('Approval absence requires current authoritative verification; ChEMBL phase or missing metadata cannot establish nonapproval. Explicitly state that current regulatory status is unknown when unverified.')
+        # A valid quote about one drug does not support a grouped approval
+        # statement about other named drugs. A direct label quote also counts.
+        quoted_text=' '.join(c.excerpt for c in claim.citations)
+        for source_id,source in bundle['sources'].items():
+            name=source.get('fields',{}).get('name','') if source_id.startswith('CHEMBL') else ''
+            name=re.sub(r'\s+(?:hydrochloride|hcl|maleate|sodium)$','',name,flags=re.I).strip()
+            if len(name)<5:continue
+            pattern=r'(?<![A-Za-z0-9])'+re.escape(name)+r'(?![A-Za-z0-9])'
+            if re.search(pattern,claim.text,re.I) and source_id not in cited and not re.search(pattern,quoted_text,re.I):
+                objections.append(f'Approval statement names {name} without a corresponding compound record or source quotation; add specific supporting citations or narrow the claim.')
+    if bundle.get('assessment_pathway')=='preclinical_validation':
+        direct=[c for c in claim.citations if bundle['sources'].get(c.source_id,{}).get('applicability',{}).get('evidence_scope')=='direct_biological']
+        if claim.stance!='context' and not direct:
+            objections.append('Preclinical target-disease inference requires a direct biological literature citation; unrelated approvals and indirect context cannot establish it.')
     if not claim.uncertainty.strip() or not claim.relevance.strip():
         objections.append('Relevance and uncertainty must be explicit.')
     return list(dict.fromkeys(objections))
 
-def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = None, runner=None, on_progress=None, should_cancel=None) -> AIReport:
+def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = None, runner=None, on_progress=None, should_cancel=None, prior_art_client=None, on_stage=None, deadline=None) -> AIReport:
     settings = settings or load_ai_settings()
     report = AIReport(enabled=settings.enabled, provider=settings.provider, model=settings.model, thinking_level=settings.thinking_level)
     # This guard runs before constructing a runner or SDK client.
@@ -143,17 +274,29 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
         report.warnings.append('Offline fixture: Gemini is disabled and no paid calls were made.')
         return report
     if not settings.enabled:
+        report.warnings.append('Gemini was not requested/authorized for this job or backend AI is disabled. Coverage eligibility is reported independently; zero paid calls made.')
         return report
     if not result.resolved_target_id or not (result.trials or result.publications):
         report.status = 'skipped'
         report.warnings.append('Insufficient resolved public evidence for AI reasoning; no calls made.')
         return report
+    # Recheck actual configured packet capacities, not only retrieval defaults.
+    result.coverage=check_coverage(result,settings.max_trials,settings.max_publications)
+    if result.coverage.status=='INSUFFICIENT COVERAGE':
+        report.status='skipped'
+        report.warnings.append('INSUFFICIENT COVERAGE: '+'; '.join(result.coverage.gaps)+'. No paid model calls started.')
+        return report
     bundle = evidence_bundle(result, settings)
+    report.packet_audit={'coverage':result.coverage.model_dump(mode='json'),
+        'selected_source_ids':list(bundle['sources']),
+        'omitted_source_ids':[t.nct_id for t in result.trials if t.nct_id not in bundle['sources']]+[p.identifier for p in result.publications if p.identifier not in bundle['sources']],
+        'omission_reason':'Bounded balanced packet; full records retained in Investigation and available to question-specific prior-art checks.'}
+    report.packet_audit['agent_source_ids']={'Devils Advocate':list(bundle['sources']),'Evidence Adjudicator':list(bundle['sources'])}
     report.source_bundle = bundle
     report.sent_source_ids = list(bundle['sources'])
     report.source_urls = {key: value['url'] for key, value in bundle['sources'].items()}
     owned = runner is None
-    runner = runner or GeminiRunner(settings, on_progress=on_progress, should_cancel=should_cancel)
+    runner = runner or GeminiRunner(settings, on_progress=on_progress, should_cancel=should_cancel, deadline=deadline)
     report.calls = runner.calls
     try:
         payload = {'evidence': bundle, 'initial_rule_based_assessment': result.conclusion}
@@ -188,9 +331,24 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
                 report.warnings.append('Unaccepted claims were removed; no additional revision beyond the single-round limit or call budget.')
             report.accepted_claims = accepted
             break
+        prior_records=prior_art_context(result,[c.text+' '+c.uncertainty for c in report.accepted_claims],exclude_ids=bundle['sources'])
+        for pub in prior_records:
+            bundle['sources'].setdefault(pub.identifier,{'url':pub.url,'fields':{'title':pub.title,'abstract':pub.abstract[:settings.excerpt_chars],
+                'conclusion_excerpt':pub.conclusion_excerpt[:settings.excerpt_chars]},'prior_art_context':True,
+                'applicability':{'evidence_scope':pub.evidence_scope},
+                'caution':'Question-relevant prior art, not a newly adjudicated therapeutic claim.'})
+            report.source_urls[pub.identifier]=pub.url
+        report.sent_source_ids=list(bundle['sources'])
+        design=experimental_evidence(bundle,report.accepted_claims)
+        design['sources'].update({p.identifier:bundle['sources'][p.identifier] for p in prior_records})
+        report.packet_audit['agent_source_ids']['Experimental Challenger']=list(design['sources'])
         final = runner.generate('Experimental Challenger', EXPERIMENTER,
-            {'evidence': experimental_evidence(bundle, report.accepted_claims), 'initial_rule_based_assessment': result.conclusion,
+            {'evidence': design, 'prior_art_records':[p.identifier for p in prior_records], 'initial_rule_based_assessment': result.conclusion,
              'accepted_claims': [c.model_dump(mode='json') for c in report.accepted_claims]}, ExperimentalResponse)
+        report.final_draft=final.model_copy(deep=True)
+        report.packet_audit['final_draft_status']='Unverified generated draft retained for audit, not an accepted experiment.'
+        if target_level_objections(final.reassessment.assessment):
+            raise AIError('Final target-level conclusion exceeded bounded evidence; output rejected.')
         allowed = {c.claim_id for c in report.accepted_claims}
         if set(re.findall(r'\bDA_CLAIM_\d+\b', final.model_dump_json())) - allowed:
             raise AIError('Final synthesis introduced an unaccepted internal claim reference; output rejected.')
@@ -201,12 +359,38 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
         if not refs.issubset(allowed) or (allowed and not final.reassessment.evidence_claim_ids):
             raise AIError('Final assessment or experiment lacks valid accepted-claim anchors; output rejected.')
         cited_sources = {ref.source_id for c in report.accepted_claims for ref in c.citations}
+        for ref in final.experiment.prior_art_citations:
+            field=bundle['sources'].get(ref.source_id,{}).get('fields',{}).get(ref.field)
+            if not isinstance(field,str) or ref.excerpt not in field:
+                report.packet_audit.setdefault('final_citation_objections',[]).append({'source_id':ref.source_id,'field':ref.field,
+                    'source_in_packet':ref.source_id in bundle['sources'],'field_present':isinstance(field,str),'excerpt':ref.excerpt,'exact_excerpt':False})
+                raise AIError('Final prior-art citation lacks exact source support; output rejected.')
+            cited_sources.add(ref.source_id)
         if identifier_objections(final.model_dump_json(), cited_sources):
             raise AIError('Final synthesis introduced an uncited identifier; output rejected.')
         if not allowed:
             final.reassessment.assessment = 'insufficient evidence'
-            final.reassessment.remaining_uncertainty.append('No challenger claim survived verification; experiment hypotheses are provisional.')
-        final.experiment.status = 'AI-generated unvalidated research proposal; not performed or validated. Researcher approval required.'
+            final.reassessment.remaining_uncertainty.append('No challenger claim survived verification; no meaningful experiment can be grounded.')
+        from .experiment_designer import check_experiment_readiness
+        final.experiment=check_experiment_readiness(result,final.experiment,len(allowed))
+        if result.coverage.pathway=='preclinical_validation':
+            anchored=[c for c in report.accepted_claims if c.claim_id in final.experiment.evidence_ids and
+                any(bundle['sources'][ref.source_id].get('applicability',{}).get('evidence_scope')=='direct_biological' for ref in c.citations)]
+            if not anchored:
+                from .experiment_designer import abstain_experiment
+                final.experiment=abstain_experiment('Preclinical experiment lacks an accepted uncertainty anchored in direct disease-specific biological literature.')
+        if final.experiment.status!='INSUFFICIENT EVIDENCE FOR EXPERIMENT':
+            if on_stage:on_stage('Final source and question-specific prior-art checks')
+            report.prior_art_check=check_prior_art(result,final.experiment,client=prior_art_client)
+            report.prior_art_check['original_proposal']=final.experiment.model_dump(mode='json')
+            report.final_checks=report.prior_art_check['objections']
+            if report.prior_art_check['decision']=='abstain':
+                from .experiment_designer import abstain_experiment
+                final.experiment=abstain_experiment('Question-specific prior-art/claim checks require revision or expert review. '+
+                    '; '.join(report.final_checks)+'. Closely matching sources: '+', '.join(report.prior_art_check['close_matches']))
+                report.warnings.append('Final proposal withheld after prior-art/claim checks; original findings and matched sources remain in the audit.')
+        if final.experiment.status!='INSUFFICIENT EVIDENCE FOR EXPERIMENT':
+            final.experiment.status = 'AI-generated unvalidated research proposal; not performed or validated. Researcher approval required.'
         final.experiment.limitations.append('Gemini interpretation is not independent evidence or expert validation; source sampling and excerpt truncation limit conclusions.')
         final.experiment.limitations.append('Model suitability, genetic-versus-pharmacological comparability, replication, randomization and predefined outcomes require expert design review before approval.')
         report.warnings.append('The final reassessment and experiment are AI synthesis, not separately adjudicated findings or independent scientific validation.')

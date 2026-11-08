@@ -252,3 +252,26 @@ def test_disease_suggestions_forwarded_in_offline_mode(app):
     names = [d['name'] for d in response.get_json()['diseases']]
     assert names == ['Parkinson disease']
     assert app.test_client().get('/api/diseases?q=diabetes', headers=HEADERS).get_json()['diseases'] == []
+
+
+def test_trim_report_keeps_popular_targets_under_the_hosted_response_limit():
+    from devils_advocate.server import trim_report
+    claims = [{'claim_id': f'c{i}', 'verified': i % 3 == 0, 'text': 'x' * 400} for i in range(2000)]
+    assessments = [{'source_ids': [f'NCT{i:08d}'], 'recommendation': 'revise' if i % 10 == 0 else 'investigate', 'limitations': ['y' * 700]} for i in range(633)]
+    provenance = [{'source': 'ClinicalTrials.gov' if i % 2 else 'Europe PMC', 'operation': '/x', 'state': 'completed',
+                   'provenance': 'LIVE' if i % 5 else 'CACHED_PERSISTENT', 'fetched_at': 1000.0 + i, 'expires_at': 2000.0 + i, 'sha256': 'f' * 64} for i in range(700)]
+    report = {'investigation': {'trials': [{'nct_id': 'NCT00000001', 'outcome_records': [1], 'population': 'p'}],
+                                'claims': claims, 'assessments': assessments},
+              'timings': {'retrieval': {'requests': 700, 'cache_hits': 140, 'response_provenance': provenance}}}
+    trimmed = trim_report(report)
+    inv = trimmed['investigation']
+    assert 'outcome_records' not in inv['trials'][0] and 'population' not in inv['trials'][0]
+    assert len(inv['assessments']) == 150 and inv['assessments_omitted'] == 483
+    assert all(a['recommendation'] == 'revise' for a in inv['assessments'][:64])  # review-worthy ones survive first
+    assert len(inv['claims']) == 200 and inv['claims_omitted'] == 1800 and all(c['verified'] for c in inv['claims'])
+    retrieval = trimmed['timings']['retrieval']
+    assert 'response_provenance' not in retrieval
+    summary = retrieval['response_provenance_summary']
+    assert sum(v['count'] for v in summary.values()) == 700
+    assert summary['ClinicalTrials.gov · LIVE']['count'] == 280 and summary['ClinicalTrials.gov · LIVE']['last_fetched_at'] == 1699.0
+    assert len(json.dumps(trimmed)) < 400_000

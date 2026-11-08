@@ -417,6 +417,18 @@ excluded from Git, model inputs, logs and downloaded reports.
 
 ## Presentation and profiling
 
+See [clinical/preclinical pathway validation](PATHWAY_VALIDATION.md) for the
+generalized biological association gate, unrelated-approval separation, fresh
+Next.js → Flask → SQLite HIV/CCR5 and scoliosis/BCL2 results, provenance, and
+zero-paid-call reproduction commands. Adequate early-stage biology no longer
+requires clinical trials; insufficient biology still abstains.
+
+The [scientific reliability audit](RELIABILITY_AUDIT.md) documents the reproduced
+CCR5 retrieval failure, balanced source selection, approval/indication coverage,
+pre-model abstention gate, five-case recorded benchmark and measured limitations.
+Run `.\.venv\Scripts\python.exe -m devils_advocate.scientific_benchmark` from the
+repository root for deterministic public-fixture checks with zero model calls.
+
 The Next.js Evidence Trace, Medium/High configuration, measured timings,
 bounded retrieval budget, isolated browser QA and reproducible packet-size
 comparison are documented in [the workbench README](../frontend/README.md).
@@ -484,3 +496,14 @@ Repeat the optional full live smoke check with:
 ```powershell
 .\.venv\Scripts\python.exe -m devils_advocate.capture_example --check-search
 ```
+
+## Retrieval caching, prior-art checks and measured optimization
+
+See [OPTIMIZATION_VALIDATION.md](OPTIMIZATION_VALIDATION.md) for the five-case
+cold/warm measurements, actual Next.js/Flask/SQLite runs, authorized Medium/High
+comparison, scientific limitations and reproduction commands. Source timestamps
+and cache provenance appear in the UI; **Force refresh public sources** bypasses
+both memory and persistent caches. A cached public record is not a validated
+scientific conclusion. Full source records and selected/omitted packet IDs remain
+auditable. The five-attempt default and separate extra-call authorization retain
+the full adjudication workflow and human gates.
