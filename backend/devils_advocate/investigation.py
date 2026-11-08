@@ -12,7 +12,7 @@ from .devil_advocate import investigate_target
 from .experiment_designer import propose_experiment
 from .http_client import JsonClient, RetrievalDeadlineExceeded
 from .models import TargetInput
-from .workbench_demo import load_recorded
+from .workbench_demo import RecordedTargetUnavailable, load_recorded
 
 GENERIC_FAILURE = ('Investigation could not complete. Public sources or backend configuration may be '
                    'unavailable; private exception details were withheld.')
@@ -75,7 +75,7 @@ def run_investigation(payload: dict, *, investigator=investigate_target, ai_reas
                 'experiment': propose_experiment(result).model_dump(mode='json'),
                 'recorded_ai': recorded_ai, 'selection': payload['selection'], 'timings': timings,
                 'weights': payload['weights'], 'mode': payload['mode'], 'calls': calls}
-    except RetrievalDeadlineExceeded as exc:
+    except (RetrievalDeadlineExceeded, RecordedTargetUnavailable) as exc:
         raise InvestigationFailed(str(exc)) from exc
     except ValueError as exc:
         raise InvestigationFailed(IDENTITY_FAILURE) from exc

@@ -235,3 +235,20 @@ def test_approval_fails_closed_without_secret_on_vercel(tmp_path, monkeypatch):
 def test_offline_run_cannot_be_investigated_in_live_mode(app):
     client = app.test_client(); run = scout(client)
     assert client.post('/api/investigations', headers=LIVE, json={'run': run, 'symbol': 'LRRK2'}).status_code == 400
+
+
+def test_offline_target_without_recording_explains_demo_limit_instead_of_identity_failure(app):
+    client = app.test_client(); run = scout(client)
+    other = next(t['symbol'] for t in run['targets'] if t['symbol'] not in ['LRRK2', 'BACE1'])
+    job = investigate(client, run, symbol=other).get_json()
+    assert job['state'] == 'failed'
+    assert other in job['error'] and 'LRRK2' in job['error'] and 'Live' in job['error']
+    assert 'identity' not in job['error'].lower()
+
+
+def test_disease_suggestions_forwarded_in_offline_mode(app):
+    response = app.test_client().get('/api/diseases?q=park', headers=HEADERS)
+    assert response.status_code == 200
+    names = [d['name'] for d in response.get_json()['diseases']]
+    assert names == ['Parkinson disease']
+    assert app.test_client().get('/api/diseases?q=diabetes', headers=HEADERS).get_json()['diseases'] == []

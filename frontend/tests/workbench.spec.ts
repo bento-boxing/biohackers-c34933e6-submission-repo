@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 test('recorded LRRK2 flow: discovery, challenge, experiment, approval and screening',async({page})=>{
   await page.goto('/');
   await expect(page.getByRole('heading',{name:'A stronger starting hypothesis.'})).toBeVisible();
+  await page.getByLabel('Research data mode').selectOption('offline');
   await page.getByRole('button',{name:'Discover targets →'}).click();
   await expect(page.getByRole('button',{name:'Select LRRK2 →'})).toBeVisible({timeout:40_000});
   await page.screenshot({path:'test-results/discovery-desktop.png',fullPage:true});
@@ -35,10 +36,15 @@ test('recorded LRRK2 flow: discovery, challenge, experiment, approval and screen
   await expect(page.getByRole('button',{name:'Challenge this target →'})).toBeEnabled();
 });
 
-test('live authorization is explicit and mode change clears evidence',async({page})=>{
+test('live mode runs Gemini without a consent checkbox and mode change clears evidence',async({page})=>{
   await page.goto('/challenge');
   await page.getByLabel('Research data mode').selectOption('live');
-  const consent=page.getByRole('checkbox',{name:/I authorize up to/});
+  await expect(page.getByRole('checkbox',{name:/I authorize up to/})).toHaveCount(0);
+  await expect(page.getByText(/then Gemini/)).toBeVisible();
+  await page.getByLabel('Research data mode').selectOption('offline');
+  await expect(page.getByText('Open the recorded investigation.')).toBeVisible();
+  await expect(page.getByRole('heading',{name:'Scientific Challenge & Revision'})).toHaveCount(0);
+});
   await expect(consent).toBeVisible();
   if(await consent.isEnabled())await expect(page.getByRole('button',{name:'Challenge this target →'})).toBeDisabled();
   await page.getByLabel('Research data mode').selectOption('offline');
@@ -59,6 +65,7 @@ test('mobile dashboard and navigation remain usable',async({page})=>{
 
 test('reload restores the run, target and report from localStorage without backend restore calls',async({page})=>{
   await page.goto('/');
+  await page.getByLabel('Research data mode').selectOption('offline');
   await page.getByRole('button',{name:'Discover targets →'}).click();
   await page.getByRole('button',{name:'Select LRRK2 →'}).click();
   await page.getByRole('button',{name:'Challenge this target →'}).click();

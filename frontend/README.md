@@ -139,16 +139,18 @@ capture context. LRRK2 has no curated ChEMBL mechanism compounds in the recorded
 retrieval; its trials remain uncertain candidates, not demonstrated failures.
 The original smaller BACE1 fixture and all existing tests are retained.
 
-## Live workflow and explicit paid authorization
+## Live workflow and paid AI
 
 Choose **Live APIs**, run discovery, select a target and review the displayed
 model/call cap. Live Scout clients do **not** read the recorded demo cache.
 Successful live responses may use the normal server API cache, labelled
 **LIVE / API CACHE**; no recorded evidence is silently substituted on failures.
 
-The paid checkbox and **Challenge this target** button authorize the specific
-investigation. The backend independently requires `paid_authorized=true` and
-enabled AI configuration. Maximum paid request attempts are frozen server-side
+Pressing **Challenge this target** in Live APIs mode runs retrieval and, when the
+backend has `AI_ENABLED=true`, Gemini reasoning: there is no separate consent
+checkbox, so every live investigation is a billed one. The frontend sends
+`paid_authorized=true` for live requests; the backend still refuses AI when its
+configuration has it disabled. Maximum paid request attempts are frozen server-side
 at submission (default five), with medium thinking and a 120-second request
 timeout. Source retrieval remains deterministic; the existing three Gemini
 roles, one revision round and citation checks are reused. No new paid test was
@@ -243,7 +245,7 @@ npm.cmd --prefix frontend run test:e2e
 
 Playwright covers the recorded Parkinson/LRRK2 path, refresh recovery, experiment
 navigation, required rationale/confirmation, approved cached screening, clearing
-evidence after selecting SNCA, explicit live authorization, and mobile navigation.
+evidence after selecting SNCA, live-mode Gemini wording, and mobile navigation.
 Tests use installed Chrome and do not download a browser or call Gemini.
 TypeScript, ESLint and optimized Next.js build are separate checks.
 The final validation passed **182 Python tests** and **5 browser scenarios**,

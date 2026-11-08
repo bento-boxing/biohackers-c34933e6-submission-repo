@@ -11,7 +11,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 from pipeline import audit
-from pipeline.clients.opentargets import DiseaseNotFound
+from pipeline.clients.opentargets import DiseaseNotFound, suggest_diseases
 from pipeline.http import CacheMiss, HttpClient, UpstreamError, default_client
 from pipeline.models import ScoutResult, Weights
 from pipeline.scout.pipeline import rescore, run_scout
@@ -22,6 +22,8 @@ from pipeline.clients.chembl import chembl_molecule_url
 from pipeline.models import Compound, ScreeningResult
 
 RUNS: dict[str, ScoutResult] = {}
+# Diseases the recorded demo cache can serve end to end; offline suggestions never leave this list.
+RECORDED_DISEASES = [{"id": "MONDO_0005180", "name": "Parkinson disease"}]
 SCORE_KEYS = ("genetic", "association", "druggability", "literature", "total")
 SCORE_TOLERANCE = 0.0005
 
@@ -118,6 +120,17 @@ def create_app(client: HttpClient | None = None,
         run_id = uuid.uuid4().hex
         RUNS[run_id] = result
         return jsonify(scout_run_json(run_id, result, http.cache_only))
+
+    @app.get("/api/diseases")
+    def diseases():
+        q = (request.args.get("q") or "").strip()
+        if not q:
+            return error("q is required", 400)
+        if http.cache_only:
+            found = [d for d in RECORDED_DISEASES if q.casefold() in d["name"].casefold()]
+        else:
+            found = [{"id": d.id, "name": d.name} for d in suggest_diseases(http, q)]
+        return jsonify({"query": q, "diseases": found})
 
     @app.get("/api/approvals")
     def list_approvals():
