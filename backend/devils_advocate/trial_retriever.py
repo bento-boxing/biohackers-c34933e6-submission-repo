@@ -130,6 +130,16 @@ def parse_trial(record: dict, compounds: list[Compound]) -> Trial:
                      'Alias within intervention text; review needed' if probable else 'No intervention alias match',
         url=f'https://clinicaltrials.gov/study/{nct}')
 
+STOPPED_STATUSES = {'TERMINATED', 'WITHDRAWN', 'SUSPENDED'}
+FULL_RECORD_RESERVE_SECONDS = 30  # keep time for literature retrieval after trials
+
+
+def _remaining_seconds(client) -> float | None:
+    getter = getattr(client, 'remaining_seconds', None)
+    value = getter() if callable(getter) else None
+    return value if isinstance(value, (int, float)) else None
+
+
 def retrieve_trials(client: JsonClient, target: TargetInput, compounds: list[Compound],
                     notes: list[str]) -> list[Trial]:
     found = {}
@@ -158,7 +168,15 @@ def retrieve_trials(client: JsonClient, target: TargetInput, compounds: list[Com
             notes.append(str(exc))
     # Search results may omit fields. Fetch each unique trial's full record once
     # (the shared client caches it), then inspect actual field membership.
-    for trial in found.values():
+    # Stopped trials are verified first; when the retrieval budget runs short the rest keep
+    # their search-response stop reason, explicitly marked as not verified against the record.
+    ordered = sorted(found.values(), key=lambda t: t.status not in STOPPED_STATUSES)
+    for index, trial in enumerate(ordered):
+        remaining = _remaining_seconds(client)
+        if remaining is not None and remaining < FULL_RECORD_RESERVE_SECONDS:
+            notes.append(f'Full registry record checks stopped after {index} of {len(ordered)} trials: '
+                         'retrieval time budget nearly exhausted. Unchecked trials are labelled as not verified.')
+            break
         reason = fetch_stop_reason(client, trial.nct_id)
         reason.search_value = trial.stop_reason.value
         reason.search_state = trial.stop_reason.state

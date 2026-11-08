@@ -57,22 +57,19 @@ test('mobile dashboard and navigation remain usable',async({page})=>{
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
 });
 
-test('temporary backend failure preserves the saved job for later recovery',async({page})=>{
+test('reload restores the run, target and report from localStorage without backend restore calls',async({page})=>{
   await page.goto('/');
   await page.getByRole('button',{name:'Discover targets →'}).click();
   await page.getByRole('button',{name:'Select LRRK2 →'}).click();
   await page.getByRole('button',{name:'Challenge this target →'}).click();
   await expect(page.getByRole('heading',{name:'Scientific Challenge & Revision'})).toBeVisible({timeout:40_000});
-  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('agentverse-workbench-v1')||'null'));
-  expect(saved.job_id).toBeTruthy();
-  await page.route('**/api/workbench/runs/**',route=>route.abort());
-  await page.reload();
-  await expect(page.getByRole('alert').filter({hasText:'Previous session could not be restored'})).toBeVisible();
-  const retained=await page.evaluate(()=>JSON.parse(localStorage.getItem('agentverse-workbench-v1')||'null'));
-  expect(retained.job_id).toBe(saved.job_id);
-  await page.unroute('**/api/workbench/runs/**');
+  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('agentverse-workbench-v2')||'null'));
+  expect(saved.job.result.investigation.target.target_symbol).toBe('LRRK2');
+  const restoreCalls:string[]=[];
+  await page.route('**/api/**',route=>{const url=route.request().url();if(!url.includes('/api/workbench/config'))restoreCalls.push(url);return route.continue();});
   await page.reload();
   await expect(page.getByRole('heading',{name:'Scientific Challenge & Revision'})).toBeVisible({timeout:30_000});
+  expect(restoreCalls).toEqual([]);
 });
 
 test('BACE1 archived Gemini output is visibly recorded with zero new calls',async({page})=>{

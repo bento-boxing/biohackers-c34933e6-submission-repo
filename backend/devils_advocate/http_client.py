@@ -46,6 +46,12 @@ class JsonClient:
             profile['total_seconds'] = round(time.monotonic() - started, 6)
             self._observer, self._deadline, self._should_cancel, self._profile, self._profile_start = previous
 
+    def remaining_seconds(self):
+        """Seconds left in the current tracking budget, or None outside tracking."""
+        if self._deadline is None:
+            return None
+        return max(0.0, self._deadline - time.monotonic())
+
     def _check_budget(self):
         if self._should_cancel and self._should_cancel():
             raise RetrievalDeadlineExceeded('Retrieval stopped before a further request after cancellation was observed.')

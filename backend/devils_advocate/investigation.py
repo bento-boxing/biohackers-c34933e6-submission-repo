@@ -24,8 +24,12 @@ class InvestigationFailed(RuntimeError):
     """User-safe failure; str(exc) may be shown in the UI."""
 
 
-def default_budget_seconds() -> int:
-    return int(os.getenv('RESEARCH_RETRIEVAL_BUDGET_SECONDS', '150'))
+def default_budget_seconds(use_ai: bool = False) -> int:
+    """Fit one Vercel request (300 s): retrieval + up to 120 s of Gemini when AI is on."""
+    override = os.getenv('RESEARCH_RETRIEVAL_BUDGET_SECONDS')
+    if override:
+        return int(override)
+    return 150 if use_ai else 240
 
 
 def run_investigation(payload: dict, *, investigator=investigate_target, ai_reasoner=run_ai_reasoning,
@@ -40,7 +44,7 @@ def run_investigation(payload: dict, *, investigator=investigate_target, ai_reas
             timings = {'recorded_playback_seconds': round(time.monotonic() - started, 6)}
         else:
             client = client or JsonClient()
-            budget = budget_seconds if budget_seconds is not None else default_budget_seconds()
+            budget = budget_seconds if budget_seconds is not None else default_budget_seconds(payload['use_ai'])
             with client.tracking(None, budget_seconds=budget) as measured:
                 result = investigator(target, client=client)
             timings = {'retrieval': measured}
