@@ -1,0 +1,40 @@
+[
+  {
+    "route": "/api/screen",
+    "status": 403,
+    "response": {
+      "error": "An explicit researcher approval is required before screening."
+    }
+  },
+  {
+    "route": "/api/approvals",
+    "status": 403,
+    "response": {
+      "error": "Use the Researcher Decision endpoint after reviewing an investigation."
+    }
+  },
+  {
+    "route": "/api/workbench/decisions",
+    "status": 404,
+    "response": {
+      "error": "Unknown endpoint."
+    }
+  },
+  {
+    "route": "/api/investigations existing public-only idempotency key",
+    "status": 202,
+    "response": {
+      "created": false,
+      "job_id": "7ea61b17e5d84910933071a3def19d9e",
+      "state": "completed"
+    },
+    "same_job": true
+  },
+  {
+    "route": "/api/research-decisions unconfirmed",
+    "status": 400,
+    "response": {
+      "error": "Explicit confirmation and an originating Scout run are required for screening approval."
+    }
+  }
+]

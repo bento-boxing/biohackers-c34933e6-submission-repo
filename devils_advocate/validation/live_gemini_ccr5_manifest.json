@@ -1,0 +1,26 @@
+{
+  "idempotency_key": "d8e3f7e3-4f61-4de5-96a9-790f3cba4061",
+  "started_at": 1794103436.7051728,
+  "authorized_max_calls": 5,
+  "backend": {
+    "code_matches_disk": true,
+    "disk_source_hash": "a76f7c958d96b4dbbf34",
+    "pipeline_version": "association-pathways-v1",
+    "process_loaded_at": 1794103139.3573282,
+    "source_hash": "a76f7c958d96b4dbbf34"
+  },
+  "ai": {
+    "enabled": true,
+    "max_calls": 5,
+    "model": "gemini-4-argon",
+    "provider": "google",
+    "thinking_level": "medium",
+    "timeout_seconds": 120
+  },
+  "authorization": "User explicitly authorized one replacement after ChEMBL HTTP 500; five total attempts across both jobs.",
+  "previous_job_id": "6dbe27c05275411b8eff620316ae850b",
+  "previous_paid_attempts": 0,
+  "job_id": "398304dac2fd43ae9edcf3ad044e9a7d",
+  "finished_at": 1794103675.5896442,
+  "wall_seconds": 238.884471
+}

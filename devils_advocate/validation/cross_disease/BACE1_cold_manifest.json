@@ -1,0 +1,13 @@
+{
+  "case": "BACE1",
+  "target_input": {
+    "disease_name": "Alzheimer's disease",
+    "target_symbol": "BACE1",
+    "target_id": "ENSG00000186318",
+    "disease_id": "MONDO_0004975"
+  },
+  "started_at": 1794109562.0441067,
+  "idempotency_key": "26238e71-7e99-4dcf-b59d-457c76f75054",
+  "paid_calls_authorized": 0,
+  "job_id": "f2921ef2e2014fd9a39887487ec9224f"
+}

@@ -10,6 +10,7 @@ from .http_client import JsonClient, RetrievalDeadlineExceeded
 from .job_store import JobStore
 from .models import TargetInput
 from .workbench_demo import load_recorded
+from .build_info import runtime_info
 
 class JobWorker:
     def __init__(self, store: JobStore, *, investigator=investigate_target, ai_reasoner=run_ai_reasoning):
@@ -17,7 +18,7 @@ class JobWorker:
         self.investigator = investigator
         self.ai_reasoner = ai_reasoner
         self.stop = threading.Event()
-        self.client = JsonClient()  # Reuse verified resolution + HTTP caches across jobs.
+        self.client = JsonClient(cache_path=store.path.parent/'public-evidence-cache.sqlite3',max_workers=4)
 
     def execute(self, job):
         identifier, payload = job['id'], job['payload']
@@ -45,7 +46,8 @@ class JobWorker:
                     except OSError:
                         pass  # SQLite remains authoritative if diagnostic logging fails.
                 with self.client.tracking(retrieval_progress, budget_seconds=300,
-                        should_cancel=lambda: self.store.cancelled(identifier)) as measured:
+                        should_cancel=lambda: self.store.cancelled(identifier),
+                        scope=target.model_dump(mode='json'),refresh=payload.get('refresh_evidence',False)) as measured:
                     result = self.investigator(target, client=self.client)
                 timings = {'retrieval': measured}
                 self.store.progress(identifier, 'Biomedical evidence retrieved', timings=timings)
@@ -56,7 +58,8 @@ class JobWorker:
                 def progress(calls):
                     self.store.progress(identifier, calls[-1].role, [c.model_dump(mode='json') for c in calls])
                 result.ai = self.ai_reasoner(result, settings=settings, on_progress=progress,
-                    should_cancel=lambda: self.store.cancelled(identifier))
+                    should_cancel=lambda: self.store.cancelled(identifier),prior_art_client=self.client,
+                    on_stage=lambda stage:self.store.progress(identifier,stage))
             if self.store.cancelled(identifier):
                 self.store.finish(identifier, 'cancelled', error='Stopped before further calls. An in-flight provider request may still have been billed.')
                 return
@@ -64,6 +67,10 @@ class JobWorker:
                       'experiment': propose_experiment(result).model_dump(mode='json'),
                       'recorded_ai': recorded_ai, 'selection': payload['selection'],
                       'timings': timings,
+                      'provenance':{**runtime_info(),'retrieved_at':time.time(),
+                        'source_mode':'recorded' if payload['mode']=='offline' else 'live_public_api',
+                        'source_counts':{'trials':len(result.trials),'publications':len(result.publications),'compounds':len(result.compounds)},
+                        'cache_hits':timings.get('retrieval',{}).get('cache_hits',0)},
                       'weights': payload['weights'], 'mode': payload['mode']}
             self.store.progress(identifier, 'Report ready for researcher review', timings=timings)
             self.store.finish(identifier, 'completed', result=report)

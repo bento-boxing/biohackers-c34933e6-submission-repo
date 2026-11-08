@@ -1,0 +1,14 @@
+{
+  "case": "preclinical",
+  "target_input": {
+    "disease_name": "Rett syndrome",
+    "target_symbol": "SLC12A5",
+    "target_id": "ENSG00000124140",
+    "disease_id": "MONDO_0010726"
+  },
+  "started_at": 1794111871.0955155,
+  "idempotency_key": "ef77fe80-317a-420d-a033-f0c07d4ff7c8",
+  "paid_calls_authorized": 0,
+  "job_id": "2e8315945aba40988a23381550f4e2de",
+  "finished_at": 1794112035.0151813
+}

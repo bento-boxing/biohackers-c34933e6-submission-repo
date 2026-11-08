@@ -1,0 +1,14 @@
+{
+  "case": "CFTR",
+  "target_input": {
+    "disease_name": "cystic fibrosis",
+    "target_symbol": "CFTR",
+    "target_id": "ENSG00000001626",
+    "disease_id": "MONDO_0009061"
+  },
+  "started_at": 1794110507.0261166,
+  "idempotency_key": "41f92904-b247-4275-ad54-c8cc5604af0f",
+  "paid_calls_authorized": 0,
+  "job_id": "b223161215b94d35ad177f2c7a2b1b11",
+  "finished_at": 1794110544.6926038
+}

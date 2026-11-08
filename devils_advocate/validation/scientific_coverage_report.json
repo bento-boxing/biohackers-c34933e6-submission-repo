@@ -1,0 +1,165 @@
+{
+  "cases": [
+    {
+      "target": "CCR5",
+      "expected_conclusion": "Maraviroc is an approved precedent for selected CCR5-tropic HIV-1 populations, in combination therapy. MERIT endpoint and tropism differences do not invalidate CCR5.",
+      "checks": {
+        "reference_context_preserved_and_scoped": true,
+        "approval_metadata_preserved": true,
+        "status_not_used_as_outcome": true,
+        "missing_publications_abstains": true,
+        "no_unverified_fallback_experiment": true,
+        "all_curated_directions_kept": true
+      },
+      "approved_precedent_in_fixture": true,
+      "coverage": "BOUNDED REVIEW",
+      "coverage_gaps": [],
+      "selected": [
+        "CHEMBL256907",
+        "NCT00098306",
+        "MED:18832244",
+        "MED:20151839",
+        "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+        "SPL:0c5f41e8-d358-403a-b199-6b9028b52748"
+      ],
+      "direction_candidates": {
+        "MED:18832244": [
+          "positive_candidate"
+        ],
+        "MED:20151839": [
+          "negative_candidate"
+        ]
+      },
+      "uncertainty": "Curated source subset; not an exhaustive clinical search or a verified Gemini interpretation."
+    },
+    {
+      "target": "PCSK9",
+      "expected_conclusion": "Evolocumab provides approved LDL-lowering precedent; bococizumab immunogenicity/variability is a compound-specific concern, not PCSK9 invalidity.",
+      "checks": {
+        "reference_context_preserved_and_scoped": true,
+        "approval_metadata_preserved": true,
+        "status_not_used_as_outcome": true,
+        "missing_publications_abstains": true,
+        "no_unverified_fallback_experiment": true,
+        "all_curated_directions_kept": true
+      },
+      "approved_precedent_in_fixture": true,
+      "coverage": "INSUFFICIENT COVERAGE",
+      "coverage_gaps": [
+        "No registry trial with a visible disease match; population applicability unresolved."
+      ],
+      "selected": [
+        "CHEMBL2364655",
+        "CHEMBL3137349",
+        "NCT01763866",
+        "MED:24825642",
+        "MED:28304227"
+      ],
+      "direction_candidates": {
+        "MED:24825642": [
+          "positive_candidate"
+        ],
+        "MED:28304227": [
+          "compound_limitation_candidate"
+        ]
+      },
+      "uncertainty": "Curated source subset; not an exhaustive clinical search or a verified Gemini interpretation."
+    },
+    {
+      "target": "EGFR",
+      "expected_conclusion": "Osimertinib provides approved precedent for specified EGFR-mutant NSCLC populations; do not generalise efficacy to EGFR-wild-type disease or all resistance settings.",
+      "checks": {
+        "reference_context_preserved_and_scoped": true,
+        "approval_metadata_preserved": true,
+        "status_not_used_as_outcome": true,
+        "missing_publications_abstains": true,
+        "no_unverified_fallback_experiment": true,
+        "all_curated_directions_kept": true
+      },
+      "approved_precedent_in_fixture": true,
+      "coverage": "BOUNDED REVIEW",
+      "coverage_gaps": [],
+      "selected": [
+        "CHEMBL3353410",
+        "NCT02296125",
+        "MED:29151359"
+      ],
+      "direction_candidates": {
+        "MED:29151359": [
+          "positive_candidate",
+          "safety_candidate"
+        ]
+      },
+      "uncertainty": "Curated source subset; not an exhaustive clinical search or a verified Gemini interpretation."
+    },
+    {
+      "target": "BACE1",
+      "expected_conclusion": "Verubecestat did not improve prodromal Alzheimer clinical outcomes; some outcomes worsened. Biomarker modulation is not clinical efficacy, and this is not universal target invalidity.",
+      "checks": {
+        "reference_context_preserved_and_scoped": true,
+        "approval_metadata_preserved": true,
+        "status_not_used_as_outcome": true,
+        "missing_publications_abstains": true,
+        "no_unverified_fallback_experiment": true,
+        "all_curated_directions_kept": true
+      },
+      "approved_precedent_in_fixture": false,
+      "coverage": "BOUNDED REVIEW",
+      "coverage_gaps": [],
+      "selected": [
+        "CHEMBL3301601",
+        "NCT01953601",
+        "MED:30970186"
+      ],
+      "direction_candidates": {
+        "MED:30970186": [
+          "negative_candidate"
+        ]
+      },
+      "uncertainty": "Curated source subset; not an exhaustive clinical search or a verified Gemini interpretation."
+    },
+    {
+      "target": "LRRK2",
+      "expected_conclusion": "Early clinical safety/engagement is not established disease-modifying benefit. Distinguish the registry stop reason from a demonstrated efficacy failure. Contemporary efficacy/approval remains outside this small reference extract.",
+      "checks": {
+        "reference_context_preserved_and_scoped": true,
+        "approval_metadata_preserved": true,
+        "status_not_used_as_outcome": true,
+        "missing_publications_abstains": true,
+        "no_unverified_fallback_experiment": true,
+        "all_curated_directions_kept": true
+      },
+      "approved_precedent_in_fixture": false,
+      "coverage": "BOUNDED REVIEW",
+      "coverage_gaps": [],
+      "selected": [
+        "NCT05418673",
+        "MED:36807624"
+      ],
+      "direction_candidates": {
+        "MED:36807624": []
+      },
+      "uncertainty": "Curated source subset; not an exhaustive clinical search or a verified Gemini interpretation."
+    }
+  ],
+  "checks_passed": 30,
+  "checks_total": 30,
+  "positive_evidence_omission": {
+    "cases": 3,
+    "legacy_phrase_filter_misses": 2,
+    "new_filter_and_packet_misses": 0,
+    "meaning": "False-negative evidence omission in recorded reference replay, not measured AI scientific false-negative diagnoses."
+  },
+  "coverage_check_ms": {
+    "runs": 500,
+    "median": 0.077,
+    "p95": 0.1431
+  },
+  "paid_calls": 0,
+  "limitations": [
+    "No paid or semantic Gemini evaluation performed.",
+    "Reference cases and expectations selected by implementer, not independently blinded.",
+    "No absence-of-approval claim is made for BACE1/LRRK2; phase and source extracts only describe retrieved records.",
+    "Direction detectors are triage signals; published efficacy and safety interpretations require expert adjudication."
+  ]
+}

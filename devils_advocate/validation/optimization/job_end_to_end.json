@@ -1,0 +1,50 @@
+{
+  "backend": {
+    "code_matches_disk": true,
+    "disk_source_hash": "f5045e4c10651a3a268c",
+    "pipeline_version": "association-pathways-v1",
+    "process_loaded_at": 1794107431.9538906,
+    "source_hash": "f5045e4c10651a3a268c"
+  },
+  "initial_cache_entries": 0,
+  "method": "Fresh Next proxy -> Flask production worker -> SQLite -> Next GET, public-only, AI disabled.",
+  "cases": [
+    {
+      "phase": "first",
+      "job_id": "424dcd2b2cac439c920105c431ca077c",
+      "end_to_end_seconds": 56.305937,
+      "retrieval_seconds": 54.628748,
+      "requests": 56,
+      "cache_hits": 0,
+      "network_attempts": 56,
+      "trials": 136,
+      "publications": 138,
+      "coverage": "BOUNDED REVIEW",
+      "pathway": "clinical_precedent",
+      "sqlite_api_equal": true,
+      "source_provenance_modes": [
+        "LIVE"
+      ],
+      "paid_calls": 0
+    },
+    {
+      "phase": "repeat",
+      "job_id": "2e641624c6b4442f87b4b03ea435485b",
+      "end_to_end_seconds": 10.655687,
+      "retrieval_seconds": 8.848113,
+      "requests": 0,
+      "cache_hits": 186,
+      "network_attempts": 0,
+      "trials": 136,
+      "publications": 138,
+      "coverage": "BOUNDED REVIEW",
+      "pathway": "clinical_precedent",
+      "sqlite_api_equal": true,
+      "source_provenance_modes": [
+        "CACHED_MEMORY"
+      ],
+      "paid_calls": 0
+    }
+  ],
+  "paid_calls": 0
+}

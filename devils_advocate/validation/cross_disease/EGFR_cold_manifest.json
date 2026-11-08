@@ -1,0 +1,13 @@
+{
+  "case": "EGFR",
+  "target_input": {
+    "disease_name": "EGFR-mutant non-small-cell lung cancer",
+    "target_symbol": "EGFR",
+    "target_id": "ENSG00000146648",
+    "disease_id": "MONDO_0005233"
+  },
+  "started_at": 1794109499.103476,
+  "idempotency_key": "7c93d23a-103a-4ebc-8015-51e122d3c0a1",
+  "paid_calls_authorized": 0,
+  "job_id": "7de2b3a62fbd4c12ae6a6f64c5329903"
+}

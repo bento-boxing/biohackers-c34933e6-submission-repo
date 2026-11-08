@@ -1,0 +1,240 @@
+{
+  "status": 200,
+  "seconds": 12.328465599988704,
+  "response": {
+    "cache_only": false,
+    "default_weights": {
+      "association": 0.3,
+      "druggability": 0.2,
+      "genetic": 0.4,
+      "literature": 0.1
+    },
+    "disease": {
+      "id": "MONDO_0009061",
+      "name": "cystic fibrosis"
+    },
+    "run_id": "ce9d5aeba72b4c5784a0781956c6a008",
+    "targets": [
+      {
+        "chembl_target_id": "CHEMBL4051",
+        "components": {
+          "association": 0.9211437412666207,
+          "druggability": 1.0,
+          "genetic": 0.9559864519292256,
+          "literature": 1.0
+        },
+        "has_approved_drug": true,
+        "literature_hits": 34368,
+        "name": "CF transmembrane conductance regulator",
+        "open_targets_url": "https://platform.opentargets.org/target/ENSG00000001626",
+        "pmids": [
+          "42963477",
+          "42931970",
+          "42946579"
+        ],
+        "potent_count": 819,
+        "safety_flags": [
+          {
+            "detail": "adverse events",
+            "kind": "liability"
+          }
+        ],
+        "symbol": "CFTR",
+        "target_id": "ENSG00000001626",
+        "tractability_sm_labels": [
+          "Approved Drug",
+          "Structure with Ligand",
+          "High-Quality Ligand",
+          "High-Quality Pocket",
+          "Druggable Family"
+        ],
+        "uniprot": "P13569"
+      },
+      {
+        "chembl_target_id": "CHEMBL1075145",
+        "components": {
+          "association": 0.464666605307334,
+          "druggability": 0.8030971384480019,
+          "genetic": 0.0,
+          "literature": 0.6116434931257771
+        },
+        "has_approved_drug": false,
+        "literature_hits": 594,
+        "name": "valosin containing protein",
+        "open_targets_url": "https://platform.opentargets.org/target/ENSG00000165280",
+        "pmids": [
+          "42728818",
+          "42751151",
+          "42066560"
+        ],
+        "potent_count": 436,
+        "safety_flags": [
+          {
+            "detail": "Kidney - Medulla: 59 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Heart - Left Ventricle: 72 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Heart - Atrial Appendage: 66 TPM",
+            "kind": "expression"
+          }
+        ],
+        "symbol": "VCP",
+        "target_id": "ENSG00000165280",
+        "tractability_sm_labels": [
+          "Structure with Ligand",
+          "High-Quality Ligand",
+          "High-Quality Pocket",
+          "Druggable Family"
+        ],
+        "uniprot": "P55072"
+      },
+      {
+        "chembl_target_id": "CHEMBL4523597",
+        "components": {
+          "association": 0.5590034801739948,
+          "druggability": 0.5516556669221879,
+          "genetic": 0.0,
+          "literature": 0.3430875751303001
+        },
+        "has_approved_drug": true,
+        "literature_hits": 35,
+        "name": "ribosomal protein S27a",
+        "open_targets_url": "https://platform.opentargets.org/target/ENSG00000143947",
+        "pmids": [
+          "41212059",
+          "41889639",
+          "42074047"
+        ],
+        "potent_count": 1,
+        "safety_flags": [
+          {
+            "detail": "Liver: 593 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Kidney - Cortex: 862 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Kidney - Medulla: 1458 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Heart - Left Ventricle: 456 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Heart - Atrial Appendage: 690 TPM",
+            "kind": "expression"
+          }
+        ],
+        "symbol": "RPS27A",
+        "target_id": "ENSG00000143947",
+        "tractability_sm_labels": [
+          "Approved Drug",
+          "Structure with Ligand",
+          "High-Quality Ligand"
+        ],
+        "uniprot": "P62979"
+      },
+      {
+        "chembl_target_id": "CHEMBL4523179",
+        "components": {
+          "association": 0.4664169115565105,
+          "druggability": 0.35,
+          "genetic": 0.0,
+          "literature": 0.6106731428185082
+        },
+        "has_approved_drug": false,
+        "literature_hits": 588,
+        "name": "ubiquitin C",
+        "open_targets_url": "https://platform.opentargets.org/target/ENSG00000150991",
+        "pmids": [
+          "41221812",
+          "42153326",
+          "42089300"
+        ],
+        "potent_count": 0,
+        "safety_flags": [
+          {
+            "detail": "Liver: 111 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Kidney - Cortex: 147 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Kidney - Medulla: 199 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Heart - Left Ventricle: 146 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Heart - Atrial Appendage: 253 TPM",
+            "kind": "expression"
+          }
+        ],
+        "symbol": "UBC",
+        "target_id": "ENSG00000150991",
+        "tractability_sm_labels": [
+          "Structure with Ligand",
+          "High-Quality Pocket"
+        ],
+        "uniprot": "P0CG48"
+      },
+      {
+        "chembl_target_id": "CHEMBL5465346",
+        "components": {
+          "association": 0.48084106753843,
+          "druggability": 0.0,
+          "genetic": 0.0,
+          "literature": 0.4696330221732615
+        },
+        "has_approved_drug": false,
+        "literature_hits": 134,
+        "name": "ring finger protein 5",
+        "open_targets_url": "https://platform.opentargets.org/target/ENSG00000204308",
+        "pmids": [
+          "42749230",
+          "41723327",
+          "42744971"
+        ],
+        "potent_count": 0,
+        "safety_flags": [
+          {
+            "detail": "Liver: 76 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Kidney - Cortex: 91 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Kidney - Medulla: 124 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Heart - Left Ventricle: 57 TPM",
+            "kind": "expression"
+          },
+          {
+            "detail": "Heart - Atrial Appendage: 58 TPM",
+            "kind": "expression"
+          }
+        ],
+        "symbol": "RNF5",
+        "target_id": "ENSG00000204308",
+        "tractability_sm_labels": [],
+        "uniprot": "Q99942"
+      }
+    ]
+  },
+  "mode": "live"
+}

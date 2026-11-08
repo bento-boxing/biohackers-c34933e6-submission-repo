@@ -1,0 +1,13 @@
+{
+  "case": "PCSK9",
+  "target_input": {
+    "disease_name": "Hypercholesterolemia",
+    "target_symbol": "PCSK9",
+    "target_id": "ENSG00000169174"
+  },
+  "started_at": 1794111441.6143715,
+  "idempotency_key": "7e54c238-5a60-46c2-8ced-e2e1cd317ad0",
+  "paid_calls_authorized": 0,
+  "job_id": "7883d22c1b634a4484321e3cb3c5728e",
+  "finished_at": 1794111460.010405
+}

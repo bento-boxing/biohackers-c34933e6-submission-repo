@@ -1,0 +1,13 @@
+{
+  "case": "fabricated",
+  "target_input": {
+    "disease_name": "HIV infection",
+    "target_symbol": "AUDIT_FAKE_GENE_ZXQ987",
+    "disease_id": "MONDO_0005109"
+  },
+  "started_at": 1794110416.3443155,
+  "idempotency_key": "73887ee1-ae8a-4c3a-95d0-6223f04dce1b",
+  "paid_calls_authorized": 0,
+  "job_id": "5ece38080be64305b02fd7cb9250292e",
+  "finished_at": 1794110416.6953588
+}

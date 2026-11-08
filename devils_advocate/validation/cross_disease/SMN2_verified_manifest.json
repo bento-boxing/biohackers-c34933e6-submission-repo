@@ -1,0 +1,14 @@
+{
+  "case": "SMN2",
+  "target_input": {
+    "disease_name": "spinal muscular atrophy",
+    "target_symbol": "SMN2",
+    "target_id": "ENSG00000205571",
+    "disease_id": "MONDO_0001516"
+  },
+  "started_at": 1794111651.2426586,
+  "idempotency_key": "fc014305-7577-40e5-96ad-0c7bd6182384",
+  "paid_calls_authorized": 0,
+  "job_id": "8d28d6662a1d42288e0e07eb752d74d7",
+  "finished_at": 1794111721.352986
+}

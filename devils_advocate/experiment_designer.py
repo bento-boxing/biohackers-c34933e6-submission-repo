@@ -1,9 +1,35 @@
 from .models import Experiment, Investigation
 
+def abstain_experiment(reason: str) -> Experiment:
+    return Experiment(question='Insufficient evidence to identify a meaningful unresolved experiment.',
+        competing_explanations=[],model='',measurement='',controls=[],possible_results=[],
+        limitations=[reason,'Existing clinical knowledge and population-specific precedent must be reviewed before proposing a novel study.'],
+        decision_impact='Obtain missing clinical/indication evidence and researcher review before choosing an experiment.',
+        evidence_ids=[],status='INSUFFICIENT EVIDENCE FOR EXPERIMENT')
+
+def check_experiment_readiness(result: Investigation, experiment: Experiment, accepted_count: int) -> Experiment:
+    """Fail closed on missing knowledge review; this cannot certify scientific novelty."""
+    if experiment.status=='INSUFFICIENT EVIDENCE FOR EXPERIMENT':return experiment
+    if not accepted_count or not experiment.evidence_ids:
+        return abstain_experiment('No accepted evidence-grounded uncertainty anchors a meaningful study.')
+    if not experiment.knowledge_review.strip() or not experiment.unresolved_gap.strip():
+        return abstain_experiment('The synthesis did not document existing knowledge and a specific unresolved gap.')
+    import re
+    if any(c.max_phase==4 and any(r.get('approval_precedent') and r.get('disease_match') in ['identifier','lexical'] for r in c.indications) for c in result.compounds):
+        broad=re.search(r'\b(?:does|can)\b.{0,150}\b(?:benefit|effective|efficacy|work)\b',experiment.question,re.I)
+        scoped=re.search(r'\b(resistan\w*|subgroup|population|mechanism|selectiv\w*|toxic\w*|safety|tropism|stage|exposure|combination|dose|variant|mutation|therapeutic window)\b',experiment.question,re.I)
+        if broad and not scoped:
+            return abstain_experiment('A broad treatment-benefit question risks repeating approved clinical precedent; define an evidence-grounded unresolved scope first.')
+    return experiment
+
 def propose_experiment(investigation: Investigation | dict) -> Experiment:
     result = Investigation.model_validate(investigation)
     if result.ai and result.ai.status == 'completed' and result.ai.experiment is not None:
         return result.ai.experiment.model_copy(deep=True)
+    if result.mode=='live':
+        # The fallback cannot establish novelty, including when Gemini is disabled
+        # or coverage/verification failed. Historical recorded demos stay intact.
+        return abstain_experiment('No verified synthesis established a specific unresolved scientific question; '+result.conclusion)
     evidence = [c.claim_id for c in result.claims if c.verified and c.source_field == 'why_stopped']
     target = result.target.target_symbol
     disease = result.target.disease_name

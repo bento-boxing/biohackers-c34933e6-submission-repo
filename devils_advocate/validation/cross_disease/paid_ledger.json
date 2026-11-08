@@ -1,0 +1,302 @@
+{
+  "authorization": "Current cross-disease audit request: up to three cases, five attempts each, fifteen aggregate; do not repeat failed jobs.",
+  "max_total": 15,
+  "max_per_case": 5,
+  "selected_cases": [
+    "PCSK9",
+    "BACE1",
+    "preclinical"
+  ],
+  "cases": {
+    "PCSK9": {
+      "idempotency_key": "f779bbad-e56c-4868-afb5-a045199916e1",
+      "started_at": 1794111813.5216293,
+      "backend": {
+        "code_matches_disk": true,
+        "disk_source_hash": "b16ff4f63df9ac9072fd",
+        "pipeline_version": "association-pathways-v1",
+        "process_loaded_at": 1794111411.376349,
+        "source_hash": "b16ff4f63df9ac9072fd"
+      },
+      "configuration": {
+        "enabled": true,
+        "max_calls": 5,
+        "model": "gemini-4-argon",
+        "provider": "google",
+        "thinking_level": "medium",
+        "timeout_seconds": 120
+      },
+      "calls": [
+        {
+          "duration_seconds": 50.874119,
+          "error": "",
+          "payload_bytes": 70955,
+          "role": "Devils Advocate",
+          "started_at": 1794111886.269766,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 20789,
+            "total_output_tokens": 2413,
+            "total_thought_tokens": 889,
+            "total_tokens": 24091
+          }
+        },
+        {
+          "duration_seconds": 13.662929,
+          "error": "",
+          "payload_bytes": 78514,
+          "role": "Evidence Adjudicator",
+          "started_at": 1794111937.2072065,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 22324,
+            "total_output_tokens": 497,
+            "total_thought_tokens": 0,
+            "total_tokens": 22821
+          }
+        },
+        {
+          "duration_seconds": 29.443881,
+          "error": "",
+          "payload_bytes": 81530,
+          "role": "Devils Advocate revision",
+          "started_at": 1794111950.9166553,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 18735,
+            "total_input_tokens": 23340,
+            "total_output_tokens": 2392,
+            "total_thought_tokens": 116,
+            "total_tokens": 25848
+          }
+        },
+        {
+          "duration_seconds": 21.044681,
+          "error": "",
+          "payload_bytes": 77875,
+          "role": "Evidence Adjudicator",
+          "started_at": 1794111980.408947,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 16384,
+            "total_input_tokens": 22203,
+            "total_output_tokens": 427,
+            "total_thought_tokens": 350,
+            "total_tokens": 22980
+          }
+        },
+        {
+          "duration_seconds": 31.656986,
+          "error": "",
+          "payload_bytes": 70596,
+          "role": "Experimental Challenger",
+          "started_at": 1794112001.918828,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 20486,
+            "total_output_tokens": 2258,
+            "total_thought_tokens": 113,
+            "total_tokens": 22857
+          }
+        }
+      ],
+      "target_input": {
+        "disease_name": "Hypercholesterolemia",
+        "target_symbol": "PCSK9",
+        "target_id": "ENSG00000169174"
+      },
+      "job_id": "6f0a021ecf4f4f5192e3f78591c174c6",
+      "state": "completed",
+      "finished_at": 1794112034.071571,
+      "wall_seconds": 220.549942,
+      "ai_status": "failed"
+    },
+    "BACE1": {
+      "idempotency_key": "993cf32a-f3cb-4e43-ac14-d8ca9a9fa6df",
+      "started_at": 1794112036.8546412,
+      "backend": {
+        "code_matches_disk": true,
+        "disk_source_hash": "b16ff4f63df9ac9072fd",
+        "pipeline_version": "association-pathways-v1",
+        "process_loaded_at": 1794111411.376349,
+        "source_hash": "b16ff4f63df9ac9072fd"
+      },
+      "configuration": {
+        "enabled": true,
+        "max_calls": 5,
+        "model": "gemini-4-argon",
+        "provider": "google",
+        "thinking_level": "medium",
+        "timeout_seconds": 120
+      },
+      "calls": [
+        {
+          "duration_seconds": 25.016676,
+          "error": "",
+          "payload_bytes": 49620,
+          "role": "Devils Advocate",
+          "started_at": 1794112044.205066,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 13990,
+            "total_output_tokens": 1964,
+            "total_thought_tokens": 0,
+            "total_tokens": 15954
+          }
+        },
+        {
+          "duration_seconds": 24.37421,
+          "error": "",
+          "payload_bytes": 55308,
+          "role": "Evidence Adjudicator",
+          "started_at": 1794112069.2578433,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 15052,
+            "total_output_tokens": 707,
+            "total_thought_tokens": 0,
+            "total_tokens": 15759
+          }
+        },
+        {
+          "duration_seconds": 30.290437,
+          "error": "",
+          "payload_bytes": 59198,
+          "role": "Devils Advocate revision",
+          "started_at": 1794112093.6707242,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 16302,
+            "total_output_tokens": 1796,
+            "total_thought_tokens": 493,
+            "total_tokens": 18591
+          }
+        },
+        {
+          "duration_seconds": 14.679252,
+          "error": "",
+          "payload_bytes": 54782,
+          "role": "Evidence Adjudicator",
+          "started_at": 1794112123.992928,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 14892,
+            "total_output_tokens": 309,
+            "total_thought_tokens": 170,
+            "total_tokens": 15371
+          }
+        },
+        {
+          "duration_seconds": 27.920873,
+          "error": "",
+          "payload_bytes": 50386,
+          "role": "Experimental Challenger",
+          "started_at": 1794112139.000173,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 14150,
+            "total_output_tokens": 1926,
+            "total_thought_tokens": 0,
+            "total_tokens": 16076
+          }
+        }
+      ],
+      "target_input": {
+        "disease_name": "Alzheimer's disease",
+        "target_symbol": "BACE1",
+        "target_id": "ENSG00000186318",
+        "disease_id": "MONDO_0004975"
+      },
+      "job_id": "930facef03df4f808e69862e85d46666",
+      "state": "completed",
+      "finished_at": 1794112169.6638691,
+      "wall_seconds": 132.809228,
+      "ai_status": "completed"
+    },
+    "preclinical": {
+      "idempotency_key": "edd56212-5220-4cc0-88af-175a54c7ce68",
+      "started_at": 1794112171.9640124,
+      "backend": {
+        "code_matches_disk": true,
+        "disk_source_hash": "b16ff4f63df9ac9072fd",
+        "pipeline_version": "association-pathways-v1",
+        "process_loaded_at": 1794111411.376349,
+        "source_hash": "b16ff4f63df9ac9072fd"
+      },
+      "configuration": {
+        "enabled": true,
+        "max_calls": 5,
+        "model": "gemini-4-argon",
+        "provider": "google",
+        "thinking_level": "medium",
+        "timeout_seconds": 120
+      },
+      "calls": [
+        {
+          "duration_seconds": 21.198785,
+          "error": "",
+          "payload_bytes": 13009,
+          "role": "Devils Advocate",
+          "started_at": 1794112175.2211082,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 4053,
+            "total_output_tokens": 1405,
+            "total_thought_tokens": 0,
+            "total_tokens": 5458
+          }
+        },
+        {
+          "duration_seconds": 23.639582,
+          "error": "",
+          "payload_bytes": 16978,
+          "role": "Evidence Adjudicator",
+          "started_at": 1794112196.4534423,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 4642,
+            "total_output_tokens": 343,
+            "total_thought_tokens": 165,
+            "total_tokens": 5150
+          }
+        },
+        {
+          "duration_seconds": 37.707123,
+          "error": "",
+          "payload_bytes": 24749,
+          "role": "Experimental Challenger",
+          "started_at": 1794112220.1563869,
+          "success": true,
+          "usage": {
+            "total_cached_tokens": 0,
+            "total_input_tokens": 7263,
+            "total_output_tokens": 2106,
+            "total_thought_tokens": 833,
+            "total_tokens": 10202
+          }
+        }
+      ],
+      "target_input": {
+        "disease_name": "Rett syndrome",
+        "target_symbol": "SLC12A5",
+        "target_id": "ENSG00000124140",
+        "disease_id": "MONDO_0010726"
+      },
+      "job_id": "f87153135af14ab6a72b50c5caa1f356",
+      "state": "completed",
+      "finished_at": 1794112259.3780892,
+      "wall_seconds": 87.414077,
+      "ai_status": "completed"
+    }
+  }
+}

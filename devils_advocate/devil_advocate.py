@@ -4,11 +4,15 @@ import html
 import re
 from pathlib import Path
 from .http_client import JsonClient, RetrievalError
-from .models import Assessment, Claim, Compound, Investigation, Publication, TargetInput
+from .models import Assessment, Claim, Compound, Investigation, Publication, TargetInput, SearchAudit
 from .relevance import ALIASES, disease_matches, mentions
-from .trial_retriever import TargetIdentityError, resolve_target, retrieve_compounds, retrieve_trials
+from .trial_retriever import TargetIdentityError, resolve_target, retrieve_compounds, retrieve_trials,verify_supplied_gene
 from .evidence_verifier import verify_claims
 from .stop_reasons import stop_reason_label
+from .disease_terms import resolve_disease_terms, matches
+from .precedent import retrieve_precedent
+from .coverage import check_coverage
+from .association import retrieve_association
 
 def classify_concern(text: str) -> str:
     """Only classify explicit reason/evidence text, never registry status alone."""
@@ -28,41 +32,7 @@ def classify_concern(text: str) -> str:
             categories.append(category)
     return categories[0] if len(categories) == 1 else 'other' if categories else 'unknown'
 
-def retrieve_publications(client: JsonClient, target: TargetInput, compounds: list[Compound] | None = None) -> list[Publication]:
-    # Quote input safely for the Europe PMC query grammar.
-    clean = lambda s: re.sub(r'[^\w\s-]', ' ', s).strip()
-    terms = [target.target_symbol, *[c.name for c in compounds or []]]
-    disease_terms = ALIASES.get(target.disease_name.casefold(), [target.disease_name])
-    disease_query = '(' + ' OR '.join('TITLE_ABS:' + clean(term) + '*' if term in ['alzheimer', 'parkinson']
-                                     else f'TITLE_ABS:"{clean(term)}"' for term in disease_terms) + ')'
-    query = '(' + ' OR '.join(f'TITLE_ABS:"{clean(term)}"' for term in terms) + ')'
-    query += f' AND {disease_query}'
-    # Prioritize clinical challenge evidence without excluding supportive studies.
-    query += ' AND (trial OR efficacy OR safety OR failure OR randomized)'
-    endpoint = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search'
-    page = client.get(endpoint, {'query': query, 'format': 'json', 'resultType': 'core', 'pageSize': 25})
-    records = page.get('resultList', {}).get('result', [])
-    if compounds:
-        clinical_query = '(' + ' OR '.join(f'TITLE_ABS:"{clean(c.name)}"' for c in compounds) + ')'
-        clinical_query += f' AND {disease_query} AND (TITLE:trial OR TITLE:randomized)'
-        clinical = client.get(endpoint, {'query': clinical_query, 'format': 'json', 'resultType': 'core', 'pageSize': 10})
-        records = clinical.get('resultList', {}).get('result', []) + records
-    unique = {f"{p['source']}:{p['id']}": p for p in records}
-    publications = [Publication(identifier=f"{p['source']}:{p['id']}", title=p.get('title', ''),
-                        abstract=re.sub(r'</?[A-Za-z][^>]*>', '', html.unescape(p.get('abstractText', ''))),
-                        doi=p.get('doi'), url=f"https://europepmc.org/article/{p['source']}/{p['id']}")
-            for p in unique.values()]
-    for pub in publications:
-        text = pub.title + ' ' + pub.abstract
-        named = any(mentions(text, name) for name in terms)
-        disease = disease_matches(text, target.disease_name)
-        pub.relevance = (f'Target/curated compound explicitly named: {named}; disease explicitly named: {disease}. '
-                         'Lexical applicability only; study population, mechanism, direction of effect and study quality need review.')
-    # Search engines can match full-text indexing outside the returned abstract.
-    # Do not present those candidates as applicable evidence without visible context.
-    return [p for p in publications if
-            disease_matches(p.title + ' ' + p.abstract, target.disease_name) and
-            any(mentions(p.title + ' ' + p.abstract, term) for term in terms)]
+from .literature import retrieve_publications
 
 def analyze(investigation: Investigation) -> list[Claim]:
     claims = []
@@ -129,35 +99,55 @@ def investigate_target(target_input: TargetInput | dict, *, offline: bool = Fals
         data = json.loads((Path(__file__).parent / 'fixtures' / 'bace1.json').read_text(encoding='utf-8'))
         result = Investigation(target=target, mode='offline', **data)
     else:
+        target=target.model_copy(update={'target_aliases':[],'protein_gene_symbols':[]})
         result = Investigation(target=target, mode='live')
         client = client or JsonClient()
+        target = resolve_disease_terms(client, target, result.search_audit)
+        result.target = target
         try:
+            verify_supplied_gene(client,target,result.search_audit)
             result.resolved_target_id = resolve_target(client, target)
+            result.search_audit.append(SearchAudit(source='ChEMBL',operation='target identity',
+                url='https://www.ebi.ac.uk/chembl/api/data/target/search.json',query={'q':target.target_symbol},
+                state='found' if result.resolved_target_id else 'no_results',relevant=int(bool(result.resolved_target_id))))
             result.resolution_status = 'resolved' if result.resolved_target_id else 'unknown'
+            if result.resolved_target_id and target.target_aliases:
+                result.search_audit.append(SearchAudit(source='ChEMBL',operation='verified target aliases',
+                    url='https://www.ebi.ac.uk/chembl/api/data/target/'+result.resolved_target_id+'.json',
+                    state='found',returned=len(target.target_aliases),detail='Bounded gene-symbol aliases from the exact human component, not inferred protein-family synonyms. Shared protein aliases do not establish an identical gene-level therapeutic mechanism.'))
             if result.resolved_target_id:
-                result.compounds = retrieve_compounds(client, result.resolved_target_id, result.retrieval_errors)
+                result.compounds = retrieve_compounds(client, result.resolved_target_id, result.retrieval_errors, result.search_audit)
             else:
                 result.missing_information.append('No unambiguous exact human ChEMBL target resolution; no target ID guessed.')
         except TargetIdentityError as exc:
             result.resolution_status = 'invalid_identifier'
             result.missing_information.append(str(exc))
+            result.search_audit.append(SearchAudit(source='ChEMBL',operation='target identity',url='https://www.ebi.ac.uk/chembl/api/data/target',state='failed',detail='Supplied target identity failed validation.'))
         except RetrievalError as exc:
             result.resolution_status = 'unavailable' if not result.resolved_target_id else 'resolved'
             result.retrieval_errors.append(str(exc))
+            result.search_audit.append(SearchAudit(source='ChEMBL',operation='target/compound retrieval',url='https://www.ebi.ac.uk/chembl/api/data',state='failed',detail='ChEMBL retrieval unavailable; not evidence of absent compounds or approvals.'))
         if result.resolved_target_id:
-            result.trials = retrieve_trials(client, target, result.compounds, result.retrieval_errors)
+            retrieve_association(client,result)
+            retrieve_precedent(client, result)
+            result.trials = retrieve_trials(client, target, result.compounds, result.retrieval_errors, result.search_audit)
             try:
-                result.publications = retrieve_publications(client, target, result.compounds)
+                refs=[p for t in result.trials if t.disease_match=='matched' and t.relationship=='verified' for p in t.publication_ids]
+                result.publications = retrieve_publications(client, target, result.compounds, result.search_audit,refs,include_clinical=True)
             except RetrievalError as exc:
                 result.retrieval_errors.append(str(exc))
         else:
             result.missing_information.append('Unresolved target: downstream retrieval skipped to prevent unrelated disease-only evidence.')
-        result.retrieval_notes.append('Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds, 100 trials/query and 35 publications; not a systematic review.')
+            result.search_audit.extend(SearchAudit(source=source,operation='downstream retrieval',url=url,state='not_searched',detail='Target identity unresolved.') for source,url in [
+                ('ChEMBL','https://www.ebi.ac.uk/chembl/api/data/mechanism.json'),
+                ('ClinicalTrials.gov','https://clinicaltrials.gov/api/v2/studies'),
+                ('Europe PMC','https://www.ebi.ac.uk/europepmc/webservices/rest/search')])
+        result.retrieval_notes.append('Bounded search: at most 30 target candidates, 300 mechanisms, 15 compounds and 100 trials/query. Literature queries/chunks return at most 40 records each, plus up to 60 registry-linked result PMIDs and one minimal fallback. Actual per-query limits and omissions are audited; not a systematic review.')
     # Recheck legacy recorded fixture applicability using the current rules.
     if offline and result.resolved_target_id:
         result.resolution_status = 'resolved'
     for trial in result.trials:
-        trial.disease_match = 'matched' if disease_matches(' '.join(trial.conditions), target.disease_name) else 'uncertain'
+        trial.disease_match = 'matched' if matches(' '.join(trial.conditions), target) else 'uncertain'
     # Retrieval helpers retain limit warnings as notes, not failed requests.
     result.retrieval_notes.extend(n for n in result.retrieval_errors if not n.startswith('https://'))
     result.retrieval_errors = [n for n in result.retrieval_errors if n.startswith('https://')]
@@ -177,4 +167,12 @@ def investigate_target(target_input: TargetInput | dict, *, offline: bool = Fals
     result.conclusion = ('Documented concerns require investigation; target-level invalidity remains unproven.'
         if any(a.recommendation == 'revise' for a in result.assessments)
         else 'insufficient evidence')
+    if not offline:
+        result.coverage = check_coverage(result)
+        if result.coverage.status == 'INSUFFICIENT COVERAGE':
+            result.conclusion = 'INSUFFICIENT COVERAGE: ' + '; '.join(result.coverage.gaps)
+        elif result.coverage.pathway=='preclinical_validation':
+            result.conclusion='Limited preclinical target-validation review permitted: '+result.association.explanation+' No disease-specific treatment efficacy is established.'
+        else:
+            result.conclusion='Clinical-precedent review permitted; interpret disease-specific trial/publication and indication evidence, including positive and negative results. Target-wide validity is not inferred.'
     return result

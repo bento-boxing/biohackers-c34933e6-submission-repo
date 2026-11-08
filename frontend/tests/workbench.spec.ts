@@ -106,3 +106,23 @@ test('experiment prose uses labelled evidence while the trace retains source rec
   await page.getByText('Measured stage durations & request sizes',{exact:true}).click();
   await expect(page.getByText('Not recorded',{exact:true}).first()).toBeVisible();
 });
+
+test('coverage gaps and failed searches are visible without a negative target verdict',async({page})=>{
+  // Override only the browser's recorded response; no live investigation or DB mutation.
+  await page.route('**/api/investigations/*',async route=>{
+    const response=await route.fetch();const body=await response.json();
+    if(body.result){
+      body.result.investigation.coverage={status:'INSUFFICIENT COVERAGE',gaps:['Clinical literature retrieval failed.'],
+        facets:{},selected_source_ids:[],omitted_source_ids:['MED:123'],selection_reasons:{},duration_seconds:.002,caution:'Missing evidence is not evidence of inefficacy.'};
+      body.result.investigation.search_audit=[{source:'Europe PMC',operation:'clinical literature',url:'https://europepmc.org',
+        state:'failed',returned:0,relevant:0,total:null,detail:'API failure; not a zero-result query.',query:{}}];
+    }
+    await route.fulfill({response,json:body});
+  });
+  await page.goto('/challenge');
+  await page.getByRole('button',{name:/Challenge this target/}).click();
+  await expect(page.getByRole('heading',{name:'INSUFFICIENT COVERAGE',exact:true})).toBeVisible({timeout:40_000});
+  await expect(page.getByText('Clinical literature retrieval failed.',{exact:true})).toBeVisible();
+  await page.getByText('Source search coverage and limits',{exact:true}).click();
+  await expect(page.getByText('API failure; not a zero-result query.',{exact:true})).toBeVisible();
+});

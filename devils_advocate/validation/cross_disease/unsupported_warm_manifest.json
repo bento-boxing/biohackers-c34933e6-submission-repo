@@ -1,0 +1,14 @@
+{
+  "case": "unsupported",
+  "target_input": {
+    "disease_name": "achondroplasia",
+    "target_symbol": "CCR5",
+    "target_id": "ENSG00000160791",
+    "disease_id": "MONDO_0007037"
+  },
+  "started_at": 1794111237.6337667,
+  "idempotency_key": "b616c346-2c58-42f0-9fe3-39b3e7d1b4c5",
+  "paid_calls_authorized": 0,
+  "job_id": "72ade6797cd64025b637de1e20849c36",
+  "finished_at": 1794111240.7763832
+}

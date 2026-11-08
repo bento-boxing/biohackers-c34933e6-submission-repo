@@ -1,0 +1,198 @@
+{
+  "job_id": "398304dac2fd43ae9edcf3ad044e9a7d",
+  "technical_job_state": "completed",
+  "ai_status": "completed",
+  "prior_failed_job_attempts": 0,
+  "current_attempts": 3,
+  "aggregate_attempts": 3,
+  "within_authorized_five": true,
+  "coverage": "BOUNDED REVIEW",
+  "pathway": "clinical_precedent",
+  "retrieval_seconds": 139.197922,
+  "attempts": [
+    {
+      "role": "Devils Advocate",
+      "success": true,
+      "seconds": 39.264179,
+      "payload_bytes": 91571,
+      "usage": {
+        "total_cached_tokens": 0,
+        "total_input_tokens": 35515,
+        "total_output_tokens": 2462,
+        "total_thought_tokens": 597,
+        "total_tokens": 38574
+      },
+      "error": ""
+    },
+    {
+      "role": "Evidence Adjudicator",
+      "success": true,
+      "seconds": 17.853941,
+      "payload_bytes": 98488,
+      "usage": {
+        "total_cached_tokens": 0,
+        "total_input_tokens": 36948,
+        "total_output_tokens": 577,
+        "total_thought_tokens": 450,
+        "total_tokens": 37975
+      },
+      "error": ""
+    },
+    {
+      "role": "Experimental Challenger",
+      "success": true,
+      "seconds": 35.829706,
+      "payload_bytes": 66207,
+      "usage": {
+        "total_cached_tokens": 0,
+        "total_input_tokens": 27527,
+        "total_output_tokens": 1650,
+        "total_thought_tokens": 0,
+        "total_tokens": 29177
+      },
+      "error": ""
+    }
+  ],
+  "model_attempt_seconds": 92.94782599999999,
+  "accepted_claims": [
+    {
+      "claim_id": "DA_CLAIM_1",
+      "kind": "interpretation",
+      "text": "CCR5 antagonism has established clinical efficacy and regulatory precedent through maraviroc, which significantly suppressed HIV-1 RNA and increased CD4 counts in treatment-experienced R5 HIV-1 patients on optimized background therapy, but its approved indication is strictly restricted to combination therapy in patients aged 2 years and older weighing at least 10 kg with CCR5-tropic HIV-1 only, excluding dual/mixed- or CXCR4-tropic disease.",
+      "relevance": "Establishes that CCR5 is a clinically validated target in a defined HIV-1 subpopulation when used in combination regimens, while bounding the scope of proven benefit.",
+      "uncertainty": "Approval and phase 4 status do not establish standalone monotherapy efficacy or benefit in patients with non-R5 viral tropism.",
+      "citations": [
+        {
+          "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "field": "indications_and_usage",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        },
+        {
+          "source_id": "MED:18832244",
+          "field": "conclusion_excerpt",
+          "url": "https://europepmc.org/article/MED/18832244",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        },
+        {
+          "source_id": "CHEMBL256907",
+          "field": "approval_metadata",
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL256907",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": "Compound approval_metadata is constructed source-linked metadata, not a verbatim registry prose field."
+        }
+      ],
+      "deterministic_objections": []
+    },
+    {
+      "claim_id": "DA_CLAIM_2",
+      "kind": "interpretation",
+      "text": "In antiretroviral-naive patients with R5 HIV-1 (MERIT trial), once-daily maraviroc was discontinued for failing prespecified noninferiority criteria and twice-daily maraviroc failed to demonstrate noninferiority to efavirenz at the <50 copies/mL primary endpoint (65.3% vs 69.3%) with higher discontinuation for lack of efficacy (11.9% vs 4.2%), a vulnerability compounded by undetected non-R5 virus and spontaneous pre-treatment tropism shifts from CCR5 to dual/mixed tropism.",
+      "relevance": "Challenges the robustness of CCR5 inhibition in treatment-naive settings and highlights dependence on high-sensitivity tropism diagnostics and viral stability.",
+      "uncertainty": "Post hoc exclusion of 15% of subjects with non-R5 virus by a more sensitive assay yielded similar response rates, leaving uncertainty between intrinsic compound potency versus diagnostic screening limitations.",
+      "citations": [
+        {
+          "source_id": "MED:20151839",
+          "field": "abstract",
+          "url": "https://europepmc.org/article/MED/20151839",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        },
+        {
+          "source_id": "MED:20151839",
+          "field": "conclusion_excerpt",
+          "url": "https://europepmc.org/article/MED/20151839",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        },
+        {
+          "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "field": "clinical_studies",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        }
+      ],
+      "deterministic_objections": []
+    },
+    {
+      "claim_id": "DA_CLAIM_3",
+      "kind": "interpretation",
+      "text": "Clinical use of maraviroc carries warnings for potentially life-threatening hepatotoxicity accompanied by systemic allergic reactions, severe skin and hypersensitivity reactions including Stevens-Johnson syndrome and toxic epidermal necrolysis, postural hypotension in severe renal impairment, and increased cardiovascular events including myocardial ischemia and infarction in treatment-experienced subjects.",
+      "relevance": "Identifies serious clinical safety liabilities associated with the approved CCR5 antagonist that require laboratory and clinical monitoring.",
+      "uncertainty": "The provided label excerpts do not resolve whether these toxicities are compound-specific off-target effects of maraviroc or on-target consequences of CCR5 blockade.",
+      "citations": [
+        {
+          "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "field": "warnings_and_cautions",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        },
+        {
+          "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "field": "warnings_and_cautions",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        },
+        {
+          "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "field": "warnings_and_cautions",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        }
+      ],
+      "deterministic_objections": []
+    },
+    {
+      "claim_id": "DA_CLAIM_4",
+      "kind": "interpretation",
+      "text": "Biologic CCR5 blockade with the monoclonal antibody PRO 140 (leronlimab) is similarly restricted to inhibiting CCR5-tropic HIV-1 isolates and lacks activity against CXCR4-tropic viruses unless engineered with a fusion-inhibitory peptide, while clinical deployment of CCR5-tropic switch strategies has also faced operational termination due to recruitment problems.",
+      "relevance": "Demonstrates that tropism restriction is a target-level mechanism limitation shared across small-molecule and antibody modalities, and that tropism-gated trials can face operational recruitment hurdles.",
+      "uncertainty": "Trial termination for recruitment problems is an operational outcome rather than evidence of clinical inefficacy, and unapprovedCCR5 compounds (such as leronlimab, vicriviroc, cenicriviroc, and aplaviroc) lack adjudicated clinical efficacy outcomes in the bounded packet.",
+      "citations": [
+        {
+          "source_id": "MED:40130879",
+          "field": "abstract",
+          "url": "https://europepmc.org/article/MED/40130879",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        },
+        {
+          "source_id": "NCT00981773",
+          "field": "why_stopped",
+          "url": "https://clinicaltrials.gov/study/NCT00981773",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        },
+        {
+          "source_id": "NCT00981773",
+          "field": "population",
+          "url": "https://clinicaltrials.gov/study/NCT00981773",
+          "retrieved_record_exists": true,
+          "exact_excerpt_in_packet": true,
+          "note": ""
+        }
+      ],
+      "deterministic_objections": []
+    }
+  ],
+  "rejected_or_revised": [],
+  "accepted_citations_all_grounded": true,
+  "scientific_review_status": "Requires separate human assessment of entailment, population scope, established efficacy and experimental novelty; these checks do not prove scientific correctness."
+}

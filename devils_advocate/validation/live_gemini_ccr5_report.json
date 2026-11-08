@@ -1,0 +1,3439 @@
+{
+  "job_id": "398304dac2fd43ae9edcf3ad044e9a7d",
+  "state": "completed",
+  "error": null,
+  "wall_seconds": 238.884471,
+  "coverage": {
+    "caution": "Bounded retrieval is not a systematic review; missing evidence is not evidence of inefficacy.",
+    "criteria_version": "pathways-v1",
+    "duration_seconds": 2.617815,
+    "facets": {
+      "ChEMBL": {
+        "limited": false,
+        "queries": 14,
+        "states": [
+          "found"
+        ]
+      },
+      "ClinicalTrials.gov": {
+        "limited": false,
+        "queries": 13,
+        "states": [
+          "found",
+          "no_results"
+        ]
+      },
+      "Europe PMC": {
+        "limited": true,
+        "queries": 6,
+        "states": [
+          "limit_reached"
+        ]
+      },
+      "OLS": {
+        "limited": false,
+        "queries": 1,
+        "states": [
+          "found"
+        ]
+      },
+      "Open Targets": {
+        "limited": false,
+        "queries": 1,
+        "states": [
+          "found"
+        ]
+      },
+      "approved_precedent": {
+        "disease_matched_indications": [
+          {
+            "approval_precedent": true,
+            "disease_match": "lexical",
+            "drugind_id": 23450,
+            "efo_id": "EFO:0000764",
+            "efo_term": "HIV infection",
+            "indication_refs": [
+              {
+                "ref_id": "NCT00098306,NCT00098722,NCT00098748,NCT00426660,NCT00478231,NCT00496782,NCT00537394,NCT00624195,NCT00634959,NCT00643643,NCT00703586,NCT00717067,NCT00719823,NCT00735072,NCT00771823,NCT00791700,NCT00808002,NCT00821535,NCT00827112,NCT00870363,NCT00875368,NCT00884858,NCT00925756,NCT00944541,NCT00966329,NCT00976404,NCT00981318,NCT00981773,NCT00982878,NCT00987948,NCT01049204,NCT01056874,NCT01068873,NCT01154673,NCT01190293,NCT01242579,NCT01291459,NCT01348763,NCT01363037,NCT01367210,NCT01384682,NCT01505114,NCT01533272,NCT01597648,NCT01680536,NCT01719627,NCT01749566,NCT01866267,NCT01896921,NCT02302547,NCT02475915,NCT02480894,NCT02519777,NCT02741323,NCT02778204,NCT02990312,NCT03163277,NCT03708861",
+                "ref_type": "ClinicalTrials",
+                "ref_url": "https://clinicaltrials.gov/search?term=NCT00098306%20NCT00098722%20NCT00098748%20NCT00426660%20NCT00478231%20NCT00496782%20NCT00537394%20NCT00624195%20NCT00634959%20NCT00643643%20NCT00703586%20NCT00717067%20NCT00719823%20NCT00735072%20NCT00771823%20NCT00791700%20NCT00808002%20NCT00821535%20NCT00827112%20NCT00870363%20NCT00875368%20NCT00884858%20NCT00925756%20NCT00944541%20NCT00966329%20NCT00976404%20NCT00981318%20NCT00981773%20NCT00982878%20NCT00987948%20NCT01049204%20NCT01056874%20NCT01068873%20NCT01154673%20NCT01190293%20NCT01242579%20NCT01291459%20NCT01348763%20NCT01363037%20NCT01367210%20NCT01384682%20NCT01505114%20NCT01533272%20NCT01597648%20NCT01680536%20NCT01719627%20NCT01749566%20NCT01866267%20NCT01896921%20NCT02302547%20NCT02475915%20NCT02480894%20NCT02519777%20NCT02741323%20NCT02778204%20NCT02990312%20NCT03163277%20NCT03708861"
+              },
+              {
+                "ref_id": "2b5e5c5d-852a-413b-825c-8491d4539e67",
+                "ref_type": "DailyMed",
+                "ref_url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2b5e5c5d-852a-413b-825c-8491d4539e67"
+              },
+              {
+                "ref_id": "46f30ac5-c96b-429e-976d-8c5ee1c0761b",
+                "ref_type": "DailyMed",
+                "ref_url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=46f30ac5-c96b-429e-976d-8c5ee1c0761b"
+              },
+              {
+                "ref_id": "a94a9a2b-337b-4c13-8622-fc392194dc21",
+                "ref_type": "DailyMed",
+                "ref_url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a94a9a2b-337b-4c13-8622-fc392194dc21"
+              },
+              {
+                "ref_id": "EMEA/H/C/000811",
+                "ref_type": "EMA",
+                "ref_url": "https://www.ema.europa.eu/en/medicines/human/EPAR/celsentri"
+              }
+            ],
+            "max_phase_for_ind": "4.0",
+            "mesh_heading": "HIV Infections",
+            "mesh_id": "D015658",
+            "molecule_chembl_id": "CHEMBL256907",
+            "parent_molecule_chembl_id": "CHEMBL256907",
+            "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+          },
+          {
+            "approval_precedent": true,
+            "disease_match": "lexical",
+            "drugind_id": 23451,
+            "efo_id": "EFO:0000180",
+            "efo_term": "HIV-1 infection",
+            "indication_refs": [
+              {
+                "ref_id": "NCT00098293,NCT00795444,NCT00993148,NCT01345630,NCT01348308,NCT01400412,NCT02486510",
+                "ref_type": "ClinicalTrials",
+                "ref_url": "https://clinicaltrials.gov/search?term=NCT00098293%20NCT00795444%20NCT00993148%20NCT01345630%20NCT01348308%20NCT01400412%20NCT02486510"
+              }
+            ],
+            "max_phase_for_ind": "4.0",
+            "mesh_heading": "HIV Infections",
+            "mesh_id": "D015658",
+            "molecule_chembl_id": "CHEMBL256907",
+            "parent_molecule_chembl_id": "CHEMBL256907",
+            "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+          }
+        ],
+        "ids": [
+          "CHEMBL256907"
+        ],
+        "meaning": "Phase 4 in ChEMBL for some indication; current authorisation/withdrawal and population require review, not inferred from phase alone."
+      },
+      "biological_association": {
+        "direct_source_ids": [
+          "MED:26825032",
+          "MED:26202768",
+          "MED:21987241",
+          "MED:18832244",
+          "MED:16641282",
+          "MED:20151839",
+          "MED:23589670",
+          "MED:21288824",
+          "MED:19432546",
+          "MED:24180001",
+          "MED:26034880",
+          "MED:22174752",
+          "MED:21890778",
+          "MED:18333863",
+          "MED:20949133",
+          "MED:24185044",
+          "MED:20703158",
+          "MED:21673796",
+          "MED:27492684",
+          "MED:26684819",
+          "MED:42794592",
+          "MED:41353403",
+          "MED:39972543",
+          "MED:42515555",
+          "MED:42953116",
+          "MED:39353749",
+          "MED:42847201",
+          "MED:39805095",
+          "MED:42559043",
+          "MED:40413451",
+          "AGR:IND607835565",
+          "MED:39774003",
+          "MED:41141451",
+          "MED:37450478",
+          "MED:39872519",
+          "MED:40691233",
+          "MED:41935287",
+          "MED:40130879",
+          "MED:39250652",
+          "MED:36564186",
+          "MED:37418541",
+          "MED:37906406",
+          "PPR:PPR673199",
+          "MED:29676212",
+          "MED:34868084",
+          "MED:32040959",
+          "MED:33778462",
+          "MED:34791296",
+          "MED:38819839",
+          "MED:42054491",
+          "MED:42403244",
+          "MED:41832601",
+          "MED:42699847",
+          "PPR:PPR1263839",
+          "PPR:PPR1291895",
+          "MED:35358290"
+        ],
+        "evidence_types": [
+          "animal_model",
+          "cellular_mechanistic",
+          "expression_only",
+          "human_genetic_association"
+        ],
+        "explanation": "Disease-specific clinical context retrieved; inspect actual indication/population and target mechanism.",
+        "independent_groups": 56,
+        "indirect_source_ids": [
+          "MED:31647836",
+          "MED:27015639",
+          "MED:23797691",
+          "MED:20672447",
+          "MED:16251317",
+          "MED:24218476",
+          "MED:16205738",
+          "MED:32630699",
+          "MED:22479485",
+          "MED:28434169",
+          "MED:21699506",
+          "MED:31292161",
+          "MED:26491256",
+          "MED:31377844",
+          "MED:23290628",
+          "MED:19424056",
+          "MED:19339945",
+          "MED:18720513",
+          "MED:21284908",
+          "MED:21835801",
+          "MED:21088872",
+          "MED:18434391",
+          "MED:22740718",
+          "MED:20518583",
+          "MED:21289125",
+          "MED:26712907",
+          "MED:42797803",
+          "MED:42839696",
+          "MED:42401549",
+          "MED:42974166",
+          "MED:42797766",
+          "MED:42621465",
+          "MED:42552339",
+          "MED:41608770",
+          "MED:41394806",
+          "MED:42656799",
+          "MED:40397567",
+          "MED:35865985",
+          "MED:40607431",
+          "MED:41967778",
+          "MED:39303165",
+          "MED:41683682",
+          "MED:40635771",
+          "MED:42835080",
+          "MED:38643381",
+          "MED:42140212",
+          "MED:40703771",
+          "MED:37759462",
+          "MED:39146384",
+          "MED:41939108",
+          "MED:33045349",
+          "MED:39556960",
+          "MED:39138568",
+          "MED:39324549",
+          "MED:42076117",
+          "MED:40672363",
+          "MED:38886484",
+          "MED:39094527",
+          "MED:38809042",
+          "MED:40653494",
+          "MED:42575974",
+          "MED:40779011",
+          "MED:42520492",
+          "PPR:PPR1315683",
+          "MED:42429541",
+          "MED:41765042",
+          "MED:41244297",
+          "MED:29941870",
+          "MED:42149386",
+          "PPR:PPR1111198",
+          "MED:39016126",
+          "MED:42897198",
+          "MED:39642611",
+          "MED:34999223",
+          "MED:32947226",
+          "MED:30000615",
+          "PPR:PPR779811",
+          "MED:31643973",
+          "PPR:PPR873243",
+          "MED:38145295",
+          "MED:27791451",
+          "MED:37718001"
+        ],
+        "limitations": [
+          "Deterministic source-scope triage, not expert quality assessment or causal verification.",
+          "Distinct source groups are not proof of independent cohorts; reviews and duplicated versions must not count as replication.",
+          "Biomarker changes, GWAS loci and druggability do not establish a valid therapeutic target."
+        ],
+        "ontology_association": {
+          "caution": "An exact-pair descriptive evidence score is not causal validation, a confidence score or treatment efficacy.",
+          "datatype_scores": [
+            {
+              "id": "literature",
+              "score": 0.8733300459169989
+            },
+            {
+              "id": "affected_pathway",
+              "score": 0.9066612367713315
+            },
+            {
+              "id": "rna_expression",
+              "score": 0.044833502875340873
+            },
+            {
+              "id": "clinical",
+              "score": 0.9780863546719432
+            }
+          ],
+          "disease_id": "MONDO_0005109",
+          "enableIndirect": false,
+          "score": 0.744544652029942,
+          "state": "found",
+          "target_id": "ENSG00000160791",
+          "url": "https://platform.opentargets.org/evidence/ENSG00000160791/MONDO_0005109"
+        },
+        "strength": "clinical_context",
+        "unrelated_source_ids": []
+      },
+      "compound_limitation_candidate": {
+        "included": [
+          "MED:40130879"
+        ],
+        "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+        "omitted": [
+          "MED:39138568",
+          "PPR:PPR779811"
+        ],
+        "retrieved": [
+          "MED:40130879",
+          "MED:39138568",
+          "PPR:PPR779811"
+        ]
+      },
+      "negative_candidate": {
+        "included": [
+          "MED:20151839"
+        ],
+        "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+        "omitted": [],
+        "retrieved": [
+          "MED:20151839"
+        ]
+      },
+      "openFDA": {
+        "limited": true,
+        "queries": 1,
+        "states": [
+          "limit_reached"
+        ]
+      },
+      "pathway": {
+        "clinical_publication_ids": [
+          "MED:26825032",
+          "MED:26202768",
+          "MED:21987241",
+          "MED:18832244",
+          "MED:16641282",
+          "MED:20151839",
+          "MED:23589670",
+          "MED:19432546",
+          "MED:24180001",
+          "MED:26034880",
+          "MED:22174752",
+          "MED:21890778",
+          "MED:18333863",
+          "MED:20949133",
+          "MED:24185044",
+          "MED:20703158",
+          "MED:26684819",
+          "MED:39972543",
+          "MED:39353749",
+          "MED:41141451",
+          "MED:37450478",
+          "MED:39250652",
+          "MED:36564186",
+          "MED:37418541",
+          "MED:37906406",
+          "PPR:PPR673199",
+          "MED:29676212",
+          "MED:34868084",
+          "MED:32040959",
+          "MED:33778462",
+          "MED:34791296",
+          "MED:38819839",
+          "MED:35358290"
+        ],
+        "clinical_trial_ids": [
+          "NCT00808002",
+          "NCT01345630",
+          "NCT02990312",
+          "NCT03617198",
+          "NCT00098722",
+          "NCT00709111",
+          "NCT02741323",
+          "NCT00703586",
+          "NCT02990858",
+          "NCT00114699",
+          "NCT00735072",
+          "NCT00098306",
+          "NCT00844519",
+          "NCT01428986",
+          "NCT00642707",
+          "NCT02355184",
+          "NCT02128828",
+          "NCT00393120",
+          "NCT02175680",
+          "NCT02797470",
+          "NCT00110591",
+          "NCT00935480",
+          "NCT01327547",
+          "NCT01049204",
+          "NCT00925756",
+          "NCT00988780",
+          "NCT00705419",
+          "NCT00686829",
+          "NCT00613379",
+          "NCT01827540",
+          "NCT01329783",
+          "NCT03708861",
+          "NCT01449006",
+          "NCT00624195",
+          "NCT01190293",
+          "NCT00042289",
+          "NCT00982878",
+          "NCT03218592",
+          "NCT02961829",
+          "NCT00478231",
+          "NCT00775294",
+          "NCT00966329",
+          "NCT03129113",
+          "NCT00981318",
+          "NCT01894776",
+          "NCT00771823",
+          "NCT00884858",
+          "NCT00993148",
+          "NCT01013987",
+          "NCT00537394",
+          "NCT01749566",
+          "NCT00870363",
+          "NCT00981773",
+          "NCT00440271",
+          "NCT00875368",
+          "NCT01505114",
+          "NCT02778204",
+          "NCT00944541",
+          "NCT00426660",
+          "NCT06805656",
+          "NCT00717067",
+          "NCT05470491",
+          "NCT02934022",
+          "NCT00525733",
+          "NCT00977756",
+          "NCT00496782",
+          "NCT00976404",
+          "NCT01056874"
+        ],
+        "meaning": "Clinical programmes use clinical coverage; exploratory biology does not require trials, approval or clinical efficacy evidence.",
+        "selected": "clinical_precedent"
+      },
+      "population": {
+        "detail": "Lexical disease/compound matches do not establish population equivalence; retain eligibility text and indication restrictions.",
+        "state": "requires_review"
+      },
+      "positive_candidate": {
+        "included": [
+          "MED:18832244"
+        ],
+        "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+        "omitted": [
+          "MED:39972543",
+          "MED:40653494",
+          "MED:38819839"
+        ],
+        "retrieved": [
+          "MED:18832244",
+          "MED:39972543",
+          "MED:40653494",
+          "MED:38819839"
+        ]
+      },
+      "safety_candidate": {
+        "included": [],
+        "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+        "omitted": [],
+        "retrieved": []
+      },
+      "sampling": {
+        "limits": [
+          {
+            "detail": "",
+            "operation": "label context",
+            "query": {
+              "limit": 2,
+              "search": "openfda.generic_name:\"MARAVIROC\""
+            },
+            "relevant": 2,
+            "returned": 2,
+            "source": "openFDA",
+            "state": "limit_reached",
+            "total": 10,
+            "url": "https://api.fda.gov/drug/label.json"
+          },
+          {
+            "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+            "operation": "registry-linked result publications",
+            "query": {
+              "format": "json",
+              "pageSize": 40,
+              "query": "SRC:MED AND (EXT_ID:20672447 OR EXT_ID:20400411 OR EXT_ID:19191652 OR EXT_ID:26825032 OR EXT_ID:24352352 OR EXT_ID:16470119 OR EXT_ID:16988514 OR EXT_ID:20002783 OR EXT_ID:21283017 OR EXT_ID:18366444 OR EXT_ID:18989231 OR EXT_ID:18795962 OR EXT_ID:20632458 OR EXT_ID:22129166 OR EXT_ID:22083071 OR EXT_ID:23305215 OR EXT_ID:23392467 OR EXT_ID:25162818 OR EXT_ID:25261418 OR EXT_ID:25407158 OR EXT_ID:26202768 OR EXT_ID:25959631 OR EXT_ID:25950206 OR EXT_ID:26918544 OR EXT_ID:27540363 OR EXT_ID:29369162 OR EXT_ID:29520730 OR EXT_ID:29528944 OR EXT_ID:30134297 OR EXT_ID:30358179 OR EXT_ID:30530925 OR EXT_ID:30715324 OR EXT_ID:31489678 OR EXT_ID:32015036 OR EXT_ID:32451908 OR EXT_ID:33252495 OR EXT_ID:33318014 OR EXT_ID:34076612 OR EXT_ID:21987241 OR EXT_ID:31647836 OR EXT_ID:23797691 OR EXT_ID:27015639)",
+              "resultType": "core"
+            },
+            "relevant": 7,
+            "returned": 40,
+            "source": "Europe PMC",
+            "state": "limit_reached",
+            "total": 42,
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+          },
+          {
+            "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+            "operation": "approved-compound clinical literature",
+            "query": {
+              "format": "json",
+              "pageSize": 40,
+              "query": "(TITLE_ABS:\"MARAVIROC\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\") AND (randomized OR randomised OR \"clinical trial\") sort_cited:y",
+              "resultType": "core"
+            },
+            "relevant": 40,
+            "returned": 40,
+            "source": "Europe PMC",
+            "state": "limit_reached",
+            "total": 296,
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+          },
+          {
+            "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+            "operation": "clinical literature (query chunk)",
+            "query": {
+              "format": "json",
+              "pageSize": 40,
+              "query": "(TITLE_ABS:\"CCR5\" OR TITLE_ABS:\"PF-232798\" OR TITLE_ABS:\"APLAVIROC HYDROCHLORIDE\" OR TITLE_ABS:\"INCB-9471\" OR TITLE_ABS:\"AZD5672\" OR TITLE_ABS:\"VICRIVIROC MALEATE\" OR TITLE_ABS:\"CCR5MAB004\" OR TITLE_ABS:\"HGS-1025\" OR TITLE_ABS:\"LERONLIMAB\" OR TITLE_ABS:\"CENICRIVIROC\" OR TITLE_ABS:\"MARAVIROC\" OR TITLE_ABS:\"BMS-813160\" OR TITLE_ABS:\"PF-04634817\" OR TITLE_ABS:\"Pf-00232798\" OR TITLE_ABS:\"Pf-232798\" OR TITLE_ABS:\"Aplaviroc hcl\" OR TITLE_ABS:\"Aplaviroc hydrochloride\" OR TITLE_ABS:\"GW-873140A\" OR TITLE_ABS:\"GW873140A\" OR TITLE_ABS:\"INCB-009471\" OR TITLE_ABS:\"INCB009471\" OR TITLE_ABS:\"INCB9471\" OR TITLE_ABS:\"Incb-9471\" OR TITLE_ABS:\"Azd 5672\" OR TITLE_ABS:\"Azd-5672\" OR TITLE_ABS:\"Azd5672\" OR TITLE_ABS:\"MK-4176\" OR TITLE_ABS:\"SCH 417690\" OR TITLE_ABS:\"SCH-417690\" OR TITLE_ABS:\"Sch417690\" OR TITLE_ABS:\"Vicriviroc maleate\" OR TITLE_ABS:\"Ccr5mab004\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\") AND (randomized OR randomised OR \"clinical trial\" OR patients)",
+              "resultType": "core"
+            },
+            "relevant": 40,
+            "returned": 40,
+            "source": "Europe PMC",
+            "state": "limit_reached",
+            "total": 3034,
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+          },
+          {
+            "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+            "operation": "clinical literature (query chunk)",
+            "query": {
+              "format": "json",
+              "pageSize": 40,
+              "query": "(TITLE_ABS:\"Hgs-1025\" OR TITLE_ABS:\"Leronlimab\" OR TITLE_ABS:\"PRO 140\" OR TITLE_ABS:\"PRO-140\" OR TITLE_ABS:\"PRO140\" OR TITLE_ABS:\"Cenicriviroc\" OR TITLE_ABS:\"TAK-652\" OR TITLE_ABS:\"TBR-652\" OR TITLE_ABS:\"Celsentri\" OR TITLE_ABS:\"Maraviroc\" OR TITLE_ABS:\"Rel-maraviroc\" OR TITLE_ABS:\"Selzentry\" OR TITLE_ABS:\"UK-427857\" OR TITLE_ABS:\"Uk-427 857\" OR TITLE_ABS:\"Bms 813160\" OR TITLE_ABS:\"Bms-813160\" OR TITLE_ABS:\"Pf-04634817\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\") AND (randomized OR randomised OR \"clinical trial\" OR patients)",
+              "resultType": "core"
+            },
+            "relevant": 40,
+            "returned": 40,
+            "source": "Europe PMC",
+            "state": "limit_reached",
+            "total": 763,
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+          },
+          {
+            "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+            "operation": "broad literature (query chunk)",
+            "query": {
+              "format": "json",
+              "pageSize": 40,
+              "query": "(TITLE_ABS:\"CCR5\" OR TITLE_ABS:\"PF-232798\" OR TITLE_ABS:\"APLAVIROC HYDROCHLORIDE\" OR TITLE_ABS:\"INCB-9471\" OR TITLE_ABS:\"AZD5672\" OR TITLE_ABS:\"VICRIVIROC MALEATE\" OR TITLE_ABS:\"CCR5MAB004\" OR TITLE_ABS:\"HGS-1025\" OR TITLE_ABS:\"LERONLIMAB\" OR TITLE_ABS:\"CENICRIVIROC\" OR TITLE_ABS:\"MARAVIROC\" OR TITLE_ABS:\"BMS-813160\" OR TITLE_ABS:\"PF-04634817\" OR TITLE_ABS:\"Pf-00232798\" OR TITLE_ABS:\"Pf-232798\" OR TITLE_ABS:\"Aplaviroc hcl\" OR TITLE_ABS:\"Aplaviroc hydrochloride\" OR TITLE_ABS:\"GW-873140A\" OR TITLE_ABS:\"GW873140A\" OR TITLE_ABS:\"INCB-009471\" OR TITLE_ABS:\"INCB009471\" OR TITLE_ABS:\"INCB9471\" OR TITLE_ABS:\"Incb-9471\" OR TITLE_ABS:\"Azd 5672\" OR TITLE_ABS:\"Azd-5672\" OR TITLE_ABS:\"Azd5672\" OR TITLE_ABS:\"MK-4176\" OR TITLE_ABS:\"SCH 417690\" OR TITLE_ABS:\"SCH-417690\" OR TITLE_ABS:\"Sch417690\" OR TITLE_ABS:\"Vicriviroc maleate\" OR TITLE_ABS:\"Ccr5mab004\" OR TITLE_ABS:\"Hgs-1025\" OR TITLE_ABS:\"Leronlimab\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\")",
+              "resultType": "core"
+            },
+            "relevant": 40,
+            "returned": 40,
+            "source": "Europe PMC",
+            "state": "limit_reached",
+            "total": 6986,
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+          },
+          {
+            "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+            "operation": "broad literature (query chunk)",
+            "query": {
+              "format": "json",
+              "pageSize": 40,
+              "query": "(TITLE_ABS:\"PRO 140\" OR TITLE_ABS:\"PRO-140\" OR TITLE_ABS:\"PRO140\" OR TITLE_ABS:\"Cenicriviroc\" OR TITLE_ABS:\"TAK-652\" OR TITLE_ABS:\"TBR-652\" OR TITLE_ABS:\"Celsentri\" OR TITLE_ABS:\"Maraviroc\" OR TITLE_ABS:\"Rel-maraviroc\" OR TITLE_ABS:\"Selzentry\" OR TITLE_ABS:\"UK-427857\" OR TITLE_ABS:\"Uk-427 857\" OR TITLE_ABS:\"Bms 813160\" OR TITLE_ABS:\"Bms-813160\" OR TITLE_ABS:\"Pf-04634817\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\")",
+              "resultType": "core"
+            },
+            "relevant": 40,
+            "returned": 40,
+            "source": "Europe PMC",
+            "state": "limit_reached",
+            "total": 1028,
+            "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+          }
+        ],
+        "policy": "Deterministic stratified bounded sample; not statistically representative or exhaustive."
+      },
+      "stop_reasons": {
+        "reported": [
+          "NCT01068873",
+          "NCT00123890",
+          "NCT01345630",
+          "NCT00197197",
+          "NCT01474954",
+          "NCT02990312",
+          "NCT02990858",
+          "NCT02355184",
+          "NCT01140412",
+          "NCT02343666",
+          "NCT01049204",
+          "NCT04334915",
+          "NCT00981318",
+          "NCT01367210",
+          "NCT03163277",
+          "NCT00981773",
+          "NCT01242579",
+          "NCT00496782"
+        ],
+        "unavailable": []
+      },
+      "trial_results": {
+        "included": [
+          "NCT00717067",
+          "NCT00735072",
+          "NCT00870363",
+          "NCT00925756",
+          "NCT01327547"
+        ],
+        "meaning": "Results availability is not success; stopping status is not failure.",
+        "retrieved": [
+          "NCT01068873",
+          "NCT01345630",
+          "NCT01076179",
+          "NCT00766597",
+          "NCT02225665",
+          "NCT00098722",
+          "NCT00709111",
+          "NCT00791700",
+          "NCT02741323",
+          "NCT02990858",
+          "NCT00098748",
+          "NCT00735072",
+          "NCT00098306",
+          "NCT00844519",
+          "NCT00642707",
+          "NCT04223778",
+          "NCT02355184",
+          "NCT02128828",
+          "NCT02175680",
+          "NCT02797470",
+          "NCT00110591",
+          "NCT01327547",
+          "NCT00098293",
+          "NCT00925756",
+          "NCT00686829",
+          "NCT00613379",
+          "NCT01449006",
+          "NCT00853840",
+          "NCT02881762",
+          "NCT00624195",
+          "NCT00042289",
+          "NCT00982878",
+          "NCT03218592",
+          "NCT00478231",
+          "NCT01894776",
+          "NCT00993148",
+          "NCT00537394",
+          "NCT00870363",
+          "NCT01275625",
+          "NCT00440271",
+          "NCT01505114",
+          "NCT02778204",
+          "NCT00908544",
+          "NCT00426660",
+          "NCT00708162",
+          "NCT00717067",
+          "NCT00525733",
+          "NCT02519777",
+          "NCT00665561",
+          "NCT01204905",
+          "NCT00496782",
+          "NCT00987948",
+          "NCT00976404"
+        ]
+      }
+    },
+    "gaps": [],
+    "omitted_source_ids": [
+      "NCT00808002",
+      "NCT01068873",
+      "NCT00123890",
+      "NCT01345630",
+      "NCT01076179",
+      "NCT00428519",
+      "NCT00766597",
+      "NCT01060618",
+      "NCT00197197",
+      "NCT01044654",
+      "NCT01474954",
+      "NCT01252641",
+      "NCT02990312",
+      "NCT03617198",
+      "NCT02225665",
+      "NCT03969550",
+      "NCT00098722",
+      "NCT00709111",
+      "NCT00791700",
+      "NCT02741323",
+      "NCT00703586",
+      "NCT00666055",
+      "NCT00321438",
+      "NCT02990858",
+      "NCT00098748",
+      "NCT00114699",
+      "NCT01866267",
+      "NCT03666871",
+      "NCT00299897",
+      "NCT00842634",
+      "NCT00098306",
+      "NCT02388594",
+      "NCT01290211",
+      "NCT00844519",
+      "NCT01428986",
+      "NCT00642707",
+      "NCT01300988",
+      "NCT04223778",
+      "NCT00711386",
+      "NCT00076284",
+      "NCT02355184",
+      "NCT02128828",
+      "NCT00393120",
+      "NCT02175680",
+      "NCT01140412",
+      "NCT02797470",
+      "NCT00110591",
+      "NCT01348308",
+      "NCT00935480",
+      "NCT02500849",
+      "NCT00243568",
+      "NCT02343666",
+      "NCT00098293",
+      "NCT01049204",
+      "NCT00988780",
+      "NCT00297076",
+      "NCT00705419",
+      "NCT00632073",
+      "NCT00686829",
+      "NCT00613379",
+      "NCT07903441",
+      "NCT04334915",
+      "NCT01827540",
+      "NCT01329783",
+      "NCT03708861",
+      "NCT01363037",
+      "NCT01449006",
+      "NCT00853840",
+      "NCT02881762",
+      "NCT00624195",
+      "NCT01190293",
+      "NCT00042289",
+      "NCT00982878",
+      "NCT03218592",
+      "NCT03402815",
+      "NCT02961829",
+      "NCT00478231",
+      "NCT00775294",
+      "NCT00966329",
+      "NCT01420523",
+      "NCT03129113",
+      "NCT02588820",
+      "NCT00992654",
+      "NCT01908660",
+      "NCT00981318",
+      "NCT02480894",
+      "NCT01894776",
+      "NCT00771823",
+      "NCT01367210",
+      "NCT00884858",
+      "NCT00993148",
+      "NCT00821535",
+      "NCT01013987",
+      "NCT00537394",
+      "NCT01776996",
+      "NCT00643643",
+      "NCT01749566",
+      "NCT03163277",
+      "NCT01275625",
+      "NCT00719823",
+      "NCT02016924",
+      "NCT00440271",
+      "NCT00875368",
+      "NCT01505114",
+      "NCT02778204",
+      "NCT00908544",
+      "NCT00634959",
+      "NCT00944541",
+      "NCT00879047",
+      "NCT00426660",
+      "NCT00708162",
+      "NCT06805656",
+      "NCT02159027",
+      "NCT02346084",
+      "NCT05470491",
+      "NCT02934022",
+      "NCT00525733",
+      "NCT00977756",
+      "NCT02519777",
+      "NCT00782301",
+      "NCT01533272",
+      "NCT00665561",
+      "NCT01242579",
+      "NCT01204905",
+      "NCT00496782",
+      "NCT06511063",
+      "NCT03178084",
+      "NCT00987948",
+      "NCT00976404",
+      "NCT01056874",
+      "MED:31647836",
+      "MED:27015639",
+      "MED:26825032",
+      "MED:26202768",
+      "MED:23797691",
+      "MED:20672447",
+      "MED:16251317",
+      "MED:24218476",
+      "MED:16205738",
+      "MED:32630699",
+      "MED:22479485",
+      "MED:16641282",
+      "MED:28434169",
+      "MED:21699506",
+      "MED:31292161",
+      "MED:26491256",
+      "MED:23589670",
+      "MED:21288824",
+      "MED:31377844",
+      "MED:19432546",
+      "MED:24180001",
+      "MED:26034880",
+      "MED:23290628",
+      "MED:19424056",
+      "MED:19339945",
+      "MED:22174752",
+      "MED:21890778",
+      "MED:18720513",
+      "MED:18333863",
+      "MED:20949133",
+      "MED:21284908",
+      "MED:21835801",
+      "MED:21088872",
+      "MED:24185044",
+      "MED:20703158",
+      "MED:18434391",
+      "MED:22740718",
+      "MED:20518583",
+      "MED:21673796",
+      "MED:27492684",
+      "MED:21289125",
+      "MED:26684819",
+      "MED:26712907",
+      "MED:42797803",
+      "MED:42794592",
+      "MED:42839696",
+      "MED:42401549",
+      "MED:41353403",
+      "MED:39972543",
+      "MED:42515555",
+      "MED:42974166",
+      "MED:42797766",
+      "MED:42621465",
+      "MED:42552339",
+      "MED:42953116",
+      "MED:41608770",
+      "MED:39353749",
+      "MED:41394806",
+      "MED:42656799",
+      "MED:40397567",
+      "MED:35865985",
+      "MED:42847201",
+      "MED:39805095",
+      "MED:42559043",
+      "MED:40607431",
+      "MED:41967778",
+      "MED:39303165",
+      "MED:40413451",
+      "AGR:IND607835565",
+      "MED:41683682",
+      "MED:39774003",
+      "MED:41141451",
+      "MED:40635771",
+      "MED:42835080",
+      "MED:38643381",
+      "MED:37450478",
+      "MED:42140212",
+      "MED:40703771",
+      "MED:39872519",
+      "MED:37759462",
+      "MED:40691233",
+      "MED:39146384",
+      "MED:41935287",
+      "MED:41939108",
+      "MED:33045349",
+      "MED:39556960",
+      "MED:39250652",
+      "MED:39138568",
+      "MED:36564186",
+      "MED:39324549",
+      "MED:42076117",
+      "MED:40672363",
+      "MED:37418541",
+      "MED:37906406",
+      "MED:38886484",
+      "PPR:PPR673199",
+      "MED:39094527",
+      "MED:29676212",
+      "MED:38809042",
+      "MED:40653494",
+      "MED:34868084",
+      "MED:32040959",
+      "MED:33778462",
+      "MED:34791296",
+      "MED:38819839",
+      "MED:42054491",
+      "MED:42575974",
+      "MED:40779011",
+      "MED:42520492",
+      "MED:42403244",
+      "MED:41832601",
+      "PPR:PPR1315683",
+      "MED:42429541",
+      "MED:41765042",
+      "MED:41244297",
+      "MED:42699847",
+      "MED:29941870",
+      "PPR:PPR1263839",
+      "MED:42149386",
+      "PPR:PPR1111198",
+      "PPR:PPR1291895",
+      "MED:35358290",
+      "MED:39016126",
+      "MED:42897198",
+      "MED:39642611",
+      "MED:34999223",
+      "MED:32947226",
+      "MED:30000615",
+      "PPR:PPR779811",
+      "MED:31643973",
+      "PPR:PPR873243",
+      "MED:38145295",
+      "MED:27791451",
+      "MED:37718001"
+    ],
+    "pathway": "clinical_precedent",
+    "reasoning_permitted": true,
+    "selected_source_ids": [
+      "NCT00717067",
+      "NCT00735072",
+      "NCT00981773",
+      "NCT00870363",
+      "NCT00925756",
+      "NCT01327547",
+      "MED:18832244",
+      "MED:20151839",
+      "MED:40130879",
+      "MED:21987241"
+    ],
+    "selection_reasons": {
+      "MED:18832244": [
+        "Unadjudicated conclusion stratum: positive_candidate"
+      ],
+      "MED:20151839": [
+        "Unadjudicated conclusion stratum: negative_candidate"
+      ],
+      "MED:21987241": [
+        "Mechanistic/context stratum; no therapeutic outcome assumed"
+      ],
+      "MED:40130879": [
+        "Unadjudicated conclusion stratum: compound_limitation_candidate"
+      ],
+      "NCT00717067": [
+        "Approved-compound precedent; status does not determine outcome"
+      ],
+      "NCT00735072": [
+        "Posted results available; direction requires interpretation"
+      ],
+      "NCT00870363": [
+        "Stop-reason stratum: unknown"
+      ],
+      "NCT00925756": [
+        "Relevance, verified alias, approval precedent, results, phase, stable NCT order"
+      ],
+      "NCT00981773": [
+        "Stop-reason stratum: operational"
+      ],
+      "NCT01327547": [
+        "Relevance, verified alias, approval precedent, results, phase, stable NCT order"
+      ]
+    },
+    "status": "BOUNDED REVIEW"
+  },
+  "timings": {
+    "retrieval": {
+      "cache_hits": 1,
+      "completed_requests": 185,
+      "requests": 185,
+      "source_seconds": {
+        "ChEMBL": 15.982278,
+        "ClinicalTrials.gov": 64.461694,
+        "Europe PMC": 18.623221,
+        "Public API": 4.323283
+      },
+      "started_at": 1794103437.034696,
+      "total_seconds": 139.197922
+    }
+  },
+  "provenance": {
+    "cache_hits": 1,
+    "code_matches_disk": true,
+    "disk_source_hash": "a76f7c958d96b4dbbf34",
+    "pipeline_version": "association-pathways-v1",
+    "process_loaded_at": 1794103139.3573282,
+    "retrieved_at": 1794103673.4186807,
+    "source_counts": {
+      "compounds": 12,
+      "publications": 138,
+      "trials": 136
+    },
+    "source_hash": "a76f7c958d96b4dbbf34",
+    "source_mode": "live_public_api"
+  },
+  "retrieved": {
+    "compounds": 12,
+    "trials": 136,
+    "publications": 138
+  },
+  "ai": {
+    "accepted_claims": [
+      {
+        "citations": [
+          {
+            "excerpt": "Maraviroc tablets are indicated in combination with other antiretroviral agents for the treatment of only CCR5-tropic human immunodeficiency virus type 1 (HIV-1) infection in adult and pediatric patients 2 years of age and older weighing at least 10 kg. Limitations of Use: • Maraviroc tablets are not recommended in patients with dual/mixed- or CXCR4-tropic HIV-1",
+            "field": "indications_and_usage",
+            "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+          },
+          {
+            "excerpt": "Maraviroc, as compared with placebo, resulted in significantly greater suppression of HIV-1 and greater increases in CD4 cell counts at 48 weeks in previously treated patients with R5 HIV-1 who were receiving OBT.",
+            "field": "conclusion_excerpt",
+            "source_id": "MED:18832244"
+          },
+          {
+            "excerpt": "\"max_phase\": 4.0, \"withdrawn_flag\": false, \"first_approval\": 2007",
+            "field": "approval_metadata",
+            "source_id": "CHEMBL256907"
+          }
+        ],
+        "claim_id": "DA_CLAIM_1",
+        "concern": "efficacy",
+        "kind": "interpretation",
+        "relevance": "Establishes that CCR5 is a clinically validated target in a defined HIV-1 subpopulation when used in combination regimens, while bounding the scope of proven benefit.",
+        "stance": "supporting",
+        "text": "CCR5 antagonism has established clinical efficacy and regulatory precedent through maraviroc, which significantly suppressed HIV-1 RNA and increased CD4 counts in treatment-experienced R5 HIV-1 patients on optimized background therapy, but its approved indication is strictly restricted to combination therapy in patients aged 2 years and older weighing at least 10 kg with CCR5-tropic HIV-1 only, excluding dual/mixed- or CXCR4-tropic disease.",
+        "uncertainty": "Approval and phase 4 status do not establish standalone monotherapy efficacy or benefit in patients with non-R5 viral tropism."
+      },
+      {
+        "citations": [
+          {
+            "excerpt": "The once-daily maraviroc arm was discontinued for not meeting prespecified noninferiority criteria. In the primary 48-week analysis (n = 721), maraviroc was noninferior for <400 copies/mL (70.6% for maraviroc vs 73.1% for efavirenz) but not for <50 copies/mL (65.3% vs 69.3%) at a threshold of -10%. More maraviroc patients discontinued for lack of efficacy (11.9% vs 4.2%)",
+            "field": "abstract",
+            "source_id": "MED:20151839"
+          },
+          {
+            "excerpt": "Twice-daily maraviroc was not noninferior to efavirenz at <50 copies/mL in the primary analysis. However, 15% of patients would have been ineligible for inclusion by a more sensitive screening assay.",
+            "field": "conclusion_excerpt",
+            "source_id": "MED:20151839"
+          },
+          {
+            "excerpt": "Of the 1,043 subjects with a CCR5-tropism result at screening, 7.6% had a dual/mixed-tropism result at the baseline visit 4 to 6 weeks later. This illustrates the background change from CCR5- to dual/mixed-tropism result over time in this treatment-experienced population",
+            "field": "clinical_studies",
+            "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+          }
+        ],
+        "claim_id": "DA_CLAIM_2",
+        "concern": "efficacy",
+        "kind": "interpretation",
+        "relevance": "Challenges the robustness of CCR5 inhibition in treatment-naive settings and highlights dependence on high-sensitivity tropism diagnostics and viral stability.",
+        "stance": "contradictory",
+        "text": "In antiretroviral-naive patients with R5 HIV-1 (MERIT trial), once-daily maraviroc was discontinued for failing prespecified noninferiority criteria and twice-daily maraviroc failed to demonstrate noninferiority to efavirenz at the <50 copies/mL primary endpoint (65.3% vs 69.3%) with higher discontinuation for lack of efficacy (11.9% vs 4.2%), a vulnerability compounded by undetected non-R5 virus and spontaneous pre-treatment tropism shifts from CCR5 to dual/mixed tropism.",
+        "uncertainty": "Post hoc exclusion of 15% of subjects with non-R5 virus by a more sensitive assay yielded similar response rates, leaving uncertainty between intrinsic compound potency versus diagnostic screening limitations."
+      },
+      {
+        "citations": [
+          {
+            "excerpt": "Hepatotoxicity accompanied by severe rash or systemic allergic reaction, including potentially life-threatening events, has been reported.",
+            "field": "warnings_and_cautions",
+            "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+          },
+          {
+            "excerpt": "Severe and potentially life-threatening skin and hypersensitivity reactions have been reported in patients taking maraviroc. This includes cases of Stevens-Johnson syndrome, hypersensitivity reaction, and toxic epidermal necrolysis.",
+            "field": "warnings_and_cautions",
+            "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+          },
+          {
+            "excerpt": "More cardiovascular events, including myocardial ischemia and/or infarction, were observed in treatment-experienced subjects who received maraviroc.",
+            "field": "warnings_and_cautions",
+            "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+          }
+        ],
+        "claim_id": "DA_CLAIM_3",
+        "concern": "safety",
+        "kind": "interpretation",
+        "relevance": "Identifies serious clinical safety liabilities associated with the approved CCR5 antagonist that require laboratory and clinical monitoring.",
+        "stance": "contradictory",
+        "text": "Clinical use of maraviroc carries warnings for potentially life-threatening hepatotoxicity accompanied by systemic allergic reactions, severe skin and hypersensitivity reactions including Stevens-Johnson syndrome and toxic epidermal necrolysis, postural hypotension in severe renal impairment, and increased cardiovascular events including myocardial ischemia and infarction in treatment-experienced subjects.",
+        "uncertainty": "The provided label excerpts do not resolve whether these toxicities are compound-specific off-target effects of maraviroc or on-target consequences of CCR5 blockade."
+      },
+      {
+        "citations": [
+          {
+            "excerpt": "PRO 140, a humanized anti-HIV monoclonal antibody targeting the cell coreceptor CCR5, is currently under clinical trials, but it only affects CCR5-tropic viruses.",
+            "field": "abstract",
+            "source_id": "MED:40130879"
+          },
+          {
+            "excerpt": "Recruitment problem",
+            "field": "why_stopped",
+            "source_id": "NCT00981773"
+          },
+          {
+            "excerpt": "Availability of stored plasma with which to perform a tropism assay\n* CCR5 tropic HIV virus based on a tropism assay from a stored plasma sample",
+            "field": "population",
+            "source_id": "NCT00981773"
+          }
+        ],
+        "claim_id": "DA_CLAIM_4",
+        "concern": "operational",
+        "kind": "interpretation",
+        "relevance": "Demonstrates that tropism restriction is a target-level mechanism limitation shared across small-molecule and antibody modalities, and that tropism-gated trials can face operational recruitment hurdles.",
+        "stance": "context",
+        "text": "Biologic CCR5 blockade with the monoclonal antibody PRO 140 (leronlimab) is similarly restricted to inhibiting CCR5-tropic HIV-1 isolates and lacks activity against CXCR4-tropic viruses unless engineered with a fusion-inhibitory peptide, while clinical deployment of CCR5-tropic switch strategies has also faced operational termination due to recruitment problems.",
+        "uncertainty": "Trial termination for recruitment problems is an operational outcome rather than evidence of clinical inefficacy, and unapprovedCCR5 compounds (such as leronlimab, vicriviroc, cenicriviroc, and aplaviroc) lack adjudicated clinical efficacy outcomes in the bounded packet."
+      }
+    ],
+    "calls": [
+      {
+        "duration_seconds": 39.264179,
+        "error": "",
+        "payload_bytes": 91571,
+        "role": "Devils Advocate",
+        "started_at": 1794103580.133773,
+        "success": true,
+        "usage": {
+          "total_cached_tokens": 0,
+          "total_input_tokens": 35515,
+          "total_output_tokens": 2462,
+          "total_thought_tokens": 597,
+          "total_tokens": 38574
+        }
+      },
+      {
+        "duration_seconds": 17.853941,
+        "error": "",
+        "payload_bytes": 98488,
+        "role": "Evidence Adjudicator",
+        "started_at": 1794103619.455986,
+        "success": true,
+        "usage": {
+          "total_cached_tokens": 0,
+          "total_input_tokens": 36948,
+          "total_output_tokens": 577,
+          "total_thought_tokens": 450,
+          "total_tokens": 37975
+        }
+      },
+      {
+        "duration_seconds": 35.829706,
+        "error": "",
+        "payload_bytes": 66207,
+        "role": "Experimental Challenger",
+        "started_at": 1794103637.389655,
+        "success": true,
+        "usage": {
+          "total_cached_tokens": 0,
+          "total_input_tokens": 27527,
+          "total_output_tokens": 1650,
+          "total_thought_tokens": 0,
+          "total_tokens": 29177
+        }
+      }
+    ],
+    "enabled": true,
+    "experiment": {
+      "competing_explanations": [
+        "Virologic failure under CCR5 blockade results from the rapid selection and outgrowth of pre-existing, low-frequency CXCR4- or dual/mixed-tropic variants missed by standard screening or arising during the pre-treatment window, which can only be suppressed when CCR5 targeting is paired with a tropism-independent fusion inhibitor.",
+        "Virologic failure under CCR5 blockade occurs despite pure CCR5-tropic virus due to incomplete target engagement or receptor-level escape on CCR5, meaning that even after excluding all non-R5 variants with ultra-sensitive tropism screening, selective CCR5 antagonists and antibodies fail to fully suppress viral replication."
+      ],
+      "controls": [
+        "Vehicle-treated infected PBMC cultures (no-drug viral growth control)",
+        "Pure laboratory-adapted CCR5-tropic and CXCR4-tropic HIV-1 reference strains (tropism specificity controls)",
+        "Selective CCR5 blockade alone using maraviroc or unmodified PRO 140 antibody versus bispecific CCR5-anchored fusion inhibitor (2P23-PRO140-Fc)"
+      ],
+      "decision_impact": "If failure is strictly restricted to undetected or shifting non-R5 variants, clinical development decisions should prioritize either ultra-sensitive rapid baseline tropism diagnostics or bispecific CCR5-anchored fusion constructs; if failure occurs in pure R5 isolates despite complete receptor occupancy, next-generation selective CCR5 monotherapy or switch strategies should be deprioritized in favor of multi-target regimens. Researcher approval is required before any next action.",
+      "evidence_ids": [
+        "DA_CLAIM_1",
+        "DA_CLAIM_2",
+        "DA_CLAIM_4"
+      ],
+      "hypothesis_evidence": [
+        [
+          "DA_CLAIM_2",
+          "DA_CLAIM_4"
+        ],
+        [
+          "DA_CLAIM_1",
+          "DA_CLAIM_2"
+        ]
+      ],
+      "knowledge_review": "Retrieved sources already establish that maraviroc is approved and effective in combination therapy for treatment-experienced patients with CCR5-tropic HIV-1, that it is not recommended for dual/mixed- or CXCR4-tropic HIV-1, that 7.6% of screened R5 patients shifted to dual/mixed tropism before baseline in phase 3 trials, that 15% of treatment-naive patients in the MERIT trial had non-R5 virus detected by a more sensitive assay, and that adding the 2P23 fusion-inhibitory peptide to the CCR5 antibody PRO 140 extends preclinical activity to CXCR4-tropic isolates.",
+      "limitations": [
+        "Ex vivo PBMC cultures do not recapitulate in vivo human pharmacokinetics, lymphoid tissue penetration, or host immune selection pressures.",
+        "Shared background evidence from clinical tropism and bispecific inhibitor claims is used to motivate both competing explanations and does not constitute independent evidence for either hypothesis.",
+        "This experiment does not evaluate whether clinical hepatotoxicity, severe skin reactions, or cardiovascular events associated with maraviroc are compound-specific or target-mediated.",
+        "Gemini interpretation is not independent evidence or expert validation; source sampling and excerpt truncation limit conclusions.",
+        "Model suitability, genetic-versus-pharmacological comparability, replication, randomization and predefined outcomes require expert design review before approval."
+      ],
+      "measurement": "Viral replication kinetics (HIV-1 RNA levels and p24 antigen production), single-genome viral envelope tropism sequencing before and after drug exposure, and cell-surface CCR5 receptor occupancy.",
+      "model": "Ex vivo human peripheral blood mononuclear cell (PBMC) infection cultures challenged with longitudinal clinical HIV-1 plasma isolates collected at screening and baseline from antiretroviral-naive and treatment-experienced patients, stratified by standard versus high-sensitivity phenotypic/genotypic tropism assays.",
+      "possible_results": [
+        "If selective CCR5 blockade (maraviroc or PRO 140) completely suppresses viral replication in all isolates confirmed as pure R5 by high-sensitivity baseline sequencing, while failing only in isolates harboring minor dual/mixed or CXCR4 variants that are fully suppressed by bispecific 2P23-PRO140-Fc, this supports the interpretation that clinical failure is primarily driven by diagnostic sensitivity limits and spontaneous tropism shifts.",
+        "If selective CCR5 blockade fails to fully suppress viral replication even in isolates verified to have zero non-R5 minor variants at baseline and without emergence of CXCR4-tropic sequences, this supports the interpretation that intrinsic receptor-level escape or incomplete potency limits standalone CCR5-tropic blockade."
+      ],
+      "question": "In patients screened as having CCR5-tropic HIV-1, is virologic escape during CCR5 blockade primarily driven by outgrowth of pre-existing undetected non-R5 viral variants and spontaneous tropism shifts, or by incomplete inhibition of pure CCR5-tropic viral entry?",
+      "status": "AI-generated unvalidated research proposal; not performed or validated. Researcher approval required.",
+      "unresolved_gap": "The retrieved clinical and preclinical sources do not directly compare whether viral breakthrough in patients screened as R5-tropic is fully explained by minor non-R5 viral subpopulations that could be overcome by bispecific CCR5-fusion inhibitors versus intrinsic incomplete suppression of pure R5 virus."
+    },
+    "human_approval_required": true,
+    "model": "gemini-4-argon",
+    "provider": "google",
+    "reassessment": {
+      "assessment": "CCR5 antagonism has established clinical efficacy and regulatory approval precedent via maraviroc, which significantly suppressed HIV-1 RNA and increased CD4 counts at 48 weeks in treatment-experienced patients with R5 HIV-1 receiving optimized background therapy. However, this therapeutic precedent is strictly restricted to combination antiretroviral therapy in patients aged 2 years and older weighing at least 10 kg with CCR5-tropic HIV-1 only, excluding dual/mixed- or CXCR4-tropic virus. Evidence remains mixed in treatment-naive patients, where once-daily maraviroc failed noninferiority criteria and twice-daily maraviroc did not meet primary noninferiority to efavirenz at the less than 50 copies/mL threshold (with 11.9% vs 4.2% discontinuation for lack of efficacy), though post hoc exclusion of 15% of patients with non-R5 virus detected by a more sensitive tropism assay yielded similar response rates. Furthermore, 7.6% of treatment-experienced patients shifted from CCR5-tropic at screening to dual/mixed-tropic at baseline prior to treatment initiation, and biologic CCR5 blockade with the monoclonal antibody PRO 140 is similarly limited to CCR5-tropic isolates unless engineered with a fusion-inhibitory peptide. Clinical deployment of CCR5-tropic switch strategies has also encountered operational trial termination due to recruitment problems, while maraviroc carries clinical warnings for hepatotoxicity with allergic features, severe skin and hypersensitivity reactions, postural hypotension in severe renal impairment, and myocardial ischemia or infarction.",
+      "evidence_claim_ids": [
+        "DA_CLAIM_1",
+        "DA_CLAIM_2",
+        "DA_CLAIM_3",
+        "DA_CLAIM_4"
+      ],
+      "remaining_uncertainty": [
+        "Whether virologic failure and lack of noninferiority in patients receiving CCR5 antagonists are primarily driven by undetected baseline or spontaneous pre-treatment shifts to non-R5 tropism versus intrinsic limitations of CCR5 receptor blockade against pure R5 HIV-1.",
+        "Whether hepatotoxicity, severe hypersensitivity reactions, and cardiovascular events observed with maraviroc represent compound-specific off-target liabilities or on-target class effects of CCR5 inhibition.",
+        "Whether engineered bispecific CCR5-anchored fusion proteins can maintain activity against dual/mixed- and CXCR4-tropic clinical isolates in human settings without introducing new safety liabilities."
+      ]
+    },
+    "rounds": [
+      {
+        "accepted_claim_ids": [
+          "DA_CLAIM_1",
+          "DA_CLAIM_2",
+          "DA_CLAIM_3",
+          "DA_CLAIM_4"
+        ],
+        "adjudications": [
+          {
+            "claim_id": "DA_CLAIM_1",
+            "finding": "The claim accurately reflects the efficacy results from the MOTIVATE trials (MED:18832244), ChEMBL phase 4 approval metadata (CHEMBL256907), and the specific population, combination-therapy, and CCR5-tropism restrictions in the FDA label (SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339).",
+            "revision_request": "",
+            "verdict": "supported"
+          },
+          {
+            "claim_id": "DA_CLAIM_2",
+            "finding": "The claim and its accompanying uncertainty accurately summarize the primary 48-week noninferiority results, discontinuation rates, and post hoc tropism reanalysis in treatment-naive patients from the MERIT trial (MED:20151839), alongside the pre-treatment tropism shifts documented in treatment-experienced subjects in the product label (SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339).",
+            "revision_request": "",
+            "verdict": "supported"
+          },
+          {
+            "claim_id": "DA_CLAIM_3",
+            "finding": "The listed safety warnings—including hepatotoxicity with allergic features, severe skin/hypersensitivity reactions (SJS/TEN), cardiovascular events in treatment-experienced subjects, and postural hypotension considerations in severe renal impairment—are directly supported by the warnings_and_cautions section of SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339.",
+            "revision_request": "",
+            "verdict": "supported"
+          },
+          {
+            "claim_id": "DA_CLAIM_4",
+            "finding": "The claim is directly supported by MED:40130879 regarding PRO 140's restriction to CCR5-tropic viruses and preclinical engineering with a fusion-inhibitory peptide, as well as NCT00981773 regarding tropism-screened eligibility and trial termination due to recruitment problems, while properly distinguishing operational termination from efficacy.",
+            "revision_request": "",
+            "verdict": "supported"
+          }
+        ],
+        "deterministic_objections": {
+          "DA_CLAIM_1": [],
+          "DA_CLAIM_2": [],
+          "DA_CLAIM_3": [],
+          "DA_CLAIM_4": []
+        },
+        "draft": {
+          "claims": [
+            {
+              "citations": [
+                {
+                  "excerpt": "Maraviroc tablets are indicated in combination with other antiretroviral agents for the treatment of only CCR5-tropic human immunodeficiency virus type 1 (HIV-1) infection in adult and pediatric patients 2 years of age and older weighing at least 10 kg. Limitations of Use: • Maraviroc tablets are not recommended in patients with dual/mixed- or CXCR4-tropic HIV-1",
+                  "field": "indications_and_usage",
+                  "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+                },
+                {
+                  "excerpt": "Maraviroc, as compared with placebo, resulted in significantly greater suppression of HIV-1 and greater increases in CD4 cell counts at 48 weeks in previously treated patients with R5 HIV-1 who were receiving OBT.",
+                  "field": "conclusion_excerpt",
+                  "source_id": "MED:18832244"
+                },
+                {
+                  "excerpt": "\"max_phase\": 4.0, \"withdrawn_flag\": false, \"first_approval\": 2007",
+                  "field": "approval_metadata",
+                  "source_id": "CHEMBL256907"
+                }
+              ],
+              "claim_id": "DA_CLAIM_1",
+              "concern": "efficacy",
+              "kind": "interpretation",
+              "relevance": "Establishes that CCR5 is a clinically validated target in a defined HIV-1 subpopulation when used in combination regimens, while bounding the scope of proven benefit.",
+              "stance": "supporting",
+              "text": "CCR5 antagonism has established clinical efficacy and regulatory precedent through maraviroc, which significantly suppressed HIV-1 RNA and increased CD4 counts in treatment-experienced R5 HIV-1 patients on optimized background therapy, but its approved indication is strictly restricted to combination therapy in patients aged 2 years and older weighing at least 10 kg with CCR5-tropic HIV-1 only, excluding dual/mixed- or CXCR4-tropic disease.",
+              "uncertainty": "Approval and phase 4 status do not establish standalone monotherapy efficacy or benefit in patients with non-R5 viral tropism."
+            },
+            {
+              "citations": [
+                {
+                  "excerpt": "The once-daily maraviroc arm was discontinued for not meeting prespecified noninferiority criteria. In the primary 48-week analysis (n = 721), maraviroc was noninferior for <400 copies/mL (70.6% for maraviroc vs 73.1% for efavirenz) but not for <50 copies/mL (65.3% vs 69.3%) at a threshold of -10%. More maraviroc patients discontinued for lack of efficacy (11.9% vs 4.2%)",
+                  "field": "abstract",
+                  "source_id": "MED:20151839"
+                },
+                {
+                  "excerpt": "Twice-daily maraviroc was not noninferior to efavirenz at <50 copies/mL in the primary analysis. However, 15% of patients would have been ineligible for inclusion by a more sensitive screening assay.",
+                  "field": "conclusion_excerpt",
+                  "source_id": "MED:20151839"
+                },
+                {
+                  "excerpt": "Of the 1,043 subjects with a CCR5-tropism result at screening, 7.6% had a dual/mixed-tropism result at the baseline visit 4 to 6 weeks later. This illustrates the background change from CCR5- to dual/mixed-tropism result over time in this treatment-experienced population",
+                  "field": "clinical_studies",
+                  "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+                }
+              ],
+              "claim_id": "DA_CLAIM_2",
+              "concern": "efficacy",
+              "kind": "interpretation",
+              "relevance": "Challenges the robustness of CCR5 inhibition in treatment-naive settings and highlights dependence on high-sensitivity tropism diagnostics and viral stability.",
+              "stance": "contradictory",
+              "text": "In antiretroviral-naive patients with R5 HIV-1 (MERIT trial), once-daily maraviroc was discontinued for failing prespecified noninferiority criteria and twice-daily maraviroc failed to demonstrate noninferiority to efavirenz at the <50 copies/mL primary endpoint (65.3% vs 69.3%) with higher discontinuation for lack of efficacy (11.9% vs 4.2%), a vulnerability compounded by undetected non-R5 virus and spontaneous pre-treatment tropism shifts from CCR5 to dual/mixed tropism.",
+              "uncertainty": "Post hoc exclusion of 15% of subjects with non-R5 virus by a more sensitive assay yielded similar response rates, leaving uncertainty between intrinsic compound potency versus diagnostic screening limitations."
+            },
+            {
+              "citations": [
+                {
+                  "excerpt": "Hepatotoxicity accompanied by severe rash or systemic allergic reaction, including potentially life-threatening events, has been reported.",
+                  "field": "warnings_and_cautions",
+                  "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+                },
+                {
+                  "excerpt": "Severe and potentially life-threatening skin and hypersensitivity reactions have been reported in patients taking maraviroc. This includes cases of Stevens-Johnson syndrome, hypersensitivity reaction, and toxic epidermal necrolysis.",
+                  "field": "warnings_and_cautions",
+                  "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+                },
+                {
+                  "excerpt": "More cardiovascular events, including myocardial ischemia and/or infarction, were observed in treatment-experienced subjects who received maraviroc.",
+                  "field": "warnings_and_cautions",
+                  "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+                }
+              ],
+              "claim_id": "DA_CLAIM_3",
+              "concern": "safety",
+              "kind": "interpretation",
+              "relevance": "Identifies serious clinical safety liabilities associated with the approved CCR5 antagonist that require laboratory and clinical monitoring.",
+              "stance": "contradictory",
+              "text": "Clinical use of maraviroc carries warnings for potentially life-threatening hepatotoxicity accompanied by systemic allergic reactions, severe skin and hypersensitivity reactions including Stevens-Johnson syndrome and toxic epidermal necrolysis, postural hypotension in severe renal impairment, and increased cardiovascular events including myocardial ischemia and infarction in treatment-experienced subjects.",
+              "uncertainty": "The provided label excerpts do not resolve whether these toxicities are compound-specific off-target effects of maraviroc or on-target consequences of CCR5 blockade."
+            },
+            {
+              "citations": [
+                {
+                  "excerpt": "PRO 140, a humanized anti-HIV monoclonal antibody targeting the cell coreceptor CCR5, is currently under clinical trials, but it only affects CCR5-tropic viruses.",
+                  "field": "abstract",
+                  "source_id": "MED:40130879"
+                },
+                {
+                  "excerpt": "Recruitment problem",
+                  "field": "why_stopped",
+                  "source_id": "NCT00981773"
+                },
+                {
+                  "excerpt": "Availability of stored plasma with which to perform a tropism assay\n* CCR5 tropic HIV virus based on a tropism assay from a stored plasma sample",
+                  "field": "population",
+                  "source_id": "NCT00981773"
+                }
+              ],
+              "claim_id": "DA_CLAIM_4",
+              "concern": "operational",
+              "kind": "interpretation",
+              "relevance": "Demonstrates that tropism restriction is a target-level mechanism limitation shared across small-molecule and antibody modalities, and that tropism-gated trials can face operational recruitment hurdles.",
+              "stance": "context",
+              "text": "Biologic CCR5 blockade with the monoclonal antibody PRO 140 (leronlimab) is similarly restricted to inhibiting CCR5-tropic HIV-1 isolates and lacks activity against CXCR4-tropic viruses unless engineered with a fusion-inhibitory peptide, while clinical deployment of CCR5-tropic switch strategies has also faced operational termination due to recruitment problems.",
+              "uncertainty": "Trial termination for recruitment problems is an operational outcome rather than evidence of clinical inefficacy, and unapprovedCCR5 compounds (such as leronlimab, vicriviroc, cenicriviroc, and aplaviroc) lack adjudicated clinical efficacy outcomes in the bounded packet."
+            }
+          ],
+          "initial_assessment": "While CCR5 antagonism has established clinical precedent and regulatory approval via maraviroc for HIV-1 infection, therapeutic utility is strictly restricted to CCR5-tropic virus in combination with other antiretroviral agents in patients aged 2 years and older weighing at least 10 kg. Broad target applicability across general HIV infectious disease is challenged by primary noninferiority failure at the <50 copies/mL threshold in treatment-naive patients, rapid background viral tropism shifts to dual/mixed or CXCR4-tropic strains where CCR5-directed agents lack efficacy, serious hepatotoxicity and hypersensitivity warnings on the product label, and operational recruitment barriers in clinical switch studies.",
+          "remaining_uncertainty": [
+            "Whether the hepatotoxicity, severe hypersensitivity, and cardiovascular events reported for maraviroc are compound-specific or class-wide target liabilities of CCR5 inhibition.",
+            "Why other clinical-stage CCR5 inhibitors and antagonists (such as aplaviroc, vicriviroc, cenicriviroc, leronlimab, PF-232798, and INCB-9471) have not achieved regulatory approval for HIV infection within the bounded evidence packet.",
+            "Whether biomarker and physiological changes observed in completed Phase 4 studies (such as cerebral metabolite NAA/Cr ratios in MED:21987241 or T-cell subset/gene expression endpoints in NCT00735072, NCT00870363, and NCT00925756) translate into meaningful long-term clinical benefit."
+          ]
+        },
+        "round_number": 0
+      }
+    ],
+    "sent_source_ids": [
+      "CHEMBL1649931",
+      "CHEMBL1668019",
+      "CHEMBL1688243",
+      "CHEMBL1951914",
+      "CHEMBL2107384",
+      "CHEMBL2109341",
+      "CHEMBL2109342",
+      "CHEMBL2109343",
+      "CHEMBL2110727",
+      "CHEMBL256907",
+      "CHEMBL4594419",
+      "CHEMBL5095029",
+      "NCT00717067",
+      "NCT00735072",
+      "NCT00981773",
+      "NCT00870363",
+      "NCT00925756",
+      "NCT01327547",
+      "MED:18832244",
+      "MED:20151839",
+      "MED:40130879",
+      "MED:21987241",
+      "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+      "SPL:0c5f41e8-d358-403a-b199-6b9028b52748"
+    ],
+    "source_bundle": {
+      "assessment_pathway": "clinical_precedent",
+      "biological_association": {
+        "direct_source_ids": [
+          "MED:26825032",
+          "MED:26202768",
+          "MED:21987241",
+          "MED:18832244",
+          "MED:16641282",
+          "MED:20151839",
+          "MED:23589670",
+          "MED:21288824",
+          "MED:19432546",
+          "MED:24180001",
+          "MED:26034880",
+          "MED:22174752",
+          "MED:21890778",
+          "MED:18333863",
+          "MED:20949133",
+          "MED:24185044",
+          "MED:20703158",
+          "MED:21673796",
+          "MED:27492684",
+          "MED:26684819",
+          "MED:42794592",
+          "MED:41353403",
+          "MED:39972543",
+          "MED:42515555",
+          "MED:42953116",
+          "MED:39353749",
+          "MED:42847201",
+          "MED:39805095",
+          "MED:42559043",
+          "MED:40413451",
+          "AGR:IND607835565",
+          "MED:39774003",
+          "MED:41141451",
+          "MED:37450478",
+          "MED:39872519",
+          "MED:40691233",
+          "MED:41935287",
+          "MED:40130879",
+          "MED:39250652",
+          "MED:36564186",
+          "MED:37418541",
+          "MED:37906406",
+          "PPR:PPR673199",
+          "MED:29676212",
+          "MED:34868084",
+          "MED:32040959",
+          "MED:33778462",
+          "MED:34791296",
+          "MED:38819839",
+          "MED:42054491",
+          "MED:42403244",
+          "MED:41832601",
+          "MED:42699847",
+          "PPR:PPR1263839",
+          "PPR:PPR1291895",
+          "MED:35358290"
+        ],
+        "evidence_types": [
+          "animal_model",
+          "cellular_mechanistic",
+          "expression_only",
+          "human_genetic_association"
+        ],
+        "explanation": "Disease-specific clinical context retrieved; inspect actual indication/population and target mechanism.",
+        "independent_groups": 56,
+        "indirect_source_ids": [
+          "MED:31647836",
+          "MED:27015639",
+          "MED:23797691",
+          "MED:20672447",
+          "MED:16251317",
+          "MED:24218476",
+          "MED:16205738",
+          "MED:32630699",
+          "MED:22479485",
+          "MED:28434169",
+          "MED:21699506",
+          "MED:31292161",
+          "MED:26491256",
+          "MED:31377844",
+          "MED:23290628",
+          "MED:19424056",
+          "MED:19339945",
+          "MED:18720513",
+          "MED:21284908",
+          "MED:21835801",
+          "MED:21088872",
+          "MED:18434391",
+          "MED:22740718",
+          "MED:20518583",
+          "MED:21289125",
+          "MED:26712907",
+          "MED:42797803",
+          "MED:42839696",
+          "MED:42401549",
+          "MED:42974166",
+          "MED:42797766",
+          "MED:42621465",
+          "MED:42552339",
+          "MED:41608770",
+          "MED:41394806",
+          "MED:42656799",
+          "MED:40397567",
+          "MED:35865985",
+          "MED:40607431",
+          "MED:41967778",
+          "MED:39303165",
+          "MED:41683682",
+          "MED:40635771",
+          "MED:42835080",
+          "MED:38643381",
+          "MED:42140212",
+          "MED:40703771",
+          "MED:37759462",
+          "MED:39146384",
+          "MED:41939108",
+          "MED:33045349",
+          "MED:39556960",
+          "MED:39138568",
+          "MED:39324549",
+          "MED:42076117",
+          "MED:40672363",
+          "MED:38886484",
+          "MED:39094527",
+          "MED:38809042",
+          "MED:40653494",
+          "MED:42575974",
+          "MED:40779011",
+          "MED:42520492",
+          "PPR:PPR1315683",
+          "MED:42429541",
+          "MED:41765042",
+          "MED:41244297",
+          "MED:29941870",
+          "MED:42149386",
+          "PPR:PPR1111198",
+          "MED:39016126",
+          "MED:42897198",
+          "MED:39642611",
+          "MED:34999223",
+          "MED:32947226",
+          "MED:30000615",
+          "PPR:PPR779811",
+          "MED:31643973",
+          "PPR:PPR873243",
+          "MED:38145295",
+          "MED:27791451",
+          "MED:37718001"
+        ],
+        "limitations": [
+          "Deterministic source-scope triage, not expert quality assessment or causal verification.",
+          "Distinct source groups are not proof of independent cohorts; reviews and duplicated versions must not count as replication.",
+          "Biomarker changes, GWAS loci and druggability do not establish a valid therapeutic target."
+        ],
+        "ontology_association": {
+          "caution": "An exact-pair descriptive evidence score is not causal validation, a confidence score or treatment efficacy.",
+          "datatype_scores": [
+            {
+              "id": "literature",
+              "score": 0.8733300459169989
+            },
+            {
+              "id": "affected_pathway",
+              "score": 0.9066612367713315
+            },
+            {
+              "id": "rna_expression",
+              "score": 0.044833502875340873
+            },
+            {
+              "id": "clinical",
+              "score": 0.9780863546719432
+            }
+          ],
+          "disease_id": "MONDO_0005109",
+          "enableIndirect": false,
+          "score": 0.744544652029942,
+          "state": "found",
+          "target_id": "ENSG00000160791",
+          "url": "https://platform.opentargets.org/evidence/ENSG00000160791/MONDO_0005109"
+        },
+        "strength": "clinical_context",
+        "unrelated_source_ids": []
+      },
+      "coverage": {
+        "caution": "Bounded retrieval is not a systematic review; missing evidence is not evidence of inefficacy.",
+        "criteria_version": "pathways-v1",
+        "duration_seconds": 2.617815,
+        "facets": {
+          "ChEMBL": {
+            "limited": false,
+            "queries": 14,
+            "states": [
+              "found"
+            ]
+          },
+          "ClinicalTrials.gov": {
+            "limited": false,
+            "queries": 13,
+            "states": [
+              "found",
+              "no_results"
+            ]
+          },
+          "Europe PMC": {
+            "limited": true,
+            "queries": 6,
+            "states": [
+              "limit_reached"
+            ]
+          },
+          "OLS": {
+            "limited": false,
+            "queries": 1,
+            "states": [
+              "found"
+            ]
+          },
+          "Open Targets": {
+            "limited": false,
+            "queries": 1,
+            "states": [
+              "found"
+            ]
+          },
+          "approved_precedent": {
+            "disease_matched_indications": [
+              {
+                "approval_precedent": true,
+                "disease_match": "lexical",
+                "drugind_id": 23450,
+                "efo_id": "EFO:0000764",
+                "efo_term": "HIV infection",
+                "indication_refs": [
+                  {
+                    "ref_id": "NCT00098306,NCT00098722,NCT00098748,NCT00426660,NCT00478231,NCT00496782,NCT00537394,NCT00624195,NCT00634959,NCT00643643,NCT00703586,NCT00717067,NCT00719823,NCT00735072,NCT00771823,NCT00791700,NCT00808002,NCT00821535,NCT00827112,NCT00870363,NCT00875368,NCT00884858,NCT00925756,NCT00944541,NCT00966329,NCT00976404,NCT00981318,NCT00981773,NCT00982878,NCT00987948,NCT01049204,NCT01056874,NCT01068873,NCT01154673,NCT01190293,NCT01242579,NCT01291459,NCT01348763,NCT01363037,NCT01367210,NCT01384682,NCT01505114,NCT01533272,NCT01597648,NCT01680536,NCT01719627,NCT01749566,NCT01866267,NCT01896921,NCT02302547,NCT02475915,NCT02480894,NCT02519777,NCT02741323,NCT02778204,NCT02990312,NCT03163277,NCT03708861",
+                    "ref_type": "ClinicalTrials",
+                    "ref_url": "https://clinicaltrials.gov/search?term=NCT00098306%20NCT00098722%20NCT00098748%20NCT00426660%20NCT00478231%20NCT00496782%20NCT00537394%20NCT00624195%20NCT00634959%20NCT00643643%20NCT00703586%20NCT00717067%20NCT00719823%20NCT00735072%20NCT00771823%20NCT00791700%20NCT00808002%20NCT00821535%20NCT00827112%20NCT00870363%20NCT00875368%20NCT00884858%20NCT00925756%20NCT00944541%20NCT00966329%20NCT00976404%20NCT00981318%20NCT00981773%20NCT00982878%20NCT00987948%20NCT01049204%20NCT01056874%20NCT01068873%20NCT01154673%20NCT01190293%20NCT01242579%20NCT01291459%20NCT01348763%20NCT01363037%20NCT01367210%20NCT01384682%20NCT01505114%20NCT01533272%20NCT01597648%20NCT01680536%20NCT01719627%20NCT01749566%20NCT01866267%20NCT01896921%20NCT02302547%20NCT02475915%20NCT02480894%20NCT02519777%20NCT02741323%20NCT02778204%20NCT02990312%20NCT03163277%20NCT03708861"
+                  },
+                  {
+                    "ref_id": "2b5e5c5d-852a-413b-825c-8491d4539e67",
+                    "ref_type": "DailyMed",
+                    "ref_url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2b5e5c5d-852a-413b-825c-8491d4539e67"
+                  },
+                  {
+                    "ref_id": "46f30ac5-c96b-429e-976d-8c5ee1c0761b",
+                    "ref_type": "DailyMed",
+                    "ref_url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=46f30ac5-c96b-429e-976d-8c5ee1c0761b"
+                  },
+                  {
+                    "ref_id": "a94a9a2b-337b-4c13-8622-fc392194dc21",
+                    "ref_type": "DailyMed",
+                    "ref_url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a94a9a2b-337b-4c13-8622-fc392194dc21"
+                  },
+                  {
+                    "ref_id": "EMEA/H/C/000811",
+                    "ref_type": "EMA",
+                    "ref_url": "https://www.ema.europa.eu/en/medicines/human/EPAR/celsentri"
+                  }
+                ],
+                "max_phase_for_ind": "4.0",
+                "mesh_heading": "HIV Infections",
+                "mesh_id": "D015658",
+                "molecule_chembl_id": "CHEMBL256907",
+                "parent_molecule_chembl_id": "CHEMBL256907",
+                "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+              },
+              {
+                "approval_precedent": true,
+                "disease_match": "lexical",
+                "drugind_id": 23451,
+                "efo_id": "EFO:0000180",
+                "efo_term": "HIV-1 infection",
+                "indication_refs": [
+                  {
+                    "ref_id": "NCT00098293,NCT00795444,NCT00993148,NCT01345630,NCT01348308,NCT01400412,NCT02486510",
+                    "ref_type": "ClinicalTrials",
+                    "ref_url": "https://clinicaltrials.gov/search?term=NCT00098293%20NCT00795444%20NCT00993148%20NCT01345630%20NCT01348308%20NCT01400412%20NCT02486510"
+                  }
+                ],
+                "max_phase_for_ind": "4.0",
+                "mesh_heading": "HIV Infections",
+                "mesh_id": "D015658",
+                "molecule_chembl_id": "CHEMBL256907",
+                "parent_molecule_chembl_id": "CHEMBL256907",
+                "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+              }
+            ],
+            "ids": [
+              "CHEMBL256907"
+            ],
+            "meaning": "Phase 4 in ChEMBL for some indication; current authorisation/withdrawal and population require review, not inferred from phase alone."
+          },
+          "biological_association": {
+            "direct_source_ids": [
+              "MED:26825032",
+              "MED:26202768",
+              "MED:21987241",
+              "MED:18832244",
+              "MED:16641282",
+              "MED:20151839",
+              "MED:23589670",
+              "MED:21288824",
+              "MED:19432546",
+              "MED:24180001",
+              "MED:26034880",
+              "MED:22174752",
+              "MED:21890778",
+              "MED:18333863",
+              "MED:20949133",
+              "MED:24185044",
+              "MED:20703158",
+              "MED:21673796",
+              "MED:27492684",
+              "MED:26684819",
+              "MED:42794592",
+              "MED:41353403",
+              "MED:39972543",
+              "MED:42515555",
+              "MED:42953116",
+              "MED:39353749",
+              "MED:42847201",
+              "MED:39805095",
+              "MED:42559043",
+              "MED:40413451",
+              "AGR:IND607835565",
+              "MED:39774003",
+              "MED:41141451",
+              "MED:37450478",
+              "MED:39872519",
+              "MED:40691233",
+              "MED:41935287",
+              "MED:40130879",
+              "MED:39250652",
+              "MED:36564186",
+              "MED:37418541",
+              "MED:37906406",
+              "PPR:PPR673199",
+              "MED:29676212",
+              "MED:34868084",
+              "MED:32040959",
+              "MED:33778462",
+              "MED:34791296",
+              "MED:38819839",
+              "MED:42054491",
+              "MED:42403244",
+              "MED:41832601",
+              "MED:42699847",
+              "PPR:PPR1263839",
+              "PPR:PPR1291895",
+              "MED:35358290"
+            ],
+            "evidence_types": [
+              "animal_model",
+              "cellular_mechanistic",
+              "expression_only",
+              "human_genetic_association"
+            ],
+            "explanation": "Disease-specific clinical context retrieved; inspect actual indication/population and target mechanism.",
+            "independent_groups": 56,
+            "indirect_source_ids": [
+              "MED:31647836",
+              "MED:27015639",
+              "MED:23797691",
+              "MED:20672447",
+              "MED:16251317",
+              "MED:24218476",
+              "MED:16205738",
+              "MED:32630699",
+              "MED:22479485",
+              "MED:28434169",
+              "MED:21699506",
+              "MED:31292161",
+              "MED:26491256",
+              "MED:31377844",
+              "MED:23290628",
+              "MED:19424056",
+              "MED:19339945",
+              "MED:18720513",
+              "MED:21284908",
+              "MED:21835801",
+              "MED:21088872",
+              "MED:18434391",
+              "MED:22740718",
+              "MED:20518583",
+              "MED:21289125",
+              "MED:26712907",
+              "MED:42797803",
+              "MED:42839696",
+              "MED:42401549",
+              "MED:42974166",
+              "MED:42797766",
+              "MED:42621465",
+              "MED:42552339",
+              "MED:41608770",
+              "MED:41394806",
+              "MED:42656799",
+              "MED:40397567",
+              "MED:35865985",
+              "MED:40607431",
+              "MED:41967778",
+              "MED:39303165",
+              "MED:41683682",
+              "MED:40635771",
+              "MED:42835080",
+              "MED:38643381",
+              "MED:42140212",
+              "MED:40703771",
+              "MED:37759462",
+              "MED:39146384",
+              "MED:41939108",
+              "MED:33045349",
+              "MED:39556960",
+              "MED:39138568",
+              "MED:39324549",
+              "MED:42076117",
+              "MED:40672363",
+              "MED:38886484",
+              "MED:39094527",
+              "MED:38809042",
+              "MED:40653494",
+              "MED:42575974",
+              "MED:40779011",
+              "MED:42520492",
+              "PPR:PPR1315683",
+              "MED:42429541",
+              "MED:41765042",
+              "MED:41244297",
+              "MED:29941870",
+              "MED:42149386",
+              "PPR:PPR1111198",
+              "MED:39016126",
+              "MED:42897198",
+              "MED:39642611",
+              "MED:34999223",
+              "MED:32947226",
+              "MED:30000615",
+              "PPR:PPR779811",
+              "MED:31643973",
+              "PPR:PPR873243",
+              "MED:38145295",
+              "MED:27791451",
+              "MED:37718001"
+            ],
+            "limitations": [
+              "Deterministic source-scope triage, not expert quality assessment or causal verification.",
+              "Distinct source groups are not proof of independent cohorts; reviews and duplicated versions must not count as replication.",
+              "Biomarker changes, GWAS loci and druggability do not establish a valid therapeutic target."
+            ],
+            "ontology_association": {
+              "caution": "An exact-pair descriptive evidence score is not causal validation, a confidence score or treatment efficacy.",
+              "datatype_scores": [
+                {
+                  "id": "literature",
+                  "score": 0.8733300459169989
+                },
+                {
+                  "id": "affected_pathway",
+                  "score": 0.9066612367713315
+                },
+                {
+                  "id": "rna_expression",
+                  "score": 0.044833502875340873
+                },
+                {
+                  "id": "clinical",
+                  "score": 0.9780863546719432
+                }
+              ],
+              "disease_id": "MONDO_0005109",
+              "enableIndirect": false,
+              "score": 0.744544652029942,
+              "state": "found",
+              "target_id": "ENSG00000160791",
+              "url": "https://platform.opentargets.org/evidence/ENSG00000160791/MONDO_0005109"
+            },
+            "strength": "clinical_context",
+            "unrelated_source_ids": []
+          },
+          "compound_limitation_candidate": {
+            "included": [
+              "MED:40130879"
+            ],
+            "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+            "omitted": [
+              "MED:39138568",
+              "PPR:PPR779811"
+            ],
+            "retrieved": [
+              "MED:40130879",
+              "MED:39138568",
+              "PPR:PPR779811"
+            ]
+          },
+          "negative_candidate": {
+            "included": [
+              "MED:20151839"
+            ],
+            "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+            "omitted": [],
+            "retrieved": [
+              "MED:20151839"
+            ]
+          },
+          "openFDA": {
+            "limited": true,
+            "queries": 1,
+            "states": [
+              "limit_reached"
+            ]
+          },
+          "pathway": {
+            "clinical_publication_ids": [
+              "MED:26825032",
+              "MED:26202768",
+              "MED:21987241",
+              "MED:18832244",
+              "MED:16641282",
+              "MED:20151839",
+              "MED:23589670",
+              "MED:19432546",
+              "MED:24180001",
+              "MED:26034880",
+              "MED:22174752",
+              "MED:21890778",
+              "MED:18333863",
+              "MED:20949133",
+              "MED:24185044",
+              "MED:20703158",
+              "MED:26684819",
+              "MED:39972543",
+              "MED:39353749",
+              "MED:41141451",
+              "MED:37450478",
+              "MED:39250652",
+              "MED:36564186",
+              "MED:37418541",
+              "MED:37906406",
+              "PPR:PPR673199",
+              "MED:29676212",
+              "MED:34868084",
+              "MED:32040959",
+              "MED:33778462",
+              "MED:34791296",
+              "MED:38819839",
+              "MED:35358290"
+            ],
+            "clinical_trial_ids": [
+              "NCT00808002",
+              "NCT01345630",
+              "NCT02990312",
+              "NCT03617198",
+              "NCT00098722",
+              "NCT00709111",
+              "NCT02741323",
+              "NCT00703586",
+              "NCT02990858",
+              "NCT00114699",
+              "NCT00735072",
+              "NCT00098306",
+              "NCT00844519",
+              "NCT01428986",
+              "NCT00642707",
+              "NCT02355184",
+              "NCT02128828",
+              "NCT00393120",
+              "NCT02175680",
+              "NCT02797470",
+              "NCT00110591",
+              "NCT00935480",
+              "NCT01327547",
+              "NCT01049204",
+              "NCT00925756",
+              "NCT00988780",
+              "NCT00705419",
+              "NCT00686829",
+              "NCT00613379",
+              "NCT01827540",
+              "NCT01329783",
+              "NCT03708861",
+              "NCT01449006",
+              "NCT00624195",
+              "NCT01190293",
+              "NCT00042289",
+              "NCT00982878",
+              "NCT03218592",
+              "NCT02961829",
+              "NCT00478231",
+              "NCT00775294",
+              "NCT00966329",
+              "NCT03129113",
+              "NCT00981318",
+              "NCT01894776",
+              "NCT00771823",
+              "NCT00884858",
+              "NCT00993148",
+              "NCT01013987",
+              "NCT00537394",
+              "NCT01749566",
+              "NCT00870363",
+              "NCT00981773",
+              "NCT00440271",
+              "NCT00875368",
+              "NCT01505114",
+              "NCT02778204",
+              "NCT00944541",
+              "NCT00426660",
+              "NCT06805656",
+              "NCT00717067",
+              "NCT05470491",
+              "NCT02934022",
+              "NCT00525733",
+              "NCT00977756",
+              "NCT00496782",
+              "NCT00976404",
+              "NCT01056874"
+            ],
+            "meaning": "Clinical programmes use clinical coverage; exploratory biology does not require trials, approval or clinical efficacy evidence.",
+            "selected": "clinical_precedent"
+          },
+          "population": {
+            "detail": "Lexical disease/compound matches do not establish population equivalence; retain eligibility text and indication restrictions.",
+            "state": "requires_review"
+          },
+          "positive_candidate": {
+            "included": [
+              "MED:18832244"
+            ],
+            "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+            "omitted": [
+              "MED:39972543",
+              "MED:40653494",
+              "MED:38819839"
+            ],
+            "retrieved": [
+              "MED:18832244",
+              "MED:39972543",
+              "MED:40653494",
+              "MED:38819839"
+            ]
+          },
+          "safety_candidate": {
+            "included": [],
+            "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+            "omitted": [],
+            "retrieved": []
+          },
+          "sampling": {
+            "limits": [
+              {
+                "detail": "",
+                "operation": "label context",
+                "query": {
+                  "limit": 2,
+                  "search": "openfda.generic_name:\"MARAVIROC\""
+                },
+                "relevant": 2,
+                "returned": 2,
+                "source": "openFDA",
+                "state": "limit_reached",
+                "total": 10,
+                "url": "https://api.fda.gov/drug/label.json"
+              },
+              {
+                "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+                "operation": "registry-linked result publications",
+                "query": {
+                  "format": "json",
+                  "pageSize": 40,
+                  "query": "SRC:MED AND (EXT_ID:20672447 OR EXT_ID:20400411 OR EXT_ID:19191652 OR EXT_ID:26825032 OR EXT_ID:24352352 OR EXT_ID:16470119 OR EXT_ID:16988514 OR EXT_ID:20002783 OR EXT_ID:21283017 OR EXT_ID:18366444 OR EXT_ID:18989231 OR EXT_ID:18795962 OR EXT_ID:20632458 OR EXT_ID:22129166 OR EXT_ID:22083071 OR EXT_ID:23305215 OR EXT_ID:23392467 OR EXT_ID:25162818 OR EXT_ID:25261418 OR EXT_ID:25407158 OR EXT_ID:26202768 OR EXT_ID:25959631 OR EXT_ID:25950206 OR EXT_ID:26918544 OR EXT_ID:27540363 OR EXT_ID:29369162 OR EXT_ID:29520730 OR EXT_ID:29528944 OR EXT_ID:30134297 OR EXT_ID:30358179 OR EXT_ID:30530925 OR EXT_ID:30715324 OR EXT_ID:31489678 OR EXT_ID:32015036 OR EXT_ID:32451908 OR EXT_ID:33252495 OR EXT_ID:33318014 OR EXT_ID:34076612 OR EXT_ID:21987241 OR EXT_ID:31647836 OR EXT_ID:23797691 OR EXT_ID:27015639)",
+                  "resultType": "core"
+                },
+                "relevant": 7,
+                "returned": 40,
+                "source": "Europe PMC",
+                "state": "limit_reached",
+                "total": 42,
+                "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+              },
+              {
+                "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+                "operation": "approved-compound clinical literature",
+                "query": {
+                  "format": "json",
+                  "pageSize": 40,
+                  "query": "(TITLE_ABS:\"MARAVIROC\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\") AND (randomized OR randomised OR \"clinical trial\") sort_cited:y",
+                  "resultType": "core"
+                },
+                "relevant": 40,
+                "returned": 40,
+                "source": "Europe PMC",
+                "state": "limit_reached",
+                "total": 296,
+                "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+              },
+              {
+                "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+                "operation": "clinical literature (query chunk)",
+                "query": {
+                  "format": "json",
+                  "pageSize": 40,
+                  "query": "(TITLE_ABS:\"CCR5\" OR TITLE_ABS:\"PF-232798\" OR TITLE_ABS:\"APLAVIROC HYDROCHLORIDE\" OR TITLE_ABS:\"INCB-9471\" OR TITLE_ABS:\"AZD5672\" OR TITLE_ABS:\"VICRIVIROC MALEATE\" OR TITLE_ABS:\"CCR5MAB004\" OR TITLE_ABS:\"HGS-1025\" OR TITLE_ABS:\"LERONLIMAB\" OR TITLE_ABS:\"CENICRIVIROC\" OR TITLE_ABS:\"MARAVIROC\" OR TITLE_ABS:\"BMS-813160\" OR TITLE_ABS:\"PF-04634817\" OR TITLE_ABS:\"Pf-00232798\" OR TITLE_ABS:\"Pf-232798\" OR TITLE_ABS:\"Aplaviroc hcl\" OR TITLE_ABS:\"Aplaviroc hydrochloride\" OR TITLE_ABS:\"GW-873140A\" OR TITLE_ABS:\"GW873140A\" OR TITLE_ABS:\"INCB-009471\" OR TITLE_ABS:\"INCB009471\" OR TITLE_ABS:\"INCB9471\" OR TITLE_ABS:\"Incb-9471\" OR TITLE_ABS:\"Azd 5672\" OR TITLE_ABS:\"Azd-5672\" OR TITLE_ABS:\"Azd5672\" OR TITLE_ABS:\"MK-4176\" OR TITLE_ABS:\"SCH 417690\" OR TITLE_ABS:\"SCH-417690\" OR TITLE_ABS:\"Sch417690\" OR TITLE_ABS:\"Vicriviroc maleate\" OR TITLE_ABS:\"Ccr5mab004\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\") AND (randomized OR randomised OR \"clinical trial\" OR patients)",
+                  "resultType": "core"
+                },
+                "relevant": 40,
+                "returned": 40,
+                "source": "Europe PMC",
+                "state": "limit_reached",
+                "total": 3034,
+                "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+              },
+              {
+                "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+                "operation": "clinical literature (query chunk)",
+                "query": {
+                  "format": "json",
+                  "pageSize": 40,
+                  "query": "(TITLE_ABS:\"Hgs-1025\" OR TITLE_ABS:\"Leronlimab\" OR TITLE_ABS:\"PRO 140\" OR TITLE_ABS:\"PRO-140\" OR TITLE_ABS:\"PRO140\" OR TITLE_ABS:\"Cenicriviroc\" OR TITLE_ABS:\"TAK-652\" OR TITLE_ABS:\"TBR-652\" OR TITLE_ABS:\"Celsentri\" OR TITLE_ABS:\"Maraviroc\" OR TITLE_ABS:\"Rel-maraviroc\" OR TITLE_ABS:\"Selzentry\" OR TITLE_ABS:\"UK-427857\" OR TITLE_ABS:\"Uk-427 857\" OR TITLE_ABS:\"Bms 813160\" OR TITLE_ABS:\"Bms-813160\" OR TITLE_ABS:\"Pf-04634817\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\") AND (randomized OR randomised OR \"clinical trial\" OR patients)",
+                  "resultType": "core"
+                },
+                "relevant": 40,
+                "returned": 40,
+                "source": "Europe PMC",
+                "state": "limit_reached",
+                "total": 763,
+                "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+              },
+              {
+                "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+                "operation": "broad literature (query chunk)",
+                "query": {
+                  "format": "json",
+                  "pageSize": 40,
+                  "query": "(TITLE_ABS:\"CCR5\" OR TITLE_ABS:\"PF-232798\" OR TITLE_ABS:\"APLAVIROC HYDROCHLORIDE\" OR TITLE_ABS:\"INCB-9471\" OR TITLE_ABS:\"AZD5672\" OR TITLE_ABS:\"VICRIVIROC MALEATE\" OR TITLE_ABS:\"CCR5MAB004\" OR TITLE_ABS:\"HGS-1025\" OR TITLE_ABS:\"LERONLIMAB\" OR TITLE_ABS:\"CENICRIVIROC\" OR TITLE_ABS:\"MARAVIROC\" OR TITLE_ABS:\"BMS-813160\" OR TITLE_ABS:\"PF-04634817\" OR TITLE_ABS:\"Pf-00232798\" OR TITLE_ABS:\"Pf-232798\" OR TITLE_ABS:\"Aplaviroc hcl\" OR TITLE_ABS:\"Aplaviroc hydrochloride\" OR TITLE_ABS:\"GW-873140A\" OR TITLE_ABS:\"GW873140A\" OR TITLE_ABS:\"INCB-009471\" OR TITLE_ABS:\"INCB009471\" OR TITLE_ABS:\"INCB9471\" OR TITLE_ABS:\"Incb-9471\" OR TITLE_ABS:\"Azd 5672\" OR TITLE_ABS:\"Azd-5672\" OR TITLE_ABS:\"Azd5672\" OR TITLE_ABS:\"MK-4176\" OR TITLE_ABS:\"SCH 417690\" OR TITLE_ABS:\"SCH-417690\" OR TITLE_ABS:\"Sch417690\" OR TITLE_ABS:\"Vicriviroc maleate\" OR TITLE_ABS:\"Ccr5mab004\" OR TITLE_ABS:\"Hgs-1025\" OR TITLE_ABS:\"Leronlimab\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\")",
+                  "resultType": "core"
+                },
+                "relevant": 40,
+                "returned": 40,
+                "source": "Europe PMC",
+                "state": "limit_reached",
+                "total": 6986,
+                "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+              },
+              {
+                "detail": "Direction signals are unadjudicated triage, never outcome proof.",
+                "operation": "broad literature (query chunk)",
+                "query": {
+                  "format": "json",
+                  "pageSize": 40,
+                  "query": "(TITLE_ABS:\"PRO 140\" OR TITLE_ABS:\"PRO-140\" OR TITLE_ABS:\"PRO140\" OR TITLE_ABS:\"Cenicriviroc\" OR TITLE_ABS:\"TAK-652\" OR TITLE_ABS:\"TBR-652\" OR TITLE_ABS:\"Celsentri\" OR TITLE_ABS:\"Maraviroc\" OR TITLE_ABS:\"Rel-maraviroc\" OR TITLE_ABS:\"Selzentry\" OR TITLE_ABS:\"UK-427857\" OR TITLE_ABS:\"Uk-427 857\" OR TITLE_ABS:\"Bms 813160\" OR TITLE_ABS:\"Bms-813160\" OR TITLE_ABS:\"Pf-04634817\") AND (TITLE_ABS:\"HIV infectious disease\" OR TITLE_ABS:\"HIV\" OR TITLE_ABS:\"HIV infection\" OR TITLE_ABS:\"Human immunodeficiency virus infectious disease\" OR TITLE_ABS:\"Human immunodeficiency virus disease or disorder\" OR TITLE_ABS:\"Human immunodeficiency virus caused disease or disorder\")",
+                  "resultType": "core"
+                },
+                "relevant": 40,
+                "returned": 40,
+                "source": "Europe PMC",
+                "state": "limit_reached",
+                "total": 1028,
+                "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+              }
+            ],
+            "policy": "Deterministic stratified bounded sample; not statistically representative or exhaustive."
+          },
+          "stop_reasons": {
+            "reported": [
+              "NCT01068873",
+              "NCT00123890",
+              "NCT01345630",
+              "NCT00197197",
+              "NCT01474954",
+              "NCT02990312",
+              "NCT02990858",
+              "NCT02355184",
+              "NCT01140412",
+              "NCT02343666",
+              "NCT01049204",
+              "NCT04334915",
+              "NCT00981318",
+              "NCT01367210",
+              "NCT03163277",
+              "NCT00981773",
+              "NCT01242579",
+              "NCT00496782"
+            ],
+            "unavailable": []
+          },
+          "trial_results": {
+            "included": [
+              "NCT00717067",
+              "NCT00735072",
+              "NCT00870363",
+              "NCT00925756",
+              "NCT01327547"
+            ],
+            "meaning": "Results availability is not success; stopping status is not failure.",
+            "retrieved": [
+              "NCT01068873",
+              "NCT01345630",
+              "NCT01076179",
+              "NCT00766597",
+              "NCT02225665",
+              "NCT00098722",
+              "NCT00709111",
+              "NCT00791700",
+              "NCT02741323",
+              "NCT02990858",
+              "NCT00098748",
+              "NCT00735072",
+              "NCT00098306",
+              "NCT00844519",
+              "NCT00642707",
+              "NCT04223778",
+              "NCT02355184",
+              "NCT02128828",
+              "NCT02175680",
+              "NCT02797470",
+              "NCT00110591",
+              "NCT01327547",
+              "NCT00098293",
+              "NCT00925756",
+              "NCT00686829",
+              "NCT00613379",
+              "NCT01449006",
+              "NCT00853840",
+              "NCT02881762",
+              "NCT00624195",
+              "NCT00042289",
+              "NCT00982878",
+              "NCT03218592",
+              "NCT00478231",
+              "NCT01894776",
+              "NCT00993148",
+              "NCT00537394",
+              "NCT00870363",
+              "NCT01275625",
+              "NCT00440271",
+              "NCT01505114",
+              "NCT02778204",
+              "NCT00908544",
+              "NCT00426660",
+              "NCT00708162",
+              "NCT00717067",
+              "NCT00525733",
+              "NCT02519777",
+              "NCT00665561",
+              "NCT01204905",
+              "NCT00496782",
+              "NCT00987948",
+              "NCT00976404"
+            ]
+          }
+        },
+        "gaps": [],
+        "omitted_source_ids": [
+          "NCT00808002",
+          "NCT01068873",
+          "NCT00123890",
+          "NCT01345630",
+          "NCT01076179",
+          "NCT00428519",
+          "NCT00766597",
+          "NCT01060618",
+          "NCT00197197",
+          "NCT01044654",
+          "NCT01474954",
+          "NCT01252641",
+          "NCT02990312",
+          "NCT03617198",
+          "NCT02225665",
+          "NCT03969550",
+          "NCT00098722",
+          "NCT00709111",
+          "NCT00791700",
+          "NCT02741323",
+          "NCT00703586",
+          "NCT00666055",
+          "NCT00321438",
+          "NCT02990858",
+          "NCT00098748",
+          "NCT00114699",
+          "NCT01866267",
+          "NCT03666871",
+          "NCT00299897",
+          "NCT00842634",
+          "NCT00098306",
+          "NCT02388594",
+          "NCT01290211",
+          "NCT00844519",
+          "NCT01428986",
+          "NCT00642707",
+          "NCT01300988",
+          "NCT04223778",
+          "NCT00711386",
+          "NCT00076284",
+          "NCT02355184",
+          "NCT02128828",
+          "NCT00393120",
+          "NCT02175680",
+          "NCT01140412",
+          "NCT02797470",
+          "NCT00110591",
+          "NCT01348308",
+          "NCT00935480",
+          "NCT02500849",
+          "NCT00243568",
+          "NCT02343666",
+          "NCT00098293",
+          "NCT01049204",
+          "NCT00988780",
+          "NCT00297076",
+          "NCT00705419",
+          "NCT00632073",
+          "NCT00686829",
+          "NCT00613379",
+          "NCT07903441",
+          "NCT04334915",
+          "NCT01827540",
+          "NCT01329783",
+          "NCT03708861",
+          "NCT01363037",
+          "NCT01449006",
+          "NCT00853840",
+          "NCT02881762",
+          "NCT00624195",
+          "NCT01190293",
+          "NCT00042289",
+          "NCT00982878",
+          "NCT03218592",
+          "NCT03402815",
+          "NCT02961829",
+          "NCT00478231",
+          "NCT00775294",
+          "NCT00966329",
+          "NCT01420523",
+          "NCT03129113",
+          "NCT02588820",
+          "NCT00992654",
+          "NCT01908660",
+          "NCT00981318",
+          "NCT02480894",
+          "NCT01894776",
+          "NCT00771823",
+          "NCT01367210",
+          "NCT00884858",
+          "NCT00993148",
+          "NCT00821535",
+          "NCT01013987",
+          "NCT00537394",
+          "NCT01776996",
+          "NCT00643643",
+          "NCT01749566",
+          "NCT03163277",
+          "NCT01275625",
+          "NCT00719823",
+          "NCT02016924",
+          "NCT00440271",
+          "NCT00875368",
+          "NCT01505114",
+          "NCT02778204",
+          "NCT00908544",
+          "NCT00634959",
+          "NCT00944541",
+          "NCT00879047",
+          "NCT00426660",
+          "NCT00708162",
+          "NCT06805656",
+          "NCT02159027",
+          "NCT02346084",
+          "NCT05470491",
+          "NCT02934022",
+          "NCT00525733",
+          "NCT00977756",
+          "NCT02519777",
+          "NCT00782301",
+          "NCT01533272",
+          "NCT00665561",
+          "NCT01242579",
+          "NCT01204905",
+          "NCT00496782",
+          "NCT06511063",
+          "NCT03178084",
+          "NCT00987948",
+          "NCT00976404",
+          "NCT01056874",
+          "MED:31647836",
+          "MED:27015639",
+          "MED:26825032",
+          "MED:26202768",
+          "MED:23797691",
+          "MED:20672447",
+          "MED:16251317",
+          "MED:24218476",
+          "MED:16205738",
+          "MED:32630699",
+          "MED:22479485",
+          "MED:16641282",
+          "MED:28434169",
+          "MED:21699506",
+          "MED:31292161",
+          "MED:26491256",
+          "MED:23589670",
+          "MED:21288824",
+          "MED:31377844",
+          "MED:19432546",
+          "MED:24180001",
+          "MED:26034880",
+          "MED:23290628",
+          "MED:19424056",
+          "MED:19339945",
+          "MED:22174752",
+          "MED:21890778",
+          "MED:18720513",
+          "MED:18333863",
+          "MED:20949133",
+          "MED:21284908",
+          "MED:21835801",
+          "MED:21088872",
+          "MED:24185044",
+          "MED:20703158",
+          "MED:18434391",
+          "MED:22740718",
+          "MED:20518583",
+          "MED:21673796",
+          "MED:27492684",
+          "MED:21289125",
+          "MED:26684819",
+          "MED:26712907",
+          "MED:42797803",
+          "MED:42794592",
+          "MED:42839696",
+          "MED:42401549",
+          "MED:41353403",
+          "MED:39972543",
+          "MED:42515555",
+          "MED:42974166",
+          "MED:42797766",
+          "MED:42621465",
+          "MED:42552339",
+          "MED:42953116",
+          "MED:41608770",
+          "MED:39353749",
+          "MED:41394806",
+          "MED:42656799",
+          "MED:40397567",
+          "MED:35865985",
+          "MED:42847201",
+          "MED:39805095",
+          "MED:42559043",
+          "MED:40607431",
+          "MED:41967778",
+          "MED:39303165",
+          "MED:40413451",
+          "AGR:IND607835565",
+          "MED:41683682",
+          "MED:39774003",
+          "MED:41141451",
+          "MED:40635771",
+          "MED:42835080",
+          "MED:38643381",
+          "MED:37450478",
+          "MED:42140212",
+          "MED:40703771",
+          "MED:39872519",
+          "MED:37759462",
+          "MED:40691233",
+          "MED:39146384",
+          "MED:41935287",
+          "MED:41939108",
+          "MED:33045349",
+          "MED:39556960",
+          "MED:39250652",
+          "MED:39138568",
+          "MED:36564186",
+          "MED:39324549",
+          "MED:42076117",
+          "MED:40672363",
+          "MED:37418541",
+          "MED:37906406",
+          "MED:38886484",
+          "PPR:PPR673199",
+          "MED:39094527",
+          "MED:29676212",
+          "MED:38809042",
+          "MED:40653494",
+          "MED:34868084",
+          "MED:32040959",
+          "MED:33778462",
+          "MED:34791296",
+          "MED:38819839",
+          "MED:42054491",
+          "MED:42575974",
+          "MED:40779011",
+          "MED:42520492",
+          "MED:42403244",
+          "MED:41832601",
+          "PPR:PPR1315683",
+          "MED:42429541",
+          "MED:41765042",
+          "MED:41244297",
+          "MED:42699847",
+          "MED:29941870",
+          "PPR:PPR1263839",
+          "MED:42149386",
+          "PPR:PPR1111198",
+          "PPR:PPR1291895",
+          "MED:35358290",
+          "MED:39016126",
+          "MED:42897198",
+          "MED:39642611",
+          "MED:34999223",
+          "MED:32947226",
+          "MED:30000615",
+          "PPR:PPR779811",
+          "MED:31643973",
+          "PPR:PPR873243",
+          "MED:38145295",
+          "MED:27791451",
+          "MED:37718001"
+        ],
+        "pathway": "clinical_precedent",
+        "reasoning_permitted": true,
+        "selected_source_ids": [
+          "NCT00717067",
+          "NCT00735072",
+          "NCT00981773",
+          "NCT00870363",
+          "NCT00925756",
+          "NCT01327547",
+          "MED:18832244",
+          "MED:20151839",
+          "MED:40130879",
+          "MED:21987241"
+        ],
+        "selection_reasons": {
+          "MED:18832244": [
+            "Unadjudicated conclusion stratum: positive_candidate"
+          ],
+          "MED:20151839": [
+            "Unadjudicated conclusion stratum: negative_candidate"
+          ],
+          "MED:21987241": [
+            "Mechanistic/context stratum; no therapeutic outcome assumed"
+          ],
+          "MED:40130879": [
+            "Unadjudicated conclusion stratum: compound_limitation_candidate"
+          ],
+          "NCT00717067": [
+            "Approved-compound precedent; status does not determine outcome"
+          ],
+          "NCT00735072": [
+            "Posted results available; direction requires interpretation"
+          ],
+          "NCT00870363": [
+            "Stop-reason stratum: unknown"
+          ],
+          "NCT00925756": [
+            "Relevance, verified alias, approval precedent, results, phase, stable NCT order"
+          ],
+          "NCT00981773": [
+            "Stop-reason stratum: operational"
+          ],
+          "NCT01327547": [
+            "Relevance, verified alias, approval precedent, results, phase, stable NCT order"
+          ]
+        },
+        "status": "BOUNDED REVIEW"
+      },
+      "missing_information": [
+        "Target validity cannot be inferred from compound or trial failure alone.",
+        "Mechanism selectivity, exposure, disease stage and trial population require expert comparison.",
+        "Registry results presence is not an efficacy conclusion; numerical endpoints are not automatically interpreted.",
+        "Literature triage does not establish causality, negate contradictory findings or assess study quality."
+      ],
+      "resolved_target_id": "CHEMBL274",
+      "selection": {
+        "excerpt_character_limit": 2400,
+        "omitted_source_ids": [
+          "NCT00808002",
+          "NCT01068873",
+          "NCT00123890",
+          "NCT01345630",
+          "NCT01076179",
+          "NCT00428519",
+          "NCT00766597",
+          "NCT01060618",
+          "NCT00197197",
+          "NCT01044654",
+          "NCT01474954",
+          "NCT01252641",
+          "NCT02990312",
+          "NCT03617198",
+          "NCT02225665",
+          "NCT03969550",
+          "NCT00098722",
+          "NCT00709111",
+          "NCT00791700",
+          "NCT02741323",
+          "NCT00703586",
+          "NCT00666055",
+          "NCT00321438",
+          "NCT02990858",
+          "NCT00098748",
+          "NCT00114699",
+          "NCT01866267",
+          "NCT03666871",
+          "NCT00299897",
+          "NCT00842634",
+          "NCT00098306",
+          "NCT02388594",
+          "NCT01290211",
+          "NCT00844519",
+          "NCT01428986",
+          "NCT00642707",
+          "NCT01300988",
+          "NCT04223778",
+          "NCT00711386",
+          "NCT00076284",
+          "NCT02355184",
+          "NCT02128828",
+          "NCT00393120",
+          "NCT02175680",
+          "NCT01140412",
+          "NCT02797470",
+          "NCT00110591",
+          "NCT01348308",
+          "NCT00935480",
+          "NCT02500849",
+          "NCT00243568",
+          "NCT02343666",
+          "NCT00098293",
+          "NCT01049204",
+          "NCT00988780",
+          "NCT00297076",
+          "NCT00705419",
+          "NCT00632073",
+          "NCT00686829",
+          "NCT00613379",
+          "NCT07903441",
+          "NCT04334915",
+          "NCT01827540",
+          "NCT01329783",
+          "NCT03708861",
+          "NCT01363037",
+          "NCT01449006",
+          "NCT00853840",
+          "NCT02881762",
+          "NCT00624195",
+          "NCT01190293",
+          "NCT00042289",
+          "NCT00982878",
+          "NCT03218592",
+          "NCT03402815",
+          "NCT02961829",
+          "NCT00478231",
+          "NCT00775294",
+          "NCT00966329",
+          "NCT01420523",
+          "NCT03129113",
+          "NCT02588820",
+          "NCT00992654",
+          "NCT01908660",
+          "NCT00981318",
+          "NCT02480894",
+          "NCT01894776",
+          "NCT00771823",
+          "NCT01367210",
+          "NCT00884858",
+          "NCT00993148",
+          "NCT00821535",
+          "NCT01013987",
+          "NCT00537394",
+          "NCT01776996",
+          "NCT00643643",
+          "NCT01749566",
+          "NCT03163277",
+          "NCT01275625",
+          "NCT00719823",
+          "NCT02016924",
+          "NCT00440271",
+          "NCT00875368",
+          "NCT01505114",
+          "NCT02778204",
+          "NCT00908544",
+          "NCT00634959",
+          "NCT00944541",
+          "NCT00879047",
+          "NCT00426660",
+          "NCT00708162",
+          "NCT06805656",
+          "NCT02159027",
+          "NCT02346084",
+          "NCT05470491",
+          "NCT02934022",
+          "NCT00525733",
+          "NCT00977756",
+          "NCT02519777",
+          "NCT00782301",
+          "NCT01533272",
+          "NCT00665561",
+          "NCT01242579",
+          "NCT01204905",
+          "NCT00496782",
+          "NCT06511063",
+          "NCT03178084",
+          "NCT00987948",
+          "NCT00976404",
+          "NCT01056874",
+          "MED:31647836",
+          "MED:27015639",
+          "MED:26825032",
+          "MED:26202768",
+          "MED:23797691",
+          "MED:20672447",
+          "MED:16251317",
+          "MED:24218476",
+          "MED:16205738",
+          "MED:32630699",
+          "MED:22479485",
+          "MED:16641282",
+          "MED:28434169",
+          "MED:21699506",
+          "MED:31292161",
+          "MED:26491256",
+          "MED:23589670",
+          "MED:21288824",
+          "MED:31377844",
+          "MED:19432546",
+          "MED:24180001",
+          "MED:26034880",
+          "MED:23290628",
+          "MED:19424056",
+          "MED:19339945",
+          "MED:22174752",
+          "MED:21890778",
+          "MED:18720513",
+          "MED:18333863",
+          "MED:20949133",
+          "MED:21284908",
+          "MED:21835801",
+          "MED:21088872",
+          "MED:24185044",
+          "MED:20703158",
+          "MED:18434391",
+          "MED:22740718",
+          "MED:20518583",
+          "MED:21673796",
+          "MED:27492684",
+          "MED:21289125",
+          "MED:26684819",
+          "MED:26712907",
+          "MED:42797803",
+          "MED:42794592",
+          "MED:42839696",
+          "MED:42401549",
+          "MED:41353403",
+          "MED:39972543",
+          "MED:42515555",
+          "MED:42974166",
+          "MED:42797766",
+          "MED:42621465",
+          "MED:42552339",
+          "MED:42953116",
+          "MED:41608770",
+          "MED:39353749",
+          "MED:41394806",
+          "MED:42656799",
+          "MED:40397567",
+          "MED:35865985",
+          "MED:42847201",
+          "MED:39805095",
+          "MED:42559043",
+          "MED:40607431",
+          "MED:41967778",
+          "MED:39303165",
+          "MED:40413451",
+          "AGR:IND607835565",
+          "MED:41683682",
+          "MED:39774003",
+          "MED:41141451",
+          "MED:40635771",
+          "MED:42835080",
+          "MED:38643381",
+          "MED:37450478",
+          "MED:42140212",
+          "MED:40703771",
+          "MED:39872519",
+          "MED:37759462",
+          "MED:40691233",
+          "MED:39146384",
+          "MED:41935287",
+          "MED:41939108",
+          "MED:33045349",
+          "MED:39556960",
+          "MED:39250652",
+          "MED:39138568",
+          "MED:36564186",
+          "MED:39324549",
+          "MED:42076117",
+          "MED:40672363",
+          "MED:37418541",
+          "MED:37906406",
+          "MED:38886484",
+          "PPR:PPR673199",
+          "MED:39094527",
+          "MED:29676212",
+          "MED:38809042",
+          "MED:40653494",
+          "MED:34868084",
+          "MED:32040959",
+          "MED:33778462",
+          "MED:34791296",
+          "MED:38819839",
+          "MED:42054491",
+          "MED:42575974",
+          "MED:40779011",
+          "MED:42520492",
+          "MED:42403244",
+          "MED:41832601",
+          "PPR:PPR1315683",
+          "MED:42429541",
+          "MED:41765042",
+          "MED:41244297",
+          "MED:42699847",
+          "MED:29941870",
+          "PPR:PPR1263839",
+          "MED:42149386",
+          "PPR:PPR1111198",
+          "PPR:PPR1291895",
+          "MED:35358290",
+          "MED:39016126",
+          "MED:42897198",
+          "MED:39642611",
+          "MED:34999223",
+          "MED:32947226",
+          "MED:30000615",
+          "PPR:PPR779811",
+          "MED:31643973",
+          "PPR:PPR873243",
+          "MED:38145295",
+          "MED:27791451",
+          "MED:37718001"
+        ],
+        "publications_retrieved": 138,
+        "publications_sent": 4,
+        "reasons": {
+          "MED:18832244": [
+            "Unadjudicated conclusion stratum: positive_candidate"
+          ],
+          "MED:20151839": [
+            "Unadjudicated conclusion stratum: negative_candidate"
+          ],
+          "MED:21987241": [
+            "Mechanistic/context stratum; no therapeutic outcome assumed"
+          ],
+          "MED:40130879": [
+            "Unadjudicated conclusion stratum: compound_limitation_candidate"
+          ],
+          "NCT00717067": [
+            "Approved-compound precedent; status does not determine outcome"
+          ],
+          "NCT00735072": [
+            "Posted results available; direction requires interpretation"
+          ],
+          "NCT00870363": [
+            "Stop-reason stratum: unknown"
+          ],
+          "NCT00925756": [
+            "Relevance, verified alias, approval precedent, results, phase, stable NCT order"
+          ],
+          "NCT00981773": [
+            "Stop-reason stratum: operational"
+          ],
+          "NCT01327547": [
+            "Relevance, verified alias, approval precedent, results, phase, stable NCT order"
+          ]
+        },
+        "trial_records_sent": 6,
+        "trials_retrieved": 136
+      },
+      "sources": {
+        "CHEMBL1649931": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 2.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL1649931.json\", \"indications\": [{\"drugind_id\": 114765, \"efo_id\": \"EFO:0000764\", \"efo_term\": \"HIV infection\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": false, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL1649931\"}], \"indications_retrieved\": 1, \"indications_omitted\": 0, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 inhibitor",
+            "name": "PF-232798",
+            "synonyms": "Pf-00232798; Pf-232798"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1649931"
+        },
+        "CHEMBL1668019": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 3.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL1668019.json\", \"indications\": [{\"drugind_id\": 65445, \"efo_id\": \"EFO:0000764\", \"efo_term\": \"HIV infection\", \"max_phase_for_ind\": \"3.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": false, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL1668019\"}], \"indications_retrieved\": 1, \"indications_omitted\": 0, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 antagonist",
+            "name": "APLAVIROC HYDROCHLORIDE",
+            "synonyms": "Aplaviroc hcl; Aplaviroc hydrochloride; GW-873140A; GW873140A"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1668019"
+        },
+        "CHEMBL1688243": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 2.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL1688243.json\", \"indications\": [{\"drugind_id\": 54252, \"efo_id\": \"EFO:0000764\", \"efo_term\": \"HIV infection\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": false, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL1688243\"}], \"indications_retrieved\": 1, \"indications_omitted\": 0, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 antagonist",
+            "name": "INCB-9471",
+            "synonyms": "INCB-009471; INCB009471; INCB9471; Incb-9471"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1688243"
+        },
+        "CHEMBL1951914": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 2.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL1951914.json\", \"indications\": [{\"drugind_id\": 53273, \"efo_id\": \"EFO:0000685\", \"efo_term\": \"rheumatoid arthritis\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"Arthritis, Rheumatoid\", \"mesh_id\": \"D001172\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL1951914\"}, {\"drugind_id\": 124758, \"efo_id\": \"EFO:0003086\", \"efo_term\": \"kidney disease\", \"max_phase_for_ind\": \"1.0\", \"mesh_heading\": \"Kidney Diseases\", \"mesh_id\": \"D007674\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL1951914\"}], \"indications_retrieved\": 2, \"indications_omitted\": 0, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 antagonist",
+            "name": "AZD5672",
+            "synonyms": "AZD5672; Azd 5672; Azd-5672; Azd5672"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1951914"
+        },
+        "CHEMBL2107384": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 3.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL2107384.json\", \"indications\": [{\"drugind_id\": 43616, \"efo_id\": \"EFO:0000764\", \"efo_term\": \"HIV infection\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": false, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2107384\"}], \"indications_retrieved\": 1, \"indications_omitted\": 0, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 antagonist",
+            "name": "VICRIVIROC MALEATE",
+            "synonyms": "MK-4176; SCH 417690; SCH-417690; Sch417690; Vicriviroc maleate"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2107384"
+        },
+        "CHEMBL2109341": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 1.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL2109341.json\", \"indications\": [{\"drugind_id\": 67492, \"efo_id\": \"EFO:0000764\", \"efo_term\": \"HIV infection\", \"max_phase_for_ind\": \"1.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": false, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2109341\"}], \"indications_retrieved\": 1, \"indications_omitted\": 0, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 inhibitor",
+            "name": "CCR5MAB004",
+            "synonyms": "CCR5MAB004; Ccr5mab004"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2109341"
+        },
+        "CHEMBL2109342": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 1.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL2109342.json\", \"indications\": [{\"drugind_id\": 112963, \"efo_id\": \"EFO:0000729\", \"efo_term\": \"ulcerative colitis\", \"max_phase_for_ind\": \"1.0\", \"mesh_heading\": \"Colitis, Ulcerative\", \"mesh_id\": \"D003093\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2109342\"}], \"indications_retrieved\": 1, \"indications_omitted\": 0, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 inhibitor",
+            "name": "HGS-1025",
+            "synonyms": "HGS-1025; Hgs-1025"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2109342"
+        },
+        "CHEMBL2109343": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 3.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL2109343.json\", \"indications\": [{\"drugind_id\": 111622, \"efo_id\": \"EFO:0000180\", \"efo_term\": \"HIV-1 infection\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": false, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2109343\"}, {\"drugind_id\": 52974, \"efo_id\": \"EFO:0000764\", \"efo_term\": \"HIV infection\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": false, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2109343\"}, {\"drugind_id\": 128848, \"efo_id\": \"EFO:0000616\", \"efo_term\": \"neoplasm\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"Neoplasms\", \"mesh_id\": \"D009369\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2109343\"}, {\"drugind_id\": 123068, \"efo_id\": \"EFO:0003869\", \"efo_term\": \"breast neoplasm\", \"max_phase_for_ind\": \"1.0\", \"mesh_heading\": \"Breast Neoplasms\", \"mesh_id\": \"D001943\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2109343\"}], \"indications_retrieved\": 8, \"indications_omitted\": 4, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 antagonist",
+            "name": "LERONLIMAB",
+            "synonyms": "Leronlimab; PRO 140; PRO-140; PRO140"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2109343"
+        },
+        "CHEMBL2110727": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 3.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL2110727.json\", \"indications\": [{\"drugind_id\": 44349, \"efo_id\": \"EFO:0000180\", \"efo_term\": \"HIV-1 infection\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": false, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2110727\"}, {\"drugind_id\": 121881, \"efo_id\": \"EFO:0000764\", \"efo_term\": \"HIV infection\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": false, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2110727\"}, {\"drugind_id\": 65473, \"efo_id\": \"EFO:0000544\", \"efo_term\": \"infection\", \"max_phase_for_ind\": \"1.0\", \"mesh_heading\": \"Infections\", \"mesh_id\": \"D007239\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2110727\"}, {\"drugind_id\": 65474, \"efo_id\": \"EFO:0001421\", \"efo_term\": \"liver disease\", \"max_phase_for_ind\": \"1.0\", \"mesh_heading\": \"Liver Diseases\", \"mesh_id\": \"D008107\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL2110727\"}], \"indications_retrieved\": 8, \"indications_omitted\": 4, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 antagonist",
+            "name": "CENICRIVIROC",
+            "synonyms": "Cenicriviroc; TAK-652; TBR-652"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2110727"
+        },
+        "CHEMBL256907": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 4.0, \"withdrawn_flag\": false, \"first_approval\": 2007, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL256907.json\", \"indications\": [{\"drugind_id\": 23451, \"efo_id\": \"EFO:0000180\", \"efo_term\": \"HIV-1 infection\", \"max_phase_for_ind\": \"4.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": true, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907\"}, {\"drugind_id\": 23450, \"efo_id\": \"EFO:0000764\", \"efo_term\": \"HIV infection\", \"max_phase_for_ind\": \"4.0\", \"mesh_heading\": \"HIV Infections\", \"mesh_id\": \"D015658\", \"approval_precedent\": true, \"disease_match\": \"lexical\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907\"}, {\"drugind_id\": 42035, \"efo_id\": \"EFO:0000763\", \"efo_term\": \"viral disease\", \"max_phase_for_ind\": \"4.0\", \"mesh_heading\": \"Virus Diseases\", \"mesh_id\": \"D014777\", \"approval_precedent\": true, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907\"}, {\"drugind_id\": 66257, \"efo_id\": \"EFO:0000095\", \"efo_term\": \"chronic lymphocytic leukemia\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"Leukemia, Lymphocytic, Chronic, B-Cell\", \"mesh_id\": \"D015451\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907\"}], \"indications_retrieved\": 20, \"indications_omitted\": 16, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 antagonist",
+            "name": "MARAVIROC",
+            "synonyms": "Celsentri; Maraviroc; Rel-maraviroc; Selzentry; UK-427857; Uk-427,857"
+          },
+          "precedent": true,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL256907"
+        },
+        "CHEMBL4594419": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 2.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL4594419.json\", \"indications\": [{\"drugind_id\": 126540, \"efo_id\": \"EFO:0000401\", \"efo_term\": \"diabetic nephropathy\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"Diabetic Nephropathies\", \"mesh_id\": \"D003928\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL4594419\"}, {\"drugind_id\": 126541, \"efo_id\": \"EFO:0000536\", \"efo_term\": \"hyperplasia\", \"max_phase_for_ind\": \"1.0\", \"mesh_heading\": \"Hyperplasia\", \"mesh_id\": \"D006965\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL4594419\"}, {\"drugind_id\": 148036, \"efo_id\": \"MONDO:0004992\", \"efo_term\": \"cancer\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"Neoplasms\", \"mesh_id\": \"D009369\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL4594419\"}, {\"drugind_id\": 155443, \"efo_id\": \"MONDO:0005184\", \"efo_term\": \"pancreatic ductal adenocarcinoma\", \"max_phase_for_ind\": \"1.0\", \"mesh_heading\": \"Carcinoma, Pancreatic Ductal\", \"mesh_id\": \"D021441\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL4594419\"}], \"indications_retrieved\": 4, \"indications_omitted\": 0, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 antagonist",
+            "name": "BMS-813160",
+            "synonyms": "BMS-813160; Bms 813160; Bms-813160"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4594419"
+        },
+        "CHEMBL5095029": {
+          "caution": "Target pharmacology/druggability only unless an indication is explicitly matched. Not evidence of biological relevance or efficacy for the selected disease.",
+          "fields": {
+            "approval_metadata": "{\"max_phase\": 2.0, \"withdrawn_flag\": false, \"first_approval\": null, \"source\": \"https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL5095029.json\", \"indications\": [{\"drugind_id\": 54204, \"efo_id\": \"EFO:0000401\", \"efo_term\": \"diabetic nephropathy\", \"max_phase_for_ind\": \"2.0\", \"mesh_heading\": \"Diabetic Nephropathies\", \"mesh_id\": \"D003928\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL5095029\"}, {\"drugind_id\": 124751, \"efo_id\": \"HP:0000083\", \"efo_term\": \"Renal insufficiency\", \"max_phase_for_ind\": \"1.0\", \"mesh_heading\": \"Renal Insufficiency\", \"mesh_id\": \"D051437\", \"approval_precedent\": false, \"disease_match\": \"unresolved\", \"source_url\": \"https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL5095029\"}], \"indications_retrieved\": 2, \"indications_omitted\": 0, \"selection\": \"Disease match then indication phase; first four. All retrieved records remain in the investigation.\", \"search_state\": \"found\"}",
+            "mechanisms": "C-C chemokine receptor type 5 antagonist",
+            "name": "PF-04634817",
+            "synonyms": "Pf-04634817"
+          },
+          "precedent": false,
+          "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL5095029"
+        },
+        "MED:18832244": {
+          "applicability": {
+            "biological_signals": [],
+            "detail": "Visible entity match; disease match: matched. Compound-only context must not be extrapolated to the requested disease/population.",
+            "disease_match": "matched",
+            "evidence_scope": "direct_clinical",
+            "scope_reason": "Disease-matched interventional compound study; target engagement and population remain subject to review."
+          },
+          "biological_context": false,
+          "caution": "Abstract may be truncated; no full text, causal adjudication or quality assessment.",
+          "clinical_context": true,
+          "direction_signals": [
+            "positive_candidate"
+          ],
+          "fields": {
+            "abstract": "Background CC chemokine receptor 5 antagonists are a new class of antiretroviral agents. Methods We conducted two double-blind, placebo-controlled, phase 3 studies--Maraviroc versus Optimized Therapy in Viremic Antiretroviral Treatment-Experienced Patients (MOTIVATE) 1 and MOTIVATE 2--with patients who had R5 human immunodeficiency virus type 1 (HIV-1) only. They had been treated with or had resistance to three antiretroviral-drug classes and had HIV-1 RNA levels of more than 5000 copies per milliliter. The patients were randomly assigned to one of three antiretroviral regimens consisting of maraviroc once daily, maraviroc twice daily, or placebo, each of which included optimized background therapy (OBT) based on treatment history and drug-resistance testing. Safety and efficacy were assessed after 48 weeks. Results A total of 1049 patients received the randomly assigned study drug; the mean baseline HIV-1 RNA level was 72,400 copies per milliliter, and the median CD4 cell count was 169 per cubic millimeter. At 48 weeks, in both studies, the mean change in HIV-1 RNA from baseline was greater with maraviroc than with placebo: -1.66 and -1.82 log(10) copies per milliliter with the once-daily and twice-daily regimens, respectively, versus -0.80 with placebo in MOTIVATE 1, and -1.72 and -1.87 log(10) copies per milliliter, respectively, versus -0.76 with placebo in MOTIVATE 2. More patients receiving maraviroc once or twice daily had HIV-1 RNA levels of less than 50 copies per milliliter (42% and 47%, respectively, vs. 16% in the placebo group in MOTIVATE 1; 45% in both maraviroc groups vs. 18% in MOTIVATE 2; P<0.001 for both comparisons in each study). The change from baseline in CD4 counts was also greater with maraviroc once or twice daily than with placebo (increases of 113 and 122 per cubic millimeter, respectively, vs. 54 in MOTIVATE 1; increases of 122 and 128 per cubic millimeter, respectively, vs. 69 in MOTIVATE 2; P<0.001 for both comparisons in each study). Frequencies of adverse events were similar among the groups. Conclusions Maraviroc, as compared with placebo, resulted in significantly greater suppression of HIV-1 and greater increases in CD4 cell counts at 48 weeks in previously treated patients with R5 HIV-1 who were receiving OBT. (ClinicalTrials.gov numbers, NCT00098306 and NCT00098722.)",
+            "conclusion_excerpt": "Maraviroc, as compared with placebo, resulted in significantly greater suppression of HIV-1 and greater increases in CD4 cell counts at 48 weeks in previously treated patients with R5 HIV-1 who were receiving OBT. (ClinicalTrials.gov numbers, NCT00098306 and NCT00098722.)",
+            "title": "Maraviroc for previously treated patients with R5 HIV-1 infection."
+          },
+          "url": "https://europepmc.org/article/MED/18832244"
+        },
+        "MED:20151839": {
+          "applicability": {
+            "biological_signals": [],
+            "detail": "Visible entity match; disease match: matched. Compound-only context must not be extrapolated to the requested disease/population.",
+            "disease_match": "matched",
+            "evidence_scope": "direct_clinical",
+            "scope_reason": "Disease-matched interventional compound study; target engagement and population remain subject to review."
+          },
+          "biological_context": false,
+          "caution": "Abstract may be truncated; no full text, causal adjudication or quality assessment.",
+          "clinical_context": true,
+          "direction_signals": [
+            "negative_candidate"
+          ],
+          "fields": {
+            "abstract": "Background The MERIT (Maraviroc versus Efavirenz in Treatment-Naive Patients) study compared maraviroc and efavirenz, both with zidovudine-lamivudine, in antiretroviral-naive patients with R5 human immunodeficiency virus type 1 (HIV-1) infection. Methods Patients screened for R5 HIV-1 were randomized to receive efavirenz (600 mg once daily) or maraviroc (300 mg once or twice daily) with zidovudine-lamivudine. Coprimary end points were proportions of patients with a viral load <400 and <50 copies/mL at week 48; the noninferiority of maraviroc was assessed. Results The once-daily maraviroc arm was discontinued for not meeting prespecified noninferiority criteria. In the primary 48-week analysis (n = 721), maraviroc was noninferior for <400 copies/mL (70.6% for maraviroc vs 73.1% for efavirenz) but not for <50 copies/mL (65.3% vs 69.3%) at a threshold of -10%. More maraviroc patients discontinued for lack of efficacy (11.9% vs 4.2%), but fewer discontinued for adverse events (4.2% vs 13.6%). In a post hoc reanalysis excluding 107 patients (15%) with non-R5 screening virus by the current, more sensitive tropism assay, the lower bound of the 1-sided 97.5% confidence interval for the difference between treatment groups was above -10% for each end point. Conclusions Twice-daily maraviroc was not noninferior to efavirenz at <50 copies/mL in the primary analysis. However, 15% of patients would have been ineligible for inclusion by a more sensitive screening assay. Their retrospective exclusion resulted in similar response rates in both arms Trial registration. ClinicalTrials.gov identifier: (NCT00098293) .",
+            "conclusion_excerpt": "Twice-daily maraviroc was not noninferior to efavirenz at <50 copies/mL in the primary analysis. However, 15% of patients would have been ineligible for inclusion by a more sensitive screening assay. Their retrospective exclusion resulted in similar response rates in both arms Trial registration. ClinicalTrials.gov identifier: (NCT00098293) .",
+            "title": "Maraviroc versus efavirenz, both in combination with zidovudine-lamivudine, for the treatment of antiretroviral-naive subjects with CCR5-tropic HIV-1 infection."
+          },
+          "url": "https://europepmc.org/article/MED/20151839"
+        },
+        "MED:21987241": {
+          "applicability": {
+            "biological_signals": [],
+            "detail": "Visible entity match; disease match: matched. Compound-only context must not be extrapolated to the requested disease/population.",
+            "disease_match": "matched",
+            "evidence_scope": "direct_clinical",
+            "scope_reason": "Disease-matched interventional compound study; target engagement and population remain subject to review."
+          },
+          "biological_context": false,
+          "caution": "Abstract may be truncated; no full text, causal adjudication or quality assessment.",
+          "clinical_context": false,
+          "direction_signals": [],
+          "fields": {
+            "abstract": "Background We conducted a pharmacokinetic and in vivo cerebral (1)H magnetic resonance spectroscopy ((1)H-MRS) study to assess CSF exposure and cerebral metabolite ratios (CMRs) following maraviroc intensification. Methods HIV-infected neurologically asymptomatic adults receiving tenofovir, emtricitabine and lopinavir/ritonavir with plasma HIV RNA <50 copies/mL were eligible and received intensified therapy with 150 mg of maraviroc twice daily. (1)H-MRS was performed in several cerebral locations, including the right basal ganglia (RBG), to assess CMRs, including N-acetyl aspartate/creatine (NAA/Cr), at baseline and after 14 days. Subsequently, on day 15, blood samples were obtained to determine plasma concentrations of maraviroc pre-dose (C(trough)) and then paired blood and CSF samples were collected at 4 or 6 h post-dose. Associations between maraviroc exposure, clinical parameters and changes to CMRs were evaluated. Trial registry ClinicalTrials.gov (http://clinicaltrials.gov/ct2/show/NCT00982878). Results Twelve subjects (75% male) participated with a mean (SD) CD4+ cell count of 503 (199) cells/μL. Mean (SD) maraviroc plasma concentrations at pre-dose, 4 h post-dose and 6 h post-dose were 337 (74), 842 (174) and 485 (100) ng/mL and CSF concentrations at 4 h post-dose and 6 h post-dose were 7.5 (1.3) and 5.1 (1.2) ng/mL. The mean maraviroc CSF : plasma ratio (range) was 1.01% (0.57%-1.61%). An increase of 14.8% was observed for the RBG NAA/Cr ratio, which was significantly associated with higher maraviroc plasma C(trough) (P = 0.05, r = 0.61), but not CSF concentration (P = 0.16, r = 0.46). Conclusions After 14 days of maraviroc intensification, small increases in cerebral metabolite markers of neuronal integrity (NAA/Cr ratios) were observed and are associated with maraviroc plasma C(trough).",
+            "conclusion_excerpt": "After 14 days of maraviroc intensification, small increases in cerebral metabolite markers of neuronal integrity (NAA/Cr ratios) were observed and are associated with maraviroc plasma C(trough).",
+            "title": "CNS effects of a CCR5 inhibitor in HIV-infected subjects: a pharmacokinetic and cerebral metabolite study."
+          },
+          "url": "https://europepmc.org/article/MED/21987241"
+        },
+        "MED:40130879": {
+          "applicability": {
+            "biological_signals": [
+              "expression_only"
+            ],
+            "detail": "Visible entity match; disease match: matched. Compound-only context must not be extrapolated to the requested disease/population.",
+            "disease_match": "matched",
+            "evidence_scope": "direct_biological",
+            "scope_reason": "Disease-specific primary biological candidate; association/perturbation does not prove therapeutic validity. Locus-to-gene assignment needs review."
+          },
+          "biological_context": true,
+          "caution": "Abstract may be truncated; no full text, causal adjudication or quality assessment.",
+          "clinical_context": false,
+          "direction_signals": [
+            "compound_limitation_candidate"
+          ],
+          "fields": {
+            "abstract": "PRO 140, a humanized anti-HIV monoclonal antibody targeting the cell coreceptor CCR5, is currently under clinical trials, but it only affects CCR5-tropic viruses. In this study, we have engineered two tandem fusion proteins (2P23-PRO140SC and 2P23-PRO140-Fc) with bifunctional activity by adding short fusion-inhibitory peptide 2P23 to the single-chain fragment variable (scFv) of PRO 140 (PRO140SC) with or without the Fc domain of human IgG4. We first demonstrated that 2P23-PRO140SC and 2P23-PRO140-Fc could efficiently bind to the cell membranes through CCR5 anchoring, which did not affect the expression level of CCR5 on the cell surface. We then verified that the addition of 2P23 peptide to PRO140SC enabled a very potent activity against CXCR4-tropic HIV-1 isolates. As expected, the bispecific fusion proteins exhibited highly potent activities in inhibiting divergent HIV-1 subtypes and viral mutants that were resistant to the fusion inhibitors 2P23 and T20, and they displayed relatively low  in vitro  cytotoxicity. Furthermore, both the fusion proteins had robust  in vivo  anti-HIV activities in rats, with 2P23-PRO140-Fc much better than 2P23-PRO140SC. In conclusion, our studies have provided bispecific HIV-1 inhibitors that overcome the drawbacks of PRO 140 antibody and offered novel tools for studying the mechanisms of HIV-1 infection.IMPORTANCEGiven that HIV-1 evolves with high variability and drug resistance, the development of novel antivirals is important. CCR5-directed antibody PRO 140 is currently under clinical trials, but it only inhibits CCR5-tropic HIV-1 isolates. The designed fusion proteins by adding a minimum fusion-inhibitory peptide to PRO 140 enable dramatically increased activities in inhibiting both CCR5-tropic and CXCR4-tropic viruses, thus offering novel antiviral agents with a bispecific functionality that can overcome the drawbacks of PRO 140 antibody.",
+            "conclusion_excerpt": ", our studies have provided bispecific HIV-1 inhibitors that overcome the drawbacks of PRO 140 antibody and offered novel tools for studying the mechanisms of HIV-1 infection.IMPORTANCEGiven that HIV-1 evolves with high variability and drug resistance, the development of novel antivirals is important. CCR5-directed antibody PRO 140 is currently under clinical trials, but it only inhibits CCR5-tropic HIV-1 isolates. The designed fusion proteins by adding a minimum fusion-inhibitory peptide to PRO 140 enable dramatically increased activities in inhibiting both CCR5-tropic and CXCR4-tropic viruses, thus offering novel antiviral agents with a bispecific functionality that can overcome the drawbacks of PRO 140 antibody.",
+            "title": "Addition of a short HIV-1 fusion-inhibitory peptide to PRO 140 antibody dramatically increases its antiviral breadth and potency."
+          },
+          "url": "https://europepmc.org/article/MED/40130879"
+        },
+        "NCT00717067": {
+          "applicability": {
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity.",
+            "compound_ids": [
+              "CHEMBL256907"
+            ],
+            "compound_matches": {
+              "CHEMBL256907": "verified"
+            },
+            "disease_match": "matched",
+            "relationship": "verified",
+            "stop_reason_provenance": {
+              "checked_at_utc": "2026-11-08T02:05:37.628409+00:00",
+              "detail": "",
+              "full_record_checked": true,
+              "search_state": "absent",
+              "search_value": null,
+              "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT00717067",
+              "state": "absent",
+              "value": null
+            }
+          },
+          "fields": {
+            "conditions": "Human Immunodeficiency Virus (HIV) Infection",
+            "interventions": "Maraviroc; Maraviroc; Ritonavir; Saquinavir; Maraviroc; Ritonavir; Saquinavir; Maraviroc; Ritonavir; Saquinavir; Maraviroc; Maraviroc; Maraviroc",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Area Under the Plasma Concentration Time-curve From Zero to the Last Measured Concentration (AUClast)\", \"description\": \"Area under the plasma concentration time-curve from zero to the last measured concentration (AUClast) measured in nanograms \\\\* hour divided by milliliters (ng\\\\*hr/mL).\", \"populationDescription\": \"Pharmacokinetic (PK) parameter analysis population: all subjects treated who have at least 1 of the PK parameters of interest.\", \"reportingStatus\": \"POSTED\", \"paramType\": \"GEOMETRIC_MEAN\", \"dispersionType\": \"Standard Deviation\", \"unitOfMeasure\": \"ng*hr/mL\", \"timeFrame\": \"Pre-dose, post-dose hours 0.5, 1, 2, 3, 4, 6, 8, 12, 24, 48, and 72.\", \"groups\": [{\"id\": \"OG000\", \"title\": \"Healthy Subjects: Multiple Dose\", \"description\": \"Maraviroc 150 mg twic",
+            "phases": "PHASE4",
+            "population": "Inclusion Criteria:\n\n* Stable Renal Function defined as ≤20% (25% for normal renal function) difference between 2 measurements of serum creatinine obtained on 2 occasions separated by at least 2 weeks.\n* Body Mass Index (BMI) of approximately 18 to 40 kg/m2 inclusive.\n* Total body weight \\>50 kg (110 lbs).\n* Male or female subjects between the ages of 18 and 85 years.\n\nExclusion Criteria:\n\n* Subjects with acute renal disease and/or history of renal transplant.\n* Supine BP at Screening ≥160 mm Hg systolic or ≥95 mm Hg diastolic.\n* Supine BP at Screening ≤80 mm Hg systolic or ≤40 mm Hg diastolic.",
+            "status": "COMPLETED",
+            "title": "Pharmacokinetics, Safety And Toleration Of Maraviroc Administered To Subjects With Various Degrees Of Renal Impaired And Normal Renal Function",
+            "why_stopped": ""
+          },
+          "url": "https://clinicaltrials.gov/study/NCT00717067"
+        },
+        "NCT00735072": {
+          "applicability": {
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity.",
+            "compound_ids": [
+              "CHEMBL256907"
+            ],
+            "compound_matches": {
+              "CHEMBL256907": "verified"
+            },
+            "disease_match": "matched",
+            "relationship": "verified",
+            "stop_reason_provenance": {
+              "checked_at_utc": "2026-11-08T02:04:38.601027+00:00",
+              "detail": "",
+              "full_record_checked": true,
+              "search_state": "absent",
+              "search_value": null,
+              "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT00735072",
+              "state": "absent",
+              "value": null
+            }
+          },
+          "fields": {
+            "conditions": "HIV Infection",
+            "interventions": "Placebo; Placebo for Maraviroc; Maraviroc; Selzentry",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Week 24 Change in Percentage of CD8+ T Cells That Co-express CD38 and HLA DR (Week 24 %CD38+HLA-DR+ CD8+ T Cells Minus Baseline %CD38+HLA-DR+ CD8+ T Cells)\", \"reportingStatus\": \"POSTED\", \"paramType\": \"MEDIAN\", \"dispersionType\": \"Inter-Quartile Range\", \"unitOfMeasure\": \"%CD38+ HLA-DR+ CD8+ T cells\", \"timeFrame\": \"Baseline and Week 24\", \"groups\": [{\"id\": \"OG000\", \"title\": \"Maraviroc\", \"description\": \"Maraviroc (dose based on current medications in regimen: 150mg PO BID for those on a protease inhibitor-based regimen other than Tipranavir; 600mg PO BID for efavirenz-containing regimens; or 300 mg PO BID for all other regimens).\"}, {\"id\": \"OG001\", \"title\": \"Placebo\", \"description\": \"Placebo (dose based on current medications in regimen: 150mg PO BID for those on ",
+            "phases": "PHASE4",
+            "population": "Inclusion Criteria:\n\n1. HIV-1 infection, as documented by any licensed ELISA test kit and confirmed by Western blot at any time prior to study entry. HIV-1 culture, HIV-1 antigen, plasma HIV-1 RNA, or a second antibody test by a method other than ELISA is acceptable as an alternative confirmatory test.\n2. Stable antiretroviral therapy for at least 12 months\n3. Screening CD4+ T cell count below 350 cells/mm3\n4. All available CD4+ T cell counts in the last year and at screening \\< 350 cells/mm3\n5. Screening plasma HIV RNA levels below level of detection (\\< 50 copies RNA/mL using Roche Amplicor or \\< 75 copies/mL using Bayer bDNA)\n6. All available plasma HIV RNA levels within past year below the level of detection. Isolated values that are detectable but \\< 500 copies will be allowed as long",
+            "status": "COMPLETED",
+            "title": "Maraviroc as an Immunomodulatory Drug for Antiretroviral-treated HIV Infected Patients Exhibiting Immunologic Failure",
+            "why_stopped": ""
+          },
+          "url": "https://clinicaltrials.gov/study/NCT00735072"
+        },
+        "NCT00870363": {
+          "applicability": {
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity.",
+            "compound_ids": [
+              "CHEMBL256907"
+            ],
+            "compound_matches": {
+              "CHEMBL256907": "verified"
+            },
+            "disease_match": "matched",
+            "relationship": "verified",
+            "stop_reason_provenance": {
+              "checked_at_utc": "2026-11-08T02:05:21.957127+00:00",
+              "detail": "",
+              "full_record_checked": true,
+              "search_state": "absent",
+              "search_value": null,
+              "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT00870363",
+              "state": "absent",
+              "value": null
+            }
+          },
+          "fields": {
+            "conditions": "HIV Infections",
+            "interventions": "maraviroc in combination with 2 NRTIs (dual nucleoside reverse transcriptase inhibitor); Selzentry; maraviroc plus raltegravir in combination with 2 NRTIs (dual nucleoside reverse transcriptase inhibitor); Selzentry (maraviroc); efavirenz [or other NNRTI (non-nucleoside reverse transcriptase inhibitor)]; Sustiva",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Change in the Density of CD3+/CD4+ Cells Per Cubic Millimeter at the Effector Sites in the Duodenal Tissues Following Antiretroviral Therapy Regimen\", \"description\": \"immunohistochemistry for CD3+/CD4+ cells counted manually within the lamina propria\", \"populationDescription\": \"numbers represent an increase from baseline for the 3 treatment cohorts and represent the absolute value for the control group who were only measured at one timepjoint.\", \"reportingStatus\": \"POSTED\", \"paramType\": \"MEAN\", \"dispersionType\": \"95% Confidence Interval\", \"unitOfMeasure\": \"cells/mm^2\", \"timeFrame\": \"Baseline and nine months for 3 treatment cohorts and Baseline for the control group, which was only assessed at one time point\", \"groups\": [{\"id\": \"OG000\", \"title\": \"Maraviroc in ",
+            "phases": "PHASE4",
+            "population": "Inclusion Criteria:\n\n* Males and Females ages 18 years to 60 years inclusive\n* HIV positive (no anticipated antiretroviral therapy adjustments/changes)\n* CD4 count greater than or equal to 50 cells/ml within 30 days of screening\n* CCR5 tropism by Trofile ES(TM)\n* Can be on secondary prophylaxis with a history of AIDS defining illness\n* All females of child-bearing potential must agree to use barrier methods to prevent pregnancy or be abstinent from sexual activity while on study.\n* willing to sign consent form\n* HIV Negative individuals will also be recruited for this study as a Control Group\n\nExclusion Criteria:\n\n* allergy to peanuts or soya (maraviroc contains soya lecithin)\n* abnormal coagulation parameters (PT greater than or equal to 1.2 ULN)\n* thrombocytopenia (platelet count less th",
+            "status": "COMPLETED",
+            "title": "A Pilot Project of Virologic, Pharmacologic and Immunologic Correlates of Gastrointestinal-Associated Lymphoid Tissue Immune Reconstitution Following Maraviroc Therapy",
+            "why_stopped": ""
+          },
+          "url": "https://clinicaltrials.gov/study/NCT00870363"
+        },
+        "NCT00925756": {
+          "applicability": {
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity.",
+            "compound_ids": [
+              "CHEMBL256907"
+            ],
+            "compound_matches": {
+              "CHEMBL256907": "verified"
+            },
+            "disease_match": "matched",
+            "relationship": "verified",
+            "stop_reason_provenance": {
+              "checked_at_utc": "2026-11-08T02:04:51.179585+00:00",
+              "detail": "",
+              "full_record_checked": true,
+              "search_state": "absent",
+              "search_value": null,
+              "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT00925756",
+              "state": "absent",
+              "value": null
+            }
+          },
+          "fields": {
+            "conditions": "HIV Infections",
+            "interventions": "Maraviroc; Selzentry",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Differences in Gene Expression Profiles Obtained at Baseline and Week 4 and Week 24.\", \"description\": \"To determine differential gene expression in T-Cells due to MVC exposure between week 0, 4 and 24 weeks.\\n\\nRepeated measures (RM) ANOVA was used to identify genes whose expression changed over the course of MVC administration. Multivariate permutation tests under default settings (80% confident no more than 10% false positives) were performed using BRB-Array Tools. Gene assignment to temporal profiles was performed using a non- parametric clustering algorithm in Short Time-series Expression Miner (STEM)\", \"populationDescription\": \"32 participants received intervention and were followed for CD4+ counts. 25 of 32 participants had microarray analysis done.\", \"",
+            "phases": "PHASE4",
+            "population": "Inclusion Criteria:\n\n1. HIV-1 infection\n2. All available CD4+ T cell counts within the last 12 months of screening below 350 cells/mm3 (minimum of 3 values obtained \\> 30 days apart).\n3. HIV treatment with a stable (for at least 6 months) antiretroviral regimen consisting of at least 2 NRTIs and either a protease inhibitor boosted with low dose ritonavir or an NNRTI. A stable regimen is defined as no additions or deletions for more than 14 cumulative days.\n4. Patient considered to be receiving initial HIV regimen (history of medication substitution for toxicity is allowed).\n5. All available plasma HIV RNA levels within the last 12 months are below the level of detection. Isolated values that are detectable but \\< 1000 copies will be allowed as long as the plasma HIV RNA levels before and a",
+            "status": "COMPLETED",
+            "title": "CCR5 Inhibitor Treatment Intensification on CD4+ T-cell Recovery",
+            "why_stopped": ""
+          },
+          "url": "https://clinicaltrials.gov/study/NCT00925756"
+        },
+        "NCT00981773": {
+          "applicability": {
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity.",
+            "compound_ids": [
+              "CHEMBL256907"
+            ],
+            "compound_matches": {
+              "CHEMBL256907": "verified"
+            },
+            "disease_match": "matched",
+            "relationship": "verified",
+            "stop_reason_provenance": {
+              "checked_at_utc": "2026-11-08T02:05:27.332215+00:00",
+              "detail": "",
+              "full_record_checked": true,
+              "search_state": "reported",
+              "search_value": "Recruitment problem",
+              "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT00981773",
+              "state": "reported",
+              "value": "Recruitment problem"
+            }
+          },
+          "fields": {
+            "conditions": "HIV Infections",
+            "interventions": "Maraviroc; Maraviroc",
+            "outcome_records": "[]",
+            "phases": "PHASE4",
+            "population": "Inclusion Criteria:\n\n* HIV-1 infected males or females\n* Between 18 and 65 years of age\n* Signed informed consent\n* Currently receiving a stable antiretroviral regimen comprising of:\n\n  * two licensed NRTIs including abacavir and/or didanosine\n  * any licensed boosted protease inhibitor at any dose (excluding tipranavir\\*)\n* Undetectable plasma HIV RNA to less than 50 copies/mL for at least 24 weeks prior to screening\n* Availability of stored plasma with which to perform a tropism assay\n* CCR5 tropic HIV virus based on a tropism assay from a stored plasma sample\n* Willing to continue unchanged, or to modify antiretroviral therapy, in accordance with the randomisation assignment\n* No documented viral resistance to currently licensed HIV-1 protease inhibitors based either on previous HIV-1 g",
+            "status": "TERMINATED",
+            "title": "The St. Marys and The Mater Switch Study",
+            "why_stopped": "Recruitment problem"
+          },
+          "url": "https://clinicaltrials.gov/study/NCT00981773"
+        },
+        "NCT01327547": {
+          "applicability": {
+            "caution": "Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity.",
+            "compound_ids": [
+              "CHEMBL256907"
+            ],
+            "compound_matches": {
+              "CHEMBL256907": "verified"
+            },
+            "disease_match": "matched",
+            "relationship": "verified",
+            "stop_reason_provenance": {
+              "checked_at_utc": "2026-11-08T02:04:49.971515+00:00",
+              "detail": "",
+              "full_record_checked": true,
+              "search_state": "absent",
+              "search_value": null,
+              "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT01327547",
+              "state": "absent",
+              "value": null
+            }
+          },
+          "fields": {
+            "conditions": "HIV Coinfection",
+            "interventions": "Maraviroc; Selzentry, Celsentri; Placebo",
+            "outcome_records": "[{\"type\": \"PRIMARY\", \"title\": \"Percentage of Participants With Grade 3 and Grade 4 Alanine Aminotransferase (ALT) Abnormalities at Week 48\", \"description\": \"Percentage of participants with Grade 3 or Grade 4 ALT abnormalities defined as \\\\>5x upper limit of normal (ULN) for participants whose baseline ALT ≤ULN, or \\\\>3.5x baseline for participants whose baseline ALT \\\\>ULN, up to and including Week 48 in the maraviroc arm versus the placebo arm. The baseline was defined as the last measurement prior to Day 1 dosing.\", \"populationDescription\": \"The analysis was performed on the Full Analysis Set (FAS) which included participants who had received at least one dose of study drug. LOCF was used if the value at that time-point was missing, ie., week 48, 96 and 144.\", \"reportingStatus\": \"POSTED\"",
+            "phases": "PHASE4",
+            "population": "Inclusion Criteria:\n\n* HIV coinfected with HCV and/or HBV.\n* Undetectable HIV-1 RNA for at least 3 months prior to the screening visit\n* Treatment with current antiretroviral therapy (3-6 drugs excluding low-dose ritonavir) for at least 5 months.\n\nExclusion Criteria:\n\n* Currently receiving maraviroc.\n* Active opportunistic infections.\n* ALT and/or AST \\>5x upper limit of normal.\n* Direct bilirubin \\>1.5x upper limit of normal.\n* Severe or decompensated liver disease.\n* Liver disease unrelated to viral hepatitis infection.",
+            "status": "COMPLETED",
+            "title": "A Study Of Maraviroc In HIV Co-Infected Subjects With Hepatitis C And/Or Hepatitis B",
+            "why_stopped": ""
+          },
+          "url": "https://clinicaltrials.gov/study/NCT01327547"
+        },
+        "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339": {
+          "caution": "Official public label submission, not independent proof of approval; indication, population and version require review. Fields may be truncated.",
+          "fields": {
+            "clinical_studies": "14 CLINICAL STUDIES 14.1 Clinical Studies in Adult Subjects The clinical efficacy and safety of maraviroc are derived from analyses of data from 3 trials in adult subjects infected with CCR5-tropic HIV-1: Trials A4001027 and A4001028 in antiretroviral treatment-experienced adult subjects and Trial A4001026 in treatment-naive subjects. These trials were supported by a 48-week trial in antiretroviral treatment-experienced adult subjects infected with dual/mixed-tropic HIV-1, Trial A4001029. Trials in CCR5-Tropic, Treatment-Experienced Subjects Trials A4001027 and A4001028 were double-blind, randomized, placebo-controlled, multicenter trials in subjects infected with CCR5-tropic HIV-1. Subjects were required to have an HIV-1 RNA greater than 5,000 copies per mL despite at least 6 months of prior therapy with at least 1 agent from 3 of the 4 antiretroviral drug classes (greater than or equal to 1 NRTI, greater than or equal to 1 NNRTI, greater than or equal to 2 PIs, and/or enfuvirtide) or documented resistance to at least 1 member of each class. All subjects received an optimized background regimen consisting of 3 to 6 antiretroviral agents (excluding low-dose ritonavir) selected on the basis of the subject’s prior treatment history and baseline genotypic and phenotypic viral resistance measurements. In addition to the optimized background regimen, subjects were then randomized in a 2:2:1 ratio to maraviroc 300 mg once daily, maraviroc 300 mg twice daily, or placebo. Doses were adjusted based on background therapy as described in Dosage and Administration ( 2 ) , Table 1. In the pooled analysis for Trials A4001027 and A4001028, the demographics and baseline characteristics of the treatment groups were comparable (Table 16). Of the 1,043 subjects with a CCR5-tropism result at screening, 7.6% had a dual/mixed-tropism result at the baseline visit 4 to 6 weeks later. This illustrates the background change from CCR5- to dual/mixed-tropism result over time in this treatment-experienced population, prior to a change in antiretroviral regimen or administration of a CCR5 co-receptor antagonist. Table 16. Demographic and Baseline Characteristics of Subjects in Trials A4001027 and A4001028 Maraviroc Twice Daily (n = 426) Placebo (n = 209) Age (years) Mean (range) 46.3 (21-73) 45.7 (29-72) Sex: Male 382 (89.7%) 185 (88.5%) Female 44 (10.3%) 24 (11.5%) Race: White 363 (85.2",
+            "indications_and_usage": "1 INDICATIONS AND USAGE Maraviroc tablets are indicated in combination with other antiretroviral agents for the treatment of only CCR5-tropic human immunodeficiency virus type 1 (HIV-1) infection in adult and pediatric patients 2 years of age and older weighing at least 10 kg. Limitations of Use: • Maraviroc tablets are not recommended in patients with dual/mixed- or CXCR4-tropic HIV-1 [ see Microbiology ( 12.4 ) ]. Maraviroc tablet is a CCR5 co-receptor antagonist indicated in combination with other antiretroviral agents for the treatment of only CCR5-tropic HIV-1 infection in adults and pediatric patients 2 years of age and older weighing at least 10 kg. ( 1 ) Limitations of Use: • Not recommended in patients with dual/mixed- or CXCR4-tropic HIV-1. ( 1 )",
+            "warnings_and_cautions": "5 WARNINGS AND PRECAUTIONS • Hepatotoxicity accompanied by severe rash or systemic allergic reaction, including potentially life-threatening events, has been reported. Hepatic laboratory parameters including ALT, AST, and bilirubin should be obtained prior to starting maraviroc tablets and at other time points during treatment as clinically indicated. If rash or symptoms or signs of hepatitis or allergic reaction develop, hepatic laboratory parameters should be monitored and discontinuation of treatment should be considered. When administering maraviroc tablets to patients with pre-existing liver dysfunction or who are co-infected with hepatitis B and/or C virus, additional monitoring may be warranted. ( 5.1 ) • Severe and potentially life-threatening skin and hypersensitivity reactions have been reported in patients taking maraviroc. This includes cases of Stevens-Johnson syndrome, hypersensitivity reaction, and toxic epidermal necrolysis. Immediately discontinue maraviroc and other suspected agents if signs or symptoms of severe skin or hypersensitivity reactions develop and monitor clinical status, including liver aminotransferases, closely. ( 5.2 ) • More cardiovascular events, including myocardial ischemia and/or infarction, were observed in treatment-experienced subjects who received maraviroc. Additional monitoring may be warranted. ( 5.3 ) • If patients with severe renal impairment or ESRD receiving maraviroc (without concomitant CYP3A inducers or inhibitors) experience postural hypotension, the dose of maraviroc should be reduced from 300 mg twice daily to 150 mg twice daily. ( 5.3 ) 5.1 Hepatotoxicity Hepatotoxicity with allergic features including life-threatening events has been reported in clinical trials and postmarketing. Severe rash or evidence of systemic allergic reaction including drug-related rash with fever, eosinophilia, elevated IgE, or other systemic symptoms have been reported in conjunction with hepatotoxicity [ see Warnings and Precautions ( 5.2 ) ]. These events occurred approximately 1 month after starting treatment. Among reported cases of hepatitis, some were observed in the absence of allergic features or with no pre-existing hepatic disease. Appropriate laboratory testing including ALT, AST, and bilirubin should be conducted prior to initiating therapy with maraviroc and at other time points during treatment as clinically ind"
+          },
+          "precedent": true,
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+        },
+        "SPL:0c5f41e8-d358-403a-b199-6b9028b52748": {
+          "caution": "Official public label submission, not independent proof of approval; indication, population and version require review. Fields may be truncated.",
+          "fields": {
+            "clinical_studies": "14 CLINICAL STUDIES 14.1 Clinical Studies in Adult Subjects The clinical efficacy and safety of maraviroc are derived from analyses of data from 3 trials in adult subjects infected with CCR5-tropic HIV-1: Trials A4001027 and A4001028 in antiretroviral treatment-experienced adult subjects and Trial A4001026 in treatment-naive subjects. These trials were supported by a 48-week trial in antiretroviral treatment-experienced adult subjects infected with dual/mixed-tropic HIV-1, Trial A4001029. Trials in CCR5-Tropic, Treatment-Experienced Subjects Trials A4001027 and A4001028 were double-blind, randomized, placebo-controlled, multicenter trials in subjects infected with CCR5-tropic HIV-1. Subjects were required to have an HIV-1 RNA greater than 5,000 copies per mL despite at least 6 months of prior therapy with at least 1 agent from 3 of the 4 antiretroviral drug classes (greater than or equal to 1 NRTI, greater than or equal to 1 NNRTI, greater than or equal to 2 PIs, and/or enfuvirtide) or documented resistance to at least 1 member of each class. All subjects received an optimized background regimen consisting of 3 to 6 antiretroviral agents (excluding low-dose ritonavir) selected on the basis of the subject’s prior treatment history and baseline genotypic and phenotypic viral resistance measurements. In addition to the optimized background regimen, subjects were then randomized in a 2:2:1 ratio to maraviroc 300 mg once daily, maraviroc 300 mg twice daily, or placebo. Doses were adjusted based on background therapy as described in Dosage and Administration ( 2 ) , Table 1. In the pooled analysis for Trials A4001027 and A4001028, the demographics and baseline characteristics of the treatment groups were comparable (Table 16). Of the 1,043 subjects with a CCR5-tropism result at screening, 7.6% had a dual/mixed-tropism result at the baseline visit 4 to 6 weeks later. This illustrates the background change from CCR5- to dual/mixed-tropism result over time in this treatment-experienced population, prior to a change in antiretroviral regimen or administration of a CCR5 co-receptor antagonist. Table 16. Demographic and Baseline Characteristics of Subjects in Trials A4001027 and A4001028 Maraviroc Twice Daily (n = 426) Placebo (n = 209) Age (years) Mean (range) 46.3 (21-73) 45.7 (29-72) Sex: Male 382 (89.7%) 185 (88.5%) Female 44 (10.3%) 24 (11.5%) Race: White 363 (85.2",
+            "indications_and_usage": "1 INDICATIONS AND USAGE Maraviroc tablets are indicated in combination with other antiretroviral agents for the treatment of only CCR5-tropic human immunodeficiency virus type 1 (HIV-1) infection in adult and pediatric patients 2 years of age and older weighing at least 10 kg. Limitations of Use: • Maraviroc tablets are not recommended in patients with dual/mixed- or CXCR4-tropic HIV-1 [ see Microbiology ( 12.4 ) ]. Maraviroc tablet is a CCR5 co-receptor antagonist indicated in combination with other antiretroviral agents for the treatment of only CCR5-tropic HIV-1 infection in adults and pediatric patients 2 years of age and older weighing at least 10 kg. ( 1 ) Limitations of Use: • Not recommended in patients with dual/mixed- or CXCR4-tropic HIV-1. ( 1 )",
+            "warnings_and_cautions": "5 WARNINGS AND PRECAUTIONS • Hepatotoxicity accompanied by severe rash or systemic allergic reaction, including potentially life-threatening events, has been reported. Hepatic laboratory parameters including ALT, AST, and bilirubin should be obtained prior to starting maraviroc tablets and at other time points during treatment as clinically indicated. If rash or symptoms or signs of hepatitis or allergic reaction develop, hepatic laboratory parameters should be monitored and discontinuation of treatment should be considered. When administering maraviroc tablets to patients with pre-existing liver dysfunction or who are co-infected with hepatitis B and/or C virus, additional monitoring may be warranted. ( 5.1 ) • Severe and potentially life-threatening skin and hypersensitivity reactions have been reported in patients taking maraviroc. This includes cases of Stevens-Johnson syndrome, hypersensitivity reaction, and toxic epidermal necrolysis. Immediately discontinue maraviroc and other suspected agents if signs or symptoms of severe skin or hypersensitivity reactions develop and monitor clinical status, including liver aminotransferases, closely. ( 5.2 ) • More cardiovascular events, including myocardial ischemia and/or infarction, were observed in treatment-experienced subjects who received maraviroc. Additional monitoring may be warranted. ( 5.3 ) • If patients with severe renal impairment or ESRD receiving maraviroc (without concomitant CYP3A inducers or inhibitors) experience postural hypotension, the dose of maraviroc should be reduced from 300 mg twice daily to 150 mg twice daily. ( 5.3 ) 5.1 Hepatotoxicity Hepatotoxicity with allergic features including life-threatening events has been reported in clinical trials and postmarketing. Severe rash or evidence of systemic allergic reaction including drug-related rash with fever, eosinophilia, elevated IgE, or other systemic symptoms have been reported in conjunction with hepatotoxicity [ see Warnings and Precautions ( 5.2 ) ]. These events occurred approximately 1 month after starting treatment. Among reported cases of hepatitis, some were observed in the absence of allergic features or with no pre-existing hepatic disease. Appropriate laboratory testing including ALT, AST, and bilirubin should be conducted prior to initiating therapy with maraviroc and at other time points during treatment as clinically ind"
+          },
+          "precedent": true,
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0c5f41e8-d358-403a-b199-6b9028b52748"
+        }
+      },
+      "target": {
+        "chembl_target_id": "CHEMBL274",
+        "disease_aliases": [
+          "HIV infectious disease",
+          "Human immunodeficiency virus disease or disorder",
+          "HIV infection",
+          "Human immunodeficiency virus caused disease or disorder",
+          "Human immunodeficiency virus infectious disease"
+        ],
+        "disease_id": "MONDO_0005109",
+        "disease_name": "HIV infectious disease",
+        "target_id": "ENSG00000160791",
+        "target_symbol": "CCR5",
+        "uniprot": "P51681"
+      }
+    },
+    "source_urls": {
+      "CHEMBL1649931": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1649931",
+      "CHEMBL1668019": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1668019",
+      "CHEMBL1688243": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1688243",
+      "CHEMBL1951914": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL1951914",
+      "CHEMBL2107384": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2107384",
+      "CHEMBL2109341": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2109341",
+      "CHEMBL2109342": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2109342",
+      "CHEMBL2109343": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2109343",
+      "CHEMBL2110727": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL2110727",
+      "CHEMBL256907": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL256907",
+      "CHEMBL4594419": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL4594419",
+      "CHEMBL5095029": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL5095029",
+      "MED:18832244": "https://europepmc.org/article/MED/18832244",
+      "MED:20151839": "https://europepmc.org/article/MED/20151839",
+      "MED:21987241": "https://europepmc.org/article/MED/21987241",
+      "MED:40130879": "https://europepmc.org/article/MED/40130879",
+      "NCT00717067": "https://clinicaltrials.gov/study/NCT00717067",
+      "NCT00735072": "https://clinicaltrials.gov/study/NCT00735072",
+      "NCT00870363": "https://clinicaltrials.gov/study/NCT00870363",
+      "NCT00925756": "https://clinicaltrials.gov/study/NCT00925756",
+      "NCT00981773": "https://clinicaltrials.gov/study/NCT00981773",
+      "NCT01327547": "https://clinicaltrials.gov/study/NCT01327547",
+      "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+      "SPL:0c5f41e8-d358-403a-b199-6b9028b52748": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0c5f41e8-d358-403a-b199-6b9028b52748"
+    },
+    "status": "completed",
+    "thinking_level": "medium",
+    "warnings": [
+      "The final reassessment and experiment are AI synthesis, not separately adjudicated findings or independent scientific validation."
+    ]
+  },
+  "experiment": {
+    "competing_explanations": [
+      "Virologic failure under CCR5 blockade results from the rapid selection and outgrowth of pre-existing, low-frequency CXCR4- or dual/mixed-tropic variants missed by standard screening or arising during the pre-treatment window, which can only be suppressed when CCR5 targeting is paired with a tropism-independent fusion inhibitor.",
+      "Virologic failure under CCR5 blockade occurs despite pure CCR5-tropic virus due to incomplete target engagement or receptor-level escape on CCR5, meaning that even after excluding all non-R5 variants with ultra-sensitive tropism screening, selective CCR5 antagonists and antibodies fail to fully suppress viral replication."
+    ],
+    "controls": [
+      "Vehicle-treated infected PBMC cultures (no-drug viral growth control)",
+      "Pure laboratory-adapted CCR5-tropic and CXCR4-tropic HIV-1 reference strains (tropism specificity controls)",
+      "Selective CCR5 blockade alone using maraviroc or unmodified PRO 140 antibody versus bispecific CCR5-anchored fusion inhibitor (2P23-PRO140-Fc)"
+    ],
+    "decision_impact": "If failure is strictly restricted to undetected or shifting non-R5 variants, clinical development decisions should prioritize either ultra-sensitive rapid baseline tropism diagnostics or bispecific CCR5-anchored fusion constructs; if failure occurs in pure R5 isolates despite complete receptor occupancy, next-generation selective CCR5 monotherapy or switch strategies should be deprioritized in favor of multi-target regimens. Researcher approval is required before any next action.",
+    "evidence_ids": [
+      "DA_CLAIM_1",
+      "DA_CLAIM_2",
+      "DA_CLAIM_4"
+    ],
+    "hypothesis_evidence": [
+      [
+        "DA_CLAIM_2",
+        "DA_CLAIM_4"
+      ],
+      [
+        "DA_CLAIM_1",
+        "DA_CLAIM_2"
+      ]
+    ],
+    "knowledge_review": "Retrieved sources already establish that maraviroc is approved and effective in combination therapy for treatment-experienced patients with CCR5-tropic HIV-1, that it is not recommended for dual/mixed- or CXCR4-tropic HIV-1, that 7.6% of screened R5 patients shifted to dual/mixed tropism before baseline in phase 3 trials, that 15% of treatment-naive patients in the MERIT trial had non-R5 virus detected by a more sensitive assay, and that adding the 2P23 fusion-inhibitory peptide to the CCR5 antibody PRO 140 extends preclinical activity to CXCR4-tropic isolates.",
+    "limitations": [
+      "Ex vivo PBMC cultures do not recapitulate in vivo human pharmacokinetics, lymphoid tissue penetration, or host immune selection pressures.",
+      "Shared background evidence from clinical tropism and bispecific inhibitor claims is used to motivate both competing explanations and does not constitute independent evidence for either hypothesis.",
+      "This experiment does not evaluate whether clinical hepatotoxicity, severe skin reactions, or cardiovascular events associated with maraviroc are compound-specific or target-mediated.",
+      "Gemini interpretation is not independent evidence or expert validation; source sampling and excerpt truncation limit conclusions.",
+      "Model suitability, genetic-versus-pharmacological comparability, replication, randomization and predefined outcomes require expert design review before approval."
+    ],
+    "measurement": "Viral replication kinetics (HIV-1 RNA levels and p24 antigen production), single-genome viral envelope tropism sequencing before and after drug exposure, and cell-surface CCR5 receptor occupancy.",
+    "model": "Ex vivo human peripheral blood mononuclear cell (PBMC) infection cultures challenged with longitudinal clinical HIV-1 plasma isolates collected at screening and baseline from antiretroviral-naive and treatment-experienced patients, stratified by standard versus high-sensitivity phenotypic/genotypic tropism assays.",
+    "possible_results": [
+      "If selective CCR5 blockade (maraviroc or PRO 140) completely suppresses viral replication in all isolates confirmed as pure R5 by high-sensitivity baseline sequencing, while failing only in isolates harboring minor dual/mixed or CXCR4 variants that are fully suppressed by bispecific 2P23-PRO140-Fc, this supports the interpretation that clinical failure is primarily driven by diagnostic sensitivity limits and spontaneous tropism shifts.",
+      "If selective CCR5 blockade fails to fully suppress viral replication even in isolates verified to have zero non-R5 minor variants at baseline and without emergence of CXCR4-tropic sequences, this supports the interpretation that intrinsic receptor-level escape or incomplete potency limits standalone CCR5-tropic blockade."
+    ],
+    "question": "In patients screened as having CCR5-tropic HIV-1, is virologic escape during CCR5 blockade primarily driven by outgrowth of pre-existing undetected non-R5 viral variants and spontaneous tropism shifts, or by incomplete inhibition of pure CCR5-tropic viral entry?",
+    "status": "AI-generated unvalidated research proposal; not performed or validated. Researcher approval required.",
+    "unresolved_gap": "The retrieved clinical and preclinical sources do not directly compare whether viral breakthrough in patients screened as R5-tropic is fully explained by minor non-R5 viral subpopulations that could be overcome by bispecific CCR5-fusion inhibitors versus intrinsic incomplete suppression of pure R5 virus."
+  },
+  "note": "Technical completion only; scientific review is recorded separately. No automatic retry/new job is authorized."
+}

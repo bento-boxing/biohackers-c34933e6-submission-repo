@@ -1,0 +1,124 @@
+{
+  "authorized_aggregate_max": 10,
+  "per_arm_max": 5,
+  "source_sha256": "9d72975aeaa0993f2e4c7bbcccb4a72eefd35000f3e0f11c3c1762357b853647",
+  "origin": "RECORDED",
+  "arms": {
+    "medium": {
+      "calls": [
+        {
+          "role": "Devils Advocate",
+          "success": false,
+          "error": "Gemini connection could not be established. Error type: APIConnectionError. Raw SDK details withheld.",
+          "usage": {},
+          "started_at": 1794107336.2051044,
+          "duration_seconds": 3.587887,
+          "payload_bytes": 76033
+        },
+        {
+          "role": "Devils Advocate",
+          "success": true,
+          "error": "",
+          "usage": {
+            "total_input_tokens": 21857,
+            "total_output_tokens": 2497,
+            "total_thought_tokens": 838,
+            "total_tokens": 25192,
+            "total_cached_tokens": 0
+          },
+          "started_at": 1794107411.3178625,
+          "duration_seconds": 55.759799,
+          "payload_bytes": 76033
+        },
+        {
+          "role": "Evidence Adjudicator",
+          "success": true,
+          "error": "",
+          "usage": {
+            "total_input_tokens": 23347,
+            "total_output_tokens": 734,
+            "total_thought_tokens": 425,
+            "total_tokens": 24506,
+            "total_cached_tokens": 0
+          },
+          "started_at": 1794107467.0841038,
+          "duration_seconds": 26.226558,
+          "payload_bytes": 83013
+        },
+        {
+          "role": "Experimental Challenger",
+          "success": true,
+          "error": "",
+          "usage": {
+            "total_input_tokens": 23688,
+            "total_output_tokens": 2236,
+            "total_thought_tokens": 0,
+            "total_tokens": 25924,
+            "total_cached_tokens": 0
+          },
+          "started_at": 1794107493.3162794,
+          "duration_seconds": 40.350243,
+          "payload_bytes": 81077
+        }
+      ]
+    },
+    "high": {
+      "calls": [
+        {
+          "role": "Devils Advocate",
+          "success": false,
+          "error": "Gemini connection could not be established. Error type: APIConnectionError. Raw SDK details withheld.",
+          "usage": {},
+          "started_at": 1794107342.07138,
+          "duration_seconds": 0.74343,
+          "payload_bytes": 76033
+        },
+        {
+          "role": "Devils Advocate",
+          "success": true,
+          "error": "",
+          "usage": {
+            "total_input_tokens": 21857,
+            "total_output_tokens": 3125,
+            "total_thought_tokens": 4860,
+            "total_tokens": 29842,
+            "total_cached_tokens": 0
+          },
+          "started_at": 1794107535.775899,
+          "duration_seconds": 84.778134,
+          "payload_bytes": 76033
+        },
+        {
+          "role": "Evidence Adjudicator",
+          "success": true,
+          "error": "",
+          "usage": {
+            "total_input_tokens": 24028,
+            "total_output_tokens": 687,
+            "total_thought_tokens": 3535,
+            "total_tokens": 28250,
+            "total_cached_tokens": 0
+          },
+          "started_at": 1794107620.5595887,
+          "duration_seconds": 51.20232,
+          "payload_bytes": 85713
+        },
+        {
+          "role": "Experimental Challenger",
+          "success": false,
+          "error": "Gemini response incomplete; output was not accepted. Check output-token limit.",
+          "usage": {
+            "total_input_tokens": 23761,
+            "total_output_tokens": 3,
+            "total_thought_tokens": 8189,
+            "total_tokens": 31953,
+            "total_cached_tokens": 0
+          },
+          "started_at": 1794107671.7676167,
+          "duration_seconds": 107.44499,
+          "payload_bytes": 80862
+        }
+      ]
+    }
+  }
+}

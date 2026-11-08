@@ -1,0 +1,146 @@
+{
+  "method": "Independent PMID lookup, not supplied to tested retrieval or Gemini; title/abstract verified against Europe PMC MED source records.",
+  "cases": {
+    "CCR5": [
+      {
+        "id": "MED:18832244",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18832244/",
+        "found": true,
+        "title": "Maraviroc for previously treated patients with R5 HIV-1 infection.",
+        "doi": "10.1056/nejmoa0803152"
+      },
+      {
+        "id": "MED:20151839",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20151839/",
+        "found": true,
+        "title": "Maraviroc versus efavirenz, both in combination with zidovudine-lamivudine, for the treatment of antiretroviral-naive subjects with CCR5-tropic HIV-1 infection.",
+        "doi": "10.1086/650697"
+      }
+    ],
+    "PCSK9": [
+      {
+        "id": "MED:28304224",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28304224/",
+        "found": true,
+        "title": "Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease.",
+        "doi": "10.1056/nejmoa1615664"
+      },
+      {
+        "id": "MED:30403574",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30403574/",
+        "found": true,
+        "title": "Alirocumab and Cardiovascular Outcomes after Acute Coronary Syndrome.",
+        "doi": "10.1056/nejmoa1801174"
+      }
+    ],
+    "EGFR": [
+      {
+        "id": "MED:29151359",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/29151359/",
+        "found": true,
+        "title": "Osimertinib in Untreated EGFR-Mutated Advanced Non-Small-Cell Lung Cancer.",
+        "doi": "10.1056/nejmoa1713137"
+      }
+    ],
+    "BACE1": [
+      {
+        "id": "MED:29719179",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/29719179/",
+        "found": true,
+        "title": "Randomized Trial of Verubecestat for Mild-to-Moderate Alzheimer's Disease.",
+        "doi": "10.1056/nejmoa1706441"
+      },
+      {
+        "id": "MED:30970186",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30970186/",
+        "found": true,
+        "title": "Randomized Trial of Verubecestat for Prodromal Alzheimer's Disease.",
+        "doi": "10.1056/nejmoa1812840"
+      }
+    ],
+    "LRRK2": [
+      {
+        "id": "MED:35675433",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35675433/",
+        "found": true,
+        "title": "Preclinical and clinical evaluation of the LRRK2 inhibitor DNL201 for Parkinson's disease.",
+        "doi": "10.1126/scitranslmed.abj2658"
+      }
+    ],
+    "BCL2": [
+      {
+        "id": "MED:31337422",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31337422/",
+        "found": true,
+        "title": "Suv39h1 promotes facet joint chondrocyte proliferation by targeting miR-15a/Bcl2 in idiopathic scoliosis patients.",
+        "doi": "10.1186/s13148-019-0706-1"
+      }
+    ],
+    "preclinical": [
+      {
+        "id": "MED:26733678",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26733678/",
+        "found": true,
+        "title": "KCC2 rescues functional deficits in human neurons derived from patients with Rett syndrome.",
+        "doi": "10.1073/pnas.1524013113"
+      },
+      {
+        "id": "MED:31366578",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31366578/",
+        "found": true,
+        "title": "Pharmacological enhancement of <i>KCC2</i> gene expression exerts therapeutic effects on human Rett syndrome neurons and <i>Mecp2</i> mutant mice.",
+        "doi": "10.1126/scitranslmed.aau0164"
+      }
+    ],
+    "GLP1R": [
+      {
+        "id": "MED:27295427",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27295427/",
+        "found": true,
+        "title": "Liraglutide and Cardiovascular Outcomes in Type 2 Diabetes.",
+        "doi": "10.1056/nejmoa1603827"
+      }
+    ],
+    "CFTR": [
+      {
+        "id": "MED:22047557",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22047557/",
+        "found": true,
+        "title": "A CFTR potentiator in patients with cystic fibrosis and the G551D mutation.",
+        "doi": "10.1056/nejmoa1105185"
+      },
+      {
+        "id": "MED:31697873",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31697873/",
+        "found": true,
+        "title": "Elexacaftor-Tezacaftor-Ivacaftor for Cystic Fibrosis with a Single Phe508del Allele.",
+        "doi": "10.1056/nejmoa1908639"
+      }
+    ],
+    "SMN2": [
+      {
+        "id": "MED:29091570",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/29091570/",
+        "found": true,
+        "title": "Nusinersen versus Sham Control in Infantile-Onset Spinal Muscular Atrophy.",
+        "doi": "10.1056/nejmoa1702752"
+      }
+    ],
+    "rare": [
+      {
+        "id": "MED:24651605",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24651605/",
+        "found": true,
+        "title": "Mutations in NGLY1 cause an inherited disorder of the endoplasmic reticulum-associated degradation pathway.",
+        "doi": "10.1038/gim.2014.22"
+      },
+      {
+        "id": "MED:25605922",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25605922/",
+        "found": true,
+        "title": "Endo-\u03b2-N-acetylglucosaminidase forms N-GlcNAc protein aggregates during ER-associated degradation in Ngly1-defective cells.",
+        "doi": "10.1073/pnas.1414593112"
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "run_id": "ce9d5aeba72b4c5784a0781956c6a008",
+  "selected_target": {
+    "chembl_target_id": "CHEMBL4051",
+    "components": {
+      "association": 0.9211437412666207,
+      "druggability": 1.0,
+      "genetic": 0.9559864519292256,
+      "literature": 1.0
+    },
+    "has_approved_drug": true,
+    "literature_hits": 34368,
+    "name": "CF transmembrane conductance regulator",
+    "open_targets_url": "https://platform.opentargets.org/target/ENSG00000001626",
+    "pmids": [
+      "42963477",
+      "42931970",
+      "42946579"
+    ],
+    "potent_count": 819,
+    "safety_flags": [
+      {
+        "detail": "adverse events",
+        "kind": "liability"
+      }
+    ],
+    "symbol": "CFTR",
+    "target_id": "ENSG00000001626",
+    "tractability_sm_labels": [
+      "Approved Drug",
+      "Structure with Ligand",
+      "High-Quality Ligand",
+      "High-Quality Pocket",
+      "Druggable Family"
+    ],
+    "uniprot": "P13569"
+  },
+  "disease": {
+    "id": "MONDO_0009061",
+    "name": "cystic fibrosis"
+  },
+  "submission": {
+    "created": true,
+    "job_id": "92ac60a577c3412a933daf2705c4b75e",
+    "state": "queued"
+  },
+  "paid_calls": 0,
+  "source": "fresh live Scout response"
+}

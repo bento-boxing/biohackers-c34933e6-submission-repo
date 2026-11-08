@@ -1,0 +1,14 @@
+{
+  "case": "rare",
+  "target_input": {
+    "disease_name": "NGLY1 deficiency",
+    "target_symbol": "NGLY1",
+    "target_id": "ENSG00000151092",
+    "disease_id": "MONDO_0800044"
+  },
+  "started_at": 1794111005.2826576,
+  "idempotency_key": "30a9cd85-de36-4162-be41-d5a1a035f80e",
+  "paid_calls_authorized": 0,
+  "job_id": "47e5424fabb0465da4b95d6959103ac4",
+  "finished_at": 1794111007.158623
+}

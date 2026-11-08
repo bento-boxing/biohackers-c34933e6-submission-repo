@@ -1,0 +1,523 @@
+{
+  "method": "Offline source/quote validation plus explicit qualitative review of the two actual paid outputs. No new paid or public requests.",
+  "arms": {
+    "medium": {
+      "technical_status": "completed",
+      "measured_orchestration_seconds": 124.442255,
+      "all_attempts": 4,
+      "successful_calls": 3,
+      "connection_failures": 1,
+      "provider_attempt_seconds": 122.3366,
+      "stages": [
+        {
+          "role": "Devils Advocate",
+          "seconds": 3.587887,
+          "success": false,
+          "payload_bytes": 76033,
+          "usage": {},
+          "error": "Gemini connection could not be established. Error type: APIConnectionError. Raw SDK details withheld."
+        },
+        {
+          "role": "Devils Advocate",
+          "seconds": 55.759799,
+          "success": true,
+          "payload_bytes": 76033,
+          "usage": {
+            "total_input_tokens": 21857,
+            "total_output_tokens": 2497,
+            "total_thought_tokens": 838,
+            "total_tokens": 25192,
+            "total_cached_tokens": 0
+          },
+          "error": ""
+        },
+        {
+          "role": "Evidence Adjudicator",
+          "seconds": 26.226558,
+          "success": true,
+          "payload_bytes": 83013,
+          "usage": {
+            "total_input_tokens": 23347,
+            "total_output_tokens": 734,
+            "total_thought_tokens": 425,
+            "total_tokens": 24506,
+            "total_cached_tokens": 0
+          },
+          "error": ""
+        },
+        {
+          "role": "Experimental Challenger",
+          "seconds": 40.350243,
+          "success": true,
+          "payload_bytes": 81077,
+          "usage": {
+            "total_input_tokens": 23688,
+            "total_output_tokens": 2236,
+            "total_thought_tokens": 0,
+            "total_tokens": 25924,
+            "total_cached_tokens": 0
+          },
+          "error": ""
+        }
+      ],
+      "accepted_claim_checks": [
+        {
+          "claim_id": "CLM-1",
+          "citations": [
+            {
+              "source_id": "CHEMBL256907",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "MED:18832244",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            }
+          ],
+          "current_guard_objections": []
+        },
+        {
+          "claim_id": "CLM-3",
+          "citations": [
+            {
+              "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            }
+          ],
+          "current_guard_objections": []
+        },
+        {
+          "claim_id": "CLM-4",
+          "citations": [
+            {
+              "source_id": "NCT00981773",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "CHEMBL1668019",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "CHEMBL2109343",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            }
+          ],
+          "current_guard_objections": [
+            "Approval statement names VICRIVIROC without a corresponding compound record or source quotation; add specific supporting citations or narrow the claim.",
+            "Approval statement names CENICRIVIROC without a corresponding compound record or source quotation; add specific supporting citations or narrow the claim."
+          ]
+        }
+      ],
+      "exact_citations": 9,
+      "total_citations": 9,
+      "revised_or_removed_claim_ids": [
+        "CLM-2"
+      ],
+      "source_identical": true,
+      "current_prior_art_guard_replay": {
+        "status": "NOVELTY_NOT_ESTABLISHED",
+        "question": {
+          "scientific_claim": "Head-to-head comparison of maraviroc against structurally distinct small-molecule and antibody CCR5 antagonists in wild-type versus CCR5-deficient human hepatic-immune co-cultures can differentiate off-target chemical hepatotoxicity from on-target CCR5-mediated hepatic immune perturbation.",
+          "mechanism": "CCR5 co-receptor antagonism versus compound-specific off-target/metabolic hepatocellular and immune-mediated hypersensitivity toxicity.",
+          "context": "HIV-1 infection therapeutic optimization: distinguishing compound-specific off-target hepatic/hypersensitivity toxicity of maraviroc from class-wide on-target CCR5 blockade liabilities.",
+          "research_question": "Are the hepatotoxicity and immune-mediated hypersensitivity signals associated with maraviroc driven by compound-specific off-target reactivity of maraviroc or by on-target pharmacological blockade of CCR5?"
+        },
+        "matches": [],
+        "close_matches": [],
+        "additional_source_ids": [],
+        "searches": [],
+        "objections": [],
+        "duration_seconds": 0.051736,
+        "decision": "unvalidated_proposal_requires_expert_review",
+        "caution": "No-overlap is not proof of novelty; close overlap warrants review, not a categorical claim that all experimental details are solved."
+      },
+      "scientific_review": "Recognised population-scoped efficacy and safety warnings. Adjudicator rejected population conflation. Accepted CLM-4 still bundles four compound approval statements with citations to only two compound records; current offline guard flags both missing citations. Do not present the preserved paid output as fully verified. Proposed off-target/on-target liver-toxicity hypotheses are plausible but require primary mechanistic support and expert model review. Original lexical checker falsely flagged generic binding/clinical background; current offline replay removes those blocks, without establishing novelty."
+    },
+    "high": {
+      "technical_status": "failed",
+      "measured_orchestration_seconds": 245.474444,
+      "all_attempts": 4,
+      "successful_calls": 2,
+      "connection_failures": 1,
+      "provider_attempt_seconds": 243.425444,
+      "stages": [
+        {
+          "role": "Devils Advocate",
+          "seconds": 0.74343,
+          "success": false,
+          "payload_bytes": 76033,
+          "usage": {},
+          "error": "Gemini connection could not be established. Error type: APIConnectionError. Raw SDK details withheld."
+        },
+        {
+          "role": "Devils Advocate",
+          "seconds": 84.778134,
+          "success": true,
+          "payload_bytes": 76033,
+          "usage": {
+            "total_input_tokens": 21857,
+            "total_output_tokens": 3125,
+            "total_thought_tokens": 4860,
+            "total_tokens": 29842,
+            "total_cached_tokens": 0
+          },
+          "error": ""
+        },
+        {
+          "role": "Evidence Adjudicator",
+          "seconds": 51.20232,
+          "success": true,
+          "payload_bytes": 85713,
+          "usage": {
+            "total_input_tokens": 24028,
+            "total_output_tokens": 687,
+            "total_thought_tokens": 3535,
+            "total_tokens": 28250,
+            "total_cached_tokens": 0
+          },
+          "error": ""
+        },
+        {
+          "role": "Experimental Challenger",
+          "seconds": 107.44499,
+          "success": false,
+          "payload_bytes": 80862,
+          "usage": {
+            "total_input_tokens": 23761,
+            "total_output_tokens": 3,
+            "total_thought_tokens": 8189,
+            "total_tokens": 31953,
+            "total_cached_tokens": 0
+          },
+          "error": "Gemini response incomplete; output was not accepted. Check output-token limit."
+        }
+      ],
+      "accepted_claim_checks": [
+        {
+          "claim_id": "CLM-1",
+          "citations": [
+            {
+              "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "MED:18832244",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "CHEMBL256907",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            }
+          ],
+          "current_guard_objections": []
+        },
+        {
+          "claim_id": "CLM-2",
+          "citations": [
+            {
+              "source_id": "MED:20151839",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "SPL:09ec3e79-c0d3-4b8f-80d8-0a854c4ca339",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            },
+            {
+              "source_id": "MED:40130879",
+              "retrieved_record_exists": true,
+              "exact_excerpt": true
+            }
+          ],
+          "current_guard_objections": [
+            "Cross-population causal attribution requires revision: separate outcomes and explanatory evidence by cohort; naming both populations does not establish a shared cause across trials."
+          ]
+        }
+      ],
+      "exact_citations": 6,
+      "total_citations": 6,
+      "revised_or_removed_claim_ids": [
+        "CLM-3",
+        "CLM-4"
+      ],
+      "source_identical": true,
+      "current_prior_art_guard_replay": null,
+      "scientific_review": "Recognised established R5 combination-therapy efficacy. Accepted CLM-2 overstates absence of activity in dual/mixed virus and combines cross-population explanatory evidence; current guard flags the causal attribution. Adjudicator requested compound-specific citations for another claim. Experimental output was incomplete, so hypotheses, proposal citations and prior-art awareness cannot be scored as successful."
+    }
+  },
+  "aggregate_attempts": 8,
+  "authorized_maximum": 10,
+  "historic_bad_proposal_current_guard": {
+    "status": "PRIOR_ART_OVERLAP_REQUIRES_REVIEW",
+    "question": {
+      "scientific_claim": "The retrieved clinical and preclinical sources do not directly compare whether viral breakthrough in patients screened as R5-tropic is fully explained by minor non-R5 viral subpopulations that could be overcome by bispecific CCR5-fusion inhibitors versus intrinsic incomplete suppression of pure R5 virus.",
+      "mechanism": "Viral replication kinetics (HIV-1 RNA levels and p24 antigen production), single-genome viral envelope tropism sequencing before and after drug exposure, and cell-surface CCR5 receptor occupancy.",
+      "context": "Ex vivo human peripheral blood mononuclear cell (PBMC) infection cultures challenged with longitudinal clinical HIV-1 plasma isolates collected at screening and baseline from antiretroviral-naive and treatment-experienced patients, stratified by standard versus high-sensitivity phenotypic/genotypic tropism assays.",
+      "research_question": "In patients screened as having CCR5-tropic HIV-1, is virologic escape during CCR5 blockade primarily driven by outgrowth of pre-existing undetected non-R5 viral variants and spontaneous tropism shifts, or by incomplete inhibition of pure CCR5-tropic viral entry?"
+    },
+    "matches": [
+      {
+        "source_id": "MED:16251317",
+        "title": "Maraviroc (UK-427,857), a potent, orally bioavailable, and selective small-molecule inhibitor of chemokine receptor CCR5 with broad-spectrum anti-human immunodeficiency virus type 1 activity.",
+        "url": "https://europepmc.org/article/MED/16251317",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "exist",
+          "tropic",
+          "viral"
+        ],
+        "specific_shared_terms": [
+          "exist"
+        ],
+        "conclusion": "say (= geometric mean plus two standard deviations [SD] of 1.7-fold). The mechanism of action of maraviroc was established using cell-based assays, where it blocked binding of viral envelope, gp120, to CCR5 to prevent the membrane fusion events necessary for viral entry. Maraviroc did not affect CCR5 cell surface levels or associated intracellular signaling, confirming it as a functional antagonist of CCR5. Maraviroc has no detectable in vitro cytotoxicity and is highly selective for CCR5, as confirmed against a wide range of receptors and enzymes, including the hERG ion channel (50% inhibitory concentration, >10 microM), indicating potential for an excellent clinical safety profile. Studies in preclinical in vitro and in vivo models predicted maraviroc to have human pharmacokinetics consistent with once- or twice-daily dosing following oral administration. Clinical trials are ongoing to further investigate the potential of using maraviroc for the treatment of HIV-1 infection and AIDS.",
+        "disease_in_title": false,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "MED:26491256",
+        "title": "Maraviroc: a review of its use in HIV infection and beyond.",
+        "url": "https://europepmc.org/article/MED/26491256",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "tropic",
+          "viral"
+        ],
+        "specific_shared_terms": [],
+        "conclusion": "r the treatment of patients infected with R5-tropic HIV-1. MVC has been shown to be effective at inhibiting HIV-1 entry into cells and is well tolerated. With expanding MVC use by HIV-1-infected humans, different clinical outcomes post-approval have been observed with MVC monotherapy or combination therapy with other antiretroviral drugs, with MVC use in humans infected with dual-R5- and X4-tropic HIV-1, infected with different HIV-1 genotype or infected with HIV-2. This review discuss the role of CCR5 in HIV-1 infection, the development of the CCR5 antagonist MVC, its pharmacokinetics, pharmacodynamics, drug-drug interactions, and the implications of these interactions on treatment outcomes, including viral mutations and drug resistance, and the mechanisms associated with the development of resistance to MVC. This review also discusses available studies investigating the use of MVC in the treatment of other diseases such as cancer, graft-versus-host disease, and inflammatory diseases.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "MED:29676212",
+        "title": "PRO 140, a monoclonal antibody targeting CCR5, as a long-acting, single-agent maintenance therapy for HIV-1 infection.",
+        "url": "https://europepmc.org/article/MED/29676212",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "tropic",
+          "viral",
+          "virologic"
+        ],
+        "specific_shared_terms": [
+          "virologic"
+        ],
+        "conclusion": "PRO 140 has a potential to address an unmet need for a long-acting, single-agent, maintenance regimen for HIV infection in selected patients. Studies are underway to determine host and/or virologic factors that may predict treatment success on PRO 140 monotherapy. Moreover, it has sufficient potency for a prolonged period of monotherapy that it would be an excellent component of a multi long-acting drug combination.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "MED:39016126",
+        "title": "Hybrid Virtual Screening Approach to Predict Novel Natural Compounds against HIV-1 CCR5.",
+        "url": "https://europepmc.org/article/MED/39016126",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "tropic",
+          "viral"
+        ],
+        "specific_shared_terms": [],
+        "conclusion": "This computational screening workflow identified three natural compounds with promising CCR5 inhibition and favorable pharmacokinetic profiles. One compound emerged as a lead based on bioavailability potential and minimal interaction risk. These findings present opportunities for developing alternative CCR5 antagonists and warrant further experimental investigation. Overall, the hybrid virtual screening approach proved effective for mining large natural product spaces to discover novel molecular entities with drug-like properties.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "MED:39146384",
+        "title": "Characterization of a CXCR4 antagonist TIQ-15 with dual tropic HIV entry inhibition properties.",
+        "url": "https://europepmc.org/article/MED/39146384",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "tropic",
+          "tropism",
+          "viral"
+        ],
+        "specific_shared_terms": [
+          "tropism"
+        ],
+        "conclusion": "ng. In addition, TIQ-15 induces CXCR4 receptor internalization without affecting the levels of the CD4 receptor, suggesting that TIQ-15 may act through a novel allosteric site on CXCR4 for blocking HIV entry. Furthermore, TIQ-15 did not inhibit VSV-G pseudotyped HIV-1 infection, demonstrating its specificity in blocking CXCR4-tropic virus entry, but not CXCR4-independent endocytosis or post-entry steps. When tested against a panel of clinical isolates, TIQ-15 showed potent inhibition against CXCR4-tropic and dual-tropic viruses, and moderate inhibition against CCR5-tropic isolates. This observation was followed by a co-dosing study with maraviroc, and TIQ-15 demonstrated synergistic activity. In summary, here we describe a novel HIV-1 entry inhibitor, TIQ-15, which potently inhibits CXCR4-tropic viruses while possessing low-level synergistic activities against CCR5-tropic viruses. TIQ-15 could potentially be co-dosed with the CCR5 inhibitor maraviroc to block viruses of mixed tropisms.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "MED:41765042",
+        "title": "Virtual screening and molecular fingerprinting for &lt;i&gt;in silico&lt;/i&gt; designing of potential CCR5 inhibitors targeting HIV therapy.",
+        "url": "https://europepmc.org/article/MED/41765042",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "tropic",
+          "viral"
+        ],
+        "specific_shared_terms": [],
+        "conclusion": " generated with drugs in market and clinical trials using PharmGist tool. The model was utilized to screen the ZINC database to obtain compounds with the required features and proceed for docking with AutoDock tools. Top ten compounds with good docking score and significant interactions at the active pocket were advanced to ADME (absorption, distribution, metabolism, and excretion) and toxicity predictions. Interestingly, ZINC08948076 (Mol1) and ZINC08966180 (Mol2) share similar molecular fingerprints with the drug molecule, BMS-813160. In contrast, the MD simulation trajectories revealed ZINC13150285 (Mol3) and maraviroc to have similar conformational dynamics (RMSD and Rg) between the ligand and the target protein. Additionally, ZINC24968598 (Mol4) was observed to have the lowest potential energy and ZINC09515758 (Mol5) with the lowest interaction energy. Overall, the study could identify ZINC09515758 and ZINC00673808 as potential hit molecules for further experimental investigation.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "MED:42515555",
+        "title": "HIV-V3Augur: A Novel Machine Learning Model for Predicting HIV-1 Tropism in Sub-Subtype A6 and CRF63_02A6, Predominant Variants in Russia and Countries of the Former Soviet Union.",
+        "url": "https://europepmc.org/article/MED/42515555",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "exist",
+          "tropic",
+          "tropism",
+          "variant",
+          "viral"
+        ],
+        "specific_shared_terms": [
+          "exist",
+          "tropism",
+          "variant"
+        ],
+        "conclusion": " for globally prevalent subtypes (≈95% for B, C, and CRF01_AE) but showed markedly reduced performance for sub-subtype A6 (best accuracy among existing models, 85%) and CRF63_02A6 (best accuracy, 72%), with a poor balance between sensitivity and specificity. To address this problem, we developed HIV-V3Augur, an ensemble stacking model based on the Random Forest and Support Vector Machine (SVM) machine learning algorithms, trained on Pseudo Amino Acid Composition (PseAAC) and Relative Synonymous Codon Usage (RSCU) features with 10-fold stratified cross-validation. HIV-V3Augur achieved an accuracy of 77%, sensitivity of 79%, and specificity of 79% on sub-subtype A6, and on CRF63_02A6 it reached an accuracy of 95%, sensitivity of 87%, and specificity of 100%. Cross-validation demonstrated that HIV-V3Augur represents a balanced genotypic tropism prediction tool for understudied HIV-1 variants circulating in the FSU region. HIV-V3Augur can be used locally through a graphical user interface.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "MED:42797803",
+        "title": "CCR5 as a Therapeutic Target in HIV Disease: From CRISPR/Cas9 Gene Editing to Maraviroc-Mediated Inhibition.",
+        "url": "https://europepmc.org/article/MED/42797803",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "tropic",
+          "tropism",
+          "viral"
+        ],
+        "specific_shared_terms": [
+          "tropism"
+        ],
+        "conclusion": "at individuals carrying the naturally occurring CCR5Δ32 mutation exhibit marked resistance to HIV infection established the foundation for both genetic and pharmacological approaches to CCR5 inhibition. This review summarizes recent advances in CCR5-targeted therapies with a focus on CRISPR/Cas9-mediated gene editing and maraviroc-mediated receptor blockade. We discuss the molecular mechanisms, preclinical evidence and emerging clinical data supporting CRISPR-based CCR5 disruption, including multiplex editing strategies designed to overcome viral tropism switching. We also examine the evolving role of maraviroc beyond viral entry inhibition, highlighting its immunomodulatory effects, potential latency-reversing activity and applications in graft-versus-host disease and cancer. Together, these complementary strategies underscore the potential of CCR5-targeted interventions as integral components of future combination therapies aimed at achieving durable HIV remission or functional cure.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "PPR:PPR1111198",
+        "title": "Humanized rabbit entry receptor complex supports HIV-1 entry into rabbit cells",
+        "url": "https://europepmc.org/article/PPR/PPR1111198",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "tropic",
+          "variant",
+          "viral"
+        ],
+        "specific_shared_terms": [
+          "variant"
+        ],
+        "conclusion": ", computational modeling identified key residues in CD4 and CCR5, thereby overcoming a receptor-dependent block that restricts HIV-1 entry into rabbit cells. These findings constitute important steps toward the development of a fully permissive immunocompetent rabbit model of HIV-1 infection.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "PPR:PPR1263839",
+        "title": "A cell line model for the study of CD4-negative HIV-1 infection and latent virus reservoirs",
+        "url": "https://europepmc.org/article/PPR/PPR1263839",
+        "score": 0.4047,
+        "shared_terms": [
+          "entry",
+          "tropic",
+          "viral"
+        ],
+        "specific_shared_terms": [],
+        "conclusion": "showed that CD4 was required to interact with the HIV-1 envelope gp120 in order to cause conformational changes in the envelope to expose the binding motif for chemokine co-receptor engagement, required for additional conformational changes to expose the gp41 fusion protein, allowing for entry and infection. However, reports continued that cells lacking CD4 could be infected which raised questions as to how this can happen. To address this critical gap, we have identified a cell line, HOS, that is commercially available, having expression of CD4, CXCR4 and/or CCR5. Using these HOS cell lines, we have been able to confirm that HIV-1, either X4 or R5 enveloped viruses, can infect CD4-negative cells. We have also confirmed that infection is productive and allows for latent proviral integration. Our findings provide a system for further studies of the mechanism(s) of HIV-1 infection of CD4-negative cells using a consistent model and may aid in elucidating establishment of viral reservoirs.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "MED:16641282",
+        "title": "Emergence of CXCR4-using human immunodeficiency virus type 1 (HIV-1) variants in a minority of HIV-1-infected patients following treatment with the CCR5 antagonist maraviroc is from a pretreatment CXCR4-using virus reservoir.",
+        "url": "https://europepmc.org/article/MED/16641282",
+        "score": 0.3873,
+        "shared_terms": [
+          "outgrowth",
+          "pre",
+          "tropic",
+          "tropism",
+          "variant",
+          "viral"
+        ],
+        "specific_shared_terms": [
+          "outgrowth",
+          "pre",
+          "tropism",
+          "variant"
+        ],
+        "conclusion": "during treatment and CXCR4-using virus was detected at day 11. No pretreatment factor predicted the emergence of CXCR4-tropic virus during maraviroc therapy in these two patients. Phylogenetic analysis of envelope (Env) clones from pre- and posttreatment time points indicated that the CXCR4-using variants probably emerged by outgrowth of a pretreatment CXCR4-using reservoir, rather than via coreceptor switch of a CCR5-tropic clone under selection pressure from maraviroc. Phylogenetic analysis was also performed on Env clones from a third patient harboring CXCR4-using virus prior to treatment. This patient was enrolled due to a sample labeling error. Although this patient experienced no overall reduction in viral load in response to treatment, the CCR5-tropic components of the circulating virus did appear to be suppressed while receiving maraviroc as monotherapy. Importantly, in all three patients, circulating virus reverted to predominantly CCR5 tropic following cessation of maraviroc.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      },
+      {
+        "source_id": "MED:21890778",
+        "title": "Deep V3 sequencing for HIV type 1 tropism in treatment-naive patients: a reanalysis of the MERIT trial of maraviroc.",
+        "url": "https://europepmc.org/article/MED/21890778",
+        "score": 0.2905,
+        "shared_terms": [
+          "non",
+          "tropism",
+          "variant",
+          "viral",
+          "virologic"
+        ],
+        "specific_shared_terms": [
+          "tropism",
+          "variant",
+          "virologic"
+        ],
+        "conclusion": "Reanalysis of the MERIT trial using deep V3 loop sequencing indicates that, had patients originally been screened using this method, the maraviroc arm would have likely been found to be noninferior to the efavirenz arm.",
+        "disease_in_title": true,
+        "caution": "Lexical question/mechanism overlap is a prior-art warning, not proof that every detail is answered."
+      }
+    ],
+    "close_matches": [
+      "MED:42515555",
+      "MED:16641282",
+      "MED:21890778"
+    ],
+    "additional_source_ids": [],
+    "searches": [],
+    "objections": [
+      "Unsupported exclusivity: supplied evidence must not be generalized to an only-effective mechanism or treatment.",
+      "Assay sensitivity: finite detection cannot establish absolute absence; specify a detection bound and uncertainty."
+    ],
+    "duration_seconds": 0.055108,
+    "decision": "abstain",
+    "caution": "No-overlap is not proof of novelty; close overlap warrants review, not a categorical claim that all experimental details are solved."
+  },
+  "limitations": [
+    "One sample per level; no statistical quality or latency claim.",
+    "Source collection identical; adjudication/design prompts differ because generated claims differ.",
+    "Connection failures count toward five attempts per arm and leave insufficient room for a full revision/re-adjudication/design sequence; rejected claims were removed.",
+    "Recorded corpus prior-art checks only in paid comparison; normal live jobs additionally perform a bounded targeted Europe PMC search.",
+    "Exact citation matching is not semantic entailment or proof of novelty.",
+    "No combined live-retrieval-plus-Gemini optimized end-to-end timing was measured."
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "job_id": "6dbe27c05275411b8eff620316ae850b",
+  "state": "completed",
+  "error": null,
+  "wall_seconds": 36.432632,
+  "coverage": {
+    "caution": "Bounded retrieval is not a systematic review; missing evidence is not evidence of inefficacy.",
+    "criteria_version": "pathways-v1",
+    "duration_seconds": 0.000289,
+    "facets": {
+      "ChEMBL": {
+        "limited": false,
+        "queries": 2,
+        "states": [
+          "failed",
+          "not_searched"
+        ]
+      },
+      "ClinicalTrials.gov": {
+        "limited": false,
+        "queries": 1,
+        "states": [
+          "not_searched"
+        ]
+      },
+      "Europe PMC": {
+        "limited": false,
+        "queries": 1,
+        "states": [
+          "not_searched"
+        ]
+      },
+      "OLS": {
+        "limited": false,
+        "queries": 1,
+        "states": [
+          "found"
+        ]
+      },
+      "Open Targets": {
+        "limited": false,
+        "queries": 0,
+        "states": [
+          "not_searched"
+        ]
+      },
+      "approved_precedent": {
+        "disease_matched_indications": [],
+        "ids": [],
+        "meaning": "Phase 4 in ChEMBL for some indication; current authorisation/withdrawal and population require review, not inferred from phase alone."
+      },
+      "biological_association": {
+        "direct_source_ids": [],
+        "evidence_types": [],
+        "explanation": "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify.",
+        "independent_groups": 0,
+        "indirect_source_ids": [],
+        "limitations": [
+          "Deterministic source-scope triage, not expert quality assessment or causal verification.",
+          "Distinct source groups are not proof of independent cohorts; reviews and duplicated versions must not count as replication.",
+          "Biomarker changes, GWAS loci and druggability do not establish a valid therapeutic target."
+        ],
+        "ontology_association": {},
+        "strength": "insufficient",
+        "unrelated_source_ids": []
+      },
+      "compound_limitation_candidate": {
+        "included": [],
+        "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+        "omitted": [],
+        "retrieved": []
+      },
+      "negative_candidate": {
+        "included": [],
+        "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+        "omitted": [],
+        "retrieved": []
+      },
+      "openFDA": {
+        "limited": false,
+        "queries": 0,
+        "states": [
+          "not_searched"
+        ]
+      },
+      "pathway": {
+        "clinical_publication_ids": [],
+        "clinical_trial_ids": [],
+        "meaning": "Clinical programmes use clinical coverage; exploratory biology does not require trials, approval or clinical efficacy evidence.",
+        "selected": "unresolved"
+      },
+      "population": {
+        "detail": "Lexical disease/compound matches do not establish population equivalence; retain eligibility text and indication restrictions.",
+        "state": "requires_review"
+      },
+      "positive_candidate": {
+        "included": [],
+        "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+        "omitted": [],
+        "retrieved": []
+      },
+      "safety_candidate": {
+        "included": [],
+        "meaning": "Conclusion-text triage candidates, not independently verified clinical outcomes.",
+        "omitted": [],
+        "retrieved": []
+      },
+      "sampling": {
+        "limits": [],
+        "policy": "Deterministic stratified bounded sample; not statistically representative or exhaustive."
+      },
+      "stop_reasons": {
+        "reported": [],
+        "unavailable": []
+      },
+      "trial_results": {
+        "included": [],
+        "meaning": "Results availability is not success; stopping status is not failure.",
+        "retrieved": []
+      }
+    },
+    "gaps": [
+      "Exact target identity unresolved.",
+      "ClinicalTrials.gov search missing or failed; cannot establish pathway coverage.",
+      "Europe PMC search missing or failed; cannot establish pathway coverage.",
+      "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify."
+    ],
+    "omitted_source_ids": [],
+    "pathway": "unresolved",
+    "reasoning_permitted": false,
+    "selected_source_ids": [],
+    "selection_reasons": {},
+    "status": "INSUFFICIENT COVERAGE"
+  },
+  "timings": {
+    "retrieval": {
+      "cache_hits": 0,
+      "completed_requests": 1,
+      "requests": 2,
+      "source_seconds": {
+        "ChEMBL": 32.822413,
+        "Public API": 1.170354
+      },
+      "started_at": 1794103257.5266018,
+      "total_seconds": 34.067855
+    }
+  },
+  "provenance": {
+    "cache_hits": 0,
+    "code_matches_disk": true,
+    "disk_source_hash": "a76f7c958d96b4dbbf34",
+    "pipeline_version": "association-pathways-v1",
+    "process_loaded_at": 1794103139.3573282,
+    "retrieved_at": 1794103291.6510897,
+    "source_counts": {
+      "compounds": 0,
+      "publications": 0,
+      "trials": 0
+    },
+    "source_hash": "a76f7c958d96b4dbbf34",
+    "source_mode": "live_public_api"
+  },
+  "retrieved": {
+    "compounds": 0,
+    "trials": 0,
+    "publications": 0
+  },
+  "ai": {
+    "accepted_claims": [],
+    "calls": [],
+    "enabled": true,
+    "experiment": null,
+    "human_approval_required": true,
+    "model": "gemini-4-argon",
+    "provider": "google",
+    "reassessment": null,
+    "rounds": [],
+    "sent_source_ids": [],
+    "source_bundle": {},
+    "source_urls": {},
+    "status": "skipped",
+    "thinking_level": "medium",
+    "warnings": [
+      "Insufficient resolved public evidence for AI reasoning; no calls made."
+    ]
+  },
+  "experiment": {
+    "competing_explanations": [],
+    "controls": [],
+    "decision_impact": "Obtain missing clinical/indication evidence and researcher review before choosing an experiment.",
+    "evidence_ids": [],
+    "hypothesis_evidence": [],
+    "knowledge_review": "",
+    "limitations": [
+      "No verified synthesis established a specific unresolved scientific question; INSUFFICIENT COVERAGE: Exact target identity unresolved.; ClinicalTrials.gov search missing or failed; cannot establish pathway coverage.; Europe PMC search missing or failed; cannot establish pathway coverage.; Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify.",
+      "Existing clinical knowledge and population-specific precedent must be reviewed before proposing a novel study."
+    ],
+    "measurement": "",
+    "model": "",
+    "possible_results": [],
+    "question": "Insufficient evidence to identify a meaningful unresolved experiment.",
+    "status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+    "unresolved_gap": ""
+  },
+  "note": "Technical completion only; scientific review is recorded separately. No automatic retry/new job is authorized."
+}

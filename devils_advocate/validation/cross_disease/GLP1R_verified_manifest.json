@@ -1,0 +1,14 @@
+{
+  "case": "GLP1R",
+  "target_input": {
+    "disease_name": "Type 2 diabetes mellitus",
+    "target_symbol": "GLP1R",
+    "target_id": "ENSG00000112164",
+    "disease_id": "MONDO_0005148"
+  },
+  "started_at": 1794111551.2582016,
+  "idempotency_key": "665402bc-4d79-4967-9745-030f3eb2da1c",
+  "paid_calls_authorized": 0,
+  "job_id": "204fa2c9a8754bbbaaa91f0af6720730",
+  "finished_at": 1794111601.5578952
+}

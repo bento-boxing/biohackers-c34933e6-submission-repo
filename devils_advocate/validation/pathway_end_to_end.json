@@ -1,0 +1,383 @@
+{
+  "method": "Fresh Next.js proxy / Flask production job endpoint, production worker, real public API retrieval, SQLite roundtrip. AI disabled; no mocks.",
+  "backend": {
+    "code_matches_disk": true,
+    "disk_source_hash": "a76f7c958d96b4dbbf34",
+    "pipeline_version": "association-pathways-v1",
+    "process_loaded_at": 1794102186.3900867,
+    "source_hash": "a76f7c958d96b4dbbf34"
+  },
+  "cases": [
+    {
+      "case": "CCR5",
+      "job_id": "b887e92d17114a95a0335fca5b16071e",
+      "seconds": 103.34506,
+      "trials": 136,
+      "publications": 138,
+      "compound_count": 12,
+      "coverage": "BOUNDED REVIEW",
+      "pathway": "clinical_precedent",
+      "gaps": [],
+      "reasoning_permitted": true,
+      "association": {
+        "direct_source_ids": [
+          "MED:26825032",
+          "MED:26202768",
+          "MED:21987241",
+          "MED:18832244",
+          "MED:16641282",
+          "MED:20151839",
+          "MED:23589670",
+          "MED:21288824",
+          "MED:19432546",
+          "MED:24180001",
+          "MED:26034880",
+          "MED:22174752",
+          "MED:21890778",
+          "MED:18333863",
+          "MED:20949133",
+          "MED:24185044",
+          "MED:20703158",
+          "MED:21673796",
+          "MED:27492684",
+          "MED:26684819",
+          "MED:42794592",
+          "MED:41353403",
+          "MED:39972543",
+          "MED:42515555",
+          "MED:42953116",
+          "MED:39353749",
+          "MED:42847201",
+          "MED:39805095",
+          "MED:42559043",
+          "MED:40413451",
+          "AGR:IND607835565",
+          "MED:39774003",
+          "MED:41141451",
+          "MED:37450478",
+          "MED:39872519",
+          "MED:40691233",
+          "MED:41935287",
+          "MED:40130879",
+          "MED:39250652",
+          "MED:36564186",
+          "MED:37418541",
+          "MED:37906406",
+          "PPR:PPR673199",
+          "MED:29676212",
+          "MED:34868084",
+          "MED:32040959",
+          "MED:33778462",
+          "MED:34791296",
+          "MED:38819839",
+          "MED:42054491",
+          "MED:42403244",
+          "MED:41832601",
+          "MED:42699847",
+          "PPR:PPR1263839",
+          "PPR:PPR1291895",
+          "MED:35358290"
+        ],
+        "evidence_types": [
+          "animal_model",
+          "cellular_mechanistic",
+          "expression_only",
+          "human_genetic_association"
+        ],
+        "explanation": "Disease-specific clinical context retrieved; inspect actual indication/population and target mechanism.",
+        "independent_groups": 56,
+        "indirect_source_ids": [
+          "MED:31647836",
+          "MED:27015639",
+          "MED:23797691",
+          "MED:20672447",
+          "MED:16251317",
+          "MED:24218476",
+          "MED:16205738",
+          "MED:32630699",
+          "MED:22479485",
+          "MED:28434169",
+          "MED:21699506",
+          "MED:31292161",
+          "MED:26491256",
+          "MED:31377844",
+          "MED:23290628",
+          "MED:19424056",
+          "MED:19339945",
+          "MED:18720513",
+          "MED:21284908",
+          "MED:21835801",
+          "MED:21088872",
+          "MED:18434391",
+          "MED:22740718",
+          "MED:20518583",
+          "MED:21289125",
+          "MED:26712907",
+          "MED:42797803",
+          "MED:42839696",
+          "MED:42401549",
+          "MED:42974166",
+          "MED:42797766",
+          "MED:42621465",
+          "MED:42552339",
+          "MED:41608770",
+          "MED:41394806",
+          "MED:42656799",
+          "MED:40397567",
+          "MED:35865985",
+          "MED:40607431",
+          "MED:41967778",
+          "MED:39303165",
+          "MED:41683682",
+          "MED:40635771",
+          "MED:42835080",
+          "MED:38643381",
+          "MED:42140212",
+          "MED:40703771",
+          "MED:37759462",
+          "MED:39146384",
+          "MED:41939108",
+          "MED:33045349",
+          "MED:39556960",
+          "MED:39138568",
+          "MED:39324549",
+          "MED:42076117",
+          "MED:40672363",
+          "MED:38886484",
+          "MED:39094527",
+          "MED:38809042",
+          "MED:40653494",
+          "MED:42575974",
+          "MED:40779011",
+          "MED:42520492",
+          "PPR:PPR1315683",
+          "MED:42429541",
+          "MED:41765042",
+          "MED:41244297",
+          "MED:29941870",
+          "MED:42149386",
+          "PPR:PPR1111198",
+          "MED:39016126",
+          "MED:42897198",
+          "MED:39642611",
+          "MED:34999223",
+          "MED:32947226",
+          "MED:30000615",
+          "PPR:PPR779811",
+          "MED:31643973",
+          "PPR:PPR873243",
+          "MED:38145295",
+          "MED:27791451",
+          "MED:37718001"
+        ],
+        "limitations": [
+          "Deterministic source-scope triage, not expert quality assessment or causal verification.",
+          "Distinct source groups are not proof of independent cohorts; reviews and duplicated versions must not count as replication.",
+          "Biomarker changes, GWAS loci and druggability do not establish a valid therapeutic target."
+        ],
+        "ontology_association": {
+          "caution": "An exact-pair descriptive evidence score is not causal validation, a confidence score or treatment efficacy.",
+          "datatype_scores": [
+            {
+              "id": "literature",
+              "score": 0.8733300459169989
+            },
+            {
+              "id": "affected_pathway",
+              "score": 0.9066612367713315
+            },
+            {
+              "id": "rna_expression",
+              "score": 0.044833502875340873
+            },
+            {
+              "id": "clinical",
+              "score": 0.9780863546719432
+            }
+          ],
+          "disease_id": "MONDO_0005109",
+          "enableIndirect": false,
+          "score": 0.744544652029942,
+          "state": "found",
+          "target_id": "ENSG00000160791",
+          "url": "https://platform.opentargets.org/evidence/ENSG00000160791/MONDO_0005109"
+        },
+        "strength": "clinical_context",
+        "unrelated_source_ids": []
+      },
+      "selected": [
+        "NCT00717067",
+        "NCT00735072",
+        "NCT00981773",
+        "NCT00870363",
+        "NCT00925756",
+        "NCT01327547",
+        "MED:18832244",
+        "MED:20151839",
+        "MED:40130879",
+        "MED:21987241"
+      ],
+      "positive": [
+        "MED:18832244",
+        "MED:39972543",
+        "MED:40653494",
+        "MED:38819839"
+      ],
+      "negative": [
+        "MED:20151839"
+      ],
+      "api_persistence_equal": true,
+      "ai_status": "disabled",
+      "paid_calls": 0,
+      "provenance": {
+        "cache_hits": 0,
+        "code_matches_disk": true,
+        "disk_source_hash": "a76f7c958d96b4dbbf34",
+        "pipeline_version": "association-pathways-v1",
+        "process_loaded_at": 1794102186.3900867,
+        "retrieved_at": 1794102300.0911036,
+        "source_counts": {
+          "compounds": 12,
+          "publications": 138,
+          "trials": 136
+        },
+        "source_hash": "a76f7c958d96b4dbbf34",
+        "source_mode": "live_public_api"
+      }
+    },
+    {
+      "case": "BCL2",
+      "job_id": "aafffa0d589d4bba8cb1abf4804b6b28",
+      "seconds": 12.433231,
+      "trials": 0,
+      "publications": 7,
+      "compound_count": 4,
+      "coverage": "BOUNDED REVIEW",
+      "pathway": "preclinical_validation",
+      "gaps": [],
+      "reasoning_permitted": true,
+      "association": {
+        "direct_source_ids": [
+          "MED:42244182",
+          "PPR:PPR1242034",
+          "MED:37031322",
+          "MED:31337422",
+          "MED:32030084"
+        ],
+        "evidence_types": [
+          "cellular_mechanistic",
+          "expression_only",
+          "human_genetic_association"
+        ],
+        "explanation": "Multiple primary biological source groups support a limited hypothesis assessment; causality, direction and therapeutic value remain unresolved.",
+        "independent_groups": 4,
+        "indirect_source_ids": [
+          "MED:33209193",
+          "MED:38750761"
+        ],
+        "limitations": [
+          "Deterministic source-scope triage, not expert quality assessment or causal verification.",
+          "Distinct source groups are not proof of independent cohorts; reviews and duplicated versions must not count as replication.",
+          "Biomarker changes, GWAS loci and druggability do not establish a valid therapeutic target."
+        ],
+        "ontology_association": {
+          "caution": "An exact-pair descriptive evidence score is not causal validation, a confidence score or treatment efficacy.",
+          "datatype_scores": [
+            {
+              "id": "literature",
+              "score": 0.012158615952232422
+            }
+          ],
+          "disease_id": "MONDO_0005392",
+          "enableIndirect": false,
+          "score": 0.0014783194187388072,
+          "state": "found",
+          "target_id": "ENSG00000171791",
+          "url": "https://platform.opentargets.org/evidence/ENSG00000171791/MONDO_0005392"
+        },
+        "strength": "exploratory",
+        "unrelated_source_ids": []
+      },
+      "selected": [
+        "MED:32030084",
+        "MED:31337422",
+        "MED:33209193",
+        "MED:37031322"
+      ],
+      "positive": [],
+      "negative": [],
+      "api_persistence_equal": true,
+      "ai_status": "disabled",
+      "paid_calls": 0,
+      "provenance": {
+        "cache_hits": 0,
+        "code_matches_disk": true,
+        "disk_source_hash": "a76f7c958d96b4dbbf34",
+        "pipeline_version": "association-pathways-v1",
+        "process_loaded_at": 1794102186.3900867,
+        "retrieved_at": 1794102314.140178,
+        "source_counts": {
+          "compounds": 4,
+          "publications": 7,
+          "trials": 0
+        },
+        "source_hash": "a76f7c958d96b4dbbf34",
+        "source_mode": "live_public_api"
+      }
+    },
+    {
+      "case": "unsupported",
+      "job_id": "f735ff4d1ecf462986f7e7f927fc0a57",
+      "seconds": 16.425755,
+      "trials": 0,
+      "publications": 0,
+      "compound_count": 4,
+      "coverage": "INSUFFICIENT COVERAGE",
+      "pathway": "unresolved",
+      "gaps": [
+        "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify."
+      ],
+      "reasoning_permitted": false,
+      "association": {
+        "direct_source_ids": [],
+        "evidence_types": [],
+        "explanation": "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify.",
+        "independent_groups": 0,
+        "indirect_source_ids": [],
+        "limitations": [
+          "Deterministic source-scope triage, not expert quality assessment or causal verification.",
+          "Distinct source groups are not proof of independent cohorts; reviews and duplicated versions must not count as replication.",
+          "Biomarker changes, GWAS loci and druggability do not establish a valid therapeutic target."
+        ],
+        "ontology_association": {
+          "reason": "Exact disease and Ensembl IDs were not both supplied; no association guessed.",
+          "state": "not_searched"
+        },
+        "strength": "insufficient",
+        "unrelated_source_ids": []
+      },
+      "selected": [],
+      "positive": [],
+      "negative": [],
+      "api_persistence_equal": true,
+      "ai_status": "disabled",
+      "paid_calls": 0,
+      "provenance": {
+        "cache_hits": 11,
+        "code_matches_disk": true,
+        "disk_source_hash": "a76f7c958d96b4dbbf34",
+        "pipeline_version": "association-pathways-v1",
+        "process_loaded_at": 1794102186.3900867,
+        "retrieved_at": 1794102330.935641,
+        "source_counts": {
+          "compounds": 4,
+          "publications": 0,
+          "trials": 0
+        },
+        "source_hash": "a76f7c958d96b4dbbf34",
+        "source_mode": "live_public_api"
+      }
+    }
+  ],
+  "paid_calls": 0
+}

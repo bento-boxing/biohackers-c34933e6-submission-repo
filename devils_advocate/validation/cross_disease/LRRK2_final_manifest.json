@@ -1,0 +1,14 @@
+{
+  "case": "LRRK2",
+  "target_input": {
+    "disease_name": "Parkinson's disease",
+    "target_symbol": "LRRK2",
+    "target_id": "ENSG00000188906",
+    "disease_id": "MONDO_0005180"
+  },
+  "started_at": 1794110877.2618341,
+  "idempotency_key": "450efd5f-f0a9-4c7a-abf7-5cde83f04132",
+  "paid_calls_authorized": 0,
+  "job_id": "70843f912b8f4ca8a7bae6e90cad5fed",
+  "finished_at": 1794110882.8286443
+}

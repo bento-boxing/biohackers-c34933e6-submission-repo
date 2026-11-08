@@ -1,0 +1,24 @@
+{
+  "idempotency_key": "816beb38-e9d4-4649-9853-0cb41cb678ae",
+  "started_at": 1794103257.0571127,
+  "authorized_max_calls": 5,
+  "backend": {
+    "code_matches_disk": true,
+    "disk_source_hash": "a76f7c958d96b4dbbf34",
+    "pipeline_version": "association-pathways-v1",
+    "process_loaded_at": 1794103139.3573282,
+    "source_hash": "a76f7c958d96b4dbbf34"
+  },
+  "ai": {
+    "enabled": true,
+    "max_calls": 5,
+    "model": "gemini-4-argon",
+    "provider": "google",
+    "thinking_level": "medium",
+    "timeout_seconds": 120
+  },
+  "authorization": "Explicit user authorization for one fresh HIV/CCR5 investigation, up to five model attempts.",
+  "job_id": "6dbe27c05275411b8eff620316ae850b",
+  "finished_at": 1794103293.4897447,
+  "wall_seconds": 36.432632
+}

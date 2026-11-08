@@ -51,7 +51,7 @@ def test_compounds_preserve_ids_synonyms_mechanism():
 
 def test_empty_and_failed_retrieval():
     result = investigate_target(TARGET, client=FakeClient([{'targets': []}, {'studies': []}, {'resultList': {}}]))
-    assert result.conclusion == 'insufficient evidence'
+    assert result.conclusion.startswith('INSUFFICIENT COVERAGE')
     assert not result.claims
     notes = []
     assert retrieve_trials(FakeClient([RetrievalError('unavailable')]), TARGET, [], notes) == []

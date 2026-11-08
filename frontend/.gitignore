@@ -1,6 +1,7 @@
 node_modules/
 .next/
 .next-qa/
+.next-optimization-qa/
 out/
 next-env.d.ts
 *.tsbuildinfo

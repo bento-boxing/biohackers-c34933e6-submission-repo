@@ -2,7 +2,8 @@
 import re
 import time
 from .http_client import JsonClient, RetrievalError
-from .models import Compound, TargetInput, Trial
+from .models import Compound, TargetInput, Trial, SearchAudit
+from .disease_terms import matches
 from .relevance import disease_matches
 from .stop_reasons import fetch_stop_reason, inspect_stop_reason
 
@@ -15,6 +16,23 @@ def normalize(value: str) -> str:
 class TargetIdentityError(ValueError):
     """A supplied database identifier disagrees with the requested human protein."""
 
+def verify_supplied_gene(client,target: TargetInput,audit: list[SearchAudit]) -> None:
+    identifier=target.target_id or ''
+    if not identifier.startswith('ENSG'):return
+    url='https://rest.ensembl.org/lookup/id/'+identifier
+    if not re.fullmatch(r'ENSG\d{11}',identifier):raise TargetIdentityError('Malformed supplied Ensembl gene identifier.')
+    try:record=client.get(url,{'content-type':'application/json'})
+    except RetrievalError as exc:
+        if exc.status_code==404:
+            audit.append(SearchAudit(source='Ensembl',operation='gene identity',url=url,state='no_results',detail='Supplied gene identifier not found.'))
+            raise TargetIdentityError('Supplied Ensembl gene identifier was not found.') from None
+        raise
+    valid=(record.get('id')==identifier and record.get('species')=='homo_sapiens'
+        and record.get('display_name','').casefold()==target.target_symbol.casefold())
+    audit.append(SearchAudit(source='Ensembl',operation='gene identity',url=url,
+        state='found' if valid else 'failed',detail='Human gene identifier and symbol agree.' if valid else 'Supplied gene identifier, species and symbol disagree or record is malformed.'))
+    if not valid:raise TargetIdentityError('Supplied Ensembl identifier does not verify the requested human gene symbol; downstream retrieval blocked.')
+
 def resolve_target(client: JsonClient, target: TargetInput) -> str | None:
     # External identifiers (e.g. Ensembl) are preserved but never used as ChEMBL IDs.
     supplied = target.chembl_target_id or (target.target_id if target.target_id and re.fullmatch(r'CHEMBL\d+', target.target_id) else None)
@@ -22,7 +40,8 @@ def resolve_target(client: JsonClient, target: TargetInput) -> str | None:
         raise TargetIdentityError('Conflicting supplied ChEMBL target identifiers.')
     key = (supplied, target.target_symbol.casefold(), target.uniprot)
     cache = getattr(client, '_verified_resolutions', None) if isinstance(client, JsonClient) else None
-    if cache is not None and key in cache and time.monotonic() - cache[key][0] < 900:
+    if cache is not None and not getattr(client,'refresh',False) and not getattr(client,'persistent_cache',None) and key in cache and time.monotonic() - cache[key][0] < 900:
+        target.target_aliases=list(getattr(client,'_verified_target_aliases',{}).get(cache[key][1],[]))
         return cache[key][1]
     if supplied:
         try:
@@ -64,9 +83,21 @@ def resolve_target(client: JsonClient, target: TargetInput) -> str | None:
             client._verified_resolutions = {}
             cache = client._verified_resolutions
         cache[key] = (time.monotonic(), resolved)
+    if resolved:
+        target.protein_gene_symbols=list(dict.fromkeys(s.get('component_synonym','') for r in records if r.get('target_chembl_id')==resolved
+            for component in r.get('target_components',[]) for s in component.get('target_component_synonyms',[]) if s.get('syn_type')=='GENE_SYMBOL'))[:30]
+        candidates=[s.get('component_synonym','') for r in records if r.get('target_chembl_id')==resolved
+            for component in r.get('target_components',[]) for s in component.get('target_component_synonyms',[])
+            if s.get('syn_type')=='GENE_SYMBOL_OTHER']
+        target.target_aliases=list(dict.fromkeys(n for n in candidates if re.fullmatch(r'[A-Za-z][A-Za-z0-9-]{2,29}',n) and n.casefold()!=target.target_symbol.casefold()))[:8]
+        if len(target.protein_gene_symbols)>1:target.target_aliases=[]
+        if isinstance(client,JsonClient):
+            if not hasattr(client,'_verified_target_aliases'):client._verified_target_aliases={}
+            client._verified_target_aliases[resolved]=list(target.target_aliases)
     return resolved
 
-def retrieve_compounds(client: JsonClient, target_id: str, notes: list[str] | None = None) -> list[Compound]:
+def retrieve_compounds(client: JsonClient, target_id: str, notes: list[str] | None = None,
+                       audit: list[SearchAudit] | None = None) -> list[Compound]:
     mechanisms = []
     for offset in range(0, 300, 100):
         page = client.get(f'{CHEMBL}/mechanism.json',
@@ -81,37 +112,64 @@ def retrieve_compounds(client: JsonClient, target_id: str, notes: list[str] | No
     for item in mechanisms:
         grouped.setdefault(item['molecule_chembl_id'], []).append(item.get('mechanism_of_action') or '')
     compounds = []
+    molecules = {}
+    # Rank by actual molecule metadata before capping; identifier order can hide approved drugs.
+    if len(grouped)>15:
+        identifiers=sorted(grouped)
+        for start in range(0,len(identifiers),100):
+            page=client.get(f'{CHEMBL}/molecule.json',{'molecule_chembl_id__in':','.join(identifiers[start:start+100]),'limit':100})
+            molecules.update({m['molecule_chembl_id']:m for m in page.get('molecules',[])})
+        if audit is not None and len(molecules)<len(grouped):
+            audit.append(SearchAudit(source='ChEMBL',operation='molecule metadata',url=f'{CHEMBL}/molecule.json',
+                state='failed',returned=len(molecules),detail='Some candidate molecule metadata missing; approval coverage incomplete.'))
     if len(grouped) > 15 and notes is not None:
         notes.append(f'Compound retrieval capped at 15 of {len(grouped)} curated mechanism compounds.')
-    for identifier, actions in sorted(grouped.items())[:15]:
+    def priority(item):
+        phase=molecules.get(item[0],{}).get('max_phase')
+        return (-(float(phase) if phase is not None else -1),item[0])
+    for identifier, actions in sorted(grouped.items(),key=priority)[:15]:
         try:
-            molecule = client.get(f'{CHEMBL}/molecule/{identifier}.json')
+            molecule = molecules.get(identifier) or client.get(f'{CHEMBL}/molecule/{identifier}.json')
         except RetrievalError as exc:
             if notes is None:
                 raise
             notes.append(str(exc))
+            if audit is not None:audit.append(SearchAudit(source='ChEMBL',operation='molecule metadata',
+                url=f'{CHEMBL}/molecule/{identifier}.json',state='failed',detail='Candidate molecule metadata unavailable; approval status unresolved.'))
             continue
         compounds.append(Compound(chembl_id=identifier,
             name=molecule.get('pref_name') or identifier,
             synonyms=sorted({s['molecule_synonym'] for s in molecule.get('molecule_synonyms', [])
                              if s.get('molecule_synonym')}), mechanisms=actions,
-            url=f'https://www.ebi.ac.uk/chembl/explore/compound/{identifier}'))
+            url=f'https://www.ebi.ac.uk/chembl/explore/compound/{identifier}',
+            max_phase=molecule.get('max_phase'),withdrawn_flag=molecule.get('withdrawn_flag'),
+            first_approval=molecule.get('first_approval'),approval_source_url=f'{CHEMBL}/molecule/{identifier}.json',
+            molecule_type=molecule.get('molecule_type'),
+            mechanism_records=[{k:r.get(k) for k in ['target_chembl_id','molecule_chembl_id','mechanism_of_action','action_type','direct_interaction','molecular_mechanism','mechanism_refs']} for r in mechanisms if r.get('molecule_chembl_id')==identifier]))
+    if audit is not None:
+        audit.append(SearchAudit(source='ChEMBL',operation='mechanism compounds',url=f'{CHEMBL}/mechanism.json',
+            query={'target_chembl_id':target_id},state='limit_reached' if len(grouped)>15 or len(mechanisms)>=300 else 'found' if compounds else 'no_results',
+            returned=len(compounds),relevant=len(compounds),total=len(grouped),
+            detail='max_phase=4 is approval precedent for some indication, not proof for the requested disease.'))
     return compounds
 
-def parse_trial(record: dict, compounds: list[Compound]) -> Trial:
+def compound_matcher(compounds: list[Compound]):
+    return [(c.chembl_id,{normalize(s) for s in [c.name,*c.synonyms] if len(normalize(s))>=4},
+             re.compile(r'(?<!\w)(?:'+'|'.join(re.escape(s) for s in [c.name,*c.synonyms] if len(s)>=5)+r')(?!\w)',re.I)
+             if any(len(s)>=5 for s in [c.name,*c.synonyms]) else None) for c in compounds]
+
+def parse_trial(record: dict, compounds: list[Compound], *, matcher=None) -> Trial:
     protocol = record.get('protocolSection', {})
     identity = protocol.get('identificationModule', {})
     status = protocol.get('statusModule', {})
     interventions = [name for item in protocol.get('armsInterventionsModule', {}).get('interventions', [])
                      for name in [item.get('name', ''), *item.get('otherNames', [])] if name]
     exact, probable = [], []
-    for compound in compounds:
-        aliases = {normalize(s) for s in [compound.name, *compound.synonyms] if len(normalize(s)) >= 4}
+    for identifier,aliases,pattern in matcher if matcher is not None else compound_matcher(compounds):
         if any(normalize(i) in aliases for i in interventions):
-            exact.append(compound.chembl_id)
-        elif any(re.search(r'(?<!\w)' + re.escape(s) + r'(?!\w)', i, re.I)
-                 for s in [compound.name, *compound.synonyms] if len(s) >= 5 for i in interventions):
-            probable.append(compound.chembl_id)
+            exact.append(identifier)
+        elif pattern and any(pattern.search(i) for i in interventions):
+            probable.append(identifier)
     nct = identity['nctId']
     reason = inspect_stop_reason(record, nct)
     return Trial(nct_id=nct, title=identity.get('briefTitle', ''),
@@ -128,40 +186,107 @@ def parse_trial(record: dict, compounds: list[Compound]) -> Trial:
         relationship='verified' if exact else 'probable' if probable else 'uncertain',
         match_reason='Exact normalized intervention alias' if exact else
                      'Alias within intervention text; review needed' if probable else 'No intervention alias match',
-        url=f'https://clinicaltrials.gov/study/{nct}')
+        url=f'https://clinicaltrials.gov/study/{nct}',
+        phases=protocol.get('designModule',{}).get('phases',[]),
+        publication_ids=list(dict.fromkeys(r['pmid'] for r in protocol.get('referencesModule',{}).get('references',[])
+            if r.get('type')=='RESULT' and re.fullmatch(r'\d+',str(r.get('pmid',''))))))
 
 def retrieve_trials(client: JsonClient, target: TargetInput, compounds: list[Compound],
-                    notes: list[str]) -> list[Trial]:
+                    notes: list[str], audit: list[SearchAudit] | None = None) -> list[Trial]:
     found = {}
+    matcher=compound_matcher(compounds)
+    raw_records={}
     # Separate queries avoid a long OR expression and retain per-compound provenance.
-    terms = [target.target_symbol, *[c.name for c in compounds]]
+    terms = [target.target_symbol, *target.target_aliases, *[c.name for c in compounds]]
     for term in dict.fromkeys(terms):
         params = {'query.cond': target.disease_name, 'query.intr': term, 'pageSize': 50, 'format': 'json'}
+        count=0;relevant=0
         try:
             for _ in range(2):
                 page = client.get(CTG, params)
+                if not isinstance(page.get('studies'),list):
+                    raise RetrievalError(CTG+': malformed trial search')
+                count+=len(page['studies'])
                 for record in page.get('studies', []):
                     try:
-                        trial = parse_trial(record, compounds)
+                        protocol=record['protocolSection'];nct=protocol['identificationModule']['nctId']
+                        if not re.fullmatch(r'NCT\d{8}',nct):raise ValueError('Invalid NCT ID')
+                        conditions=protocol.get('conditionsModule',{}).get('conditions',[])
                     except (KeyError, TypeError, ValueError) as exc:
                         notes.append(f'{CTG}: malformed study record skipped ({type(exc).__name__}).')
                         continue
-                    trial.disease_match = 'matched' if disease_matches(' '.join(trial.conditions), target.disease_name) else 'uncertain'
-                    found[trial.nct_id] = trial
+                    relevant+=matches(' '.join(conditions),target)
+                    raw_records[nct]=record
                 token = page.get('nextPageToken')
                 if not token:
                     break
                 params['pageToken'] = token
             else:
                 notes.append(f'Trial search capped at 100 records for {term}.')
+            if audit is not None:
+                audit.append(SearchAudit(source='ClinicalTrials.gov',operation='trial search',url=CTG,
+                    query={'condition':target.disease_name,'intervention':term},state='limit_reached' if token else 'found' if count else 'no_results',returned=count,relevant=relevant))
         except RetrievalError as exc:
             notes.append(str(exc))
+            if audit is not None:audit.append(SearchAudit(source='ClinicalTrials.gov',operation='trial search',url=CTG,state='failed',detail='Trial query failed; not a zero-result query.'))
     # Search results may omit fields. Fetch each unique trial's full record once
     # (the shared client caches it), then inspect actual field membership.
-    for trial in found.values():
-        reason = fetch_stop_reason(client, trial.nct_id)
+    for nct,raw in raw_records.items():
+        try:
+            trial=parse_trial(raw,compounds,matcher=matcher)
+            trial.disease_match='matched' if matches(' '.join(trial.conditions),target) else 'uncertain'
+            found[nct]=trial
+        except (KeyError,TypeError,ValueError):notes.append(f'{CTG}: malformed study record skipped.')
+    def fetch_detail(trial):
+        full=[]
+        reason = fetch_stop_reason(client, trial.nct_id,on_record=full.append)
+        return trial,reason,full
+    if isinstance(client,JsonClient) and client.persistent_cache and client.max_workers>1:
+        cached={};missing=[]
+        for trial in found.values():
+            record=client.cached_response(f'{CTG}/{trial.nct_id}')
+            if record is None:missing.append(trial.nct_id)
+            else:cached[trial.nct_id]=record
+        def batch_fetch(ids):
+            try:
+                page=client.get(CTG,{'filter.ids':','.join(ids),'pageSize':50,'format':'json'})
+                records={r.get('protocolSection',{}).get('identificationModule',{}).get('nctId'):r for r in page.get('studies',[])}
+                # Verify a full detail response per batch: if bulk fields differ,
+                # use individual detail fetches rather than trusting omitted data.
+                sample=next((identifier for identifier in ids if identifier in records),None)
+                if sample:
+                    detail=client.get(f'{CTG}/{sample}')
+                    if any(records[sample].get(key)!=detail.get(key) for key in ['protocolSection','resultsSection']):
+                        return {sample:detail}
+                for identifier in ids:
+                    if identifier in records:
+                        reason=inspect_stop_reason(records[identifier],identifier,full_record=True)
+                        if reason.state!='invalid':client.prime_verified_record(f'{CTG}/{identifier}',records[identifier],origin=CTG+'?filter.ids='+','.join(ids))
+                return {identifier:records[identifier] for identifier in ids if identifier in records}
+            except RetrievalError:return {}
+        for records in client.map(batch_fetch,[missing[i:i+50] for i in range(0,len(missing),50)]):cached.update(records)
+        details=[]
+        for trial in found.values():
+            record=cached.get(trial.nct_id)
+            if record is None:details.append(fetch_detail(trial))
+            else:details.append((trial,inspect_stop_reason(record,trial.nct_id,full_record=True),[record]))
+        if audit is not None:audit.append(SearchAudit(source='ClinicalTrials.gov',operation='full record batch verification',url=CTG,
+            state='found' if cached else 'no_results',returned=len(cached),detail='No field projection; exact NCT identities checked; protocol/results compared with individual detail sample per batch. Missing records fall back to individual details.'))
+    else:
+        details=client.map(fetch_detail,list(found.values())) if isinstance(client,JsonClient) else [fetch_detail(t) for t in found.values()]
+    for trial,reason,full in details:
         reason.search_value = trial.stop_reason.value
         reason.search_state = trial.stop_reason.state
+        if full:
+            try:
+                detailed=parse_trial(full[0],compounds,matcher=matcher)
+                detailed.disease_match='matched' if matches(' '.join(detailed.conditions),target) else 'uncertain'
+                found[trial.nct_id]=detailed
+                trial=detailed
+            except (KeyError,TypeError,ValueError):
+                notes.append(f'{CTG}/{trial.nct_id}: full record has malformed non-status fields; search record retained.')
+                if audit is not None:audit.append(SearchAudit(source='ClinicalTrials.gov',operation='full record results',
+                    url=f'{CTG}/{trial.nct_id}',state='failed',detail='Non-status fields malformed; do not infer missing results.'))
         trial.stop_reason = reason
         trial.why_stopped = reason.value if reason.state == 'reported' else ''
         if reason.state in ['api_error', 'record_missing', 'invalid']:

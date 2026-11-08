@@ -1,0 +1,14 @@
+{
+  "case": "invalid_disease",
+  "target_input": {
+    "disease_name": "HIV infection",
+    "target_symbol": "CCR5",
+    "target_id": "ENSG00000160791",
+    "disease_id": "MONDO_999999999"
+  },
+  "started_at": 1794110897.564442,
+  "idempotency_key": "ee298eaf-e590-40ff-b281-08b17b296a95",
+  "paid_calls_authorized": 0,
+  "job_id": "72c308bc96e84216810c7c9b4d718db1",
+  "finished_at": 1794110916.1907673
+}

@@ -1,0 +1,45 @@
+{
+  "job_id": "398304dac2fd43ae9edcf3ad044e9a7d",
+  "technical_completion": "pass",
+  "scientific_correctness": "partial pass",
+  "efficacy_recognized": true,
+  "target_invalidity_claim_found": false,
+  "accepted_claims": 4,
+  "citation_references": 12,
+  "model_rejected_or_revised_claims": 0,
+  "manual_findings": [
+    {
+      "area": "claim_2",
+      "severity": "scope clarification",
+      "finding": "Treatment-naive MERIT observations and treatment-experienced screening-to-baseline assay-result changes must not imply same-cohort causality."
+    },
+    {
+      "area": "experiment_hypothesis_1",
+      "severity": "unsupported exclusivity",
+      "finding": "Only a CCR5/fusion combination can suppress the variants is not established by supplied sources."
+    },
+    {
+      "area": "experiment_possible_result",
+      "severity": "unjustified certainty",
+      "finding": "A finite-sensitivity assay cannot verify absolute zero minor non-R5 variants."
+    },
+    {
+      "area": "experimental_novelty",
+      "severity": "fails requested novelty check",
+      "finding": "Pre-existing CXCR4 reservoir outgrowth and retained-CCR5 resistance are already documented; PMID16641282 was retrieved but omitted from the model packet."
+    }
+  ],
+  "experiment_novelty_check": "fail as framed; a narrower novel question is not established by this run",
+  "demo_suitability": "Supervised evidence-review demo only; do not present the proposed experiment as scientifically validated novelty.",
+  "aggregate_model_attempts": 3,
+  "authorized_ceiling": 5,
+  "primary_review_sources": [
+    "https://pubmed.ncbi.nlm.nih.gov/18832244/",
+    "https://pubmed.ncbi.nlm.nih.gov/20151839/",
+    "https://pubmed.ncbi.nlm.nih.gov/16641282/",
+    "https://pubmed.ncbi.nlm.nih.gov/17182681/",
+    "https://pubmed.ncbi.nlm.nih.gov/40130879/",
+    "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=09ec3e79-c0d3-4b8f-80d8-0a854c4ca339"
+  ],
+  "note": "Independent human-style review of sources and output, separate from the model adjudicator. Original outputs and records are unmodified."
+}

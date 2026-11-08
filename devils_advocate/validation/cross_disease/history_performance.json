@@ -1,0 +1,12 @@
+{
+  "history_http_seconds": [
+    1.15114370000083,
+    0.5926837000006344,
+    0.5636109000042779
+  ],
+  "returned_jobs": 25,
+  "latest_rows": 100,
+  "scientific_result_characters_avoided": 315430031,
+  "payload_characters_read": 79863,
+  "method": "Three actual Next proxy GETs after metadata-only query; previous browser run timed out, so no fabricated before latency."
+}

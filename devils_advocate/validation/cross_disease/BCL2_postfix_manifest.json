@@ -1,0 +1,14 @@
+{
+  "case": "BCL2",
+  "target_input": {
+    "disease_name": "scoliosis",
+    "target_symbol": "BCL2",
+    "target_id": "ENSG00000171791",
+    "disease_id": "MONDO_0005392"
+  },
+  "started_at": 1794110378.669512,
+  "idempotency_key": "d1edf6b9-3cb3-482e-813c-436b933ae306",
+  "paid_calls_authorized": 0,
+  "job_id": "ea5050db52304bfdaf9a4d08c81d73e6",
+  "finished_at": 1794110384.316029
+}

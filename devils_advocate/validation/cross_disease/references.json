@@ -1,0 +1,665 @@
+[
+  {
+    "case": "CCR5",
+    "target_input": {
+      "disease_name": "HIV infection",
+      "target_symbol": "CCR5",
+      "target_id": "ENSG00000160791",
+      "disease_id": "MONDO_0005109"
+    },
+    "gene": {
+      "id": "ENSG00000160791",
+      "display_name": "CCR5",
+      "species": "homo_sapiens",
+      "description": "C-C motif chemokine receptor 5 [Source:HGNC Symbol;Acc:HGNC:1606]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0005109",
+      "label": "HIV infectious disease",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0005109"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0004951",
+        "label": "susceptibility to HIV infection",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0004951"
+      },
+      {
+        "id": "MONDO:0005109",
+        "label": "HIV infectious disease",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005109"
+      },
+      {
+        "id": "MONDO:0000743",
+        "label": "oral hairy leukoplakia",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0000743"
+      },
+      {
+        "id": "MONDO:0000922",
+        "label": "pelvic inflammatory disease",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0000922"
+      },
+      {
+        "id": "MONDO:0005797",
+        "label": "HIV wasting syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005797"
+      }
+    ]
+  },
+  {
+    "case": "PCSK9",
+    "target_input": {
+      "disease_name": "Hypercholesterolemia",
+      "target_symbol": "PCSK9",
+      "target_id": "ENSG00000169174"
+    },
+    "gene": {
+      "id": "ENSG00000169174",
+      "display_name": "PCSK9",
+      "species": "homo_sapiens",
+      "description": "proprotein convertase subtilisin/kexin type 9 [Source:HGNC Symbol;Acc:HGNC:20001]",
+      "biotype": "protein_coding"
+    },
+    "disease": null,
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "HP:0003124",
+        "label": "Hypercholesterolemia",
+        "iri": "http://purl.obolibrary.org/obo/HP_0003124"
+      },
+      {
+        "id": "MONDO:0011374",
+        "label": "hypercholesterolemia, familial, 4",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0011374"
+      },
+      {
+        "id": "MONDO:0011369",
+        "label": "hypercholesterolemia, autosomal dominant, 3",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0011369"
+      },
+      {
+        "id": "MONDO:0007750",
+        "label": "hypercholesterolemia, familial, 1",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0007750"
+      },
+      {
+        "id": "MONDO:0007751",
+        "label": "hypercholesterolemia, autosomal dominant, type B",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0007751"
+      }
+    ],
+    "phenotype_reference": [
+      {
+        "id": "HP:0003124",
+        "label": "Hypercholesterolemia",
+        "iri": "http://purl.obolibrary.org/obo/HP_0003124"
+      }
+    ],
+    "note": "Hypercholesterolemia is a phenotype; no narrower familial disease identifier was assigned."
+  },
+  {
+    "case": "EGFR",
+    "target_input": {
+      "disease_name": "EGFR-mutant non-small-cell lung cancer",
+      "target_symbol": "EGFR",
+      "target_id": "ENSG00000146648",
+      "disease_id": "MONDO_0005233"
+    },
+    "gene": {
+      "id": "ENSG00000146648",
+      "display_name": "EGFR",
+      "species": "homo_sapiens",
+      "description": "epidermal growth factor receptor [Source:HGNC Symbol;Acc:HGNC:3236]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0005233",
+      "label": "non-small cell lung carcinoma",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0005233"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0005233",
+        "label": "non-small cell lung carcinoma",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005233"
+      },
+      {
+        "id": "MONDO:0056806",
+        "label": "non-small cell squamous lung carcinoma",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0056806"
+      },
+      {
+        "id": "MONDO:0003050",
+        "label": "lung large cell carcinoma",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0003050"
+      },
+      {
+        "id": "MONDO:0006279",
+        "label": "lung sarcomatoid carcinoma",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0006279"
+      },
+      {
+        "id": "MONDO:0024674",
+        "label": "Pancoast syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0024674"
+      }
+    ]
+  },
+  {
+    "case": "BACE1",
+    "target_input": {
+      "disease_name": "Alzheimer's disease",
+      "target_symbol": "BACE1",
+      "target_id": "ENSG00000186318",
+      "disease_id": "MONDO_0004975"
+    },
+    "gene": {
+      "id": "ENSG00000186318",
+      "display_name": "BACE1",
+      "species": "homo_sapiens",
+      "description": "beta-secretase 1 [Source:HGNC Symbol;Acc:HGNC:933]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0004975",
+      "label": "Alzheimer disease",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0004975"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0011743",
+        "label": "Alzheimer disease 4",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0011743"
+      },
+      {
+        "id": "MONDO:0011913",
+        "label": "Alzheimer disease 3",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0011913"
+      },
+      {
+        "id": "MONDO:0011401",
+        "label": "Alzheimer disease without neurofibrillary tangles",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0011401"
+      },
+      {
+        "id": "MONDO:0007089",
+        "label": "Alzheimer disease 2",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0007089"
+      },
+      {
+        "id": "MONDO:0010422",
+        "label": "Alzheimer disease 16",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0010422"
+      }
+    ]
+  },
+  {
+    "case": "LRRK2",
+    "target_input": {
+      "disease_name": "Parkinson's disease",
+      "target_symbol": "LRRK2",
+      "target_id": "ENSG00000188906",
+      "disease_id": "MONDO_0005180"
+    },
+    "gene": {
+      "id": "ENSG00000188906",
+      "display_name": "LRRK2",
+      "species": "homo_sapiens",
+      "description": "leucine rich repeat kinase 2 [Source:HGNC Symbol;Acc:HGNC:18618]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0005180",
+      "label": "Parkinson disease",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0005180"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0005180",
+        "label": "Parkinson disease",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005180"
+      },
+      {
+        "id": "MONDO:0001945",
+        "label": "postencephalitic Parkinson disease",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0001945"
+      },
+      {
+        "id": "MONDO:0009830",
+        "label": "parkinsonian-pyramidal syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0009830"
+      },
+      {
+        "id": "MONDO:0015914",
+        "label": "primary orthostatic hypotension",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0015914"
+      },
+      {
+        "id": "MONDO:1060287",
+        "label": "NUS1-related disorder",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1060287"
+      }
+    ]
+  },
+  {
+    "case": "BCL2",
+    "target_input": {
+      "disease_name": "scoliosis",
+      "target_symbol": "BCL2",
+      "target_id": "ENSG00000171791",
+      "disease_id": "MONDO_0005392"
+    },
+    "gene": {
+      "id": "ENSG00000171791",
+      "display_name": "BCL2",
+      "species": "homo_sapiens",
+      "description": "BCL2 apoptosis regulator [Source:HGNC Symbol;Acc:HGNC:990]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0005392",
+      "label": "scoliosis",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0005392"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0005392",
+        "label": "scoliosis",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005392"
+      },
+      {
+        "id": "MONDO:0011810",
+        "label": "horizontal gaze palsy with progressive scoliosis",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0011810"
+      },
+      {
+        "id": "MONDO:0011320",
+        "label": "radioulnar synostosis-microcephaly-scoliosis syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0011320"
+      },
+      {
+        "id": "MONDO:0008419",
+        "label": "scoliosis, isolated, susceptibility to, 1",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0008419"
+      },
+      {
+        "id": "MONDO:0011290",
+        "label": "dislocated elbows, bowed tibias, scoliosis, deafness, cataract, microcephaly, and impaired intellectual development",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0011290"
+      }
+    ]
+  },
+  {
+    "case": "preclinical",
+    "target_input": {
+      "disease_name": "Rett syndrome",
+      "target_symbol": "SLC12A5",
+      "target_id": "ENSG00000124140",
+      "disease_id": "MONDO_0010726"
+    },
+    "gene": {
+      "id": "ENSG00000124140",
+      "display_name": "SLC12A5",
+      "species": "homo_sapiens",
+      "description": "solute carrier family 12 member 5 [Source:HGNC Symbol;Acc:HGNC:13818]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0010726",
+      "label": "Rett syndrome",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0010726"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0010726",
+        "label": "Rett syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0010726"
+      },
+      {
+        "id": "MONDO:0017746",
+        "label": "atypical Rett syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0017746"
+      },
+      {
+        "id": "MONDO:1012890",
+        "label": "Rett syndrome, MECP2-related, crab-eating macaque",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1012890"
+      },
+      {
+        "id": "MONDO:7770183",
+        "label": "Rett syndrome, rhesus macaque",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_7770183"
+      },
+      {
+        "id": "MONDO:0100040",
+        "label": "FOXG1 disorder",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0100040"
+      }
+    ]
+  },
+  {
+    "case": "unsupported",
+    "target_input": {
+      "disease_name": "achondroplasia",
+      "target_symbol": "CCR5",
+      "target_id": "ENSG00000160791",
+      "disease_id": "MONDO_0007037"
+    },
+    "gene": {
+      "id": "ENSG00000160791",
+      "display_name": "CCR5",
+      "species": "homo_sapiens",
+      "description": "C-C motif chemokine receptor 5 [Source:HGNC Symbol;Acc:HGNC:1606]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0007037",
+      "label": "achondroplasia",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0007037"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0007037",
+        "label": "achondroplasia",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0007037"
+      },
+      {
+        "id": "MONDO:0008704",
+        "label": "short-limb skeletal dysplasia with severe combined immunodeficiency",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0008704"
+      },
+      {
+        "id": "MONDO:0014658",
+        "label": "severe achondroplasia-developmental delay-acanthosis nigricans syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0014658"
+      },
+      {
+        "id": "MONDO:1010291",
+        "label": "achondroplasia, non-human animal",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1010291"
+      },
+      {
+        "id": "MONDO:1011146",
+        "label": "achondroplasia, water buffalo",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1011146"
+      }
+    ]
+  },
+  {
+    "case": "fabricated",
+    "target_input": {
+      "disease_name": "HIV infection",
+      "target_symbol": "AUDIT_FAKE_GENE_ZXQ987",
+      "disease_id": "MONDO_0005109"
+    },
+    "gene": null,
+    "disease": {
+      "id": "MONDO:0005109",
+      "label": "HIV infectious disease",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0005109"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0004951",
+        "label": "susceptibility to HIV infection",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0004951"
+      },
+      {
+        "id": "MONDO:0005109",
+        "label": "HIV infectious disease",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005109"
+      },
+      {
+        "id": "MONDO:0000743",
+        "label": "oral hairy leukoplakia",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0000743"
+      },
+      {
+        "id": "MONDO:0000922",
+        "label": "pelvic inflammatory disease",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0000922"
+      },
+      {
+        "id": "MONDO:0005797",
+        "label": "HIV wasting syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005797"
+      }
+    ]
+  },
+  {
+    "case": "invalid_disease",
+    "target_input": {
+      "disease_name": "HIV infection",
+      "target_symbol": "CCR5",
+      "target_id": "ENSG00000160791",
+      "disease_id": "MONDO_999999999"
+    },
+    "gene": {
+      "id": "ENSG00000160791",
+      "display_name": "CCR5",
+      "species": "homo_sapiens",
+      "description": "C-C motif chemokine receptor 5 [Source:HGNC Symbol;Acc:HGNC:1606]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0005109",
+      "label": "HIV infectious disease",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0005109"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0004951",
+        "label": "susceptibility to HIV infection",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0004951"
+      },
+      {
+        "id": "MONDO:0005109",
+        "label": "HIV infectious disease",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005109"
+      },
+      {
+        "id": "MONDO:0000743",
+        "label": "oral hairy leukoplakia",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0000743"
+      },
+      {
+        "id": "MONDO:0000922",
+        "label": "pelvic inflammatory disease",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0000922"
+      },
+      {
+        "id": "MONDO:0005797",
+        "label": "HIV wasting syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005797"
+      }
+    ],
+    "note": "Intentional nonexistent ID, not a verified identifier."
+  },
+  {
+    "case": "GLP1R",
+    "target_input": {
+      "disease_name": "Type 2 diabetes mellitus",
+      "target_symbol": "GLP1R",
+      "target_id": "ENSG00000112164",
+      "disease_id": "MONDO_0005148"
+    },
+    "gene": {
+      "id": "ENSG00000112164",
+      "display_name": "GLP1R",
+      "species": "homo_sapiens",
+      "description": "glucagon like peptide 1 receptor [Source:HGNC Symbol;Acc:HGNC:4324]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0005148",
+      "label": "type 2 diabetes mellitus",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0005148"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0005148",
+        "label": "type 2 diabetes mellitus",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005148"
+      },
+      {
+        "id": "MONDO:1011402",
+        "label": "type 2 diabetes mellitus, non-human animal",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1011402"
+      },
+      {
+        "id": "MONDO:1011602",
+        "label": "type 2 diabetes mellitus, Chinese hamster",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1011602"
+      },
+      {
+        "id": "MONDO:1011603",
+        "label": "type 2 diabetes mellitus, crab-eating macaque",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1011603"
+      },
+      {
+        "id": "MONDO:1011604",
+        "label": "type 2 diabetes mellitus, domestic cat",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1011604"
+      }
+    ]
+  },
+  {
+    "case": "CFTR",
+    "target_input": {
+      "disease_name": "cystic fibrosis",
+      "target_symbol": "CFTR",
+      "target_id": "ENSG00000001626",
+      "disease_id": "MONDO_0009061"
+    },
+    "gene": {
+      "id": "ENSG00000001626",
+      "display_name": "CFTR",
+      "species": "homo_sapiens",
+      "description": "CF transmembrane conductance regulator [Source:HGNC Symbol;Acc:HGNC:1884]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0009061",
+      "label": "cystic fibrosis",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0009061"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0009061",
+        "label": "cystic fibrosis",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0009061"
+      },
+      {
+        "id": "MONDO:0005413",
+        "label": "cystic fibrosis associated meconium ileus",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0005413"
+      },
+      {
+        "id": "MONDO:0009062",
+        "label": "cystic fibrosis-gastritis-megaloblastic anemia syndrome",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0009062"
+      },
+      {
+        "id": "MONDO:1010043",
+        "label": "cystic fibrosis, non-human animal",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1010043"
+      },
+      {
+        "id": "MONDO:1010543",
+        "label": "cystic fibrosis, domestic ferret",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_1010543"
+      }
+    ]
+  },
+  {
+    "case": "SMN2",
+    "target_input": {
+      "disease_name": "spinal muscular atrophy",
+      "target_symbol": "SMN2",
+      "target_id": "ENSG00000205571",
+      "disease_id": "MONDO_0001516"
+    },
+    "gene": {
+      "id": "ENSG00000205571",
+      "display_name": "SMN2",
+      "species": "homo_sapiens",
+      "description": "survival of motor neuron 2, centromeric [Source:HGNC Symbol;Acc:HGNC:11118]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0001516",
+      "label": "spinal muscular atrophy",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0001516"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0001516",
+        "label": "spinal muscular atrophy",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0001516"
+      },
+      {
+        "id": "HP:0007269",
+        "label": "Spinal muscular atrophy",
+        "iri": "http://purl.obolibrary.org/obo/HP_0007269"
+      },
+      {
+        "id": "MONDO:0009672",
+        "label": "spinal muscular atrophy, type III",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0009672"
+      },
+      {
+        "id": "MONDO:0011436",
+        "label": "autosomal recessive distal spinal muscular atrophy 1",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0011436"
+      },
+      {
+        "id": "MONDO:0010056",
+        "label": "spinal muscular atrophy, type IV",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0010056"
+      }
+    ]
+  },
+  {
+    "case": "rare",
+    "target_input": {
+      "disease_name": "NGLY1 deficiency",
+      "target_symbol": "NGLY1",
+      "target_id": "ENSG00000151092",
+      "disease_id": "MONDO_0800044"
+    },
+    "gene": {
+      "id": "ENSG00000151092",
+      "display_name": "NGLY1",
+      "species": "homo_sapiens",
+      "description": "N-glycanase 1 [Source:HGNC Symbol;Acc:HGNC:17646]",
+      "biotype": "protein_coding"
+    },
+    "disease": {
+      "id": "MONDO:0800044",
+      "label": "congenital disorder of deglycosylation 1",
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0800044"
+    },
+    "errors": [],
+    "disease_candidates": [
+      {
+        "id": "MONDO:0800044",
+        "label": "congenital disorder of deglycosylation 1",
+        "iri": "http://purl.obolibrary.org/obo/MONDO_0800044"
+      }
+    ]
+  }
+]

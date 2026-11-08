@@ -7,6 +7,25 @@ was replaced. This workspace uses Next 16.4.5, React 19.3.1 and Tailwind 4.3.5.
 
 ## Evidence presentation and latency instrumentation
 
+Coverage now selects a clinical-precedent or limited preclinical-validation
+pathway based on disease-specific sources. The report displays biological
+association before separating matched indications from unrelated druggability.
+**Retrieve public evidence only** allows an investigation with zero paid calls;
+coverage permission never replaces Gemini authorization. Report provenance shows
+source version, capture time, cache reuse and stale-report/backend warnings.
+See [actual pathway validation](../devils_advocate/PATHWAY_VALIDATION.md) for the
+fresh production-route results and opt-in saved-live-job browser checks.
+
+New live investigations also display an Evidence Coverage Check: source failures,
+zero-result and unsearched sources, result caps, approval/indication precedent,
+and selected/omitted source records. **INSUFFICIENT COVERAGE** blocks paid model
+reasoning; it is not evidence that the target is ineffective. When verified
+synthesis cannot ground a meaningful unresolved question, the experiment page
+displays **INSUFFICIENT EVIDENCE FOR EXPERIMENT**. Historical demos remain labelled
+as lacking a current coverage assessment. See the
+[reliability audit](../devils_advocate/RELIABILITY_AUDIT.md) and
+[scientific reference sheet](../devils_advocate/SCIENTIFIC_REFERENCE.md).
+
 Readable scientific text uses labelled Evidence references. Each opens the
 collapsible Evidence Trace, which retains accepted claim text, exact excerpts,
 source identifiers and registry/publication links. Internal claim IDs remain in
@@ -294,3 +313,9 @@ publication rights, and AlphaFold data terms. See `../devils_advocate/README.md`
 and the root README for primary licence/source links. Public API availability
 does not blanket-license article abstracts. Preserve notices and review source
 rights before redistributing the recorded fixtures. No patient-level data are used.
+
+The challenge form includes manual public-source refresh. Measured stage durations
+show source timestamps and LIVE/CACHED provenance; the experiment report includes
+source-linked question-specific prior-art objections and the retained original
+proposal. See [optimization validation](../devils_advocate/OPTIMIZATION_VALIDATION.md)
+for actual cold/warm and Medium/High results and their scientific limitations.

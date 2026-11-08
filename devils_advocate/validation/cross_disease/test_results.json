@@ -1,0 +1,29 @@
+{
+  "validation_date": "2026-11-08",
+  "branch": "henri-testing",
+  "python": {
+    "command": ".venv\\Scripts\\python.exe -m pytest devils_advocate/tests -q",
+    "passed": 266,
+    "failed": 0,
+    "duration_seconds": 35.06
+  },
+  "typescript": {"command": "npm.cmd run typecheck", "passed": true},
+  "lint": {"command": "npm.cmd run lint", "passed": true},
+  "production_build": {"command": "npm.cmd run build", "passed": true, "build_directory": ".next-optimization-qa"},
+  "browser": {
+    "command": "npm.cmd run test:e2e",
+    "passed": 24,
+    "failed": 0,
+    "environment": {
+      "PLAYWRIGHT_BASE_URL": "http://127.0.0.1:3001",
+      "PATHWAY_LIVE_VALIDATION": "1",
+      "OPTIMIZATION_LIVE_VALIDATION": "1",
+      "CROSS_DISEASE_LIVE_VALIDATION": "1"
+    },
+    "final_status_artifact": "frontend/test-results/.last-run.json",
+    "duration_seconds": null,
+    "note": "Final status artifact reports passed with no failed tests; final wall duration was not retained. Tests include saved actual production-path reports and recorded offline cases."
+  },
+  "paid_calls_during_final_automated_validation": 0,
+  "qualification": "Automated test success does not establish biological accuracy or experimental novelty."
+}

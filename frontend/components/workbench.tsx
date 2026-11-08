@@ -12,7 +12,7 @@ type State = {
   mode:Mode; setMode:(mode:Mode)=>void; run:ScoutRun|null; setRun:(run:ScoutRun|null)=>void;
   weights:Weights; setWeights:(weights:Weights)=>void; target:ScoutTarget|null; select:(target:ScoutTarget)=>void;
   job:Job|null; config:Config|null; error:string; setError:(error:string)=>void;
-  busy:boolean; challenge:(useAI:boolean, manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string})=>Promise<void>;
+  busy:boolean; challenge:(useAI:boolean, manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string},options?:{refresh_evidence:boolean})=>Promise<void>;
   cancel:()=>Promise<void>; refresh:()=>Promise<void>; refreshConfig:()=>Promise<void>;
   reset:()=>void; resume:(identifier:string)=>Promise<void>;
 };
@@ -87,14 +87,14 @@ export function Workbench({children}:{children:React.ReactNode}) {
     return ()=>clearInterval(timer);
   },[active,refresh]);
 
-  const challenge=async(useAI:boolean,manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string})=>{
+  const challenge=async(useAI:boolean,manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string},options?:{refresh_evidence:boolean})=>{
     if(submittingRef.current || active)return;
     submittingRef.current=true;setSubmitting(true);setError('');
     const current=generation.current;
     requestId.current ||= crypto.randomUUID();
     try {
       const body=manual?{target_input:manual,use_ai:useAI,paid_authorized:useAI,weights}:{run_id:run?.run_id,symbol:target?.symbol,use_ai:useAI,paid_authorized:useAI,weights};
-      const created=await api<{job_id:string}>('/api/investigations',mode,{method:'POST',headers:{'Idempotency-Key':requestId.current},body:JSON.stringify(body)});
+      const created=await api<{job_id:string}>('/api/investigations',mode,{method:'POST',headers:{'Idempotency-Key':requestId.current},body:JSON.stringify({...body,...options,model_call_limit:Math.min(config?.ai.max_calls||5,5)})});
       const updated=await api<Job>(`/api/investigations/${created.job_id}`,mode);
       if(current===generation.current)setJob(updated);
     } catch(e) {setError((e as Error).message);}

@@ -29,6 +29,7 @@ from .ai_config import load_ai_settings
 from .job_store import JobStore
 from .job_worker import JobWorker
 from .models import TargetInput
+from .build_info import runtime_info
 from .target_scout_adapter import flatten_scout_selection
 
 ORIGINS = ['http://127.0.0.1:3000', 'http://localhost:3000']
@@ -40,6 +41,9 @@ class ChallengeRequest(BaseModel):
     target_input: TargetInput | None = None
     use_ai: bool = False
     paid_authorized: bool = False
+    refresh_evidence: bool = False
+    model_call_limit: int = Field(default=5,ge=3,le=10)
+    extra_calls_authorized: bool = False
     weights: dict[str, float] = Field(default_factory=lambda: Weights().as_dict())
 
 class DecisionRequest(BaseModel):
@@ -112,7 +116,7 @@ def create_app(runtime: Path | None = None, *, start_worker: bool = True):
         settings = load_ai_settings()
         return jsonify(ai={k: v for k,v in settings.model_dump(mode='json').items()
                            if k in ['enabled', 'provider', 'model', 'thinking_level', 'max_calls', 'timeout_seconds']},
-                       demo_targets=['LRRK2', 'BACE1'], server='Flask + SQLite', modes=['live','offline'])
+                       demo_targets=['LRRK2', 'BACE1'], server='Flask + SQLite', modes=['live','offline'],backend=runtime_info())
 
     @app.route('/api/<path:legacy>', methods=['GET', 'POST'])
     def legacy_api(legacy):
@@ -178,8 +182,15 @@ def create_app(runtime: Path | None = None, *, start_worker: bool = True):
         settings = load_ai_settings()
         if body.use_ai and mode() == 'live' and (not body.paid_authorized or not settings.enabled):
             return jsonify(error='Paid AI requires explicit authorization and enabled backend configuration.'), 400
+        if body.use_ai and body.model_call_limit>5 and not body.extra_calls_authorized:
+            return jsonify(error='More than five model attempts requires separate explicit extra-call authorization.'),400
+        effective_limit=body.model_call_limit if body.model_call_limit>5 else min(body.model_call_limit,settings.max_calls,5)
         payload = {'selection': selection, 'mode': mode(), 'use_ai': body.use_ai and mode() == 'live',
-                   'weights': weights.normalised().as_dict(), 'ai_policy': settings.model_dump(mode='json')}
+                   'refresh_evidence':body.refresh_evidence,
+                   'weights': weights.normalised().as_dict(),
+                   'authorized_model_calls':effective_limit if body.use_ai else 0,
+                   'extra_calls_authorized':body.extra_calls_authorized,
+                   'ai_policy':{**settings.model_dump(mode='json'),'max_calls':effective_limit}}
         fingerprint = hashlib.sha256(json.dumps(payload,sort_keys=True).encode()).hexdigest()
         key_data = [mode(), selection['target_input'], body.use_ai and mode() == 'live']
         selection_key = hashlib.sha256(json.dumps(key_data,sort_keys=True).encode()).hexdigest()
@@ -202,8 +213,10 @@ def create_app(runtime: Path | None = None, *, start_worker: bool = True):
     @app.get('/api/investigations')
     def recent_investigations():
         with store.connect() as db:
-            rows = db.execute('SELECT * FROM jobs ORDER BY created DESC LIMIT 100').fetchall()
-        jobs = [store.decode(row) for row in rows]
+            # History needs metadata only. Loading/decoding every scientific
+            # result grows memory and latency with accumulated reports.
+            rows = db.execute('SELECT id,state,updated,payload FROM jobs ORDER BY created DESC LIMIT 100').fetchall()
+        jobs = [{'id':row['id'],'state':row['state'],'updated':row['updated'],'payload':json.loads(row['payload'])} for row in rows]
         return jsonify([{'job_id':job['id'], 'state':job['state'],
                          'target':job['payload']['selection']['target_input'], 'updated':job['updated']}
                         for job in jobs if job['payload']['mode']==mode()][:25])
