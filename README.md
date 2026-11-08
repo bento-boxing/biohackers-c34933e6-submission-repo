@@ -71,7 +71,8 @@ npm run dev         # http://localhost:3000, proxies /api/* to :5050
 ### AI configuration (one set of keys for everything)
 Both the Scout ranking rationale and the Challenger's reasoning use Gemini, configured in the
 repository-root `.env` (see `backend/devils_advocate/ai.env.example`): `GEMINI_API_KEY`, `AI_MODEL`,
-`AI_ENABLED=true`, `AI_THINKING_LEVEL`. No Anthropic key is used anywhere. In recorded/offline mode
+`AI_ENABLED=true`, `AI_THINKING_LEVEL`. No Anthropic key is used anywhere. The UI opens in Live APIs
+mode; the recorded demo is selected from the Data source dropdown. In recorded/offline mode
 no paid call is ever made.
 
 ## Deploying to Vercel

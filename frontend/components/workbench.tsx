@@ -21,8 +21,9 @@ export function useWorkbench() { const state=useContext(Context); if(!state) thr
 const steps = [{href:'/',label:'Target discovery',number:'01'}, {href:'/challenge',label:"Devil’s Advocate",number:'02'}, {href:'/experiment',label:'Experimental Challenger',number:'03'}, {href:'/decision',label:'Researcher decision',number:'04'}];
 
 export function Workbench({children}:{children:React.ReactNode}) {
-  const [mode,setModeState]=useState<Mode>('offline');
-  const modeRef=useRef<Mode>('offline');
+  // Live APIs by default; the recorded demo (no network, two pre-captured investigations) is opt-in.
+  const [mode,setModeState]=useState<Mode>('live');
+  const modeRef=useRef<Mode>('live');
   const [run,setRunState]=useState<ScoutRun|null>(null);
   const [weights,setWeightsState]=useState<Weights>(DEFAULT_WEIGHTS);
   const [target,setTarget]=useState<ScoutTarget|null>(null);

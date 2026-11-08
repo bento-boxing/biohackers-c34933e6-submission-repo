@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 test('recorded LRRK2 flow: discovery, challenge, experiment, approval and screening',async({page})=>{
   await page.goto('/');
   await expect(page.getByRole('heading',{name:'A stronger starting hypothesis.'})).toBeVisible();
+  await page.getByLabel('Research data mode').selectOption('offline');
   await page.getByRole('button',{name:'Discover targets →'}).click();
   await expect(page.getByRole('button',{name:'Select LRRK2 →'})).toBeVisible({timeout:40_000});
   await page.screenshot({path:'test-results/discovery-desktop.png',fullPage:true});
@@ -59,6 +60,7 @@ test('mobile dashboard and navigation remain usable',async({page})=>{
 
 test('reload restores the run, target and report from localStorage without backend restore calls',async({page})=>{
   await page.goto('/');
+  await page.getByLabel('Research data mode').selectOption('offline');
   await page.getByRole('button',{name:'Discover targets →'}).click();
   await page.getByRole('button',{name:'Select LRRK2 →'}).click();
   await page.getByRole('button',{name:'Challenge this target →'}).click();
