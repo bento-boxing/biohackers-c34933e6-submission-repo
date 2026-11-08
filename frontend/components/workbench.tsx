@@ -1,5 +1,6 @@
 'use client';
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { api } from '@/lib/api';
@@ -76,11 +77,9 @@ export function Workbench({children}:{children:React.ReactNode}) {
   return <Context.Provider value={{mode,setMode,run,setRun,weights,setWeights,target,select,job,config,error,setError,busy:submitting,challenge,addDecision,refreshConfig,reset:clear}}>
     <div className="workspace">
       <aside className="sidebar">
-        <Link href="/" className="brand"><span className="brand-symbol">✳</span><span>AGENTVERSE<small>RESEARCH WORKBENCH</small></span></Link>
+        <Link href="/" className="brand"><Image className="brand-symbol" src="/site-logo.png" alt="" aria-hidden="true" width={40} height={40}/><span>AGENTVERSE<small>RESEARCH WORKBENCH</small></span></Link>
         <div className="nav-label">TARGET VALIDATION</div>
         <nav>{steps.map(s=><Link key={s.href} href={s.href} className={pathname===s.href?'nav-item selected':'nav-item'}><span>{s.number}</span>{s.label}</Link>)}</nav>
-        <div className="sidebar-note"><span className="status-dot"/> Human judgment, supported.<p>Trace every claim.<br/>Challenge every assumption.</p></div>
-        <div className="sidebar-foot">AGENTVERSE 2026<span>Biotech research prototype</span></div>
       </aside>
       <div className="main-frame">
         <header className="topbar"><span>Research workspace <span className="muted">/ Target validation</span></span><div className="top-actions"><span className={`badge ${mode==='live'?'live':'recorded'}`}>{mode==='live'?'LIVE DATA':'RECORDED DEMO'}</span><label className="mode-switch">Data source<select aria-label="Research data mode" value={mode} onChange={e=>setMode(e.target.value as Mode)} disabled={submitting}><option value="offline">Recorded demo</option><option value="live">Live APIs</option></select></label></div></header>
@@ -91,7 +90,7 @@ export function Workbench({children}:{children:React.ReactNode}) {
   </Context.Provider>;
 }
 
-export function PageTitle({eyebrow,title,description}:{eyebrow:string;title:string;description:string}) {return <div className="page-title"><div className="eyebrow">{eyebrow}</div><h1>{title}</h1><p>{description}</p></div>;}
+export function PageTitle({eyebrow: _eyebrow,title,description: _description}:{eyebrow?:string;title:string;description?:string}) {return <div className="page-title"><h1>{title}</h1></div>;}
 export function Badge({children,tone='neutral'}:{children:React.ReactNode;tone?:string}){return <span className={`badge ${tone}`}>{children}</span>;}
 export function EmptyState({title,children}:{title:string;children:React.ReactNode}) {return <section className="panel empty-state"><div className="empty-symbol">◎</div><h2>{title}</h2><p>{children}</p><Link className="button secondary" href="/">Open Target Discovery →</Link></section>;}
 export function SelectionBar(){const {target,run,job}=useWorkbench();const input=job?.selection.target_input;return <div className="selection-bar"><span className="target-symbol">{target?.symbol||input?.target_symbol||'No target selected'}</span><span>{run?.disease.name||input?.disease_name}</span><span className="mono muted">{target?.target_id||input?.target_id}</span>{target?.chembl_target_id&&<Badge>{target.chembl_target_id}</Badge>}</div>;}

@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Badge, PageTitle, useWorkbench } from '@/components/workbench';
 import { DiseaseSearch } from '@/components/disease-search';
@@ -18,9 +18,25 @@ export default function Discovery(){
   const [rationaleNote,setRationaleNote]=useState('');
   const [explaining,setExplaining]=useState(false);
   const requestVersion=useRef(0);
+  const tableScrollbar=useRef<HTMLDivElement>(null);
+  const tableViewport=useRef<HTMLDivElement>(null);
+  const tableScrollbarContent=useRef<HTMLDivElement>(null);
   const router=useRouter();
   const ranked=run?rankTargets(run.targets,weights):[];
   const effectiveWeights=normaliseWeights(weights);
+  useEffect(()=>{
+    const scrollbar=tableScrollbar.current;
+    const viewport=tableViewport.current;
+    const content=tableScrollbarContent.current;
+    const table=viewport?.querySelector('table');
+    if(!scrollbar||!viewport||!content||!table)return;
+    const updateWidth=()=>{content.style.width=`${table.scrollWidth}px`;};
+    updateWidth();
+    const observer=new ResizeObserver(updateWidth);
+    observer.observe(viewport);
+    observer.observe(table);
+    return()=>observer.disconnect();
+  },[run,ranked.length,loading,rationales]);
   async function explain(){
     if(!run)return;
     setExplaining(true);setRationaleNote('');
@@ -36,13 +52,12 @@ export default function Discovery(){
     catch(e){setError((e as Error).message);}finally{if(version===requestVersion.current)setLoading(false);}
   }
   return <>
-    <PageTitle eyebrow="01 / TARGET DISCOVERY" title="A stronger starting hypothesis." description="Discover protein targets, inspect the evidence, and choose what deserves a closer look."/>
+    <PageTitle eyebrow="01 / TARGET DISCOVERY" title="Discover Targets" description="Discover protein targets, inspect the evidence, and choose what deserves a closer look."/>
     <section className="panel discovery-form"><div><label htmlFor="disease">Disease or indication</label><DiseaseSearch value={disease} mode={mode} disabled={loading} onChange={v=>{setDisease(v);requestVersion.current++;setRun(null);setLoading(false);}} onSubmit={name=>{setDisease(name);void discover(name);}}/></div><p>{mode==='offline'?'Recorded Parkinson disease demonstration · no network or paid AI calls.':'Live Open Targets, ChEMBL and Europe PMC · start typing for matching disease names · no paid reasoning at discovery.'}</p></section>
     <div className="metric-grid"><div className="metric"><span>Candidate targets</span><strong>{run?ranked.length:'—'}</strong><small>Evidence-ranked proteins</small></div><div className="metric"><span>Evidence dimensions</span><strong>04</strong><small>Genetic · association · druggability · literature</small></div><div className="metric"><span>Research control</span><strong className="metric-word">Human</strong><small>Approval before protein screening</small></div></div>
     <div className="discovery-grid"><section className="panel target-panel"><div className="panel-heading"><div><h2>Ranked protein targets</h2><p>{run?`${run.disease.name} · ${run.disease.id}`:'Run discovery to build your shortlist.'}</p></div><div className="panel-actions"><Badge tone={mode==='offline'?'recorded':'live'}>{mode==='offline'?'RECORDED':'LIVE / API CACHE'}</Badge>{run&&<button className="button secondary" disabled={explaining||busy} onClick={()=>void explain()} title="Gemini writes a 2-3 sentence rationale per top-10 target from the retrieved evidence only">{explaining?'Explaining…':'Explain ranking (AI)'}</button>}</div></div>{rationaleNote&&<p className="fine-print">{rationaleNote}</p>}
-      {loading?<div className="empty-table"><div className="spinner"/>Retrieving and enriching target evidence. This can take several minutes.</div>:!run?<div className="empty-table"><div className="empty-symbol">⌘</div><h3>Evidence before commitment.</h3><p>Your ranked target shortlist will appear here. Choose a disease above to begin.</p></div>:<div className="table-scroll"><table><thead><tr><HelpHeader column="rank">Rank</HelpHeader><HelpHeader column="target">Protein target</HelpHeader><HelpHeader column="score">Ranking score</HelpHeader><HelpHeader column="genetic">Genetics</HelpHeader><HelpHeader column="association">Association</HelpHeader><HelpHeader column="druggability">Druggability</HelpHeader><HelpHeader column="literature">Literature</HelpHeader><HelpHeader column="safety">Safety flags</HelpHeader><th/></tr></thead><tbody>{ranked.map(t=><tr key={t.target_id} className={target?.target_id===t.target_id?'row-selected':''}><td className="muted mono">{String(t.rank).padStart(2,'0')}</td><td><strong>{t.symbol}</strong><small className="cell-secondary">{t.name}</small>{rationales[t.symbol]&&<small className="cell-secondary rationale"><b>{rationales[t.symbol].evidence_strength}</b> · {rationales[t.symbol].rationale}</small>}</td><td><div className="score-value">{t.total.toFixed(3)}<span className="score-track"><i style={{width:`${t.total*100}%`}}/></span></div></td><td>{t.components.genetic.toFixed(2)}</td><td>{t.components.association.toFixed(2)}</td><td>{t.components.druggability.toFixed(2)}</td><td>{t.components.literature.toFixed(2)}</td><td>{t.safety_flags.length?<Badge tone="warning">{t.safety_flags.length} to review</Badge>:<span className="muted">None retrieved</span>}</td><td><button className="text-button" onClick={()=>{select(t);router.push('/challenge');}}>Select {t.symbol} →</button></td></tr>)}</tbody></table></div>}
+      {loading?<div className="empty-table"><div className="spinner"/>Retrieving and enriching target evidence. This can take several minutes.</div>:!run?<div className="empty-table"><div className="empty-symbol">⌘</div><h3>Evidence before commitment.</h3><p>Your ranked target shortlist will appear here. Choose a disease above to begin.</p></div>:<><div className="table-scrollbar" ref={tableScrollbar} aria-label="Scroll ranked protein targets horizontally" onScroll={event=>{if(tableViewport.current)tableViewport.current.scrollLeft=event.currentTarget.scrollLeft;}}><div ref={tableScrollbarContent}/></div><div className="table-scroll ranked-table-scroll" ref={tableViewport} onScroll={event=>{if(tableScrollbar.current)tableScrollbar.current.scrollLeft=event.currentTarget.scrollLeft;}}><table><thead><tr><HelpHeader column="rank">Rank</HelpHeader><HelpHeader column="target">Protein target</HelpHeader><HelpHeader column="score">Ranking score</HelpHeader><HelpHeader column="genetic">Genetics</HelpHeader><HelpHeader column="association">Association</HelpHeader><HelpHeader column="druggability">Druggability</HelpHeader><HelpHeader column="literature">Literature</HelpHeader><HelpHeader column="safety">Safety flags</HelpHeader><th/></tr></thead><tbody>{ranked.map(t=><tr key={t.target_id} className={target?.target_id===t.target_id?'row-selected':''}><td className="muted mono">{String(t.rank).padStart(2,'0')}</td><td><strong>{t.symbol}</strong><small className="cell-secondary">{t.name}</small>{rationales[t.symbol]&&<small className="cell-secondary rationale"><b>{rationales[t.symbol].evidence_strength}</b> · {rationales[t.symbol].rationale}</small>}</td><td><div className="score-value">{t.total.toFixed(3)}<span className="score-track"><i style={{width:`${t.total*100}%`}}/></span></div></td><td>{t.components.genetic.toFixed(2)}</td><td>{t.components.association.toFixed(2)}</td><td>{t.components.druggability.toFixed(2)}</td><td>{t.components.literature.toFixed(2)}</td><td>{t.safety_flags.length?<Badge tone="warning">{t.safety_flags.length} to review</Badge>:<span className="muted">None retrieved</span>}</td><td><button className="text-button" onClick={()=>{select(t);router.push('/challenge');}}>Select {t.symbol} →</button></td></tr>)}</tbody></table></div></>}
       <div className="table-note">Ranking scores summarize retrieved evidence. They are not clinical success probabilities.</div></section>
-      <aside className="panel weights-panel"><div className="eyebrow">TRANSPARENT RANKING</div><h2>Your research priorities.</h2><p>Adjust the evidence weights to explore a different ranking. The scientific scoring formula is unchanged.</p>{(Object.keys(weights) as (keyof Weights)[]).map(key=><label className="weight-row" key={key}><span>{key}<b>{Math.round(effectiveWeights[key]*100)}%</b></span><input aria-label={`${key} weight`} type="range" min="0" max="1" step="0.05" value={weights[key]} disabled={busy} onChange={e=>setWeights({...weights,[key]:Number(e.target.value)})}/></label>)}<div className="formula">Weighted total<br/><span>Σ normalized weight × component score</span></div><p className="fine-print">Safety flags remain visible and are not folded into a single ranking score.</p></aside></div>
-    <section className="bottom-note"><span>↗</span><div><h3>Discovery is the beginning of the investigation.</h3><p>Select a target to challenge historical evidence, verify claims and identify the next scientific question.</p></div></section>
+      <aside className="panel weights-panel"><h2>Research Priorities</h2><p>Adjust the evidence weights to explore a different ranking. The scientific scoring formula will remain unchanged.</p>{(Object.keys(weights) as (keyof Weights)[]).map(key=><label className="weight-row" key={key}><span>{key}<b>{Math.round(effectiveWeights[key]*100)}%</b></span><input aria-label={`${key} weight`} type="range" min="0" max="1" step="0.05" value={weights[key]} disabled={busy} onChange={e=>setWeights({...weights,[key]:Number(e.target.value)})}/></label>)}<div className="formula">Weighted total<br/><span>Σ normalized weight × component score</span></div><p className="fine-print">Safety flags remain visible and are not folded into a single ranking score.</p></aside></div>
   </>;
 }

@@ -5,7 +5,7 @@
   --surface2: #F4F4F6;
   --line: #BABFD1;
   --text: #49516F;
-  --muted: #656D88;
+  --muted: #4d5368;
   --accent: #50723C;
   --warning: #49516F;
   --danger: #8F424D;
@@ -16,6 +16,16 @@ body {
   color: var(--text);
 }
 
+.eyebrow {
+  display: none !important;
+}
+
+*,
+*::before,
+*::after {
+  border-color: transparent !important;
+}
+
 p {
   color: var(--text);
 }
@@ -24,12 +34,17 @@ input,
 select,
 textarea {
   color: var(--text);
-  background: #FFFFFF;
-  border-color: var(--line);
+  background: #F4F4F6;
+  box-shadow: 0 2px 8px #49516F0D;
 }
 
 input::placeholder,
 textarea::placeholder {
+  color: var(--muted);
+}
+
+.discovery-form label,
+.manual-fields label {
   color: var(--muted);
 }
 
@@ -66,7 +81,7 @@ textarea::placeholder {
 
 .nav-item>span,
 .th-help>i {
-  border-color: var(--line);
+  background: #F4F4F6;
 }
 
 .nav-item:hover,
@@ -163,6 +178,18 @@ textarea::placeholder {
   border-color: var(--line);
 }
 
+.search-row,
+.metric,
+.mini-card,
+.evidence-item,
+.risk-grid>div,
+.decision-option,
+.decision-entry,
+.empty-table,
+.table-note {
+  box-shadow: 0 2px 8px #49516F12;
+}
+
 .search-row input {
   background: transparent;
   color: var(--text);
@@ -250,7 +277,8 @@ td strong,
 
 .tabs button.active {
   color: var(--accent);
-  border-color: var(--accent);
+  background: #50723C1A;
+  border-radius: 6px;
 }
 
 .evidence-item,
@@ -317,7 +345,17 @@ pre,
 .technical {
   color: var(--text);
   background: #F4F4F6;
-  border-color: var(--line);
+}
+
+.badge,
+.strength,
+.node,
+.ontology,
+.entity,
+.sourceList li,
+.limitationList li,
+.tagList li {
+  box-shadow: 0 2px 8px #49516F0D;
 }
 
 blockquote {
