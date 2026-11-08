@@ -19,6 +19,15 @@ def investigation():
     result = investigate_target({'target_symbol': 'BACE1', 'disease_name': "Alzheimer's disease"}, offline=True)
     # Scripted test only: no live retrieval is claimed or executed.
     result.mode = 'live'
+    # Synthetic complete transport metadata for isolated role-contract tests.
+    # Real incomplete retrieval is covered by coverage tests and must abstain.
+    from devils_advocate.models import SearchAudit
+    for c in result.compounds:
+        c.max_phase=0
+        c.indication_search_state='no_results'
+    result.search_audit=[SearchAudit(source=s,operation='scripted test',url='https://example.org',state='found')
+                         for s in ['ChEMBL','Europe PMC','ClinicalTrials.gov']]
+    for p in result.publications:p.clinical_candidate=True
     return result
 
 def claim(source_id='NCT01739348'):
@@ -38,7 +47,10 @@ def adjudication(verdict='supported'):
 def final(accepted=True):
     return ExperimentalResponse(reassessment=Reassessment(assessment='insufficient evidence',
         evidence_claim_ids=['c1'] if accepted else [], remaining_uncertainty=['Clinical relevance unresolved.']),
-        experiment=propose_experiment(investigation()).model_copy(update={'evidence_ids': ['c1'] if accepted else []}))
+        experiment=propose_experiment(investigate_target({'target_symbol':'BACE1','disease_name':"Alzheimer's disease"},offline=True)).model_copy(update={'evidence_ids': ['c1'] if accepted else [],
+            'question':'Does orthogonal perturbation distinguish compensatory signaling from exposure-related artefacts?',
+            'knowledge_review':'Scripted scoped review: trial status is known; outcome causality remains unresolved.',
+            'unresolved_gap':'Model-specific engagement versus functional effect remains a provisional question.'}))
 
 class ScriptedRunner:
     def __init__(self, responses):

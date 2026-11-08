@@ -197,7 +197,10 @@
         "target_symbol": "BACE1",
         "target_id": null,
         "chembl_target_id": null,
-        "uniprot": null
+        "uniprot": null,
+        "disease_aliases": [],
+        "target_aliases": [],
+        "protein_gene_symbols": []
       },
       "trial": {
         "nct_id": "NCT01739348",
@@ -236,7 +239,9 @@
         "relationship": "verified",
         "match_reason": "Exact normalized intervention alias",
         "disease_match": "matched",
-        "url": "https://clinicaltrials.gov/study/NCT01739348"
+        "url": "https://clinicaltrials.gov/study/NCT01739348",
+        "phases": [],
+        "publication_ids": []
       },
       "baseline_summary": [
         {
@@ -260,7 +265,10 @@
         "target_symbol": "BACE1",
         "target_id": null,
         "chembl_target_id": null,
-        "uniprot": null
+        "uniprot": null,
+        "disease_aliases": [],
+        "target_aliases": [],
+        "protein_gene_symbols": []
       },
       "trial": {
         "nct_id": "NCT02783573",
@@ -294,7 +302,9 @@
         "relationship": "verified",
         "match_reason": "Exact normalized intervention alias",
         "disease_match": "matched",
-        "url": "https://clinicaltrials.gov/study/NCT02783573"
+        "url": "https://clinicaltrials.gov/study/NCT02783573",
+        "phases": [],
+        "publication_ids": []
       },
       "baseline_summary": [
         {
@@ -318,7 +328,10 @@
         "target_symbol": "BACE1",
         "target_id": null,
         "chembl_target_id": null,
-        "uniprot": null
+        "uniprot": null,
+        "disease_aliases": [],
+        "target_aliases": [],
+        "protein_gene_symbols": []
       },
       "trial": {
         "nct_id": "NCT02972658",
@@ -351,7 +364,9 @@
         "relationship": "verified",
         "match_reason": "Exact normalized intervention alias",
         "disease_match": "matched",
-        "url": "https://clinicaltrials.gov/study/NCT02972658"
+        "url": "https://clinicaltrials.gov/study/NCT02972658",
+        "phases": [],
+        "publication_ids": []
       },
       "baseline_summary": [
         {
@@ -375,7 +390,10 @@
         "target_symbol": "PCSK9",
         "target_id": null,
         "chembl_target_id": null,
-        "uniprot": null
+        "uniprot": null,
+        "disease_aliases": [],
+        "target_aliases": [],
+        "protein_gene_symbols": []
       },
       "trial": {
         "nct_id": "NCT03331666",
@@ -407,7 +425,9 @@
         "relationship": "verified",
         "match_reason": "Exact normalized intervention alias",
         "disease_match": "matched",
-        "url": "https://clinicaltrials.gov/study/NCT03331666"
+        "url": "https://clinicaltrials.gov/study/NCT03331666",
+        "phases": [],
+        "publication_ids": []
       },
       "baseline_summary": [
         {
@@ -431,7 +451,10 @@
         "target_symbol": "EGFR",
         "target_id": null,
         "chembl_target_id": null,
-        "uniprot": null
+        "uniprot": null,
+        "disease_aliases": [],
+        "target_aliases": [],
+        "protein_gene_symbols": []
       },
       "trial": {
         "nct_id": "NCT02443337",
@@ -465,7 +488,9 @@
         "relationship": "verified",
         "match_reason": "Exact normalized intervention alias",
         "disease_match": "matched",
-        "url": "https://clinicaltrials.gov/study/NCT02443337"
+        "url": "https://clinicaltrials.gov/study/NCT02443337",
+        "phases": [],
+        "publication_ids": []
       },
       "baseline_summary": [
         {
@@ -489,7 +514,10 @@
         "target_symbol": "EGFR",
         "target_id": null,
         "chembl_target_id": null,
-        "uniprot": null
+        "uniprot": null,
+        "disease_aliases": [],
+        "target_aliases": [],
+        "protein_gene_symbols": []
       },
       "trial": {
         "nct_id": "NCT05241873",
@@ -539,7 +567,9 @@
         "relationship": "uncertain",
         "match_reason": "No intervention alias match",
         "disease_match": "matched",
-        "url": "https://clinicaltrials.gov/study/NCT05241873"
+        "url": "https://clinicaltrials.gov/study/NCT05241873",
+        "phases": [],
+        "publication_ids": []
       },
       "baseline_summary": [
         {
@@ -563,7 +593,10 @@
         "target_symbol": "EGFR",
         "target_id": null,
         "chembl_target_id": null,
-        "uniprot": null
+        "uniprot": null,
+        "disease_aliases": [],
+        "target_aliases": [],
+        "protein_gene_symbols": []
       },
       "trial": {
         "nct_id": "NCT06704724",
@@ -637,7 +670,9 @@
         "relationship": "verified",
         "match_reason": "Exact normalized intervention alias",
         "disease_match": "matched",
-        "url": "https://clinicaltrials.gov/study/NCT06704724"
+        "url": "https://clinicaltrials.gov/study/NCT06704724",
+        "phases": [],
+        "publication_ids": []
       },
       "baseline_summary": [
         {
@@ -723,7 +758,9 @@
         "relationship": "verified",
         "match_reason": "Exact normalized intervention alias",
         "disease_match": "matched",
-        "url": "https://clinicaltrials.gov/study/NCT01739348"
+        "url": "https://clinicaltrials.gov/study/NCT01739348",
+        "phases": [],
+        "publication_ids": []
       },
       "baseline_summary": [
         {

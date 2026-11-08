@@ -31,7 +31,7 @@ def inspect_stop_reason(record: dict, nct_id: str, *, full_record: bool = False)
         evidence.state = 'reported' if evidence.value.strip() else 'empty'
     return evidence
 
-def fetch_stop_reason(client: JsonClient, nct_id: str) -> StopReasonEvidence:
+def fetch_stop_reason(client: JsonClient, nct_id: str, *, on_record=None) -> StopReasonEvidence:
     if not re.fullmatch(r'NCT\d{8}', nct_id):
         raise ValueError('Expected an NCT identifier with eight digits.')
     url = f'{CTG}/{nct_id}'
@@ -42,7 +42,9 @@ def fetch_stop_reason(client: JsonClient, nct_id: str) -> StopReasonEvidence:
             source_url=url, checked_at_utc=datetime.now(timezone.utc).isoformat(),
             detail='Registry returned HTTP 404; no trial record could be checked.' if exc.status_code == 404 else
                    f'Full registry record could not be fetched ({"HTTP " + str(exc.status_code) if exc.status_code else "connection/response error"}).')
-    return inspect_stop_reason(record, nct_id, full_record=True)
+    reason=inspect_stop_reason(record, nct_id, full_record=True)
+    if on_record and reason.state!='invalid':on_record(record)
+    return reason
 
 def stop_reason_label(trial: Trial) -> str:
     evidence = trial.stop_reason

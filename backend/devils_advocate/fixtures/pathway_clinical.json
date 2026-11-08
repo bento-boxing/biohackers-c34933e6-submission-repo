@@ -1,0 +1,427 @@
+{
+  "target": {
+    "disease_name": "HIV infectious disease",
+    "disease_id": null,
+    "target_symbol": "CCR5",
+    "target_id": null,
+    "chembl_target_id": null,
+    "uniprot": null,
+    "disease_aliases": []
+  },
+  "mode": "live",
+  "resolved_target_id": "CHEMBL274",
+  "resolution_status": "resolved",
+  "compounds": [
+    {
+      "chembl_id": "CHEMBL256907",
+      "name": "MARAVIROC",
+      "synonyms": [
+        "Celsentri",
+        "Maraviroc",
+        "Maraviroc",
+        "Maraviroc",
+        "Maraviroc",
+        "Maraviroc",
+        "Maraviroc",
+        "Maraviroc",
+        "Maraviroc",
+        "Rel-maraviroc",
+        "Selzentry",
+        "Uk-427,857",
+        "UK-427857"
+      ],
+      "mechanisms": [
+        "C-C chemokine receptor type 5 antagonist"
+      ],
+      "url": "https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL256907",
+      "max_phase": 4.0,
+      "approval_source_url": "https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL256907.json",
+      "indications": [
+        {
+          "drugind_id": 23450,
+          "efo_id": "EFO:0000764",
+          "efo_term": "HIV infection",
+          "max_phase_for_ind": "4.0",
+          "mesh_heading": "HIV Infections",
+          "mesh_id": "D015658",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "lexical",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 23451,
+          "efo_id": "EFO:0000180",
+          "efo_term": "HIV-1 infection",
+          "max_phase_for_ind": "4.0",
+          "mesh_heading": "HIV Infections",
+          "mesh_id": "D015658",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "lexical",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 26099,
+          "efo_id": "EFO:0002608",
+          "efo_term": "AIDS dementia",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "AIDS Dementia Complex",
+          "mesh_id": "D015526",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 26686,
+          "efo_id": "EFO:0000685",
+          "efo_term": "rheumatoid arthritis",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Arthritis, Rheumatoid",
+          "mesh_id": "D001172",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 27287,
+          "efo_id": "EFO:0004211",
+          "efo_term": "Hypertriglyceridemia",
+          "max_phase_for_ind": "1.0",
+          "mesh_heading": "Hypertriglyceridemia",
+          "mesh_id": "D015228",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 27789,
+          "efo_id": "EFO:0000765",
+          "efo_term": "AIDS",
+          "max_phase_for_ind": "3.0",
+          "mesh_heading": "Acquired Immunodeficiency Syndrome",
+          "mesh_id": "D000163",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 42035,
+          "efo_id": "EFO:0000763",
+          "efo_term": "viral disease",
+          "max_phase_for_ind": "4.0",
+          "mesh_heading": "Virus Diseases",
+          "mesh_id": "D014777",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 44605,
+          "efo_id": "EFO:0000544",
+          "efo_term": "infection",
+          "max_phase_for_ind": "3.0",
+          "mesh_heading": "Infections",
+          "mesh_id": "D007239",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 66257,
+          "efo_id": "EFO:0000095",
+          "efo_term": "chronic lymphocytic leukemia",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Leukemia, Lymphocytic, Chronic, B-Cell",
+          "mesh_id": "D015451",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 66258,
+          "efo_id": "EFO:0000183",
+          "efo_term": "Hodgkins lymphoma",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Hodgkin Disease",
+          "mesh_id": "D006689",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 66259,
+          "efo_id": "EFO:0000198",
+          "efo_term": "myelodysplastic syndrome",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Myelodysplastic Syndromes",
+          "mesh_id": "D009190",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 66260,
+          "efo_id": "EFO:0000339",
+          "efo_term": "chronic myelogenous leukemia",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Leukemia, Myelogenous, Chronic, BCR-ABL Positive",
+          "mesh_id": "D015464",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 66261,
+          "efo_id": "EFO:0000403",
+          "efo_term": "diffuse large B-cell lymphoma",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Lymphoma, Large B-Cell, Diffuse",
+          "mesh_id": "D016403",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 66262,
+          "efo_id": "EFO:0000712",
+          "efo_term": "stroke",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Stroke",
+          "mesh_id": "D020521",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 122346,
+          "efo_id": "MONDO:0013730",
+          "efo_term": "graft versus host disease",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Graft vs Host Disease",
+          "mesh_id": "D006086",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 122347,
+          "efo_id": "MONDO:0044881",
+          "efo_term": "hematopoietic and lymphoid cell neoplasm",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Hematologic Neoplasms",
+          "mesh_id": "D019337",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 128666,
+          "efo_id": "EFO:0000558",
+          "efo_term": "Kaposi's sarcoma",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Sarcoma, Kaposi",
+          "mesh_id": "D012514",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 128667,
+          "efo_id": "MONDO:0018906",
+          "efo_term": "follicular lymphoma",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Lymphoma, Follicular",
+          "mesh_id": "D008224",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 128668,
+          "efo_id": "MONDO:0100096",
+          "efo_term": "COVID-19",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Severe Acute Respiratory Syndrome",
+          "mesh_id": "D045169",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        },
+        {
+          "drugind_id": 135662,
+          "efo_id": "HP:0100543",
+          "efo_term": "Cognitive impairment",
+          "max_phase_for_ind": "2.0",
+          "mesh_heading": "Cognitive Dysfunction",
+          "mesh_id": "D060825",
+          "molecule_chembl_id": "CHEMBL256907",
+          "parent_molecule_chembl_id": "CHEMBL256907",
+          "disease_match": "unresolved",
+          "source_url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json?molecule_chembl_id=CHEMBL256907"
+        }
+      ],
+      "indication_search_state": "found"
+    }
+  ],
+  "trials": [
+    {
+      "nct_id": "NCT00098306",
+      "title": "Trial of Maraviroc (UK-427,857) in Combination With Optimized Background Therapy Versus Optimized Background Therapy Alone for the Treatment of HIV-1 Infected Subjects",
+      "status": "COMPLETED",
+      "why_stopped": "",
+      "stop_reason": {
+        "state": "absent",
+        "value": null,
+        "full_record_checked": true,
+        "source_url": "https://clinicaltrials.gov/api/v2/studies/NCT00098306",
+        "checked_at_utc": "2026-11-08T00:16:58.237250+00:00",
+        "detail": "",
+        "search_value": null,
+        "search_state": null
+      },
+      "conditions": [
+        "HIV Infections"
+      ],
+      "interventions": [
+        "Maraviroc (UK-427,857)",
+        "Selzentry",
+        "Optimized Background Therapy",
+        "Optimized Background Therapy",
+        "Placebo",
+        "Optimized Background Therapy"
+      ],
+      "population": "Inclusion Criteria:\n\n* Men or women at least 16 years of age (or minimum age as determined by local regulatory authorities)\n* HIV-1 RNA viral load of greater than or equal to 5,000 copies/mL\n* Stable pre-study antiretroviral regimen, or on no antiretroviral agents, for at least 4 weeks\n* Documented genotypic or phenotypic resistance to three of the four antiretroviral drug classes, OR, Antiretroviral-class experience greater than or equal to 6 months (sequential or cumulative) with at least three of the following: One nucleoside or nucleotide reverse transcriptase inhibitor, one non-nucleoside reverse transcriptase inhibitor, two protease inhibitors (excluding low-dose ritonavir) and/or enfuvirtide\n* Be willing to remain on randomized treatment without any changes or additions to the OBT regimen, except for toxicity management or upon meeting criteria for treatment failure\n* A negative urine pregnancy test at the baseline visit for Women of Child Bearing Potential (WOCBP)\n* Effective barrier contraception for WOCBP and males\n\nExclusion Criteria:\n\n* Patients requiring treatment with more than 6 antiretroviral agents (excluding low-dose ritonavir)\n* Prior treatment with maraviroc (UK-427,857) or another experimental HIV entry inhibitor for more than 14 days\n* Suspected or documented active, untreated HIV-1 related opportunistic infection (OI) or other condition requiring acute therapy\n* Treatment for an active opportunistic infection, or unexplained temperature \\>38.5 degrees Celsius for 7 consecutive days\n* Active alcohol or substance abuse sufficient, in the Investigator's judgement, to prevent adherence to study medication and/or follow up\n* Lactating women, or planned pregnancy during the trial period\n* Significant renal insufficiency\n* Previous therapy with a potentially myelosuppressive, neurotoxic, hepatoxic and/or cytotoxic agent within 30 days prior to randomization or the expected need for such therapy during the study period\n* Documented or suspected acute hepatitis or pancreatitis within 30 days prior to randomization\n* Significantly elevated liver enzymes or cirrhosis\n* Significant neutropenia, anemia or thrombocytopenia\n* Malabsorption or an inability to tolerate oral medications\n* Symptomatic postural hypotension or severe cardiovascular or cerebrovascular disease\n* Certain medications\n* Malignancy requiring parenteral chemotherapy that must be continued for the duration of the trial\n* X4- or dual/mixed-tropic virus or repeated assay failure\n* Any other clinical condition that, in the Investigator's judgement, would potentially compromise study compliance or the ability to evaluate safety/efficacy",
+      "has_results": true,
+      "compound_ids": [
+        "CHEMBL256907"
+      ],
+      "compound_matches": {
+        "CHEMBL256907": "verified"
+      },
+      "relationship": "verified",
+      "match_reason": "Exact normalized intervention alias",
+      "disease_match": "matched",
+      "outcome_records": [],
+      "url": "https://clinicaltrials.gov/study/NCT00098306",
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "identifier": "MED:18832244",
+      "title": "Maraviroc for previously treated patients with R5 HIV-1 infection.",
+      "abstract": "Background CC chemokine receptor 5 antagonists are a new class of antiretroviral agents. Methods We conducted two double-blind, placebo-controlled, phase 3 studies--Maraviroc versus Optimized Therapy in Viremic Antiretroviral Treatment-Experienced Patients (MOTIVATE) 1 and MOTIVATE 2--with patients who had R5 human\n[intervening abstract text omitted]\nConclusions: Maraviroc, as compared with placebo, resulted in significantly greater suppression of HIV-1 and greater increases in CD4 cell counts at 48 weeks in previously treated patients with R5 HIV-1 who were receiving OBT. (ClinicalTrials.gov numbers, NCT00098306 and NCT00098722.)",
+      "doi": "10.1056/nejmoa0803152",
+      "relevance": "Curated reference excerpt; assess actual disease/population restrictions.",
+      "url": "https://europepmc.org/article/MED/18832244",
+      "clinical_candidate": true,
+      "direction_signals": [],
+      "conclusion_excerpt": "Maraviroc, as compared with placebo, resulted in significantly greater suppression of HIV-1 and greater increases in CD4 cell counts at 48 weeks in previously treated patients with R5 HIV-1 who were receiving OBT. (ClinicalTrials.gov numbers, NCT00098306 and NCT00098722.)"
+    },
+    {
+      "identifier": "MED:20151839",
+      "title": "Maraviroc versus efavirenz, both in combination with zidovudine-lamivudine, for the treatment of antiretroviral-naive subjects with CCR5-tropic HIV-1 infection.",
+      "abstract": "Background The MERIT (Maraviroc versus Efavirenz in Treatment-Naive Patients) study compared maraviroc and efavirenz, both with zidovudine-lamivudine, in antiretroviral-naive patients with R5 human immunodeficiency virus type 1 (HIV-1) infection. Methods Patients screened for R5 HIV-1 were randomized to receive efavirenz\n[intervening abstract text omitted]\nConclusions: Twice-daily maraviroc was not noninferior to efavirenz at <50 copies/mL in the primary analysis. However, 15% of patients would have been ineligible for inclusion by a more sensitive screening assay. Their retrospective exclusion resulted in similar response rates in both arms Trial registration. ClinicalTrials.gov identifier: (NCT00098293) .",
+      "doi": "10.1086/650697",
+      "relevance": "Curated reference excerpt; assess actual disease/population restrictions.",
+      "url": "https://europepmc.org/article/MED/20151839",
+      "clinical_candidate": true,
+      "direction_signals": [],
+      "conclusion_excerpt": "Twice-daily maraviroc was not noninferior to efavirenz at <50 copies/mL in the primary analysis. However, 15% of patients would have been ineligible for inclusion by a more sensitive screening assay. Their retrospective exclusion resulted in similar response rates in both arms Trial registration. ClinicalTrials.gov identifier: (NCT00098293) ."
+    }
+  ],
+  "claims": [],
+  "revisions": [],
+  "missing_information": [],
+  "retrieval_notes": [],
+  "retrieval_errors": [],
+  "assessments": [],
+  "conclusion": "insufficient evidence",
+  "ai": null,
+  "search_audit": [
+    {
+      "source": "ChEMBL",
+      "operation": "drug indications",
+      "url": "https://www.ebi.ac.uk/chembl/api/data/drug_indication.json",
+      "query": {
+        "molecule_chembl_id": "CHEMBL256907",
+        "limit": 100
+      },
+      "state": "found",
+      "returned": 20,
+      "relevant": 2,
+      "total": null,
+      "detail": ""
+    },
+    {
+      "source": "openFDA",
+      "operation": "label context",
+      "url": "https://api.fda.gov/drug/label.json",
+      "query": {
+        "search": "openfda.generic_name:\"MARAVIROC\"",
+        "limit": 2
+      },
+      "state": "limit_reached",
+      "returned": 2,
+      "relevant": 2,
+      "total": 10,
+      "detail": ""
+    },
+    {
+      "source": "ChEMBL",
+      "operation": "curated reference subset",
+      "url": "https://www.ebi.ac.uk/chembl/api/data",
+      "query": {},
+      "state": "found",
+      "returned": 1,
+      "relevant": 0,
+      "total": null,
+      "detail": "Selected source extract, not an exhaustive production retrieval."
+    },
+    {
+      "source": "Europe PMC",
+      "operation": "curated reference subset",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
+      "query": {},
+      "state": "found",
+      "returned": 1,
+      "relevant": 0,
+      "total": null,
+      "detail": "Selected source extract, not an exhaustive production retrieval."
+    },
+    {
+      "source": "ClinicalTrials.gov",
+      "operation": "curated reference subset",
+      "url": "https://clinicaltrials.gov/study/NCT00098306",
+      "query": {},
+      "state": "found",
+      "returned": 1,
+      "relevant": 0,
+      "total": null,
+      "detail": "Selected source extract, not an exhaustive production retrieval."
+    }
+  ],
+  "coverage": null,
+  "regulatory_records": []
+}

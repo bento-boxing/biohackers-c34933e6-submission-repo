@@ -31,6 +31,7 @@ from pipeline.settings import data_dir
 from .ai_config import load_ai_settings
 from .ai_reasoning import run_ai_reasoning
 from .approval_signing import configured as signing_configured, sign, sign_payload, verify, verify_token
+from .build_info import runtime_info
 from .devil_advocate import investigate_target
 from .investigation import InvestigationFailed, run_investigation
 from .models import TargetInput
@@ -124,7 +125,8 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
         settings = load_ai_settings()
         return jsonify(ai={k: v for k, v in settings.model_dump(mode='json').items()
                            if k in ['enabled', 'provider', 'model', 'thinking_level', 'max_calls', 'timeout_seconds']},
-                       demo_targets=['LRRK2', 'BACE1'], server='Flask (stateless)', modes=['live', 'offline'])
+                       demo_targets=['LRRK2', 'BACE1'], server='Flask (stateless)', modes=['live', 'offline'],
+                       backend=runtime_info())
 
     @app.route('/api/<path:legacy>', methods=['GET', 'POST'])
     def legacy_api(legacy):

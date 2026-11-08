@@ -1,4 +1,6 @@
 # Large reproducible live-response bundles stay local; compact reviewed extracts
 # and validation reports are retained for the offline demonstration.
 validation/*_sources.json
+validation/optimization/*_sources.json
+validation/cross_disease/*_sources.json
 runtime/
