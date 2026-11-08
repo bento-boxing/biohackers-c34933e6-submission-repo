@@ -3,7 +3,7 @@ from pipeline.models import Weights
 from pipeline.scout.pipeline import run_scout
 
 SPEC_KEYS = {"ts", "disease_id", "disease_name", "target_id", "symbol", "uniprot", "chembl_target_id",
-             "weights", "scores", "safety_flags", "reason", "approved_by"}
+             "weights", "scores", "safety_flags", "reason", "approved_by", "approval_id", "decision_id", "action"}
 
 
 def test_make_approval_fields_match_spec_example_keys(client, monkeypatch):

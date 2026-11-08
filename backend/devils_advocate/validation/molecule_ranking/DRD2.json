@@ -1,0 +1,580 @@
+{
+ "target": "DRD2",
+ "chembl_target_id": "CHEMBL217",
+ "disease": "Parkinson disease",
+ "elapsed_seconds": 15.4,
+ "coverage": {
+  "partial": true,
+  "stage1": {
+   "total_count": 11896,
+   "retrieved": 5000,
+   "complete": false,
+   "cutoff_pchembl": 7.27,
+   "order_by": "-pchembl_value",
+   "selection_method": "activity records with pChEMBL >= 6 ordered by pChEMBL descending; retrieval stopped at 5000 of 11896 records, so every omitted record has pChEMBL <= 7.27"
+  },
+  "candidate_pool": {
+   "size": 69,
+   "molecules_retrieved": 2972,
+   "method": "union of the top 50 molecules by maximum pChEMBL (baseline) and the top 50 by preliminary median pChEMBL"
+  },
+  "stage2": {
+   "molecules": 69,
+   "records": 762,
+   "truncated_batches": 0
+  },
+  "indications": {
+   "molecules_checked": 14,
+   "molecules_with_records": 10
+  },
+  "stage3": {
+   "molecules_assessed": 10,
+   "shortlist": [
+    "CHEMBL157138",
+    "CHEMBL1303",
+    "CHEMBL8946",
+    "CHEMBL178803",
+    "CHEMBL297302",
+    "CHEMBL267932",
+    "CHEMBL54",
+    "CHEMBL392158",
+    "CHEMBL267930",
+    "CHEMBL398615"
+   ],
+   "truncated_batches": 0,
+   "skipped_for_budget": [],
+   "method": "all ChEMBL activity records with a pChEMBL value for the top 10 candidates; only exact binding measurements of the on-target primary type are compared"
+  },
+  "elapsed_seconds": 15.42
+ },
+ "notes": [
+  "Partial retrieval: activity records with pChEMBL >= 6 ordered by pChEMBL descending; retrieval stopped at 5000 of 11896 records, so every omitted record has pChEMBL <= 7.27. Molecules whose every measurement is weaker than pChEMBL 7.27 were not retrieved."
+ ],
+ "pool_size": 69,
+ "coverage_comparison": {
+  "total_potent_records": 11896,
+  "legacy_molecules_retrieved": 3528,
+  "ordered_molecules_retrieved": 2972,
+  "ordered_cutoff_pchembl": 7.27,
+  "baseline_top50_molecules_absent_from_legacy_retrieval": [
+   "CHEMBL5178472",
+   "CHEMBL5180504",
+   "CHEMBL5183205",
+   "CHEMBL5184911",
+   "CHEMBL5198795",
+   "CHEMBL5200771",
+   "CHEMBL5201074",
+   "CHEMBL5202592",
+   "CHEMBL5204599",
+   "CHEMBL5206565",
+   "CHEMBL5207281",
+   "CHEMBL5208845",
+   "CHEMBL5176229",
+   "CHEMBL297302",
+   "CHEMBL3115575",
+   "CHEMBL8514",
+   "CHEMBL3115585",
+   "CHEMBL4451384",
+   "CHEMBL190461",
+   "CHEMBL398615",
+   "CHEMBL538542",
+   "CHEMBL8946",
+   "CHEMBL5900385",
+   "CHEMBL4060461",
+   "CHEMBL4104013",
+   "CHEMBL3921903",
+   "CHEMBL6064944",
+   "CHEMBL4245263",
+   "CHEMBL4090208",
+   "CHEMBL4097330",
+   "CHEMBL4071185",
+   "CHEMBL4078348",
+   "CHEMBL5441140",
+   "CHEMBL4570273"
+  ],
+  "legacy_top50_overlap_with_ordered_baseline_top50": 0.22,
+  "legacy_top50_max_pchembl_range": [
+   9.3,
+   10.52
+  ],
+  "ordered_top50_max_pchembl_range": [
+   9.92,
+   11.0
+  ]
+ },
+ "ranking_change_vs_baseline": {
+  "balanced": {
+   "top10_overlap": 0.0,
+   "spearman": -0.212,
+   "mean_abs_rank_shift": 27.45
+  },
+  "novel_candidates": {
+   "top10_overlap": 0.0,
+   "spearman": -0.3555,
+   "mean_abs_rank_shift": 29.28
+  },
+  "repurposing": {
+   "top10_overlap": 0.2,
+   "spearman": -0.0721,
+   "mean_abs_rank_shift": 25.65
+  }
+ },
+ "ablations": {
+  "potency": {
+   "top10_overlap_with_full": 0.5,
+   "spearman_with_full": 0.2897,
+   "mean_abs_rank_shift": 17.77,
+   "top10": [
+    "CHEMBL1303",
+    "CHEMBL301265",
+    "CHEMBL178803",
+    "CHEMBL190461",
+    "CHEMBL8514",
+    "CHEMBL398615",
+    "CHEMBL297302",
+    "CHEMBL218166",
+    "CHEMBL134807",
+    "CHEMBL6064944"
+   ]
+  },
+  "drug_likeness": {
+   "top10_overlap_with_full": 0.3,
+   "spearman_with_full": 0.5389,
+   "mean_abs_rank_shift": 14.7,
+   "top10": [
+    "CHEMBL1303",
+    "CHEMBL218166",
+    "CHEMBL8514",
+    "CHEMBL5176229",
+    "CHEMBL5178472",
+    "CHEMBL5180504",
+    "CHEMBL5183205",
+    "CHEMBL5184911",
+    "CHEMBL5198795",
+    "CHEMBL5200771"
+   ]
+  },
+  "selectivity": {
+   "top10_overlap_with_full": 0.3,
+   "spearman_with_full": 0.8932,
+   "mean_abs_rank_shift": 4.7,
+   "top10": [
+    "CHEMBL157138",
+    "CHEMBL1303",
+    "CHEMBL8946",
+    "CHEMBL178803",
+    "CHEMBL297302",
+    "CHEMBL267932",
+    "CHEMBL54",
+    "CHEMBL392158",
+    "CHEMBL267930",
+    "CHEMBL398615"
+   ]
+  },
+  "clinical": {
+   "top10_overlap_with_full": 0.7,
+   "spearman_with_full": 0.8223,
+   "mean_abs_rank_shift": 8.35,
+   "top10": [
+    "CHEMBL1257382",
+    "CHEMBL1303",
+    "CHEMBL3938210",
+    "CHEMBL5394961",
+    "CHEMBL538542",
+    "CHEMBL3976282",
+    "CHEMBL4104013",
+    "CHEMBL4063235",
+    "CHEMBL5855446",
+    "CHEMBL8514"
+   ]
+  }
+ },
+ "stability_under_missing_data": {
+  "drop_qed_30pct": {
+   "mean_top10_overlap": 0.54,
+   "mean_abs_rank_shift": 5.58,
+   "runs": [
+    {
+     "top10_overlap": 0.5,
+     "spearman": 0.8626,
+     "mean_abs_rank_shift": 6.38
+    },
+    {
+     "top10_overlap": 0.4,
+     "spearman": 0.8563,
+     "mean_abs_rank_shift": 6.12
+    },
+    {
+     "top10_overlap": 0.5,
+     "spearman": 0.89,
+     "mean_abs_rank_shift": 5.1
+    },
+    {
+     "top10_overlap": 0.7,
+     "spearman": 0.9066,
+     "mean_abs_rank_shift": 4.84
+    },
+    {
+     "top10_overlap": 0.6,
+     "spearman": 0.8908,
+     "mean_abs_rank_shift": 5.48
+    }
+   ]
+  },
+  "drop_selectivity_30pct": {
+   "mean_top10_overlap": 0.8,
+   "mean_abs_rank_shift": 2.03,
+   "runs": [
+    {
+     "top10_overlap": 0.9,
+     "spearman": 0.9685,
+     "mean_abs_rank_shift": 1.19
+    },
+    {
+     "top10_overlap": 0.8,
+     "spearman": 0.9324,
+     "mean_abs_rank_shift": 2.43
+    },
+    {
+     "top10_overlap": 0.8,
+     "spearman": 0.9558,
+     "mean_abs_rank_shift": 1.91
+    },
+    {
+     "top10_overlap": 0.8,
+     "spearman": 0.9259,
+     "mean_abs_rank_shift": 2.55
+    },
+    {
+     "top10_overlap": 0.7,
+     "spearman": 0.9581,
+     "mean_abs_rank_shift": 2.06
+    }
+   ]
+  },
+  "drop_both_30pct": {
+   "mean_top10_overlap": 0.3,
+   "mean_abs_rank_shift": 8.16,
+   "runs": [
+    {
+     "top10_overlap": 0.4,
+     "spearman": 0.8515,
+     "mean_abs_rank_shift": 7.33
+    },
+    {
+     "top10_overlap": 0.3,
+     "spearman": 0.7967,
+     "mean_abs_rank_shift": 7.65
+    },
+    {
+     "top10_overlap": 0.3,
+     "spearman": 0.8113,
+     "mean_abs_rank_shift": 8.58
+    },
+    {
+     "top10_overlap": 0.2,
+     "spearman": 0.7744,
+     "mean_abs_rank_shift": 9.13
+    },
+    {
+     "top10_overlap": 0.3,
+     "spearman": 0.8076,
+     "mean_abs_rank_shift": 8.12
+    }
+   ]
+  }
+ },
+ "known_compounds": {
+  "ROPINIROLE": {
+   "in_pool": false,
+   "expected_indication_status": "matched"
+  },
+  "PRAMIPEXOLE": {
+   "in_pool": true,
+   "chembl_id": "CHEMBL301265",
+   "baseline_rank": 2,
+   "rubric_rank": {
+    "balanced": 57,
+    "novel_candidates": 64,
+    "repurposing": 4
+   },
+   "aggregate_pchembl": 7.31,
+   "max_pchembl": 10.83,
+   "primary_type": "Ki",
+   "aggregate_n": 14,
+   "phase": 4.0,
+   "indication_status": "matched",
+   "expected_indication_status": "matched",
+   "indication_correct": true,
+   "selectivity_evidence": "not_assessed",
+   "selectivity_window": null,
+   "targets_tested": 0
+  },
+  "ROTIGOTINE": {
+   "in_pool": true,
+   "chembl_id": "CHEMBL1303",
+   "baseline_rank": 30,
+   "rubric_rank": {
+    "balanced": 1,
+    "novel_candidates": 2,
+    "repurposing": 1
+   },
+   "aggregate_pchembl": 10.22,
+   "max_pchembl": 10.22,
+   "primary_type": "Ki",
+   "aggregate_n": 3,
+   "phase": 4.0,
+   "indication_status": "matched",
+   "expected_indication_status": "matched",
+   "indication_correct": true,
+   "selectivity_evidence": "observed_window",
+   "selectivity_window": 1.82,
+   "targets_tested": 26
+  },
+  "APOMORPHINE": {
+   "in_pool": false,
+   "expected_indication_status": "matched"
+  },
+  "BROMOCRIPTINE": {
+   "in_pool": false,
+   "expected_indication_status": "matched"
+  },
+  "CABERGOLINE": {
+   "in_pool": false,
+   "expected_indication_status": "matched"
+  },
+  "HALOPERIDOL": {
+   "in_pool": true,
+   "chembl_id": "CHEMBL54",
+   "baseline_rank": 48,
+   "rubric_rank": {
+    "balanced": 45,
+    "novel_candidates": 60,
+    "repurposing": 12
+   },
+   "aggregate_pchembl": 8.81,
+   "max_pchembl": 9.92,
+   "primary_type": "Ki",
+   "aggregate_n": 102,
+   "phase": 4.0,
+   "indication_status": "other_indications_only",
+   "expected_indication_status": "other_indications_only",
+   "indication_correct": true,
+   "selectivity_evidence": "observed_window",
+   "selectivity_window": -0.49,
+   "targets_tested": 128
+  },
+  "RISPERIDONE": {
+   "in_pool": false,
+   "expected_indication_status": "other_indications_only"
+  },
+  "ARIPIPRAZOLE": {
+   "in_pool": false,
+   "expected_indication_status": "other_indications_only"
+  }
+ },
+ "indication_interpretation": {
+  "known_in_pool": 3,
+  "correct": 3,
+  "phased_molecules_in_pool": 14,
+  "status_counts": {
+   "matched": 4,
+   "other_indications_only": 6,
+   "no_indication_records": 4,
+   "preclinical": 55
+  }
+ },
+ "assay_interpretation": {
+  "primary_type_counts": {
+   "Ki": 48,
+   "IC50": 3,
+   "Kd": 13,
+   "EC50": 5
+  },
+  "no_aggregate": 0,
+  "sparse": 22,
+  "conflicting": 21,
+  "max_minus_median_mean": 0.79,
+  "max_minus_median_ge_1_log": 19,
+  "censored_records": 33
+ },
+ "selectivity_evidence_top10": {
+  "evidence_counts": {
+   "observed_window": 3,
+   "not_assessed": 7
+  },
+  "scored_without_window": 0,
+  "targets_tested": [
+   26,
+   1,
+   0,
+   0,
+   0,
+   2,
+   0,
+   0,
+   0,
+   0
+  ],
+  "partial": 0,
+  "windows": [
+   1.82,
+   0.76,
+   null,
+   null,
+   null,
+   0.94,
+   null,
+   null,
+   null,
+   null
+  ],
+  "missing_factor_lists": [
+   [],
+   [],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ]
+  ]
+ },
+ "top10": {
+  "baseline": [
+   "CHEMBL157138",
+   "CHEMBL301265",
+   "CHEMBL5178472",
+   "CHEMBL5180504",
+   "CHEMBL5183205",
+   "CHEMBL5184911",
+   "CHEMBL5198795",
+   "CHEMBL5200771",
+   "CHEMBL5201074",
+   "CHEMBL5202592"
+  ],
+  "balanced": [
+   "CHEMBL1303",
+   "CHEMBL178803",
+   "CHEMBL8514",
+   "CHEMBL1257382",
+   "CHEMBL218166",
+   "CHEMBL398615",
+   "CHEMBL3938210",
+   "CHEMBL5394961",
+   "CHEMBL538542",
+   "CHEMBL3976282"
+  ],
+  "novel_candidates": [
+   "CHEMBL1257382",
+   "CHEMBL1303",
+   "CHEMBL5394961",
+   "CHEMBL538542",
+   "CHEMBL3938210",
+   "CHEMBL4104013",
+   "CHEMBL3976282",
+   "CHEMBL4063235",
+   "CHEMBL5855446",
+   "CHEMBL8514"
+  ],
+  "repurposing": [
+   "CHEMBL1303",
+   "CHEMBL157138",
+   "CHEMBL190461",
+   "CHEMBL301265",
+   "CHEMBL178803",
+   "CHEMBL297302",
+   "CHEMBL218166",
+   "CHEMBL398615",
+   "CHEMBL8514",
+   "CHEMBL8946"
+  ]
+ },
+ "names": {
+  "CHEMBL1303": "ROTIGOTINE",
+  "CHEMBL178803": "BLONANSERIN",
+  "CHEMBL8514": "BUTACLAMOL",
+  "CHEMBL1257382": null,
+  "CHEMBL218166": "BIFEPRUNOX",
+  "CHEMBL398615": "METOPIMAZINE",
+  "CHEMBL3938210": null,
+  "CHEMBL5394961": null,
+  "CHEMBL538542": null,
+  "CHEMBL3976282": null,
+  "CHEMBL8946": "ETICLOPRIDE",
+  "CHEMBL297302": "BENPERIDOL",
+  "CHEMBL4104013": null,
+  "CHEMBL157138": "LISURIDE",
+  "CHEMBL4063235": null,
+  "CHEMBL5855446": null,
+  "CHEMBL122533": null,
+  "CHEMBL4451384": null,
+  "CHEMBL5900385": null,
+  "CHEMBL4570273": null,
+  "CHEMBL4544491": null,
+  "CHEMBL317433": null,
+  "CHEMBL1813590": null,
+  "CHEMBL4528835": null,
+  "CHEMBL2298829": null,
+  "CHEMBL5441140": null,
+  "CHEMBL392158": "FALLYPRIDE",
+  "CHEMBL5178472": null,
+  "CHEMBL5201074": null,
+  "CHEMBL5976918": null,
+  "CHEMBL1813594": null,
+  "CHEMBL5184911": null,
+  "CHEMBL5206565": null,
+  "CHEMBL5208845": null,
+  "CHEMBL1813591": null,
+  "CHEMBL5183205": null,
+  "CHEMBL5204599": null,
+  "CHEMBL4097330": null,
+  "CHEMBL4078348": null,
+  "CHEMBL5207281": null,
+  "CHEMBL5180504": null,
+  "CHEMBL5200771": null,
+  "CHEMBL5202592": null,
+  "CHEMBL267930": "SPIPERONE",
+  "CHEMBL54": "HALOPERIDOL",
+  "CHEMBL5198795": null,
+  "CHEMBL1813595": null,
+  "CHEMBL267932": "MESPIPERONE",
+  "CHEMBL4747225": null,
+  "CHEMBL3921903": null,
+  "CHEMBL4246655": null,
+  "CHEMBL1739963": null,
+  "CHEMBL4071185": null,
+  "CHEMBL4090208": null,
+  "CHEMBL190461": "CANNABIDIOL",
+  "CHEMBL4245263": null,
+  "CHEMBL301265": "PRAMIPEXOLE",
+  "CHEMBL156164": null,
+  "CHEMBL5176229": null,
+  "CHEMBL225230": "R-N-PROPYLNORAPOMORPHINE",
+  "CHEMBL156651": null,
+  "CHEMBL317488": null,
+  "CHEMBL4060461": null,
+  "CHEMBL134807": null,
+  "CHEMBL3115575": null,
+  "CHEMBL3115585": null,
+  "CHEMBL6030256": null,
+  "CHEMBL6064944": null,
+  "CHEMBL1774386": null
+ }
+}

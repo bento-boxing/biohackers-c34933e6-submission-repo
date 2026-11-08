@@ -208,7 +208,7 @@ returned unknown. See `validation/chembl_identity_report.json` for exact outcome
 |---|---|
 | POST `/api/scout` | Existing nested Scout response with raw evidence and cache provenance |
 | GET `/api/approvals` | Existing mode-specific researcher approvals |
-| POST `/api/screen` | Existing pipeline, only with a server-signed researcher approval |
+| POST `/api/screen` | Existing pipeline, only with a server-signed researcher approval named by its `approval_id` and checked against the investigated disease and target; optional `rubric` objective |
 | GET `/api/workbench/config` | Public model/provider/call-cap settings; no key |
 | POST `/api/investigations` | Validate source selection/consent, run the investigation, return the report |
 | POST `/api/research-decisions` | Rationale, decision and explicit screening confirmation; issues the signed approval |

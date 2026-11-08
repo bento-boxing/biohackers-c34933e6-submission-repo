@@ -34,8 +34,13 @@ evidence only, on an explicit button, and is cached per weight setting.
 `backend/runs/approvals.jsonl`. The server recomputes the scores and rejects a mismatch.
 
 **Stage 2 · Protein Screening.** For an approved target: the AlphaFold structure (mean pLDDT, links)
-and the 50 most potent ChEMBL compounds (pChEMBL ≥ 6, i.e. ≤ 1 µM) with phase, Lipinski data and
-approved-drug flags. A second checkpoint writes a shortlist to `backend/runs/shortlists.jsonl`.
+and a candidate pool of ChEMBL compounds (pChEMBL ≥ 6, retrieved strongest-first with the coverage
+cutoff reported) ranked by a documented, heuristic four-factor rubric: potency (median of comparable
+exact binding measurements, never the lone maximum), drug-likeness (QED, Lipinski), clinical stage
+qualified by indication, and observed off-target evidence for the shortlist. Missing factors are listed,
+not scored as zero; the potency-only baseline ranking is kept for comparison. See
+`backend/devils_advocate/MOLECULE_RANKING_VALIDATION.md`. A second checkpoint writes a shortlist to
+`backend/runs/shortlists.jsonl`.
 
 ## Repository layout
 
@@ -130,8 +135,8 @@ score mismatch) or 502 (upstream API failure).
 | POST   | /api/rationale   | `{run_id, run?, weights}`             | `{rationales: [{symbol, rationale, evidence_strength}]}` or `{available: false}` |
 | GET    | /api/approvals   |                                       | approvals, newest first |
 | POST   | /api/approvals   | `{run_id, symbol, weights, scores, reason}` | the stored approval |
-| POST   | /api/screen      | `{approval_ts}` (Scout app) · `{approval}` signed (workbench) | approval, structure, compounds[] |
-| POST   | /api/shortlists  | `{approval_ts, chembl_ids, reason}`   | `{ok: true}` (Scout app only) |
+| POST   | /api/screen      | `{approval_id, rubric?}` (Scout app) · `{approval, approval_id, disease_id, target_id, rubric?}` signed (workbench) | approval, structure, compounds[] (four factors, rank, baseline_rank, rank_reason), coverage, rubric, baseline, notes |
+| POST   | /api/shortlists  | `{approval_id, chembl_ids, reason}`   | `{ok: true}` (Scout app only) |
 | POST   | /api/investigations | `{run, symbol}` or `{target_input}`, `use_ai`, `paid_authorized`, `weights` | the finished job: `{job_id, state, result, error, selection, weights, report_sig}` |
 | POST   | /api/research-decisions | `{decision_id, job_id, action, rationale, confirmed, report_sig, target_sig?}` | the decision; `approve_screening` adds a signed `approval` |
 | GET    | /api/workbench/config | | public AI settings, modes |

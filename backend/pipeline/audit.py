@@ -4,6 +4,7 @@ from __future__ import annotations
 import getpass
 import json
 import os
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -20,6 +21,11 @@ def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def new_approval_id() -> str:
+    """Immutable, unique approval identifier; never derived from the clock."""
+    return uuid.uuid4().hex
+
+
 def _user() -> str:
     return os.environ.get("SCOUT_USER") or getpass.getuser()
 
@@ -27,7 +33,7 @@ def _user() -> str:
 def make_approval(result: ScoutResult, target: ScoredTarget, reason: str) -> Approval:
     e, s = target.evidence, target.scores
     return Approval(
-        ts=_now(), disease_id=result.disease.id, disease_name=result.disease.name,
+        approval_id=new_approval_id(), ts=_now(), disease_id=result.disease.id, disease_name=result.disease.name,
         target_id=e.target_id, symbol=e.symbol, uniprot=e.uniprot, chembl_target_id=e.chembl_target_id,
         weights=result.weights.normalised().as_dict(),
         scores={"genetic": s.genetic, "association": s.association, "druggability": s.druggability,
@@ -51,21 +57,22 @@ def read_approvals(path: Path = APPROVALS_PATH) -> list[Approval]:
 
 def append_shortlist(approval: Approval, chembl_ids: list[str], reason: str,
                      path: Path = SHORTLISTS_PATH) -> None:
-    append_jsonl(path, {"ts": _now(), "approval_ts": approval.ts, "symbol": approval.symbol,
+    append_jsonl(path, {"ts": _now(), "approval_id": approval.approval_id, "approval_ts": approval.ts, "symbol": approval.symbol,
                         "chembl_ids": list(chembl_ids), "reason": reason, "shortlisted_by": _user()})
 
 
 def approval_from_components(disease_id: str, disease_name: str, target: dict, weights: Weights,
-                             reason: str) -> Approval:
+                             reason: str, decision_id: str | None = None) -> Approval:
     """Build an approval from a scout target JSON (components are weight-independent)."""
     c = target["components"]
     comps = {k: float(c[k]) for k in ("genetic", "association", "druggability", "literature")}
     total = weighted_total(comps["genetic"], comps["association"], comps["druggability"],
                            comps["literature"], weights)
     return Approval(
-        ts=_now(), disease_id=disease_id, disease_name=disease_name,
+        approval_id=new_approval_id(), ts=_now(), disease_id=disease_id, disease_name=disease_name,
         target_id=target["target_id"], symbol=target["symbol"], uniprot=target.get("uniprot"),
         chembl_target_id=target.get("chembl_target_id"), weights=weights.normalised().as_dict(),
         scores={**comps, "total": total},
         safety_flags=[f["detail"] for f in target.get("safety_flags", [])], reason=reason, approved_by=_user(),
+        decision_id=decision_id,
     )
