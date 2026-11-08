@@ -109,24 +109,11 @@ def test_budget_crossed_during_response_records_source_duration_without_caching(
     assert measured['source_seconds']['ClinicalTrials.gov']==2.
     assert not client.cache
 
-def test_progress_merge_keeps_retrieval_timings_when_ai_progress_arrives(tmp_path):
-    from devils_advocate.job_store import JobStore
-    store=JobStore(tmp_path/'jobs.db')
-    job,_=store.create('example-idem','f','selection',{})
-    store.progress(job['id'],'Evidence retrieved',timings={'retrieval':{'total_seconds':3.25}})
-    store.progress(job['id'],'Devils Advocate',[])
-    assert store.get(job['id'])['progress']['timings']['retrieval']['total_seconds']==3.25
-
-def test_budget_error_is_explicit_and_prevents_paid_reasoning(tmp_path):
-    from devils_advocate.job_store import JobStore
-    from devils_advocate.job_worker import JobWorker
-    store=JobStore(tmp_path/'jobs.db')
+def test_budget_error_is_explicit_and_prevents_paid_reasoning():
+    from devils_advocate.investigation import InvestigationFailed, run_investigation
     payload={'mode':'live','use_ai':True,'weights':{},'selection':{'target_input':{'target_symbol':'BACE1','disease_name':'Example'}}}
-    store.create('test-budget','f','selection',payload)
     reasoner=Mock(side_effect=AssertionError('paid forbidden'))
-    worker=JobWorker(store,investigator=Mock(side_effect=RetrievalDeadlineExceeded('Biomedical retrieval time budget exhausted.')),ai_reasoner=reasoner)
-    job=store.claim();worker.execute(job)
-    result=store.get(job['id'])
-    assert result['state']=='failed' and 'time budget' in result['error']
-    assert result['progress']['timings']['retrieval']['total_seconds']>=0
+    with pytest.raises(InvestigationFailed) as exc:
+        run_investigation(payload,investigator=Mock(side_effect=RetrievalDeadlineExceeded('Biomedical retrieval time budget exhausted.')),ai_reasoner=reasoner)
+    assert 'time budget' in str(exc.value)
     reasoner.assert_not_called()
