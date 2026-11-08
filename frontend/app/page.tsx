@@ -22,7 +22,7 @@ export default function Discovery(){
   async function explain(){
     if(!run)return;
     setExplaining(true);setRationaleNote('');
-    try{const res=await api<RationaleResponse>('/api/rationale',mode,{method:'POST',body:JSON.stringify({run_id:run.run_id,weights})});
+    try{const res=await api<RationaleResponse>('/api/rationale',mode,{method:'POST',body:JSON.stringify({run_id:run.run_id,run,weights})});
       if('available' in res){setRationales({});setRationaleNote(mode==='offline'?'Recorded mode: no model call is made.':`Rationale unavailable: ${res.reason}`);}
       else setRationales(Object.fromEntries(res.rationales.map(r=>[r.symbol,r])));}
     catch(e){setRationaleNote((e as Error).message);}finally{setExplaining(false);}

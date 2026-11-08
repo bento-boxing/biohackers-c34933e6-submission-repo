@@ -50,6 +50,8 @@ export type Approval = {
   safety_flags: string[];
   reason: string;
   approved_by: string;
+  /** HMAC issued by the workbench server; required by /api/screen. */
+  signature?: string;
 };
 
 export type Rationale = {
