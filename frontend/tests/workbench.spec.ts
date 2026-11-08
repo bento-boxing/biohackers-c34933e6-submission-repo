@@ -19,16 +19,32 @@ test('recorded LRRK2 flow: discovery, challenge, experiment, approval and screen
   await expect(page.getByText('UNVALIDATED RESEARCH PROPOSAL',{exact:true})).toBeVisible();
   await page.getByRole('link',{name:'Record decision →'}).click();
   const save=page.getByRole('button',{name:'Save researcher decision'});
-  const screen=page.getByRole('button',{name:'Run approved screening →'});
-  await expect(save).toBeDisabled();await expect(screen).toBeDisabled();
+  await expect(save).toBeDisabled();
+  await expect(page.getByText('Compound screening stays locked.')).toBeVisible();
+  // the fifth page refuses to screen without a signed approval
+  await page.getByRole('link',{name:/Compound candidates/}).click();
+  await expect(page.getByRole('heading',{name:'Locked until a researcher approves this target.'})).toBeVisible();
+  await page.getByRole('link',{name:'Open researcher decision →'}).click();
   await page.getByRole('radio',{name:/Approve for protein screening/}).check();
   await page.getByLabel('Researcher rationale').fill('Automated recorded-demo check: explore evidence only; no clinical recommendation.');
   await expect(save).toBeDisabled();
   await page.getByRole('checkbox',{name:/I have reviewed this investigation/}).check();
   await save.click();
-  await expect(screen).toBeEnabled({timeout:20_000});
-  await screen.click();
+  const next=page.getByRole('link',{name:'View compound candidates →'});
+  await expect(next).toBeVisible({timeout:20_000});
+  await next.click();
+  await expect(page).toHaveURL(/\/screening$/);
   await expect(page.getByText('RECORDED SCREENING DATA · LRRK2')).toBeVisible({timeout:40_000});
+  // every row carries a readable structure thumbnail that opens the ChEMBL compound record
+  await expect(page.getByRole('columnheader',{name:'Structure'})).toBeVisible();
+  const thumbs=page.locator('a.ligand-thumb');
+  expect(await thumbs.count()).toBeGreaterThan(3);
+  const first=thumbs.first();
+  await expect(first).toHaveAttribute('href',/ebi\.ac\.uk\/chembl\/compound_report_card\/CHEMBL\d+/);
+  await expect(first).toHaveAttribute('target','_blank');
+  await expect(first.locator('img')).toHaveAttribute('src',/ebi\.ac\.uk\/chembl\/api\/data\/image\/CHEMBL\d+\.svg/);
+  const box=await first.boundingBox();
+  expect(box&&box.width>=160&&box.height>=120).toBeTruthy();
   // four factors are separate columns; the rubric is labelled as a heuristic and the baseline stays available
   for (const name of ['Potency','Drug-likeness','Clinical stage','Selectivity (observed)','Warnings']) await expect(page.getByRole('columnheader',{name})).toBeVisible();
   await expect(page.getByText('Candidate prioritisation is a heuristic.')).toBeVisible();
@@ -45,6 +61,10 @@ test('recorded LRRK2 flow: discovery, challenge, experiment, approval and screen
   await expect(page.getByText('Clinical stage shown but unweighted')).toBeVisible();
   await expect(page.getByText('RECORDED SCREENING DATA · LRRK2')).toBeVisible({timeout:40_000});
   await page.screenshot({path:'test-results/screening-desktop.png',fullPage:true});
+  // the screening survives navigating away and back without a new request
+  await page.getByRole('link',{name:/Researcher decision/}).click();
+  await page.getByRole('link',{name:/Compound candidates/}).click();
+  await expect(page.getByText('RECORDED SCREENING DATA · LRRK2')).toBeVisible();
   await page.getByRole('link',{name:/Target discovery/}).click();
   await page.getByRole('button',{name:'Select SNCA →'}).click();
   await expect(page.getByRole('heading',{name:'Scientific Challenge & Revision'})).toHaveCount(0);

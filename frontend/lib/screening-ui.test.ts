@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Compound } from './scout-types';
-import { SCREEN_COLUMN_HELP, clinicalLabel, drugLikenessLabel, orderCompounds, potencyLabel, rankShift, selectivityLabel, warnings } from './screening-ui';
+import { SCREEN_COLUMN_HELP, chemblImageUrl, clinicalLabel, drugLikenessLabel, orderCompounds, potencyLabel, rankShift, selectivityLabel, warnings } from './screening-ui';
 
 function compound(over: Partial<Compound> = {}): Compound {
   return {
@@ -64,5 +64,14 @@ describe('screening labels', () => {
     for (const key of ['rank', 'potency', 'drug_likeness', 'clinical', 'selectivity', 'warnings', 'reason'] as const) expect(SCREEN_COLUMN_HELP[key].body.length).toBeGreaterThan(40);
     expect(SCREEN_COLUMN_HELP.selectivity.body).toMatch(/not evidence/i);
     expect(SCREEN_COLUMN_HELP.drug_likeness.body).toMatch(/heuristic/i);
+  });
+});
+
+describe('structure thumbnails', () => {
+  it('points at the ChEMBL image service for the molecule id', () => {
+    expect(chemblImageUrl('CHEMBL3643968')).toBe('https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL3643968.svg');
+  });
+  it('explains the structure column', () => {
+    expect(SCREEN_COLUMN_HELP.structure.body).toMatch(/report card/);
   });
 });
