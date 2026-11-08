@@ -105,8 +105,8 @@
 }
 
 .target {
-  border-color: var(--accent);
-  background: var(--accent);
+  border-color: #3d78d8;
+  background: #a9ccf5;
   box-shadow: 0 0 0 6px #3d78d844, 0 0 24px #3d78d855, 0 5px 16px #232c331a;
   animation: evidenceBloom 0.5s cubic-bezier(0.2, 0.9, 0.25, 1.15) var(--enter-delay) both, targetPulse 3.5s ease-in-out 0.6s infinite;
 }
@@ -117,8 +117,13 @@
   color: #232c33;
 }
 
+.target.filter,
+.target.detailKind {
+  background: #a9ccf5;
+}
+
 .compound {
-  border-color: #232c3355;
+  border-color: #8fa3b3;
   background: #c7d3dd;
 }
 
@@ -128,20 +133,30 @@
   color: #232c33;
 }
 
+.compound.filter,
+.compound.detailKind {
+  background: #c7d3dd;
+}
+
 .trial {
-  border-color: #2e2f2f77;
-  background: #e8eef2;
+  border-color: #c29643;
+  background: #f2d6a2;
 }
 
 .trial .nodeKind,
 .trial.filter,
 .trial.detailKind {
-  color: #2e2f2f;
+  color: #232c33;
+}
+
+.trial.filter,
+.trial.detailKind {
+  background: #f2d6a2;
 }
 
 .publication {
-  border-color: #3d78d899;
-  background: #e8eef2;
+  border-color: #9985c4;
+  background: #d8cef1;
 }
 
 .publication .nodeKind,
@@ -150,15 +165,25 @@
   color: #232c33;
 }
 
+.publication.filter,
+.publication.detailKind {
+  background: #d8cef1;
+}
+
 .claim {
-  border-color: #2e2f2f77;
-  background: #c7d3dd;
+  border-color: #639f8c;
+  background: #a9dccf;
 }
 
 .claim .nodeKind,
 .claim.filter,
 .claim.detailKind {
-  color: #2e2f2f;
+  color: #232c33;
+}
+
+.claim.filter,
+.claim.detailKind {
+  background: #a9dccf;
 }
 
 .detail {
@@ -173,6 +198,10 @@
 .detailKind {
   min-width: 74px;
   padding-top: 2px;
+  padding-right: 7px;
+  padding-bottom: 2px;
+  padding-left: 7px;
+  border-radius: 4px;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.8px;

@@ -314,7 +314,19 @@ export function EvidenceMap({ investigation }: { investigation: Investigation })
           proOptions={{ hideAttribution: true }}
         >
           <Background gap={20} size={1} color="#232C3322" />
-          <MiniMap pannable zoomable nodeColor={(node) => ({ target: '#3D78D8', compound: '#C7D3DD', trial: '#E8EEF2', publication: '#3D78D8', claim: '#C7D3DD' })[node.data.kind as Kind] || '#E8EEF2'} />
+          <MiniMap
+            pannable
+            zoomable
+            nodeColor={(node) =>
+              ({
+                target: '#A9CCF5',
+                compound: '#C7D3DD',
+                trial: '#F2D6A2',
+                publication: '#D8CEF1',
+                claim: '#A9DCCF',
+              })[node.data.kind as Kind] || '#E8EEF2'
+            }
+          />
           <Controls showInteractive={false} />
         </ReactFlow>
       </div>

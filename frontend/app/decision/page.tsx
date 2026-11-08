@@ -68,7 +68,7 @@ function DecisionForm() {
 
   return (
     <>
-      <PageTitle title="Evidence informs. You decide." />
+      <PageTitle title="Record Decision" />
 
       <SelectionBar />
 
