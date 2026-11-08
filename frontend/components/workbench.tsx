@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { api } from '@/lib/api';
 import { ClaimText } from './evidence-trace';
-import type { AIReport, Decision, ProgressSnapshot } from '@/lib/contracts';
+import type { AIReport, Decision, ProgressSnapshot, ScreeningResult } from '@/lib/contracts';
 import { DEFAULT_WEIGHTS, rankTargets } from '@/lib/contracts';
 import type { Config, Job, Mode, ScoutRun, ScoutTarget, Weights } from '@/lib/contracts';
 import { loadState, saveState, withDecision } from '@/lib/workbench-storage';
@@ -16,10 +16,11 @@ type State = {
   busy:boolean; progress:ProgressSnapshot|null;
   challenge:(useAI:boolean, manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string}, options?:{refresh?:boolean})=>Promise<void>;
   addDecision:(decision:Decision)=>void; refreshConfig:()=>Promise<void>; reset:()=>void;
+  screening:ScreeningResult|null; setScreening:(screening:ScreeningResult|null)=>void;
 };
 const Context = createContext<State|null>(null);
 export function useWorkbench() { const state=useContext(Context); if(!state) throw new Error('Workbench context missing'); return state; }
-const steps = [{href:'/',label:'Target discovery',number:'01'}, {href:'/challenge',label:"Devil’s Advocate",number:'02'}, {href:'/experiment',label:'Experimental Challenger',number:'03'}, {href:'/decision',label:'Researcher decision',number:'04'}];
+const steps = [{href:'/',label:'Target discovery',number:'01'}, {href:'/challenge',label:"Devil’s Advocate",number:'02'}, {href:'/experiment',label:'Experimental Challenger',number:'03'}, {href:'/decision',label:'Researcher decision',number:'04'}, {href:'/screening',label:'Compound candidates',number:'05'}];
 
 export function Workbench({children}:{children:React.ReactNode}) {
   // Live APIs by default; the recorded demo (no network, two pre-captured investigations) is opt-in.
@@ -29,6 +30,8 @@ export function Workbench({children}:{children:React.ReactNode}) {
   const [weights,setWeightsState]=useState<Weights>(DEFAULT_WEIGHTS);
   const [target,setTarget]=useState<ScoutTarget|null>(null);
   const [job,setJob]=useState<Job|null>(null);
+  // Screening belongs to one investigation; it is kept in memory only and re-run from the signed approval after a reload.
+  const [screening,setScreening]=useState<ScreeningResult|null>(null);
   const [config,setConfig]=useState<Config|null>(null);
   const [error,setError]=useState('');
   const [submitting,setSubmitting]=useState(false);
@@ -39,7 +42,7 @@ export function Workbench({children}:{children:React.ReactNode}) {
   const submittingRef=useRef(false);
   const pathname=usePathname();
 
-  const clear=useCallback(()=>{generation.current+=1;setJob(null);setError('');},[]);
+  const clear=useCallback(()=>{generation.current+=1;setJob(null);setScreening(null);setError('');},[]);
   const setMode=useCallback((value:Mode)=>{clear();modeRef.current=value;setModeState(value);setRunState(null);setTarget(null);},[clear]);
   const setRun=useCallback((value:ScoutRun|null)=>{if(value&&value.cache_only!==(modeRef.current==='offline'))return;clear();setRunState(value);setTarget(null);},[clear]);
   const select=useCallback((value:ScoutTarget)=>{if(value.target_id!==target?.target_id){clear();setTarget(value);}},[clear,target]);
@@ -87,7 +90,7 @@ export function Workbench({children}:{children:React.ReactNode}) {
     finally{submittingRef.current=false;setSubmitting(false);setProgress(null);}
   };
   const addDecision=useCallback((decision:Decision)=>{setJob(previous=>previous?withDecision(previous,decision):previous);},[]);
-  return <Context.Provider value={{mode,setMode,run,setRun,weights,setWeights,target,select,job,config,error,setError,busy:submitting,progress,challenge,addDecision,refreshConfig,reset:clear}}>
+  return <Context.Provider value={{mode,setMode,run,setRun,weights,setWeights,target,select,job,config,error,setError,busy:submitting,progress,challenge,addDecision,refreshConfig,reset:clear,screening,setScreening}}>
     <div className="workspace">
       <aside className="sidebar">
         <Link href="/" className="brand"><span className="brand-symbol">✳</span><span>AGENTVERSE<small>RESEARCH WORKBENCH</small></span></Link>

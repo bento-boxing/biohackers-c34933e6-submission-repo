@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import type { Compound, RubricObjective, ScreeningResult } from '@/lib/contracts';
-import { SCREEN_COLUMN_HELP, clinicalLabel, drugLikenessLabel, orderCompounds, potencyLabel, rankShift, selectivityLabel, warnings, type ScreenView } from '@/lib/screening-ui';
+import { SCREEN_COLUMN_HELP, chemblImageUrl, clinicalLabel, drugLikenessLabel, orderCompounds, potencyLabel, rankShift, selectivityLabel, warnings, type ScreenView } from '@/lib/screening-ui';
 
 type HelpKey = keyof typeof SCREEN_COLUMN_HELP;
 
@@ -17,6 +17,13 @@ const OBJECTIVES: { value: RubricObjective; label: string; note: string }[] = [
   { value: 'repurposing', label: 'Repurposing', note: 'Clinical stage weighted 30; other-indication development counts half' },
 ];
 
+function Thumb({ c }: { c: Compound }) {
+  const label = `${c.name || c.chembl_id} structure, open on ChEMBL`;
+  // Plain <img>: the SVG comes straight from EBI and is never optimised or proxied by this app.
+  // eslint-disable-next-line @next/next/no-img-element
+  return <a className="ligand-thumb" href={c.chembl_url} target="_blank" rel="noreferrer" title={label}><img src={chemblImageUrl(c.chembl_id)} alt={label} width={176} height={132} loading="lazy" /></a>;
+}
+
 function Shift({ c }: { c: Compound }) {
   const s = rankShift(c);
   if (s === null || s === 0) return <small className="muted">=</small>;
@@ -30,7 +37,7 @@ function Factor({ value }: { value: number | null }) {
 
 function Detail({ c }: { c: Compound }) {
   const p = c.potency, s = c.selectivity, k = c.clinical;
-  return <tr className="screen-detail"><td colSpan={9}>
+  return <tr className="screen-detail"><td colSpan={10}>
     <div className="report-grid">
       <div><h3>Potency context</h3>{p ? <><p>{p.aggregate_method || 'No aggregate.'}</p>
         <p className="mono">{Object.entries(p.by_type).map(([t, v]) => `${t}: median ${v.median} (n=${v.n}, ${v.assays} assays, ${v.min}–${v.max})`).join(' · ') || 'no comparable exact binding measurements'}</p>
@@ -68,10 +75,11 @@ export function ScreeningTable({ screening, objective, onObjective, busy }: { sc
       <label className="mode-switch">View <select aria-label="Ranking view" value={view} onChange={e => setView(e.target.value as ScreenView)}><option value="rubric">Four-factor rubric</option><option value="baseline">Potency-only baseline (max pChEMBL)</option></select></label>
     </div>
     <div className="table-scroll"><table>
-      <thead><tr><Th column="rank">{view === 'rubric' ? 'Rank' : 'Baseline rank'}</Th><th>Compound</th><Th column="potency">Potency</Th><Th column="drug_likeness">Drug-likeness</Th><Th column="clinical">Clinical stage</Th><Th column="selectivity">Selectivity (observed)</Th><Th column="warnings">Warnings</Th><Th column="reason">Why</Th><th>Score</th></tr></thead>
+      <thead><tr><Th column="rank">{view === 'rubric' ? 'Rank' : 'Baseline rank'}</Th><Th column="structure">Structure</Th><th>Compound</th><Th column="potency">Potency</Th><Th column="drug_likeness">Drug-likeness</Th><Th column="clinical">Clinical stage</Th><Th column="selectivity">Selectivity (observed)</Th><Th column="warnings">Warnings</Th><Th column="reason">Why</Th><th>Score</th></tr></thead>
       <tbody>{rows.map(c => { const w = warnings(c); return <>
         <tr key={c.chembl_id} className={open === c.chembl_id ? 'row-selected' : undefined}>
           <td><strong>{view === 'rubric' ? c.rank : c.baseline_rank}</strong>{view === 'rubric' ? <Shift c={c} /> : <small className="muted">rubric #{c.rank}</small>}</td>
+          <td><Thumb c={c} /></td>
           <td><strong>{c.name || 'Unnamed compound'}</strong><a className="cell-secondary" href={c.chembl_url} target="_blank" rel="noreferrer">{c.chembl_id} ↗</a></td>
           <td>{potencyLabel(c)}<Factor value={c.factors?.potency ?? null} /></td>
           <td>{drugLikenessLabel(c)}<Factor value={c.factors?.drug_likeness ?? null} /></td>

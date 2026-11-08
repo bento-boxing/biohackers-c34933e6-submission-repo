@@ -38,14 +38,16 @@ and a candidate pool of ChEMBL compounds (pChEMBL ≥ 6, retrieved strongest-fir
 cutoff reported) ranked by a documented, heuristic four-factor rubric: potency (median of comparable
 exact binding measurements, never the lone maximum), drug-likeness (QED, Lipinski), clinical stage
 qualified by indication, and observed off-target evidence for the shortlist. Missing factors are listed,
-not scored as zero; the potency-only baseline ranking is kept for comparison. See
+not scored as zero; the potency-only baseline ranking is kept for comparison. The candidates have their
+own page (05 / Compound candidates), unlocked by the approval, where each row shows the 2-D structure ChEMBL
+renders for the molecule; clicking it opens the ChEMBL compound report card. See
 `backend/devils_advocate/MOLECULE_RANKING_VALIDATION.md`. A second checkpoint writes a shortlist to
 `backend/runs/shortlists.jsonl`.
 
 ## Repository layout
 
 ```
-frontend/                   Next.js 16 research workbench (the only UI): discovery → challenge → experiment → decision
+frontend/                   Next.js 16 research workbench (the only UI): discovery → challenge → experiment → decision → compound candidates
 backend/app.py              The one Flask app (local :5050 and the Vercel Function): stateless workbench server
 backend/pipeline/           Target Scout: evidence retrieval, transparent ranking, approvals, screening
 backend/devils_advocate/    Target Challenger: evidence pipeline, Gemini reasoning, experiment designer, server.py
