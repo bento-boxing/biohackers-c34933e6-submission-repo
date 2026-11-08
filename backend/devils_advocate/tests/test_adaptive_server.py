@@ -58,6 +58,8 @@ def test_progress_endpoint_reports_unavailable_without_inventing_progress(tmp_pa
     ProgressWriter('abcdef1234567890').stage('Retrieving registry trials')
     found = client.get('/api/investigations/progress/abcdef1234567890', headers=LIVE).get_json()
     assert found['available'] is True and found['stage'] == 'Retrieving registry trials' and found['state'] == 'running'
+    import time
+    assert abs(found['now'] - time.time()) < 5 and found['now'] >= found['stages'][0]['started_at']  # server clock for ageing the running stage
 
 
 def test_server_accepts_refresh_rounds_and_token_and_exposes_adaptive_config(tmp_path, monkeypatch):

@@ -73,9 +73,13 @@ export function Workbench({children}:{children:React.ReactNode}) {
   useEffect(()=>{
     if(!submitting||!progressToken.current)return;
     let active=true;
-    const poll=async()=>{try{const snapshot=await api<ProgressSnapshot>(`/api/investigations/progress/${progressToken.current}`,modeRef.current);if(active)setProgress(snapshot);}catch{/* progress is optional */}};
+    let inFlight=false;
+    const poll=async()=>{if(inFlight)return;inFlight=true;try{const snapshot=await api<ProgressSnapshot>(`/api/investigations/progress/${progressToken.current}`,modeRef.current);if(active)setProgress({...snapshot,received_at:Date.now()});}catch{/* progress is optional */}finally{inFlight=false;}};
+    // Background tabs throttle timers, so a return to the tab polls at once instead of waiting for the next tick.
+    const onVisible=()=>{if(document.visibilityState==='visible')void poll();};
+    document.addEventListener('visibilitychange',onVisible);window.addEventListener('focus',onVisible);
     const first=setTimeout(poll,1500);const timer=setInterval(poll,2500);
-    return()=>{active=false;clearTimeout(first);clearInterval(timer);};
+    return()=>{active=false;clearTimeout(first);clearInterval(timer);document.removeEventListener('visibilitychange',onVisible);window.removeEventListener('focus',onVisible);};
   },[submitting]);
   const challenge=async(useAI:boolean,manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string})=>{
     if(submittingRef.current)return;
@@ -118,14 +122,20 @@ export function newProgressToken(){
 export function Progress(){
   const {busy,mode,target,config,progress}=useWorkbench();
   const [seconds,setSeconds]=useState(0);
-  useEffect(()=>{if(!busy)return;const started=Date.now();const tick=()=>setSeconds(Math.round((Date.now()-started)/1000));const first=setTimeout(tick,0);const timer=setInterval(tick,1000);return()=>{clearTimeout(first);clearInterval(timer);};},[busy]);
+  const [now,setNow]=useState(()=>Date.now());
+  useEffect(()=>{if(!busy)return;const started=Date.now();const tick=()=>{setSeconds(Math.round((Date.now()-started)/1000));setNow(Date.now());};const first=setTimeout(tick,0);const timer=setInterval(tick,1000);return()=>{clearTimeout(first);clearInterval(timer);};},[busy]);
   if(!busy)return null;
   const symbol=target?.symbol||'this target';
   const stages=progress?.available?progress.stages||[]:[];
+  // The running stage's clock: its age on the server clock when the snapshot was taken, plus the time since the browser received it.
+  const sinceSnapshot=progress?.received_at?Math.max(0,(now-progress.received_at)/1000):0;
+  const serverClock=progress?.now??progress?.updated_at;
+  const runningFor=(startedAt:number)=>Math.max(0,Math.round((serverClock?serverClock-startedAt:0)+sinceSnapshot));
   return <section className="panel progress-panel" aria-live="polite"><div className="spinner"/><div><h3>Investigating {symbol}…</h3>
     <p>{mode==='offline'?'Loading the recorded public evidence.':`Retrieving ChEMBL, ClinicalTrials.gov and Europe PMC records, assessing evidence coverage and running targeted follow-up searches${config?.ai.enabled?', then Gemini reasoning if you authorized it':''}. This usually takes one to three minutes.`}</p>
     <p>{seconds} s elapsed. The report arrives in one response; keep this page open.</p>
-    {stages.length>0&&<ul className="report-list" data-testid="progress-stages">{stages.map((s,index)=><li key={index}>{s.finished_at?`✓ ${s.name} · ${(s.seconds??0).toFixed(1)} s`:`… ${s.name}`}</li>)}</ul>}
+    {stages.length>0&&<ul className="report-list" data-testid="progress-stages">{stages.map((s,index)=><li key={index}>{s.finished_at?`✓ ${s.name} · ${(s.seconds??0).toFixed(1)} s`:`… ${s.name} · ${runningFor(s.started_at)} s so far`}</li>)}</ul>}
+    {stages.length>0&&<small>Stages are coarse: registry retrieval can run a minute or more and each Gemini call 30–90 s, so the list moves only when a stage completes. Backend last reported {Math.round(sinceSnapshot)} s ago.</small>}
     {progress&&!progress.available&&<small>Backend stage progress is not available from this host instance; the investigation is still running.</small>}
     <small>No progress percentage is invented. A request that exceeds its time budget fails with an explicit message and no recorded data is substituted.</small></div></section>;
 }

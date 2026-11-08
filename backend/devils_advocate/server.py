@@ -14,6 +14,7 @@ import os
 import re
 from pathlib import Path
 import sys
+import time
 import uuid
 from typing import Literal
 
@@ -184,7 +185,7 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
         progress = read_progress(token)
         if progress is None:
             return jsonify(available=False, detail='Progress is not available from this backend instance; the investigation may still be running.')
-        return jsonify(available=True, **progress)
+        return jsonify(available=True, now=time.time(), **progress)  # server clock: lets the browser age the running stage
 
     @app.route('/api/<path:legacy>', methods=['GET', 'POST'])
     def legacy_api(legacy):
