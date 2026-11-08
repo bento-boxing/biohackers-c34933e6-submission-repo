@@ -67,3 +67,15 @@ def test_malformed_responses_are_unavailability_not_unknown_targets():
 def test_conflicting_supplied_identifiers_are_rejected():
     with pytest.raises(TargetIdentityError):
         resolve_target(FakeClient([]),TargetInput(disease_name='Example',target_symbol='BACE1',target_id='CHEMBL203',chembl_target_id='CHEMBL4822'))
+
+def test_transient_ensembl_identity_failure_does_not_blank_the_report():
+    # Ensembl REST intermittently answers HTTP 500; the gene-identity check is a cross-check,
+    # not the evidence source, so ChEMBL resolution by symbol must still proceed and be audited.
+    responses=[RetrievalError('https://rest.ensembl.org/lookup/id/ENSG00000186318: HTTPError',status_code=500),
+               {'targets':[target()]},*[RetrievalError('https://www.ebi.ac.uk/chembl/api/data/mechanism.json: HTTPError',status_code=503)]*40]
+    result=investigate_target({'disease_name':'Example','target_symbol':'BACE1','target_id':'ENSG00000186318'},client=FakeClient(responses))
+    assert result.resolution_status=='resolved' and result.resolved_target_id=='CHEMBL4822'
+    assert any(e.startswith('https://rest.ensembl.org/') for e in result.retrieval_errors)
+    ensembl=[a for a in result.search_audit if a.source=='Ensembl' and a.operation=='gene identity']
+    assert ensembl and ensembl[0].state=='failed'
+    assert any('Ensembl' in note and 'not verified' in note for note in result.missing_information)
