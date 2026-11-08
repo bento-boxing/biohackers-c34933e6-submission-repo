@@ -105,7 +105,16 @@ def investigate_target(target_input: TargetInput | dict, *, offline: bool = Fals
         target = resolve_disease_terms(client, target, result.search_audit)
         result.target = target
         try:
-            verify_supplied_gene(client,target,result.search_audit)
+            try:
+                verify_supplied_gene(client,target,result.search_audit)
+            except RetrievalError as exc:
+                # Ensembl is a cross-check on the supplied gene identifier, not the evidence source.
+                # A transient failure (the REST service intermittently answers HTTP 500) is recorded
+                # and the symbol-based ChEMBL resolution continues unverified rather than blanking the report.
+                result.retrieval_errors.append(str(exc))
+                result.search_audit.append(SearchAudit(source='Ensembl',operation='gene identity',url='https://rest.ensembl.org/lookup/id/'+(target.target_id or ''),
+                    state='failed',detail=f'Ensembl lookup unavailable (HTTP {exc.status_code or "unavailable"}); supplied gene identifier not verified against the symbol.'))
+                result.missing_information.append('Ensembl gene-identity cross-check unavailable: the supplied gene identifier was not verified against the target symbol. ChEMBL resolution used the symbol only.')
             result.resolved_target_id = resolve_target(client, target)
             result.search_audit.append(SearchAudit(source='ChEMBL',operation='target identity',
                 url='https://www.ebi.ac.uk/chembl/api/data/target/search.json',query={'q':target.target_symbol},
