@@ -97,14 +97,22 @@ The downloadable research report is the durable record.
   add custom domains to `WORKBENCH_ORIGINS` (comma-separated).
 - **Time budget.** Vercel's default function limit is 300 s (Hobby and Pro). Live retrieval is
   capped at `RESEARCH_RETRIEVAL_BUDGET_SECONDS` (default 240 s, or 150 s when Gemini reasoning is
-  authorized so its 120 s fit too). When the budget runs short, the challenger verifies the full
+  authorized). The whole request has a deadline of `RESEARCH_REQUEST_BUDGET_SECONDS` (default 280):
+  each Gemini call is clamped to the time left and no new paid call starts within 5 s of it. When the budget runs short, the challenger verifies the full
   registry record of stopped trials first and labels the rest "not verified" instead of failing;
   only if even the searches cannot finish does the investigation fail with an explicit message.
   Measured: EGFR / NSCLC (501 trials, the worst case we found) completes in about 215 s; LRRK2 in
   under a minute. An uncached 25-target scout takes about 25 s, a screening about 12 s. Parkinson
   disease / LRRK2 are instant from the recorded snapshot.
-- **Request bodies.** Scout runs and reports travel in request bodies (a few hundred KB at most);
-  the server accepts up to 4 MB, under Vercel's 4.5 MB limit.
+- **Payload sizes.** Reports never travel back to the server: the investigation response carries a
+  signed digest (`report_sig`) and each scout target a signed `sig`, and the decision request posts
+  only those tokens. Trial outcome tables and eligibility text are dropped from responses (the UI
+  never renders them), which brings the worst live case (EGFR, 501 trials) from 7.0 MB to about
+  1.5 MB, under Vercel's 4.5 MB response limit. Request bodies are capped at 1 MB; a 25-target
+  scout run with evidence is about 130 KB.
+- **`WORKBENCH_SECRET` is required on Vercel.** Without it each instance would sign with its own
+  random key and screening would fail at random, so the server refuses to issue approvals (503 with
+  an explicit message) when `VERCEL=1` and the secret is unset.
 
 ## API
 
@@ -120,8 +128,8 @@ score mismatch) or 502 (upstream API failure).
 | POST   | /api/approvals   | `{run_id, symbol, weights, scores, reason}` | the stored approval |
 | POST   | /api/screen      | `{approval_ts}` (Scout app) · `{approval}` signed (workbench) | approval, structure, compounds[] |
 | POST   | /api/shortlists  | `{approval_ts, chembl_ids, reason}`   | `{ok: true}` (Scout app only) |
-| POST   | /api/investigations | `{run, symbol}` or `{target_input}`, `use_ai`, `paid_authorized`, `weights` | the finished job: `{job_id, state, result, error, selection, weights}` |
-| POST   | /api/research-decisions | `{decision_id, job_id, action, rationale, confirmed, report, target?}` | the decision; `approve_screening` adds a signed `approval` |
+| POST   | /api/investigations | `{run, symbol}` or `{target_input}`, `use_ai`, `paid_authorized`, `weights` | the finished job: `{job_id, state, result, error, selection, weights, report_sig}` |
+| POST   | /api/research-decisions | `{decision_id, job_id, action, rationale, confirmed, report_sig, target_sig?}` | the decision; `approve_screening` adds a signed `approval` |
 | GET    | /api/workbench/config | | public AI settings, modes |
 
 ## Data sources and caching

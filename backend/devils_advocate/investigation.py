@@ -32,13 +32,21 @@ def default_budget_seconds(use_ai: bool = False) -> int:
     return 150 if use_ai else 240
 
 
+def default_request_budget_seconds() -> int:
+    """Whole-request deadline; Vercel kills the function at 300 s."""
+    return int(os.getenv('RESEARCH_REQUEST_BUDGET_SECONDS', '280'))
+
+
 def run_investigation(payload: dict, *, investigator=investigate_target, ai_reasoner=run_ai_reasoning,
-                      client: JsonClient | None = None, budget_seconds: int | None = None) -> dict:
+                      client: JsonClient | None = None, budget_seconds: int | None = None,
+                      request_budget_seconds: int | None = None) -> dict:
     calls: list[dict] = []
+    started = time.monotonic()
+    request_budget = request_budget_seconds if request_budget_seconds is not None else default_request_budget_seconds()
+    deadline = started + request_budget
     try:
         target = TargetInput.model_validate(payload['selection']['target_input'])
         recorded_ai = False
-        started = time.monotonic()
         if payload['mode'] == 'offline':
             result, recorded_ai = load_recorded(target)
             timings = {'recorded_playback_seconds': round(time.monotonic() - started, 6)}
@@ -48,12 +56,19 @@ def run_investigation(payload: dict, *, investigator=investigate_target, ai_reas
             with client.tracking(None, budget_seconds=budget) as measured:
                 result = investigator(target, client=client)
             timings = {'retrieval': measured}
+            # Gemini must finish inside the same request: clamp each call to the time left and
+            # refuse to start a new (billed) call once the deadline is within reach.
+            remaining = max(0, int(deadline - time.monotonic()))
             settings = load_ai_settings().model_copy(update={**payload.get('ai_policy', {}), 'enabled': payload['use_ai']})
+            settings = settings.model_copy(update={'timeout_seconds': max(5, min(settings.timeout_seconds, remaining))})
 
             def progress(ai_calls):
                 calls[:] = [c.model_dump(mode='json') for c in ai_calls]
 
-            result.ai = ai_reasoner(result, settings=settings, on_progress=progress, should_cancel=lambda: False)
+            def past_deadline():
+                return time.monotonic() > deadline - 5
+
+            result.ai = ai_reasoner(result, settings=settings, on_progress=progress, should_cancel=past_deadline)
             if result.ai is not None and not calls:
                 calls[:] = [c.model_dump(mode='json') for c in result.ai.calls]
         return {'investigation': result.model_dump(mode='json'),

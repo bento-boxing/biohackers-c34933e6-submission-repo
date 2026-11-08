@@ -30,7 +30,7 @@ from pipeline.screening.pipeline import run_screening
 from pipeline.settings import data_dir
 from .ai_config import load_ai_settings
 from .ai_reasoning import run_ai_reasoning
-from .approval_signing import sign, verify
+from .approval_signing import configured as signing_configured, sign, sign_payload, verify, verify_token
 from .devil_advocate import investigate_target
 from .investigation import InvestigationFailed, run_investigation
 from .models import TargetInput
@@ -67,8 +67,8 @@ class DecisionRequest(BaseModel):
     action: Literal['investigate', 'revise', 'stop', 'approve_screening']
     rationale: str = Field(min_length=5, max_length=4000)
     confirmed: bool = False
-    report: dict
-    target: dict | None = None
+    report_sig: str = Field(max_length=20_000)
+    target_sig: str | None = Field(default=None, max_length=20_000)
 
 
 class ScreenRequest(BaseModel):
@@ -88,7 +88,7 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
     app = Flask(__name__)
     origins = allowed_origins()
     CORS(app, origins=origins, allow_headers=['Content-Type', 'X-Research-Mode', 'Idempotency-Key'])
-    app.config['MAX_CONTENT_LENGTH'] = 4_000_000  # reports and scout runs travel in request bodies
+    app.config['MAX_CONTENT_LENGTH'] = 1_000_000  # a scout run with evidence is ~130 KB; reports never come back
     app.config['SCOUT_APPS'] = apps
     app.config['INVESTIGATOR'] = investigator
     app.config['AI_REASONER'] = ai_reasoner
@@ -140,7 +140,27 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
         response = child_dispatch()
         if response.status_code >= 400:
             return jsonify(error='Scout source unavailable or request invalid. No alternate mode was substituted.'), response.status_code
+        if legacy == 'scout':
+            run = response.get_json()
+            for target in run['targets']:
+                target['sig'] = sign_payload(target_claims(run, target))
+            return jsonify(run)
         return response
+
+    def target_claims(run: dict, target: dict) -> dict:
+        """What a later approval may rely on from a scout target: signed when the run is produced."""
+        return {'run_id': run['run_id'], 'disease_id': run['disease']['id'], 'disease_name': run['disease']['name'],
+                'cache_only': run['cache_only'], 'target_id': target['target_id'], 'symbol': target['symbol'],
+                'components': target['components'], 'chembl_target_id': target.get('chembl_target_id'),
+                'uniprot': target.get('uniprot'), 'safety_flags': target.get('safety_flags', [])}
+
+    def trim_report(report: dict) -> dict:
+        """Drop per-trial bulk the UI never renders (outcome tables, eligibility text): a popular
+        target otherwise exceeds Vercel's 4.5 MB response limit."""
+        for trial in report['investigation'].get('trials', []):
+            trial.pop('outcome_records', None)
+            trial.pop('population', None)
+        return report
 
     def parse_weights(raw: dict) -> Weights:
         if set(raw) - WEIGHT_KEYS:
@@ -187,31 +207,33 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
                            result=None, error=str(exc), mode=mode(), selection=selection,
                            weights=payload['weights'], decisions=[])
         calls = report.pop('calls', [])
+        report_sig = sign_payload({'job_id': job_id, 'mode': mode(), 'selection': selection, 'weights': payload['weights']})
         return jsonify(job_id=job_id, state='completed',
                        progress={'stage': 'Report ready for researcher review', 'calls': calls, 'timings': report['timings']},
-                       result=report, error=None, mode=mode(), selection=selection,
-                       weights=payload['weights'], decisions=[])
+                       result=trim_report(report), error=None, mode=mode(), selection=selection,
+                       weights=payload['weights'], decisions=[], report_sig=report_sig)
 
     @app.post('/api/research-decisions')
     def decision():
         body = DecisionRequest.model_validate(request.get_json(silent=True))
-        report = body.report
-        if report.get('mode') != mode() or not isinstance(report.get('investigation'), dict) \
-                or not isinstance(report.get('selection'), dict):
+        report = verify_token(body.report_sig)
+        if not report or report.get('job_id') != body.job_id or report.get('mode') != mode():
             return jsonify(error='Review a completed investigation in this mode before recording a decision.'), 400
-        result = body.model_dump(mode='json', exclude={'report', 'target'})
+        selection = report['selection']
+        result = body.model_dump(mode='json', exclude={'report_sig', 'target_sig'})
         if body.action == 'approve_screening':
-            selection = report['selection']
-            if not body.confirmed or not selection.get('run_id') or body.target is None:
+            if not signing_configured():
+                return jsonify(error='WORKBENCH_SECRET is not configured on this deployment; approvals cannot be issued.'), 503
+            claims = verify_token(body.target_sig) if body.target_sig else None
+            if not body.confirmed or not selection.get('run_id') or claims is None:
                 return jsonify(error='Explicit confirmation and an originating Scout target are required for screening approval.'), 400
             target_input = selection.get('target_input') or {}
-            if body.target.get('symbol') != target_input.get('target_symbol') \
-                    or body.target.get('target_id') != target_input.get('target_id'):
+            if claims['run_id'] != selection['run_id'] or claims['target_id'] != target_input.get('target_id') \
+                    or claims['symbol'] != target_input.get('target_symbol'):
                 return jsonify(error='The approved target does not match the investigated target.'), 400
             try:
                 weights = parse_weights(report.get('weights') or {})
-                approval = audit.approval_from_components(target_input.get('disease_id') or '', target_input.get('disease_name') or '',
-                                                          body.target, weights, body.rationale)
+                approval = audit.approval_from_components(claims['disease_id'], claims['disease_name'], claims, weights, body.rationale)
             except (ValueError, KeyError, TypeError):
                 return jsonify(error='Scout target is missing the component scores needed for an approval.'), 400
             record = {**approval.__dict__}
@@ -227,9 +249,9 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
     @app.post('/api/screen')
     def screen():
         body = ScreenRequest.model_validate(request.get_json(silent=True))
-        if not verify(body.approval):
+        fields = verify(body.approval)
+        if fields is None:
             return jsonify(error='Screening requires an approval issued by this server.'), 403
-        fields = {k: v for k, v in body.approval.items() if k != 'signature'}
         try:
             approval = Approval(**fields)
         except TypeError:

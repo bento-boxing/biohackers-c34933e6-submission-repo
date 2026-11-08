@@ -47,3 +47,14 @@ def test_deadline_exceeded_message_is_surfaced():
     with pytest.raises(InvestigationFailed) as exc:
         run_investigation(payload(EGFR, 'live'), investigator=Mock(side_effect=RetrievalDeadlineExceeded('budget exhausted')), ai_reasoner=Mock())
     assert 'budget exhausted' in str(exc.value)
+
+
+def test_gemini_phase_is_cancelled_and_clamped_when_the_request_deadline_is_near():
+    target = TargetInput.model_validate(EGFR)
+    investigator = Mock(return_value=Investigation(target=target, mode='live', resolved_target_id='CHEMBL203', resolution_status='resolved'))
+    reasoner = Mock(return_value=None)
+    run_investigation(payload(EGFR, 'live', use_ai=True), investigator=investigator, ai_reasoner=reasoner,
+                      budget_seconds=5, request_budget_seconds=0)
+    kwargs = reasoner.call_args.kwargs
+    assert kwargs['should_cancel']() is True  # deadline already passed: no paid call may start
+    assert kwargs['settings'].timeout_seconds == 5  # clamped to the floor, never 120 s past the deadline

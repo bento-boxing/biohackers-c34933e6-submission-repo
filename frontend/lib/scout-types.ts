@@ -25,6 +25,8 @@ export type ScoutTarget = {
   open_targets_url: string;
   /** Raw TargetEvidence from the server; posted back verbatim for stateless rationale. */
   evidence?: Record<string, unknown>;
+  /** Server-signed claims (ids, components, safety flags) a later approval relies on. */
+  sig?: string;
 };
 
 export type ScoutRun = {

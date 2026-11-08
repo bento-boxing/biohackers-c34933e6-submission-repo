@@ -70,7 +70,7 @@ def test_bace1_playback_is_explicitly_recorded_and_never_validates_wrong_identit
 def decision_body(job, run, **updates):
     target = next(t for t in run['targets'] if t['symbol'] == 'LRRK2')
     return {'decision_id': 'decision-approval', 'job_id': job['job_id'], 'action': 'approve_screening',
-            'rationale': DECISION_TEXT, 'report': job['result'], 'target': target, **updates}
+            'rationale': DECISION_TEXT, 'report_sig': job['report_sig'], 'target_sig': target['sig'], **updates}
 
 
 def test_human_approval_gates_existing_screening(app):
@@ -92,7 +92,10 @@ def test_screen_rejects_unsigned_or_tampered_approval(app):
     approval = client.post('/api/research-decisions', headers=HEADERS, json=decision_body(job, run, confirmed=True)).get_json()['approval']
     assert client.post('/api/screen', headers=HEADERS, json={'approval_ts': 'forged'}).status_code in (400, 403)
     assert client.post('/api/screen', headers=HEADERS, json={'approval': {k: v for k, v in approval.items() if k != 'signature'}}).status_code == 403
-    assert client.post('/api/screen', headers=HEADERS, json={'approval': {**approval, 'chembl_target_id': 'CHEMBL203'}}).status_code == 403
+    tampered = client.post('/api/screen', headers=HEADERS, json={'approval': {**approval, 'chembl_target_id': 'CHEMBL203'}})
+    assert tampered.status_code == 200 and tampered.get_json()['approval']['chembl_target_id'] == 'CHEMBL1075104'  # token wins
+    body, mac = approval['signature'].split('.')
+    assert client.post('/api/screen', headers=HEADERS, json={'approval': {**approval, 'signature': body + '.' + 'ab' * 32}}).status_code == 403
 
 
 def test_non_approval_decision_is_echoed_without_approval(app):
@@ -186,3 +189,49 @@ def test_rationale_route_is_forwarded_to_scout_backend(app, monkeypatch):
     response = client.post('/api/rationale', headers=HEADERS, json={'run_id': run['run_id'], 'run': run, 'weights': run['default_weights']})
     assert response.status_code == 200, response.get_json()
     assert response.get_json()['available'] is False
+
+
+def browser_round_trip(obj):
+    return json.loads(json.dumps(obj), parse_float=lambda s: int(float(s)) if float(s).is_integer() else float(s))
+
+
+def test_screening_accepts_an_approval_that_went_through_a_browser(app):
+    client, run, job = completed_job(app)
+    approval = client.post('/api/research-decisions', headers=HEADERS, json=decision_body(job, run, confirmed=True)).get_json()['approval']
+    assert approval['scores']['literature'] == 1.0  # LRRK2 tops the literature axis: the 1.0 → 1 case
+    screened = client.post('/api/screen', headers=HEADERS, json={'approval': browser_round_trip(approval)})
+    assert screened.status_code == 200, screened.get_json()
+
+
+def test_scout_targets_and_reports_are_signed_at_origin(app):
+    client, run, job = completed_job(app)
+    assert all(t['sig'] for t in run['targets']) and job['report_sig']
+    assert 'outcome_records' not in job['result']['investigation']['trials'][0]
+    assert 'population' not in job['result']['investigation']['trials'][0]
+
+
+def test_decision_rejects_forged_target_or_report(app):
+    client, run, job = completed_job(app)
+    target = next(t for t in run['targets'] if t['symbol'] == 'LRRK2')
+    base = {'decision_id': 'decision-forged', 'job_id': job['job_id'], 'action': 'approve_screening',
+            'rationale': DECISION_TEXT, 'confirmed': True, 'report_sig': job['report_sig'], 'target_sig': target['sig']}
+    assert client.post('/api/research-decisions', headers=HEADERS, json=base).status_code == 200
+    other = next(t for t in run['targets'] if t['symbol'] != 'LRRK2')
+    assert client.post('/api/research-decisions', headers=HEADERS, json={**base, 'target_sig': other['sig']}).status_code == 400
+    assert client.post('/api/research-decisions', headers=HEADERS, json={**base, 'report_sig': 'forged.sig'}).status_code == 400
+    assert client.post('/api/research-decisions', headers=HEADERS, json={**base, 'job_id': 'f' * 32}).status_code == 400
+    # the signed approval carries the server-signed components, not whatever the client claims
+    approved = client.post('/api/research-decisions', headers=HEADERS, json={**base, 'decision_id': 'decision-forged-2'}).get_json()
+    assert approved['approval']['safety_flags'] == [f['detail'] for f in target['safety_flags']]
+
+
+def test_approval_fails_closed_without_secret_on_vercel(tmp_path, monkeypatch):
+    monkeypatch.delenv('WORKBENCH_SECRET', raising=False); monkeypatch.setenv('VERCEL', '1')
+    app = create_app(tmp_path); client, run, job = completed_job(app)
+    response = client.post('/api/research-decisions', headers=HEADERS, json=decision_body(job, run, confirmed=True))
+    assert response.status_code == 503 and 'WORKBENCH_SECRET' in response.get_json()['error']
+
+
+def test_offline_run_cannot_be_investigated_in_live_mode(app):
+    client = app.test_client(); run = scout(client)
+    assert client.post('/api/investigations', headers=LIVE, json={'run': run, 'symbol': 'LRRK2'}).status_code == 400

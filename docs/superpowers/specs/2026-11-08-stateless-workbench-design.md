@@ -55,17 +55,21 @@ All routes keep the `X-Research-Mode: live|offline` header.
   `{job_id, state: 'completed'|'failed', progress:{stage, calls}, result: Report|null, error,
   mode, selection, weights, decisions: []}`. Validation errors stay 400. No Idempotency-Key.
 - `POST /api/research-decisions` — body
-  `{decision_id, job_id, action, rationale, confirmed, report: Report, target?: ScoutTarget}`.
-  For `approve_screening` the server computes the weighted total from `target.components` and
-  the normalised `report.weights`, builds an `Approval`, appends it to the (ephemeral) approvals
-  log, and returns the decision with `approval` carrying an HMAC `signature`.
+  `{decision_id, job_id, action, rationale, confirmed, report_sig, target_sig?}` (revised after
+  review: the server signs what it produced, scout targets get `sig` and investigation responses
+  `report_sig`, and the client posts those tokens back instead of the full report). For
+  `approve_screening` the server verifies both tokens, computes the weighted total from the signed
+  components and weights, builds an `Approval`, appends it to the (ephemeral) approvals log, and
+  returns the decision with `approval` carrying a signed token in `signature`.
 - `POST /api/screen` — body `{approval}` (the signed object). Server verifies the signature
   (403 otherwise) and runs screening. Replaces the `approval_ts` lookup in the workbench.
 - Removed: `GET /api/investigations`, `GET /api/investigations/<id>`,
   `POST /api/investigations/<id>/cancel`, `GET /api/workbench/runs/<id>`, `shortlists` forwarding.
 
 Signing key: `WORKBENCH_SECRET` env var; if unset, a per-process random key (fine for one local
-server; on Vercel the variable must be set so all instances agree).
+server). On Vercel (`VERCEL=1`) an unset secret makes approval issuance fail closed with a 503.
+Tokens are `base64url(payload).hmac`, verified on the exact signed bytes so browser JSON
+re-serialisation (1.0 → 1) cannot break them.
 
 Allowed origins: `http://127.0.0.1:3000`, `http://localhost:3000`, every entry of
 `WORKBENCH_ORIGINS` (comma-separated), and `https://` + each of `VERCEL_URL`,
