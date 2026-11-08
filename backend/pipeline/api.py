@@ -54,13 +54,32 @@ def compound_json(c: Compound) -> dict:
     return {"chembl_id": c.chembl_id, "name": c.name, "best_pchembl": c.best_pchembl, "assay_type": c.assay_type,
             "max_phase": c.max_phase, "is_approved": c.is_approved, "mw": c.mw, "alogp": c.alogp,
             "hbd": c.hbd, "hba": c.hba, "psa": c.psa, "ro5_violations": c.ro5_violations,
-            "lipinski_pass": c.lipinski_pass, "chembl_url": chembl_molecule_url(c.chembl_id)}
+            "lipinski_pass": c.lipinski_pass, "chembl_url": chembl_molecule_url(c.chembl_id),
+            # four-factor evidence, shown separately; None means not available, never zero
+            "qed": c.qed, "first_approval": c.first_approval, "potency": c.potency, "clinical": c.clinical,
+            "selectivity": c.selectivity, "factors": c.factors, "priority_score": c.priority_score,
+            "rank": c.rank, "baseline_rank": c.baseline_rank, "rank_reason": c.rank_reason, "missing_data": c.missing_data}
 
 
 def screening_json(r: ScreeningResult) -> dict:
     return {"approval": r.approval.__dict__,
             "structure": r.structure.__dict__ if r.structure else None,
-            "compounds": [compound_json(c) for c in r.compounds]}
+            "compounds": [compound_json(c) for c in r.compounds],
+            "coverage": r.coverage, "rubric": r.rubric, "baseline": r.baseline, "notes": r.notes}
+
+
+def rubric_from(body: dict):
+    """Validated rubric request ({objective, weights}) or None for the default; BadInput when malformed."""
+    from pipeline.screening.rubric import Rubric
+    raw = body.get("rubric")
+    if raw is None:
+        return None
+    if not isinstance(raw, dict):
+        raise BadInput("rubric must be an object with optional 'objective' and 'weights'")
+    try:
+        return Rubric(objective=raw.get("objective") or "balanced", weights=raw.get("weights") or {})
+    except (TypeError, ValueError) as e:
+        raise BadInput(f"invalid rubric: {e}")
 
 
 class BadInput(ValueError):
@@ -193,23 +212,27 @@ def create_app(client: HttpClient | None = None,
                  for t in result.targets if t.rationale]
         return jsonify({"run_id": body["run_id"], "weights": weights.normalised().as_dict(), "rationales": items})
 
-    def _find_approval(ts: str):
-        return next((a for a in audit.read_approvals(approvals_path) if a.ts == ts), None)
+    def _find_approval(body: dict):
+        """The approval named by its unique id. Timestamps are never used: two approvals can share one."""
+        approval_id = body.get("approval_id")
+        if not isinstance(approval_id, str) or not approval_id:
+            raise BadInput("approval_id is required (approval timestamps are not identifiers)")
+        return next((a for a in audit.read_approvals(approvals_path) if a.approval_id == approval_id), None)
 
     @app.post("/api/screen")
     def screen():
         body = request.get_json(silent=True) or {}
-        approval = _find_approval(body.get("approval_ts", ""))
+        approval = _find_approval(body)
         if approval is None:
-            return error(f"no approval with ts {body.get('approval_ts')}", 404)
-        return jsonify(screening_json(run_screening(approval, client=http)))
+            return error(f"no approval with id {body.get('approval_id')}", 404)
+        return jsonify(screening_json(run_screening(approval, client=http, rubric=rubric_from(body))))
 
     @app.post("/api/shortlists")
     def shortlist():
         body = request.get_json(silent=True) or {}
-        approval = _find_approval(body.get("approval_ts", ""))
+        approval = _find_approval(body)
         if approval is None:
-            return error(f"no approval with ts {body.get('approval_ts')}", 404)
+            return error(f"no approval with id {body.get('approval_id')}", 404)
         ids = [str(x) for x in body.get("chembl_ids") or []]
         if not ids:
             return error("chembl_ids is required", 400)

@@ -111,16 +111,49 @@ def test_screen_endpoint_lrrk2(api, tmp_path):
     from tests.test_screening_pipeline import approval
     a = approval()
     append_jsonl(tmp_path / "approvals.jsonl", a.__dict__)
-    r = api.post("/api/screen", json={"approval_ts": a.ts})
+    r = api.post("/api/screen", json={"approval_id": a.approval_id})
     assert r.status_code == 200, r.get_json()
     body = r.get_json()
     assert body["approval"]["symbol"] == "LRRK2" and body["structure"]["mean_plddt"] > 0
-    assert len(body["compounds"]) == 50
+    assert len(body["compounds"]) >= 50 and body["coverage"]["partial"] is True and body["notes"]
     c = body["compounds"][0]
     for k in ("chembl_id", "name", "best_pchembl", "assay_type", "max_phase", "is_approved", "mw", "alogp",
               "hbd", "hba", "psa", "ro5_violations", "lipinski_pass", "chembl_url"):
         assert k in c
-    assert api.post("/api/screen", json={"approval_ts": "nope"}).status_code == 404
+    assert api.post("/api/screen", json={"approval_id": "nope"}).status_code == 404
+    # timestamps are not identifiers: a body that only names a timestamp is refused
+    assert api.post("/api/screen", json={"approval_ts": a.ts}).status_code == 400
+
+
+def test_screen_selects_the_exact_approval_when_two_were_created_in_the_same_second(api, tmp_path):
+    from pipeline.audit import append_jsonl
+    from tests.test_screening_pipeline import approval
+    first = approval()
+    second = approval(chembl_target_id=None, uniprot=None)
+    second.approval_id, second.symbol, second.target_id = "appr-second", "TP53", "ENSG00000141510"
+    assert first.ts == second.ts and first.approval_id != second.approval_id
+    append_jsonl(tmp_path / "approvals.jsonl", first.__dict__)
+    append_jsonl(tmp_path / "approvals.jsonl", second.__dict__)
+    r = api.post("/api/screen", json={"approval_id": first.approval_id})
+    assert r.status_code == 200 and r.get_json()["approval"]["symbol"] == "LRRK2"
+    assert r.get_json()["approval"]["approval_id"] == first.approval_id
+    r = api.post("/api/screen", json={"approval_id": second.approval_id})
+    assert r.status_code == 200 and r.get_json()["approval"]["symbol"] == "TP53"
+
+
+def test_server_issued_approvals_get_distinct_ids_even_in_the_same_second(api):
+    run = scout(api).get_json()
+    t = run["targets"][0]
+    body = {"run_id": run["run_id"], "symbol": t["symbol"], "reason": "x",
+            "scores": {**t["components"], "total": None}}
+    # recompute total the way the server does: default weights
+    from pipeline.scout.scoring import weighted_total
+    from pipeline.models import Weights
+    c = t["components"]
+    body["scores"]["total"] = weighted_total(c["genetic"], c["association"], c["druggability"], c["literature"], Weights())
+    a = api.post("/api/approvals", json=body).get_json()
+    b = api.post("/api/approvals", json=body).get_json()
+    assert a["approval_id"] != b["approval_id"] and len(a["approval_id"]) == 32
 
 
 def test_shortlist_endpoint_appends_line(api, tmp_path):
@@ -128,10 +161,10 @@ def test_shortlist_endpoint_appends_line(api, tmp_path):
     from tests.test_screening_pipeline import approval
     a = approval()
     append_jsonl(tmp_path / "approvals.jsonl", a.__dict__)
-    r = api.post("/api/shortlists", json={"approval_ts": a.ts, "chembl_ids": ["CHEMBL1", "CHEMBL2"], "reason": "potent"})
+    r = api.post("/api/shortlists", json={"approval_id": a.approval_id, "chembl_ids": ["CHEMBL1", "CHEMBL2"], "reason": "potent"})
     assert r.status_code == 200 and r.get_json() == {"ok": True}
     line = (tmp_path / "shortlists.jsonl").read_text()
-    assert '"CHEMBL2"' in line and a.ts in line
+    assert '"CHEMBL2"' in line and a.approval_id in line
 
 
 def test_scout_upstream_graphql_error_502_json(api, monkeypatch):
@@ -231,3 +264,26 @@ def test_disease_suggestions_live_use_open_targets_search(tmp_path):
     app = create_app(client=FakeClient(), approvals_path=tmp_path / "a.jsonl", shortlists_path=tmp_path / "s.jsonl")
     body = app.test_client().get("/api/diseases?q=diabetes").get_json()
     assert [d["name"] for d in body["diseases"]] == ["diabetes mellitus", "type 1 diabetes mellitus"]
+
+
+def test_screen_json_exposes_the_four_factors_coverage_and_baseline(tmp_path):
+    from pipeline.audit import append_jsonl
+    from tests.fake_chembl import FakeChembl, act
+    from tests.test_screening_pipeline import approval, mol
+    acts = [act("A", 8.0, aid=1), act("A", 8.2, aid=2, assay="A2"), act("B", 9.0, aid=3), act("B", 6.0, aid=4, assay="A4")]
+    fake = FakeChembl(acts, {"A": mol("A", "ALPHA", "2.0"), "B": mol("B")})
+    app = create_app(client=fake, approvals_path=tmp_path / "a.jsonl", shortlists_path=tmp_path / "s.jsonl")
+    a = approval(chembl_target_id="CHEMBL203", uniprot=None, approval_id="appr-fake")
+    append_jsonl(tmp_path / "a.jsonl", a.__dict__)
+    r = app.test_client().post("/api/screen", json={"approval_id": a.approval_id, "rubric": {"objective": "novel_candidates"}})
+    assert r.status_code == 200, r.get_json()
+    body = r.get_json()
+    assert body["rubric"]["objective"] == "novel_candidates" and body["coverage"]["stage1"]["complete"] is True
+    assert body["baseline"] == ["B", "A"] and [c["chembl_id"] for c in body["compounds"]] == ["A", "B"]
+    c = body["compounds"][0]
+    for k in ("rank", "baseline_rank", "rank_reason", "priority_score", "factors", "potency", "clinical", "selectivity",
+              "qed", "missing_data", "best_pchembl", "lipinski_pass", "chembl_url"):
+        assert k in c, k
+    assert c["potency"]["aggregate_method"].startswith("median") and c["clinical"]["phase_label"] == "Phase 2"
+    assert c["selectivity"]["status"] == "assessed" and c["factors"]["missing"] == ["selectivity"]
+    assert app.test_client().post("/api/screen", json={"approval_id": a.approval_id, "rubric": {"objective": "nope"}}).status_code == 400

@@ -7,6 +7,7 @@ This lets the same app run locally and as a Vercel Function.
 """
 import argparse
 import hashlib
+import hmac
 import json
 import math
 import os
@@ -22,7 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 ROOT = Path(__file__).resolve().parents[1]  # backend/
 sys.path.insert(0, str(ROOT))
 from pipeline import audit
-from pipeline.api import create_app as scout_app, screening_json
+from pipeline.api import BadInput, create_app as scout_app, rubric_from, screening_json
 from pipeline.http import HttpClient
 from pipeline.models import Approval, Weights
 from pipeline.scout.scoring import weighted_total
@@ -73,8 +74,13 @@ class DecisionRequest(BaseModel):
 
 
 class ScreenRequest(BaseModel):
-    model_config = ConfigDict(extra='forbid')
+    """Screening names the exact approval it relies on; the signed approval payload is then checked against it."""
+    model_config = ConfigDict(extra='forbid', str_strip_whitespace=True)
     approval: dict
+    approval_id: str = Field(min_length=8, max_length=100)
+    disease_id: str = Field(min_length=1, max_length=100)
+    target_id: str = Field(min_length=1, max_length=100)
+    rubric: dict | None = None
 
 
 MAX_ASSESSMENTS_IN_RESPONSE = 150
@@ -264,7 +270,8 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
                 return jsonify(error='The approved target does not match the investigated target.'), 400
             try:
                 weights = parse_weights(report.get('weights') or {})
-                approval = audit.approval_from_components(claims['disease_id'], claims['disease_name'], claims, weights, body.rationale)
+                approval = audit.approval_from_components(claims['disease_id'], claims['disease_name'], claims, weights,
+                                                          body.rationale, decision_id=body.decision_id)
             except (ValueError, KeyError, TypeError):
                 return jsonify(error='Scout target is missing the component scores needed for an approval.'), 400
             record = {**approval.__dict__}
@@ -284,11 +291,23 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
         if fields is None:
             return jsonify(error='Screening requires an approval issued by this server.'), 403
         try:
-            approval = Approval(**fields)
+            approval = Approval.from_dict(fields)
         except TypeError:
-            return jsonify(error='Approval object is malformed.'), 400
+            return jsonify(error='Approval object is malformed or predates approval identifiers; record the approval again.'), 400
+        if not hmac.compare_digest(approval.approval_id, body.approval_id):
+            return jsonify(error='The named approval_id does not match the signed approval.'), 403
+        if approval.action != 'approve_screening':
+            return jsonify(error='The signed record is not a researcher screening approval.'), 403
+        if approval.disease_id != body.disease_id:
+            return jsonify(error='The approval was issued for a different disease than the one being screened.'), 400
+        if approval.target_id != body.target_id:
+            return jsonify(error='The approval was issued for a different target than the one being screened.'), 400
         http = apps[mode()].config['HTTP_CLIENT']
-        return jsonify(screening_json(run_screening(approval, client=http)))
+        try:
+            rubric = rubric_from({'rubric': body.rubric})
+        except BadInput as exc:
+            return jsonify(error=str(exc)), 400
+        return jsonify(screening_json(run_screening(approval, client=http, rubric=rubric)))
 
     return app
 

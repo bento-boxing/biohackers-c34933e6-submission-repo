@@ -79,6 +79,8 @@ class ScoutResult:
 
 @dataclass
 class Approval:
+    """A researcher's screening approval. `approval_id` is the only identifier: timestamps collide."""
+    approval_id: str
     ts: str
     disease_id: str
     disease_name: str
@@ -91,13 +93,21 @@ class Approval:
     safety_flags: list[str]
     reason: str
     approved_by: str
+    decision_id: str | None = None
+    action: str = "approve_screening"
 
     def to_json(self) -> str:
         return json.dumps(asdict(self))
 
     @classmethod
     def from_json(cls, line: str) -> "Approval":
-        return cls(**json.loads(line))
+        return cls.from_dict(json.loads(line))
+
+    @classmethod
+    def from_dict(cls, fields: dict) -> "Approval":
+        """Build from a record that may carry extra keys (e.g. a signature appended to the audit log)."""
+        known = {f for f in cls.__dataclass_fields__}
+        return cls(**{k: v for k, v in fields.items() if k in known})
 
 
 @dataclass
@@ -113,6 +123,18 @@ class Compound:
     hba: int | None
     psa: float | None
     ro5_violations: int | None
+    # four-factor evidence (see pipeline/screening/rubric.py); None means "not available", never "zero"
+    qed: float | None = None
+    first_approval: int | None = None
+    potency: dict | None = None
+    clinical: dict | None = None
+    selectivity: dict | None = None
+    factors: dict | None = None
+    priority_score: float | None = None
+    rank: int | None = None
+    baseline_rank: int | None = None
+    rank_reason: str = ""
+    missing_data: list[str] = field(default_factory=list)
 
     @property
     def is_approved(self) -> bool:
@@ -140,3 +162,7 @@ class ScreeningResult:
     approval: Approval
     structure: Structure | None
     compounds: list[Compound]
+    coverage: dict = field(default_factory=dict)
+    rubric: dict = field(default_factory=dict)
+    baseline: list[str] = field(default_factory=list)  # chembl ids in potency-only order
+    notes: list[str] = field(default_factory=list)

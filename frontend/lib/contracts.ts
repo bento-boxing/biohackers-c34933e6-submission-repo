@@ -1,4 +1,4 @@
-export type { ScoutRun, ScoutTarget, Weights, Approval, ScreeningResult } from './scout-types';
+export type { ScoutRun, ScoutTarget, Weights, Approval, ScreeningResult, Compound, RubricObjective, PotencySummary, ClinicalSummary, SelectivitySummary, ScreeningCoverage, RubricDescription } from './scout-types';
 export { rankTargets, DEFAULT_WEIGHTS, normaliseWeights } from './score';
 export type Mode = 'live' | 'offline';
 export type TargetInput = { disease_name: string; disease_id?: string | null; target_symbol: string; target_id?: string | null; chembl_target_id?: string | null; uniprot?: string | null;target_aliases?:string[];protein_gene_symbols?:string[] };

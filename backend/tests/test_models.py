@@ -13,7 +13,7 @@ def test_weights_all_zero_falls_back_to_defaults():
 
 def test_approval_round_trips_json():
     a = Approval(
-        ts="2026-11-07T18:02:11Z", disease_id="MONDO_0005180", disease_name="Parkinson disease",
+        approval_id="0123456789abcdef0123456789abcdef", ts="2026-11-07T18:02:11Z", disease_id="MONDO_0005180", disease_name="Parkinson disease",
         target_id="ENSG00000188906", symbol="LRRK2", uniprot="Q5S007",
         chembl_target_id="CHEMBL1075104", weights=Weights().as_dict(),
         scores={"genetic": 0.9, "association": 0.8, "druggability": 0.8, "literature": 1.0, "total": 0.9},

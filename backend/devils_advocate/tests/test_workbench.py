@@ -73,6 +73,31 @@ def decision_body(job, run, **updates):
             'rationale': DECISION_TEXT, 'report_sig': job['report_sig'], 'target_sig': target['sig'], **updates}
 
 
+def screen_body(approval, **updates):
+    return {'approval': approval, 'approval_id': approval['approval_id'], 'disease_id': approval['disease_id'],
+            'target_id': approval['target_id'], **updates}
+
+
+def test_screen_requires_the_exact_approval_id_disease_target_and_decision(app):
+    client, run, job = completed_job(app)
+    approval = client.post('/api/research-decisions', headers=HEADERS, json=decision_body(job, run, confirmed=True)).get_json()['approval']
+    assert len(approval['approval_id']) == 32 and approval['decision_id'] == 'decision-approval'
+    assert approval['action'] == 'approve_screening'
+    assert client.post('/api/screen', headers=HEADERS, json={'approval': approval}).status_code == 400
+    assert client.post('/api/screen', headers=HEADERS, json=screen_body(approval, approval_id='0' * 32)).status_code == 403
+    wrong_target = client.post('/api/screen', headers=HEADERS, json=screen_body(approval, target_id='ENSG00000141510'))
+    assert wrong_target.status_code == 400 and 'target' in wrong_target.get_json()['error']
+    wrong_disease = client.post('/api/screen', headers=HEADERS, json=screen_body(approval, disease_id='EFO_0000249'))
+    assert wrong_disease.status_code == 400 and 'disease' in wrong_disease.get_json()['error']
+    # two approvals issued in the same second are distinguishable by id, and only the named one is used
+    other = client.post('/api/research-decisions', headers=HEADERS, json=decision_body(job, run, confirmed=True, decision_id='decision-approval-2')).get_json()['approval']
+    assert other['approval_id'] != approval['approval_id']
+    mixed = client.post('/api/screen', headers=HEADERS, json=screen_body(other, approval_id=approval['approval_id']))
+    assert mixed.status_code == 403
+    ok = client.post('/api/screen', headers=HEADERS, json=screen_body(other))
+    assert ok.status_code == 200 and ok.get_json()['approval']['approval_id'] == other['approval_id']
+
+
 def test_human_approval_gates_existing_screening(app):
     client, run, job = completed_job(app)
     assert client.post('/api/approvals', headers=HEADERS, json={}).status_code == 403
@@ -82,20 +107,25 @@ def test_human_approval_gates_existing_screening(app):
     approval = approved.get_json()['approval']
     assert approval['symbol'] == 'LRRK2' and approval['signature'] and approval['reason'] == DECISION_TEXT
     assert abs(approval['scores']['total'] - job['selection']['weighted_score']) < 1e-6
-    screened = client.post('/api/screen', headers=HEADERS, json={'approval': approval})
+    screened = client.post('/api/screen', headers=HEADERS, json=screen_body(approval))
     assert screened.status_code == 200, screened.get_json()
-    assert screened.get_json()['compounds']
+    body = screened.get_json()
+    assert body['compounds'] and body['rubric']['objective'] == 'balanced' and body['coverage']['stage1']
+    assert body['compounds'][0]['rank'] == 1 and body['compounds'][0]['rank_reason']
+    novel = client.post('/api/screen', headers=HEADERS, json=screen_body(approval, rubric={'objective': 'novel_candidates'}))
+    assert novel.status_code == 200 and novel.get_json()['rubric']['weights']['clinical'] == 0.0
+    assert client.post('/api/screen', headers=HEADERS, json=screen_body(approval, rubric={'objective': 'x'})).status_code == 400
 
 
 def test_screen_rejects_unsigned_or_tampered_approval(app):
     client, run, job = completed_job(app)
     approval = client.post('/api/research-decisions', headers=HEADERS, json=decision_body(job, run, confirmed=True)).get_json()['approval']
     assert client.post('/api/screen', headers=HEADERS, json={'approval_ts': 'forged'}).status_code in (400, 403)
-    assert client.post('/api/screen', headers=HEADERS, json={'approval': {k: v for k, v in approval.items() if k != 'signature'}}).status_code == 403
-    tampered = client.post('/api/screen', headers=HEADERS, json={'approval': {**approval, 'chembl_target_id': 'CHEMBL203'}})
+    assert client.post('/api/screen', headers=HEADERS, json=screen_body({k: v for k, v in approval.items() if k != 'signature'})).status_code == 403
+    tampered = client.post('/api/screen', headers=HEADERS, json=screen_body({**approval, 'chembl_target_id': 'CHEMBL203'}))
     assert tampered.status_code == 200 and tampered.get_json()['approval']['chembl_target_id'] == 'CHEMBL1075104'  # token wins
     body, mac = approval['signature'].split('.')
-    assert client.post('/api/screen', headers=HEADERS, json={'approval': {**approval, 'signature': body + '.' + 'ab' * 32}}).status_code == 403
+    assert client.post('/api/screen', headers=HEADERS, json=screen_body({**approval, 'signature': body + '.' + 'ab' * 32})).status_code == 403
 
 
 def test_non_approval_decision_is_echoed_without_approval(app):
@@ -199,7 +229,7 @@ def test_screening_accepts_an_approval_that_went_through_a_browser(app):
     client, run, job = completed_job(app)
     approval = client.post('/api/research-decisions', headers=HEADERS, json=decision_body(job, run, confirmed=True)).get_json()['approval']
     assert approval['scores']['literature'] == 1.0  # LRRK2 tops the literature axis: the 1.0 → 1 case
-    screened = client.post('/api/screen', headers=HEADERS, json={'approval': browser_round_trip(approval)})
+    screened = client.post('/api/screen', headers=HEADERS, json=screen_body(browser_round_trip(approval)))
     assert screened.status_code == 200, screened.get_json()
 
 

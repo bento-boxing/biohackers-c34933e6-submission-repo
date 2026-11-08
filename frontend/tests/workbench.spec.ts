@@ -29,11 +29,28 @@ test('recorded LRRK2 flow: discovery, challenge, experiment, approval and screen
   await expect(screen).toBeEnabled({timeout:20_000});
   await screen.click();
   await expect(page.getByText('RECORDED SCREENING DATA · LRRK2')).toBeVisible({timeout:40_000});
-  await expect(page.getByRole('columnheader',{name:'Best pChEMBL'})).toBeVisible();
+  // four factors are separate columns; the rubric is labelled as a heuristic and the baseline stays available
+  for (const name of ['Potency','Drug-likeness','Clinical stage','Selectivity (observed)','Warnings']) await expect(page.getByRole('columnheader',{name})).toBeVisible();
+  await expect(page.getByText('Candidate prioritisation is a heuristic.')).toBeVisible();
+  await expect(page.getByText('Partial retrieval.')).toBeVisible();
+  const firstRank=page.locator('tbody tr').first().locator('td').first();
+  await expect(firstRank).toContainText('1');
+  await page.getByRole('button',{name:'Explain'}).first().click();
+  await expect(page.getByRole('heading',{name:'Observed selectivity'})).toBeVisible();
+  await expect(page.locator('.screen-detail').getByText(/untested targets are unknown/i)).toBeVisible();
+  await page.getByLabel('Ranking view').selectOption('baseline');
+  await expect(page.getByRole('columnheader',{name:/Baseline rank/})).toBeVisible();
+  await page.getByLabel('Ranking view').selectOption('rubric');
+  await page.getByLabel('Prioritisation objective').selectOption('novel_candidates');
+  await expect(page.getByText('Clinical stage shown but unweighted')).toBeVisible();
+  await expect(page.getByText('RECORDED SCREENING DATA · LRRK2')).toBeVisible({timeout:40_000});
+  await page.screenshot({path:'test-results/screening-desktop.png',fullPage:true});
   await page.getByRole('link',{name:/Target discovery/}).click();
   await page.getByRole('button',{name:'Select SNCA →'}).click();
   await expect(page.getByRole('heading',{name:'Scientific Challenge & Revision'})).toHaveCount(0);
-  await expect(page.getByRole('button',{name:'Challenge this target →'})).toBeEnabled();
+  // SNCA has no recording: offline mode says so and refuses to substitute data
+  await expect(page.getByText(/There is no recording for SNCA/)).toBeVisible();
+  await expect(page.getByRole('button',{name:'Challenge this target →'})).toBeDisabled();
 });
 
 test('live mode runs Gemini without a consent checkbox and mode change clears evidence',async({page})=>{
@@ -75,6 +92,7 @@ test('reload restores the run, target and report from localStorage without backe
 
 test('BACE1 archived Gemini output is visibly recorded with zero new calls',async({page})=>{
   await page.goto('/challenge');
+  await page.getByLabel('Research data mode').selectOption('offline');
   await page.getByRole('button',{name:'Challenge this target →'}).click();
   await expect(page.getByText('Historical output · 0 new paid calls')).toBeVisible({timeout:40_000});
   await expect(page.getByText('RECORDED AI',{exact:true})).toBeVisible();
@@ -85,6 +103,7 @@ test('BACE1 archived Gemini output is visibly recorded with zero new calls',asyn
 
 test('experiment prose uses labelled evidence while the trace retains source records',async({page})=>{
   await page.goto('/challenge');
+  await page.getByLabel('Research data mode').selectOption('offline');
   await page.getByRole('button',{name:/Challenge this target/}).click();
   await expect(page.getByText('Historical output · 0 new paid calls')).toBeVisible({timeout:40_000});
   await page.getByRole('link',{name:/Review experiment/}).click();

@@ -34,24 +34,27 @@ def record(disease_name: str, n: int) -> None:
         cid = chembl.find_target(client, t.uniprot, t.symbol)
         potent = chembl.potent_count(client, cid) if cid else 0
         print("safety+lit+chembl", t.symbol, count, cid, potent)
-    # stage-2 demo data for the first target that has a ChEMBL id (LRRK2 for Parkinson)
+    record_screening(client, disease, targets)
+
+
+def record_screening(client: HttpClient, disease, targets) -> None:
+    """Stage-2 demo data for the first target that has a ChEMBL id (LRRK2 for Parkinson): the staged
+    screening pipeline is run against the recording client so every query it makes is captured."""
+    from pipeline.models import Approval, Weights
+    from pipeline.screening.pipeline import run_screening
+
     chembl.find_target(client, None, "ZZQXV1")
     for t in targets:
         cid = chembl.find_target(client, t.uniprot, t.symbol)
         if cid:
-            acts = chembl.potent_activities(client, cid, max_pages=5)
+            approval = Approval(approval_id="demo-recording", ts="2026-11-07T00:00:00Z", disease_id=disease.id,
+                                disease_name=disease.name, target_id=t.target_id, symbol=t.symbol, uniprot=t.uniprot,
+                                chembl_target_id=cid, weights=Weights().as_dict(), scores={}, safety_flags=[],
+                                reason="demo recording", approved_by="recorder")
+            result = run_screening(approval, top_n=50, client=client)
             chembl.potent_activities(client, cid, max_pages=1)
-            best: dict[str, float] = {}
-            for a in acts:
-                v = a.get("pchembl_value")
-                if v is not None:
-                    best[a["molecule_chembl_id"]] = max(best.get(a["molecule_chembl_id"], 0), float(v))
-            top = sorted(best, key=best.get, reverse=True)[:50]
-            chembl.molecules(client, top)
             chembl.molecules(client, ["CHEMBL1721885"])
-            if t.uniprot:
-                alphafold.prediction(client, t.uniprot)
-            print("stage2", t.symbol, cid, len(acts), len(top))
+            print("stage2", t.symbol, cid, len(result.compounds), result.coverage)
             break
 
 
@@ -59,9 +62,16 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--disease", default="Parkinson disease")
     ap.add_argument("--n", type=int, default=25)
+    ap.add_argument("--screening-only", action="store_true",
+                    help="only re-record the compound-screening responses (scout responses already recorded)")
     ap.add_argument("--rationale", action="store_true",
                     help="also record the default-weights LLM rationale (needs GEMINI_API_KEY, AI_MODEL and AI_ENABLED=true in the root .env)")
     a = ap.parse_args()
+    if a.screening_only:
+        client = HttpClient(write_dir=DEMO_DIR, ttl_days=36500)
+        disease = ot.resolve_disease(client, a.disease)
+        record_screening(client, disease, ot.associated_targets(client, disease.id, a.n))
+        raise SystemExit(0)
     record(a.disease, a.n)
     if a.rationale:
         from pipeline.scout.pipeline import run_scout

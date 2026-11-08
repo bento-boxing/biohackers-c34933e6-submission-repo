@@ -1,0 +1,592 @@
+{
+ "target": "EGFR",
+ "chembl_target_id": "CHEMBL203",
+ "disease": "non-small cell lung carcinoma",
+ "elapsed_seconds": 7.1,
+ "coverage": {
+  "partial": true,
+  "stage1": {
+   "total_count": 16683,
+   "retrieved": 5000,
+   "complete": false,
+   "cutoff_pchembl": 8.15,
+   "order_by": "-pchembl_value",
+   "selection_method": "activity records with pChEMBL >= 6 ordered by pChEMBL descending; retrieval stopped at 5000 of 16683 records, so every omitted record has pChEMBL <= 8.15"
+  },
+  "candidate_pool": {
+   "size": 69,
+   "molecules_retrieved": 2868,
+   "method": "union of the top 50 molecules by maximum pChEMBL (baseline) and the top 50 by preliminary median pChEMBL"
+  },
+  "stage2": {
+   "molecules": 69,
+   "records": 1981,
+   "truncated_batches": 0
+  },
+  "indications": {
+   "molecules_checked": 8,
+   "molecules_with_records": 7
+  },
+  "stage3": {
+   "molecules_assessed": 10,
+   "shortlist": [
+    "CHEMBL1173655",
+    "CHEMBL420624",
+    "CHEMBL5790648",
+    "CHEMBL5746224",
+    "CHEMBL5993268",
+    "CHEMBL5968640",
+    "CHEMBL5997498",
+    "CHEMBL53428",
+    "CHEMBL6054692",
+    "CHEMBL328106"
+   ],
+   "truncated_batches": 0,
+   "skipped_for_budget": [],
+   "method": "all ChEMBL activity records with a pChEMBL value for the top 10 candidates; only exact binding measurements of the on-target primary type are compared"
+  },
+  "elapsed_seconds": 7.1
+ },
+ "notes": [
+  "Partial retrieval: activity records with pChEMBL >= 6 ordered by pChEMBL descending; retrieval stopped at 5000 of 16683 records, so every omitted record has pChEMBL <= 8.15. Molecules whose every measurement is weaker than pChEMBL 8.15 were not retrieved."
+ ],
+ "pool_size": 69,
+ "coverage_comparison": {
+  "total_potent_records": 16683,
+  "legacy_molecules_retrieved": 3024,
+  "ordered_molecules_retrieved": 2868,
+  "ordered_cutoff_pchembl": 8.15,
+  "baseline_top50_molecules_absent_from_legacy_retrieval": [
+   "CHEMBL4650319",
+   "CHEMBL5270693",
+   "CHEMBL5790648",
+   "CHEMBL5746224",
+   "CHEMBL3353410",
+   "CHEMBL5997498",
+   "CHEMBL4537790",
+   "CHEMBL6054692",
+   "CHEMBL5968640",
+   "CHEMBL5288888",
+   "CHEMBL4100860",
+   "CHEMBL5594833",
+   "CHEMBL5805801",
+   "CHEMBL5993268",
+   "CHEMBL4521381",
+   "CHEMBL5915655",
+   "CHEMBL5271803",
+   "CHEMBL5284924",
+   "CHEMBL5193123",
+   "CHEMBL5432965",
+   "CHEMBL5282641",
+   "CHEMBL5811442",
+   "CHEMBL5186680",
+   "CHEMBL5393923",
+   "CHEMBL5434495",
+   "CHEMBL5436031",
+   "CHEMBL3545154",
+   "CHEMBL5201543",
+   "CHEMBL4103912",
+   "CHEMBL4756368",
+   "CHEMBL5874605",
+   "CHEMBL5195904",
+   "CHEMBL5399653",
+   "CHEMBL5422588",
+   "CHEMBL5957231"
+  ],
+  "legacy_top50_overlap_with_ordered_baseline_top50": 0.28,
+  "legacy_top50_max_pchembl_range": [
+   9.6,
+   11.0
+  ],
+  "ordered_top50_max_pchembl_range": [
+   10.12,
+   11.0
+  ]
+ },
+ "ranking_change_vs_baseline": {
+  "balanced": {
+   "top10_overlap": 0.4,
+   "spearman": 0.0191,
+   "mean_abs_rank_shift": 22.61
+  },
+  "novel_candidates": {
+   "top10_overlap": 0.4,
+   "spearman": -0.0323,
+   "mean_abs_rank_shift": 22.87
+  },
+  "repurposing": {
+   "top10_overlap": 0.3,
+   "spearman": 0.2442,
+   "mean_abs_rank_shift": 19.83
+  }
+ },
+ "ablations": {
+  "potency": {
+   "top10_overlap_with_full": 0.4,
+   "spearman_with_full": 0.3821,
+   "mean_abs_rank_shift": 16.09,
+   "top10": [
+    "CHEMBL328106",
+    "CHEMBL553",
+    "CHEMBL3353410",
+    "CHEMBL53428",
+    "CHEMBL29197",
+    "CHEMBL3545154",
+    "CHEMBL1173655",
+    "CHEMBL180022",
+    "CHEMBL31965",
+    "CHEMBL420624"
+   ]
+  },
+  "drug_likeness": {
+   "top10_overlap_with_full": 0.7,
+   "spearman_with_full": 0.8615,
+   "mean_abs_rank_shift": 7.74,
+   "top10": [
+    "CHEMBL3545154",
+    "CHEMBL31965",
+    "CHEMBL328106",
+    "CHEMBL5790648",
+    "CHEMBL6054692",
+    "CHEMBL5746224",
+    "CHEMBL5968640",
+    "CHEMBL5997498",
+    "CHEMBL5193123",
+    "CHEMBL5186680"
+   ]
+  },
+  "selectivity": {
+   "top10_overlap_with_full": 0.9,
+   "spearman_with_full": 0.9902,
+   "mean_abs_rank_shift": 0.61,
+   "top10": [
+    "CHEMBL1173655",
+    "CHEMBL420624",
+    "CHEMBL5790648",
+    "CHEMBL5746224",
+    "CHEMBL5993268",
+    "CHEMBL5968640",
+    "CHEMBL5997498",
+    "CHEMBL53428",
+    "CHEMBL6054692",
+    "CHEMBL328106"
+   ]
+  },
+  "clinical": {
+   "top10_overlap_with_full": 0.9,
+   "spearman_with_full": 0.9381,
+   "mean_abs_rank_shift": 3.8,
+   "top10": [
+    "CHEMBL420624",
+    "CHEMBL328106",
+    "CHEMBL5790648",
+    "CHEMBL5746224",
+    "CHEMBL5993268",
+    "CHEMBL5968640",
+    "CHEMBL5997498",
+    "CHEMBL53428",
+    "CHEMBL6054692",
+    "CHEMBL327307"
+   ]
+  }
+ },
+ "stability_under_missing_data": {
+  "drop_qed_30pct": {
+   "mean_top10_overlap": 0.7,
+   "mean_abs_rank_shift": 6.22,
+   "runs": [
+    {
+     "top10_overlap": 0.9,
+     "spearman": 0.8537,
+     "mean_abs_rank_shift": 6.7
+    },
+    {
+     "top10_overlap": 0.4,
+     "spearman": 0.8695,
+     "mean_abs_rank_shift": 7.68
+    },
+    {
+     "top10_overlap": 0.6,
+     "spearman": 0.9164,
+     "mean_abs_rank_shift": 5.1
+    },
+    {
+     "top10_overlap": 1.0,
+     "spearman": 0.9299,
+     "mean_abs_rank_shift": 4.96
+    },
+    {
+     "top10_overlap": 0.6,
+     "spearman": 0.8894,
+     "mean_abs_rank_shift": 6.67
+    }
+   ]
+  },
+  "drop_selectivity_30pct": {
+   "mean_top10_overlap": 0.98,
+   "mean_abs_rank_shift": 0.16,
+   "runs": [
+    {
+     "top10_overlap": 1.0,
+     "spearman": 0.9987,
+     "mean_abs_rank_shift": 0.23
+    },
+    {
+     "top10_overlap": 1.0,
+     "spearman": 1.0,
+     "mean_abs_rank_shift": 0.0
+    },
+    {
+     "top10_overlap": 0.9,
+     "spearman": 0.9923,
+     "mean_abs_rank_shift": 0.58
+    },
+    {
+     "top10_overlap": 1.0,
+     "spearman": 1.0,
+     "mean_abs_rank_shift": 0.0
+    },
+    {
+     "top10_overlap": 1.0,
+     "spearman": 1.0,
+     "mean_abs_rank_shift": 0.0
+    }
+   ]
+  },
+  "drop_both_30pct": {
+   "mean_top10_overlap": 0.62,
+   "mean_abs_rank_shift": 8.78,
+   "runs": [
+    {
+     "top10_overlap": 0.7,
+     "spearman": 0.8274,
+     "mean_abs_rank_shift": 8.81
+    },
+    {
+     "top10_overlap": 0.7,
+     "spearman": 0.8618,
+     "mean_abs_rank_shift": 7.65
+    },
+    {
+     "top10_overlap": 0.4,
+     "spearman": 0.8232,
+     "mean_abs_rank_shift": 9.36
+    },
+    {
+     "top10_overlap": 0.6,
+     "spearman": 0.8134,
+     "mean_abs_rank_shift": 9.62
+    },
+    {
+     "top10_overlap": 0.7,
+     "spearman": 0.8336,
+     "mean_abs_rank_shift": 8.46
+    }
+   ]
+  }
+ },
+ "known_compounds": {
+  "GEFITINIB": {
+   "in_pool": false,
+   "expected_indication_status": "matched"
+  },
+  "ERLOTINIB": {
+   "in_pool": true,
+   "chembl_id": "CHEMBL553",
+   "baseline_rank": 15,
+   "rubric_rank": {
+    "balanced": 56,
+    "novel_candidates": 65,
+    "repurposing": 5
+   },
+   "aggregate_pchembl": 7.52,
+   "max_pchembl": 10.54,
+   "primary_type": "IC50",
+   "aggregate_n": 180,
+   "phase": 4.0,
+   "indication_status": "matched",
+   "expected_indication_status": "matched",
+   "indication_correct": true,
+   "selectivity_evidence": "not_assessed",
+   "selectivity_window": null,
+   "targets_tested": 0
+  },
+  "OSIMERTINIB": {
+   "in_pool": true,
+   "chembl_id": "CHEMBL3353410",
+   "baseline_rank": 6,
+   "rubric_rank": {
+    "balanced": 48,
+    "novel_candidates": 64,
+    "repurposing": 3
+   },
+   "aggregate_pchembl": 7.92,
+   "max_pchembl": 10.7,
+   "primary_type": "IC50",
+   "aggregate_n": 221,
+   "phase": 4.0,
+   "indication_status": "matched",
+   "expected_indication_status": "matched",
+   "indication_correct": true,
+   "selectivity_evidence": "not_assessed",
+   "selectivity_window": null,
+   "targets_tested": 0
+  },
+  "AFATINIB": {
+   "in_pool": true,
+   "chembl_id": "CHEMBL1173655",
+   "baseline_rank": 38,
+   "rubric_rank": {
+    "balanced": 22,
+    "novel_candidates": 53,
+    "repurposing": 1
+   },
+   "aggregate_pchembl": 8.96,
+   "max_pchembl": 10.21,
+   "primary_type": "IC50",
+   "aggregate_n": 105,
+   "phase": 4.0,
+   "indication_status": "matched",
+   "expected_indication_status": "matched",
+   "indication_correct": true,
+   "selectivity_evidence": "observed_window",
+   "selectivity_window": -0.04,
+   "targets_tested": 638
+  },
+  "DACOMITINIB": {
+   "in_pool": false,
+   "expected_indication_status": "matched"
+  },
+  "LAPATINIB": {
+   "in_pool": true,
+   "chembl_id": "CHEMBL554",
+   "baseline_rank": 33,
+   "rubric_rank": {
+    "balanced": 55,
+    "novel_candidates": 66,
+    "repurposing": 4
+   },
+   "aggregate_pchembl": 7.97,
+   "max_pchembl": 10.22,
+   "primary_type": "IC50",
+   "aggregate_n": 74,
+   "phase": 4.0,
+   "indication_status": "matched",
+   "expected_indication_status": "other_indications_only",
+   "indication_correct": false,
+   "selectivity_evidence": "not_assessed",
+   "selectivity_window": null,
+   "targets_tested": 0
+  },
+  "ICOTINIB": {
+   "in_pool": false,
+   "expected_indication_status": "matched"
+  }
+ },
+ "indication_interpretation": {
+  "known_in_pool": 4,
+  "correct": 3,
+  "phased_molecules_in_pool": 8,
+  "status_counts": {
+   "preclinical": 61,
+   "matched": 7,
+   "no_indication_records": 1
+  }
+ },
+ "assay_interpretation": {
+  "primary_type_counts": {
+   "IC50": 68,
+   "Kd": 1
+  },
+  "no_aggregate": 0,
+  "sparse": 17,
+  "conflicting": 33,
+  "max_minus_median_mean": 0.84,
+  "max_minus_median_ge_1_log": 26,
+  "censored_records": 114
+ },
+ "selectivity_evidence_top10": {
+  "evidence_counts": {
+   "observed_window": 1,
+   "no_off_target_records": 8,
+   "not_assessed": 1
+  },
+  "scored_without_window": 0,
+  "targets_tested": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "partial": 0,
+  "windows": [
+   2.92,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "missing_factor_lists": [
+   [],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ],
+   [
+    "selectivity"
+   ]
+  ]
+ },
+ "top10": {
+  "baseline": [
+   "CHEMBL176582",
+   "CHEMBL4650319",
+   "CHEMBL5270693",
+   "CHEMBL5790648",
+   "CHEMBL5746224",
+   "CHEMBL3353410",
+   "CHEMBL5997498",
+   "CHEMBL4537790",
+   "CHEMBL180022",
+   "CHEMBL6054692"
+  ],
+  "balanced": [
+   "CHEMBL328106",
+   "CHEMBL420624",
+   "CHEMBL5790648",
+   "CHEMBL5746224",
+   "CHEMBL5993268",
+   "CHEMBL5968640",
+   "CHEMBL5997498",
+   "CHEMBL53428",
+   "CHEMBL6054692",
+   "CHEMBL3545154"
+  ],
+  "novel_candidates": [
+   "CHEMBL420624",
+   "CHEMBL328106",
+   "CHEMBL5790648",
+   "CHEMBL5746224",
+   "CHEMBL5993268",
+   "CHEMBL5968640",
+   "CHEMBL5997498",
+   "CHEMBL53428",
+   "CHEMBL6054692",
+   "CHEMBL327307"
+  ],
+  "repurposing": [
+   "CHEMBL1173655",
+   "CHEMBL3545154",
+   "CHEMBL3353410",
+   "CHEMBL554",
+   "CHEMBL553",
+   "CHEMBL4650319",
+   "CHEMBL180022",
+   "CHEMBL328106",
+   "CHEMBL31965",
+   "CHEMBL420624"
+  ]
+ },
+ "names": {
+  "CHEMBL328106": null,
+  "CHEMBL420624": null,
+  "CHEMBL5790648": null,
+  "CHEMBL5746224": null,
+  "CHEMBL5993268": null,
+  "CHEMBL5968640": null,
+  "CHEMBL5997498": null,
+  "CHEMBL53428": null,
+  "CHEMBL6054692": null,
+  "CHEMBL3545154": "POZIOTINIB",
+  "CHEMBL327307": null,
+  "CHEMBL31965": "CANERTINIB",
+  "CHEMBL5915655": null,
+  "CHEMBL5957231": null,
+  "CHEMBL176582": null,
+  "CHEMBL174426": null,
+  "CHEMBL55729": null,
+  "CHEMBL5201543": null,
+  "CHEMBL4537790": null,
+  "CHEMBL5193123": null,
+  "CHEMBL3613702": null,
+  "CHEMBL1173655": "AFATINIB",
+  "CHEMBL5188940": null,
+  "CHEMBL5874605": null,
+  "CHEMBL5195904": null,
+  "CHEMBL5288888": null,
+  "CHEMBL5186680": null,
+  "CHEMBL6120309": null,
+  "CHEMBL5180388": null,
+  "CHEMBL5393923": null,
+  "CHEMBL5436031": null,
+  "CHEMBL4760328": null,
+  "CHEMBL5399653": null,
+  "CHEMBL5432965": null,
+  "CHEMBL5220645": null,
+  "CHEMBL5282641": null,
+  "CHEMBL4759003": null,
+  "CHEMBL4784258": null,
+  "CHEMBL4103912": null,
+  "CHEMBL5196360": null,
+  "CHEMBL4748367": null,
+  "CHEMBL5594833": null,
+  "CHEMBL4778248": null,
+  "CHEMBL4787951": null,
+  "CHEMBL5422588": null,
+  "CHEMBL5284924": null,
+  "CHEMBL5811442": null,
+  "CHEMBL3353410": "OSIMERTINIB",
+  "CHEMBL4742081": null,
+  "CHEMBL5434495": null,
+  "CHEMBL5271803": null,
+  "CHEMBL5270693": null,
+  "CHEMBL4756368": null,
+  "CHEMBL1243316": null,
+  "CHEMBL554": "LAPATINIB",
+  "CHEMBL553": "ERLOTINIB",
+  "CHEMBL5173517": null,
+  "CHEMBL5952854": null,
+  "CHEMBL1229592": null,
+  "CHEMBL5805801": null,
+  "CHEMBL4757145": null,
+  "CHEMBL4100860": null,
+  "CHEMBL4787483": null,
+  "CHEMBL4650319": "MOBOCERTINIB",
+  "CHEMBL180022": "NERATINIB",
+  "CHEMBL363815": null,
+  "CHEMBL275762": null,
+  "CHEMBL29197": null,
+  "CHEMBL4521381": null
+ }
+}
