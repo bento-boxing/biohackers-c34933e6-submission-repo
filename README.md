@@ -99,11 +99,13 @@ The downloadable research report is the durable record.
 - **Time budget.** Vercel's default function limit is 300 s (Hobby and Pro). Live retrieval is
   capped at `RESEARCH_RETRIEVAL_BUDGET_SECONDS` (default 240 s, or 150 s when Gemini reasoning is
   authorized). The whole request has a deadline of `RESEARCH_REQUEST_BUDGET_SECONDS` (default 280):
-  each Gemini call is clamped to the time left and no new paid call starts within 5 s of it. When the budget runs short, the challenger verifies the full
-  registry record of stopped trials first and labels the rest "not verified" instead of failing;
-  only if even the searches cannot finish does the investigation fail with an explicit message.
-  Measured: EGFR / NSCLC (501 trials, the worst case we found) completes in about 215 s; LRRK2 in
-  under a minute. An uncached 25-target scout takes about 25 s, a screening about 12 s. Parkinson
+  each Gemini call is clamped to the time left (and refused with under 15 s left) so the function
+  is never killed mid-call. Registry full records are fetched 50 per request with up to four
+  parallel workers; when the budget still runs short, stopped trials are verified first and the
+  rest are labelled "not verified" instead of failing. Verified public responses are cached in a
+  per-instance SQLite file (`/tmp` on Vercel), so a retry of the same target is much faster.
+  Measured retrieval only: EGFR / NSCLC (633 trials, the worst case we found) 134 s, CCR5 / HIV
+  90 s, LRRK2 under 20 s; Gemini adds roughly 140 s for five calls. An uncached 25-target scout takes about 25 s, a screening about 12 s. Parkinson
   disease / LRRK2 are instant from the recorded snapshot.
 - **Payload sizes.** Reports never travel back to the server: the investigation response carries a
   signed digest (`report_sig`) and each scout target a signed `sig`, and the decision request posts
