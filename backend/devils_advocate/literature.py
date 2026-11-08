@@ -5,6 +5,7 @@ from .disease_terms import terms, matches
 from .http_client import JsonClient, RetrievalError
 from .models import Publication, SearchAudit, TargetInput, Compound
 from .relevance import mentions
+from .evidence_context import directional
 from .association import target_mentioned,aggregate_publication
 
 ENDPOINT='https://www.ebi.ac.uk/europepmc/webservices/rest/search'
@@ -46,9 +47,11 @@ def annotate(pub: Publication) -> Publication:
     pub.conclusion_excerpt=chunks[-1].strip() if len(chunks)>1 else ''
     conclusion=pub.conclusion_excerpt
     pub.direction_signals=[]
-    if re.search(r'\b(did not (?:improve|reduce)|not superior|not (?:shown to be )?noninferior|no (?:significant )?(?:benefit|difference)|failed to|not meet)\b',conclusion,re.I):
+    # A positive phrase inside a negation ("neither drug significantly reduced liver fat") is a null result.
+    positive,negated_positive=directional(r'\b(significantly (?:reduced|improved)|greater (?:virologic|viral|reduction|suppression)|efficacy superior|significantly longer|resulted in .{0,30}(?:LDL|reduction)|(?:improved|reduced) .{0,90}(?:compared with|versus)|effective and)\b',conclusion)
+    if negated_positive or re.search(r'\b(did not (?:significantly )?(?:improve|reduce)|not superior|not (?:shown to be )?noninferior|no (?:significant )?(?:benefit|difference)|failed to|not meet)\b',conclusion,re.I):
         pub.direction_signals.append('negative_candidate')
-    if re.search(r'\b(significantly (?:reduced|improved)|greater (?:virologic|viral|reduction|suppression)|efficacy superior|significantly longer|resulted in .{0,30}(?:LDL|reduction)|(?:improved|reduced) .{0,90}(?:compared with|versus)|effective and)\b',conclusion,re.I):
+    if positive:
         pub.direction_signals.append('positive_candidate')
     if re.search(r'\b(adverse events|toxicity|safety concerns|hepatotoxicity)\b',conclusion,re.I):
         pub.direction_signals.append('safety_candidate')
@@ -57,7 +60,9 @@ def annotate(pub: Publication) -> Publication:
     return pub
 
 def retrieve_publications(client: JsonClient,target: TargetInput,compounds: list[Compound] | None=None,
-                          audit: list[SearchAudit] | None=None,trial_publication_ids: list[str] | None=None,include_clinical: bool=False) -> list[Publication]:
+                          audit: list[SearchAudit] | None=None,trial_publication_ids: list[str] | None=None,include_clinical: bool=False,
+                          searches: bool=True) -> list[Publication]:
+    """searches=False runs only the registry-linked PMID lookup, so the main searches can run alongside trial retrieval."""
     audit=audit if audit is not None else []
     names=list(dict.fromkeys([target.target_symbol,*target.target_aliases,*[c.name for c in compounds or []],
           *[s for c in compounds or [] for s in c.synonyms if 4<=len(s)<=60 and len(s.split())<=4]]))[:65]
@@ -101,7 +106,7 @@ def retrieve_publications(client: JsonClient,target: TargetInput,compounds: list
                 bounded.append((operation+' (query chunk)','('+' OR '.join('TITLE_ABS:'+quoted(n) for n in chunk)+')'+suffix));chunk=[]
             chunk.append(name)
         if chunk:bounded.append((operation+' (query chunk)','('+' OR '.join('TITLE_ABS:'+quoted(n) for n in chunk)+')'+suffix))
-    queries=bounded
+    queries=bounded if searches else []
     identifiers=list(dict.fromkeys(p for p in trial_publication_ids or [] if re.fullmatch(r'\d+',p)))[:60]
     if identifiers:
         queries.insert(0,('registry-linked result publications','SRC:MED AND ('+' OR '.join('EXT_ID:'+p for p in identifiers)+')'))

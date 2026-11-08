@@ -46,7 +46,11 @@ def evaluate():
    'approval_metadata_preserved':all('approval_metadata' in packet['sources'][c.chembl_id]['fields'] for c in i.compounds if c.max_phase==4),
    'status_not_used_as_outcome':all(classify_concern(t.status)=='unknown' for t in i.trials),
    'missing_publications_abstains':check_coverage(missing).status=='INSUFFICIENT COVERAGE',
-   'no_unverified_fallback_experiment':propose_experiment(missing).status=='INSUFFICIENT EVIDENCE FOR EXPERIMENT',
+   # Without a verified synthesis the fallback is either an abstention or a flagged rule-based template,
+   # never a design presented as AI-generated or validated.
+   'fallback_experiment_labelled_not_ai':(lambda e:e.status=='INSUFFICIENT EVIDENCE FOR EXPERIMENT' or
+       (e.status.startswith('Rule-based template') and any(l.startswith('Review flag:') for l in e.limitations)) or
+       (missing.mode=='offline' and not e.status.startswith('AI-generated')))(propose_experiment(missing)),
    'all_curated_directions_kept':all(p.identifier in packet['sources'] for p in i.publications if p.direction_signals)}
   cases.append({'target':case['target'],'expected_conclusion':case['expected'],'checks':checks,
    'approved_precedent_in_fixture':approved,'coverage':coverage.status,'coverage_gaps':coverage.gaps,

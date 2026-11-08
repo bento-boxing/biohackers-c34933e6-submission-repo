@@ -16,7 +16,7 @@ test('recorded LRRK2 flow: discovery, challenge, experiment, approval and screen
   await expect(page.getByRole('heading',{name:'Scientific Challenge & Revision'})).toBeVisible({timeout:30_000});
   await page.getByRole('link',{name:'Review experiment →'}).click();
   await expect(page.getByRole('heading',{name:'One experiment. A clearer decision.'})).toBeVisible();
-  await expect(page.getByText('UNVALIDATED RESEARCH PROPOSAL',{exact:true})).toBeVisible();
+  await expect(page.getByText('PROPOSED STUDY · NOT YET PERFORMED',{exact:true})).toBeVisible();
   await page.getByRole('link',{name:'Record decision →'}).click();
   const save=page.getByRole('button',{name:'Save researcher decision'});
   await expect(save).toBeDisabled();
@@ -118,7 +118,7 @@ test('BACE1 archived Gemini output is visibly recorded with zero new calls',asyn
   await expect(page.getByText('RECORDED AI',{exact:true})).toBeVisible();
   await page.getByRole('link',{name:'Review experiment →'}).click();
   await expect(page.getByText('RECORDED GEMINI PROPOSAL',{exact:true})).toBeVisible();
-  await expect(page.getByText('UNVALIDATED RESEARCH PROPOSAL',{exact:true})).toBeVisible();
+  await expect(page.getByText('PROPOSED STUDY · NOT YET PERFORMED',{exact:true})).toBeVisible();
 });
 
 test('experiment prose uses labelled evidence while the trace retains source records',async({page})=>{

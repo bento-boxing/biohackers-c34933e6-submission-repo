@@ -7,29 +7,56 @@ def abstain_experiment(reason: str) -> Experiment:
         decision_impact='Obtain missing clinical/indication evidence and researcher review before choosing an experiment.',
         evidence_ids=[],status='INSUFFICIENT EVIDENCE FOR EXPERIMENT')
 
+REVIEW_FLAG = 'Review flag: '
+
+def flag(experiment: Experiment, reason: str) -> Experiment:
+    """Keep the proposal and make the concern visible; the researcher decides, the gate does not erase the design."""
+    if REVIEW_FLAG + reason not in experiment.limitations:
+        experiment.limitations.insert(0, REVIEW_FLAG + reason)
+    return experiment
+
+def has_design(experiment: Experiment | None) -> bool:
+    return bool(experiment and experiment.status != 'INSUFFICIENT EVIDENCE FOR EXPERIMENT'
+                and experiment.question.strip() and experiment.competing_explanations)
+
+def approved_precedent(result: Investigation) -> list[str]:
+    return [c.name for c in result.compounds if c.max_phase == 4 and
+            any(r.get('approval_precedent') and r.get('disease_match') in ['identifier', 'lexical'] for r in c.indications)]
+
 def check_experiment_readiness(result: Investigation, experiment: Experiment, accepted_count: int) -> Experiment:
-    """Fail closed on missing knowledge review; this cannot certify scientific novelty."""
-    if experiment.status=='INSUFFICIENT EVIDENCE FOR EXPERIMENT':return experiment
+    """Flag missing anchors, knowledge review or scope; this cannot certify scientific novelty."""
+    if not has_design(experiment):return experiment
     if not accepted_count or not experiment.evidence_ids:
-        return abstain_experiment('No accepted evidence-grounded uncertainty anchors a meaningful study.')
+        flag(experiment, 'No accepted challenger claim anchors this study; its motivation is the model\'s reading of the packet, not a verified uncertainty.')
     if not experiment.knowledge_review.strip() or not experiment.unresolved_gap.strip():
-        return abstain_experiment('The synthesis did not document existing knowledge and a specific unresolved gap.')
+        flag(experiment, 'The synthesis did not document existing knowledge and a specific unresolved gap; check novelty before proceeding.')
     import re
-    if any(c.max_phase==4 and any(r.get('approval_precedent') and r.get('disease_match') in ['identifier','lexical'] for r in c.indications) for c in result.compounds):
+    if approved_precedent(result):
         broad=re.search(r'\b(?:does|can)\b.{0,150}\b(?:benefit|effective|efficacy|work)\b',experiment.question,re.I)
         scoped=re.search(r'\b(resistan\w*|subgroup|population|mechanism|selectiv\w*|toxic\w*|safety|tropism|stage|exposure|combination|dose|variant|mutation|therapeutic window)\b',experiment.question,re.I)
         if broad and not scoped:
-            return abstain_experiment('A broad treatment-benefit question risks repeating approved clinical precedent; define an evidence-grounded unresolved scope first.')
+            flag(experiment, 'A broad treatment-benefit question may repeat approved clinical precedent ('+', '.join(approved_precedent(result))+'); narrow it to an unresolved population, mechanism or safety question.')
     return experiment
+
+TEMPLATE_STATUS = ('Rule-based template proposal: built from retrieved registry and approval records, not AI-synthesised; '
+                   'unvalidated and not performed. Researcher approval required.')
 
 def propose_experiment(investigation: Investigation | dict) -> Experiment:
     result = Investigation.model_validate(investigation)
     if result.ai and result.ai.status == 'completed' and result.ai.experiment is not None:
         return result.ai.experiment.model_copy(deep=True)
     if result.mode=='live':
-        # The fallback cannot establish novelty, including when Gemini is disabled
-        # or coverage/verification failed. Historical recorded demos stay intact.
-        return abstain_experiment('No verified synthesis established a specific unresolved scientific question; '+result.conclusion)
+        # Abstain only when there is nothing to ground a study in: an unresolved target or no records at all.
+        if not (result.resolved_target_id or result.resolution_status=='gene_verified') or not (result.trials or result.publications):
+            return abstain_experiment('Target identity is unresolved or no registry or literature records were retrieved; '+result.conclusion)
+        experiment=template_experiment(result)
+        reason={'failed':'Gemini synthesis did not complete','skipped':'Gemini reasoning was skipped','disabled':'Gemini reasoning was not run'}.get(
+            result.ai.status if result.ai else 'disabled','Gemini reasoning was not run')
+        return flag(experiment, reason+'; this is a rule-based template from retrieved records. Re-run with Gemini or have an expert scope it.')
+    return template_experiment(result)
+
+def template_experiment(result: Investigation) -> Experiment:
+    """Deterministic study template grounded in verified stop reasons and approval precedent."""
     evidence = [c.claim_id for c in result.claims if c.verified and c.source_field == 'why_stopped']
     target = result.target.target_symbol
     disease = result.target.disease_name
@@ -47,8 +74,13 @@ def propose_experiment(investigation: Investigation | dict) -> Experiment:
     elif target.upper() == 'EGFR':
         model = 'molecularly stratified human lung tumour models with an appropriate non-tumour comparator'
         functional_readout = 'proximal signalling, tumour growth phenotype and comparator-cell viability'
+    precedent = approved_precedent(result)
+    question = (f'Which population, resistance or mechanism factors limit benefit from {target} modulation in {disease}, '
+                f'given approved precedent with {", ".join(precedent[:3])}?' if precedent else
+                f'Does selective modulation of {target} produce a disease-relevant benefit in {disease} at tolerable exposure?')
     return Experiment(
-        question=f'Does selective modulation of {target} produce a disease-relevant benefit in {disease} at tolerable exposure?',
+        question=question,
+        status=TEMPLATE_STATUS if result.mode == 'live' else 'Proposed only; not performed or validated.',
         competing_explanations=[
             'Target modulation changes a proximal biomarker but does not improve the disease-relevant functional phenotype.',
             'Target modulation can improve function, but compound-specific effects or an inadequate therapeutic window obscure benefit.'] if evidence else
