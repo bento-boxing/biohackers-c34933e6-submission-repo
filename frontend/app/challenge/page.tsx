@@ -5,6 +5,7 @@ import { AIReview, EvidenceReport } from '@/components/reports';
 import { StageDurations } from '@/components/stage-durations';
 import { CoverageReport } from '@/components/coverage-report';
 import { ReportProvenance } from '@/components/report-provenance';
+import { EvidenceGraph } from '@/components/evidence-graph';
 import { Badge, PageTitle, Progress, SelectionBar, useWorkbench } from '@/components/workbench';
 
 export default function Challenge(){const {mode,target}=useWorkbench();return <ChallengeForm key={`${mode}:${target?.target_id||'manual'}`}/>;}
@@ -27,7 +28,7 @@ function ChallengeForm(){
     {investigation&&<><div className="metric-grid"><div className="metric"><span>ChEMBL target identity</span><strong className="metric-word mono">{investigation.resolved_target_id||'Unresolved'}</strong><small>{investigation.resolution_status}</small></div><div className="metric"><span>Retrieved evidence</span><strong>{investigation.trials.length}<em>trials</em></strong><small>{investigation.compounds.length} compounds · {investigation.publications.length} publications</small></div><div className="metric"><span>AI reasoning</span><strong className="metric-word">{report.recorded_ai?'Recorded':investigation.ai?.status||(mode==='offline'?'Not run':'Disabled')}</strong><small>{report.recorded_ai?'Historical output · 0 new paid calls':investigation.ai?`${investigation.ai.calls.filter(c=>c.success).length} completed / ${investigation.ai.calls.length} attempted`:mode==='offline'?'Recorded demo · deterministic rules only':'Gemini is disabled in the backend configuration'}</small></div></div>
       {investigation.retrieval_errors.map((e,i)=><div className="notice error" key={i}>A biomedical source could not be retrieved. Report completeness is limited.<details><summary>Public source diagnostic</summary>{e}</details></div>)}
       <section className="panel panel-content initial-assessment"><div className="eyebrow">INITIAL ASSESSMENT · DETERMINISTIC EVIDENCE RULES</div><p>{investigation.conclusion}</p><Badge tone={mode==='offline'?'recorded':'live'}>{mode==='offline'?'RECORDED EVIDENCE':'LIVE / API CACHE'}</Badge></section>
-      <ReportProvenance report={report} config={config}/><CoverageReport investigation={investigation}/><StageDurations timings={report.timings} ai={investigation.ai} recorded={report.recorded_ai}/><AIReview ai={investigation.ai} recorded={report.recorded_ai}/><EvidenceReport investigation={investigation}/>
+      <ReportProvenance report={report} config={config}/><CoverageReport investigation={investigation}/><EvidenceGraph investigation={investigation}/><StageDurations timings={report.timings} ai={investigation.ai} recorded={report.recorded_ai}/><AIReview ai={investigation.ai} recorded={report.recorded_ai}/><EvidenceReport investigation={investigation}/>
       <div className="next-step"><div><h3>Turn uncertainty into a testable question.</h3><p>Review the proposed experiment before recording a research decision.</p></div><Link className="button primary" href="/experiment">Review experiment →</Link></div>
     </>}
   </>;

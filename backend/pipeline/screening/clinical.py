@@ -47,8 +47,9 @@ def qualify_clinical(max_phase, indications: list[dict] | None, disease_id: str 
         phases = [m["max_phase_for_ind"] for m in out["matched"] if m["max_phase_for_ind"] is not None]
         out["matched_max_phase"] = max(phases) if phases else None
         out["indication_status"] = "matched"
+        phase_note = f", phase {out['matched_max_phase']:g}" if out["matched_max_phase"] is not None else ""
         out["note"] = (f"ChEMBL records development for the approved disease ({out['matched'][0]['efo_term']}"
-                       f"{f', phase {out['matched_max_phase']:g}' if out['matched_max_phase'] is not None else ''}).")
+                       f"{phase_note}).")
     elif others:
         out["indication_status"] = "other_indications_only"
         out["note"] = (f"Development recorded only for other indications ({', '.join(out['other_examples'])}"

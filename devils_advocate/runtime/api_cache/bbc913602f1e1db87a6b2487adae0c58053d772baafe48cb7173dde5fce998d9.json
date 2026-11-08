@@ -1,0 +1,1 @@
+{"ts": 1794134774.0096326, "method": "GET", "url": "https://www.ebi.ac.uk/chembl/api/data/target.json", "params": {"target_components__accession": "Q9NQ11", "target_type": "SINGLE PROTEIN", "limit": 5}, "body": null, "data": {"page_meta": {"limit": 5, "next": null, "offset": 0, "previous": null, "total_count": 0}, "targets": []}}

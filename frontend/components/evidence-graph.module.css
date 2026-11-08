@@ -1,0 +1,413 @@
+.panel {
+  overflow: visible;
+}
+
+.content {
+  padding: 22px 26px 26px;
+}
+
+.mapScroll {
+  overflow-x: auto;
+  padding: 8px 0;
+}
+
+.mapCanvas {
+  position: relative;
+  width: 100%;
+  min-width: 700px;
+  aspect-ratio: 1000 / 620;
+  min-height: 430px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: radial-gradient(ellipse at center, #50723C14 0, #FFFFFF 38%, #F4F4F6 78%);
+}
+
+.edges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.edge {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0.72;
+}
+
+.edge.direct {
+  stroke: var(--accent);
+}
+
+.edge.context {
+  stroke: #49516F;
+  stroke-dasharray: 6 6;
+}
+
+.edge.mediated {
+  stroke: #BABFD1;
+  stroke-dasharray: 4 5;
+}
+
+.edge.unresolved {
+  stroke: #BABFD1;
+  stroke-dasharray: 2 6;
+}
+
+.marker {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  width: 22%;
+  min-width: 180px;
+  aspect-ratio: 1;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform: translate(-50%, -50%);
+  border: 1px solid #50723C;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #FFFFFF, #50723C12 88%);
+  color: #49516F;
+  text-align: center;
+  cursor: pointer;
+}
+
+.marker:hover,
+.marker.selected,
+.marker:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px #50723C26, 0 0 35px #50723C1A;
+}
+
+.marker span {
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.marker strong {
+  max-width: 100%;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  overflow-wrap: anywhere;
+}
+
+.marker small {
+  max-width: 100%;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+
+.node {
+  position: absolute;
+  z-index: 2;
+  width: 27%;
+  min-height: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 11px 14px;
+  transform: translate(-50%, -50%);
+  color: var(--text);
+  background: #FFFFFF;
+  border: 1px solid #BABFD1;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.node.left {
+  border-left-width: 3px;
+}
+
+.node.right {
+  border-right-width: 3px;
+}
+
+.node.direct {
+  border-color: #BABFD1;
+}
+
+.node.direct.left {
+  border-left-color: var(--accent);
+}
+
+.node.direct.right {
+  border-right-color: var(--accent);
+}
+
+.node.context {
+  border-color: #BABFD1;
+}
+
+.node.context.left {
+  border-left-color: #49516F;
+  border-left-style: dashed;
+}
+
+.node.context.right {
+  border-right-color: #49516F;
+  border-right-style: dashed;
+}
+
+.node.mediated {
+  border-color: #BABFD1;
+}
+
+.node.mediated.left {
+  border-left-color: #BABFD1;
+  border-left-style: dashed;
+}
+
+.node.mediated.right {
+  border-right-color: #BABFD1;
+  border-right-style: dashed;
+}
+
+.node.unresolved {
+  border-color: #BABFD1;
+}
+
+.node.unresolved.left {
+  border-left-color: #BABFD1;
+  border-left-style: dotted;
+}
+
+.node.unresolved.right {
+  border-right-color: #BABFD1;
+  border-right-style: dotted;
+}
+
+.node:hover,
+.node.selected,
+.node:focus-visible {
+  background: #50723C0D;
+  border-top-color: #50723C;
+  border-bottom-color: #50723C;
+  box-shadow: 0 0 0 3px #50723C1A;
+}
+
+.nodeHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.nodeHeading b {
+  flex: 0 0 auto;
+  color: #50723C;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 11px;
+}
+
+.node small {
+  color: #49516F;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.details {
+  min-height: 300px;
+  margin-top: 20px;
+  padding: 22px;
+  border: 1px solid #BABFD1;
+  border-radius: 10px;
+  background: #FFFFFF;
+}
+
+.details h3 {
+  margin: 3px 0 8px;
+  font-size: 16px;
+}
+
+.details p {
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.detailPlaceholder {
+  min-height: 254px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.detailPlaceholder h3 {
+  margin-top: 8px;
+}
+
+.branchDescription {
+  color: #49516F;
+}
+
+.sourceList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px 24px;
+  max-height: 270px;
+  overflow: auto;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sourceList li {
+  min-width: 0;
+  padding: 11px 13px;
+  border: 1px solid #BABFD1;
+  border-radius: 7px;
+  background: #F4F4F6;
+}
+
+.sourceList a {
+  color: #50723C;
+  font-size: 11px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.sourceList a:hover {
+  color: #50723C;
+  text-decoration: underline;
+}
+
+.sourceList li p {
+  margin: 6px 0 0;
+  color: #656D88;
+  font-size: 10px;
+}
+
+.sourceLimit {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.legend i {
+  width: 17px;
+  border-top: 2px solid #718198;
+}
+
+.legend i.direct {
+  border-color: #50723C;
+}
+
+.legend i.context {
+  border-color: #49516F;
+  border-top-style: dashed;
+}
+
+.legend i.mediated {
+  border-color: #BABFD1;
+  border-top-style: dashed;
+}
+
+.legend i.unresolved {
+  border-color: #BABFD1;
+  border-top-style: dotted;
+}
+
+.caveat {
+  margin-bottom: 0;
+}
+
+.empty {
+  padding: 24px 26px;
+}
+
+@media (max-width: 760px) {
+  .content {
+    padding: 16px;
+  }
+
+  .mapCanvas {
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    aspect-ratio: auto;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .edges {
+    display: none;
+  }
+
+  .node {
+    position: relative;
+    inset: auto !important;
+    width: 100%;
+    min-height: 58px;
+    padding: 9px 10px;
+    transform: none;
+  }
+
+  .marker {
+    position: relative;
+    inset: auto;
+    align-self: center;
+    width: 180px;
+    min-width: 180px;
+    margin-bottom: 8px;
+    transform: none;
+  }
+
+  .nodeHeading {
+    font-size: 10px;
+  }
+
+  .node small {
+    font-size: 8px;
+  }
+
+  .marker strong {
+    font-size: 20px;
+  }
+
+  .details {
+    min-height: 280px;
+    padding: 17px;
+  }
+
+  .detailPlaceholder {
+    min-height: 244px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node {
+    transition: none;
+  }
+}

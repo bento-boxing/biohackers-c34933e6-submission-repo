@@ -1,18 +1,15 @@
 import type { Investigation } from '@/lib/contracts';
+import { AssociationVisual } from './association-visual';
 
 export function CoverageReport({investigation:i}:{investigation:Investigation}){
   const c=i.coverage;
-  const ontology=i.association?.ontology_association;
   if(!c)return <aside className="notice warning">Coverage was not assessed for this historical recorded report. It cannot establish absence of effective treatments.</aside>;
   return <section className="panel panel-content" aria-label="Evidence coverage">
     <div className="eyebrow">EVIDENCE COVERAGE CHECK</div><h2>{c.status}</h2>
     <p>{c.caution}</p>{c.gaps.length>0&&<ul>{c.gaps.map((gap,index)=><li key={index}>{gap}</li>)}</ul>}
     <h3>{c.pathway==='preclinical_validation'?'Limited preclinical target-validation assessment':c.pathway==='clinical_precedent'?'Clinical-precedent assessment':'Assessment pathway unresolved'}</h3>
     <p>Gemini eligibility: {c.reasoning_permitted?'Coverage permits this limited analysis.':'Not eligible; resolve the coverage gaps above.'}</p>
-    <h3>Disease–target biological association</h3>
-    {(i.target.protein_gene_symbols?.length||0)>1&&<p className="notice warning">The curated protein component is shared by {i.target.protein_gene_symbols?.join(', ')}. A shared protein is not an interchangeable gene target: gene replacement and paralog splicing/regulation require distinct evidence.</p>}
-    {ontology&&<p>Open Targets direct-pair lookup: {String(ontology.state||'not searched')}{typeof ontology.score==='number'?` · descriptive evidence score ${ontology.score.toFixed(5)}`:''}. This is not a causal confidence score or probability of treatment success.</p>}
-    {i.association?<><strong>{i.association.strength}</strong><p>{i.association.explanation}</p><p>{i.association.independent_groups} distinct primary source groups · {i.association.evidence_types.join(', ')||'No qualifying evidence type'}</p><p>Direct disease-specific sources: {i.association.direct_source_ids.join(', ')||'None'}</p><p>Indirect mechanisms / other target pharmacology: {i.association.indirect_source_ids.join(', ')||'None'}</p><details><summary>Association provenance and limitations</summary><pre>{JSON.stringify(i.association,null,2)}</pre></details></>:<p>Biological association was not independently assessed in this saved report.</p>}
+    <AssociationVisual investigation={i}/>
     <h3>Indication-specific approval versus target druggability</h3>
     {i.compounds.flatMap(compound=>(compound.regulatory_approvals||[]).map(record=><div className="evidence-item" key={compound.chembl_id+record.application_number}><a className="source-link" href={record.source_url} target="_blank" rel="noreferrer">{compound.name} · FDA {record.application_number}</a><p><strong>FDA original approval documented: {record.approval_dates.join(', ')}</strong></p><p>ChEMBL phase remains {compound.max_phase??'unknown'}. {record.disease_match==='lexical'?'The label mentions the selected disease; exact population and product restrictions require review.':'Indication applicability is unresolved.'}</p><p>{record.scope}</p></div>))}
     {i.compounds.filter(compound=>compound.max_phase===4).map(compound=>{const matched=compound.indications?.some(r=>r.approval_precedent&&['identifier','lexical'].includes(String(r.disease_match)));return <div key={compound.chembl_id} className="evidence-item"><a className="source-link" href={compound.url} target="_blank" rel="noreferrer">{compound.name} · {compound.chembl_id}</a><p><strong>{matched?'Matched indication record: review exact population and treatment restrictions.':'Target pharmacology only · No matched approved indication found.'}</strong></p><p>ChEMBL phase 4 for some indication. This does not establish approval or efficacy for the selected disease or population.</p><p>Indication lookup: {compound.indication_search_state||'not searched'}</p><details><summary>Indication records and applicability</summary><pre>{JSON.stringify(compound.indications||[],null,2)}</pre></details></div>;})}
