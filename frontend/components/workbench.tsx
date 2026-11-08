@@ -14,7 +14,7 @@ type State = {
   weights:Weights; setWeights:(weights:Weights)=>void; target:ScoutTarget|null; select:(target:ScoutTarget)=>void;
   job:Job|null; config:Config|null; error:string; setError:(error:string)=>void;
   busy:boolean; progress:ProgressSnapshot|null;
-  challenge:(useAI:boolean, manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string}, options?:{refresh?:boolean})=>Promise<void>;
+  challenge:(useAI:boolean, manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string})=>Promise<void>;
   addDecision:(decision:Decision)=>void; refreshConfig:()=>Promise<void>; reset:()=>void;
   screening:ScreeningResult|null; setScreening:(screening:ScreeningResult|null)=>void;
 };
@@ -76,13 +76,13 @@ export function Workbench({children}:{children:React.ReactNode}) {
     const first=setTimeout(poll,1500);const timer=setInterval(poll,2500);
     return()=>{active=false;clearTimeout(first);clearInterval(timer);};
   },[submitting]);
-  const challenge=async(useAI:boolean,manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string},options?:{refresh?:boolean})=>{
+  const challenge=async(useAI:boolean,manual?:{disease_name:string;target_symbol:string;chembl_target_id?:string})=>{
     if(submittingRef.current)return;
     submittingRef.current=true;setSubmitting(true);setError('');setProgress(null);
     progressToken.current=newProgressToken();
     const current=generation.current;
     try {
-      const extras={refresh_evidence:Boolean(options?.refresh),progress_token:progressToken.current};
+      const extras={progress_token:progressToken.current};
       const body=manual?{target_input:manual,use_ai:useAI,paid_authorized:useAI,weights,...extras}:{run,symbol:target?.symbol,use_ai:useAI,paid_authorized:useAI,weights,...extras};
       const finished=await api<Job>('/api/investigations',mode,{method:'POST',body:JSON.stringify(body)});
       if(current===generation.current)setJob(finished);

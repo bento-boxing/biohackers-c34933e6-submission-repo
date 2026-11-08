@@ -27,10 +27,3 @@ test('saved adaptive report renders the evidence discovery plan, dated records a
  await expect(followUp.first().getByText(/found by follow-up:/)).toBeVisible();
  await expect(followUp.first().getByText(/^Published \d{4}/)).toBeVisible();
 });
-
-test('manual investigation form offers a public-source refresh in live mode only',async({page})=>{
- await page.goto('/challenge');
- await expect(page.getByText('Refresh public sources',{exact:false})).toBeVisible({timeout:30_000});
- await page.getByLabel('Research data mode').selectOption('offline');
- await expect(page.getByText('Refresh public sources',{exact:false})).toHaveCount(0);
-});
