@@ -98,9 +98,9 @@ that could change a research decision. Document knowledge_review (what the
 retrieved sources already establish and their scope) and unresolved_gap (what
 remains unanswered); anchor them through experiment evidence_ids. These are
 bounded interpretations, not proof of novelty or an independent literature review.
-If novelty/uncertainty cannot be grounded,
-return an experiment with status='INSUFFICIENT EVIDENCE FOR EXPERIMENT', explain
-the missing knowledge review, and leave hypotheses/design/measurements empty.'''
+Always propose the single most decision-relevant study. If novelty or grounding
+is weak, say so plainly in knowledge_review, unresolved_gap and limitations, and
+narrow the question, rather than declining to design one.'''
 
 PATHWAY_RULES=''' Use assessment_pathway and biological_association first.
 For preclinical_validation: this is a LIMITED PRECLINICAL TARGET-VALIDATION
@@ -297,13 +297,14 @@ def identifier_objections(narrative: str, cited: set[str]) -> list[str]:
             objections.append('Narrative PMID lacks a matching retrieved publication citation.')
     return list(dict.fromkeys(objections))
 
-NEGATIVE = r'\b(did not (?:improve|reduce|meet|demonstrate|differ)|not superior|no (?:significant )?(?:benefit|difference|improvement)|failed to|futility|discontinued|terminated|adverse events|toxicity|safety concerns|hepatotoxicity)\b'
+NEGATIVE = r'\b(did not (?:significantly )?(?:improve|reduce|meet|demonstrate|differ)|not superior|no (?:significant )?(?:benefit|difference|improvement)|failed to|futility|discontinued|terminated|adverse events|toxicity|safety concerns|hepatotoxicity)\b'
 POSITIVE = r'\b(significantly (?:reduced|improved|lower|higher|longer)|superior|met (?:the|its) primary endpoint|efficacy was demonstrated|greater (?:virologic|viral|reduction|suppression)|improved .{0,60}(?:compared with|versus))\b'
 CAUSAL = r'\b(causes?|caused by|due to|leads? to|results? in|drives?|is responsible for|because of|mediates?)\b'
 ASSOCIATIVE = r'\b(associated|association|correlat\w*|linked|observed|reported|found)\b'
 
-def omitted_contradictions(result: Investigation | None, bundle: dict, claim: AIClaim) -> list[str]:
-    """Direct, disease-matched records in the full collection whose triage signal opposes the claim's stance and that the packet lacks."""
+def omitted_related(result: Investigation | None, bundle: dict, claim: AIClaim) -> list[str]:
+    """Direct, disease-matched records the packet lacks whose triage signal points the other way. They are
+    related evidence to keep visible; whether they contradict the claim is decided by omitted_contradictions."""
     if result is None or claim.stance == 'context':
         return []
     opposing = {'supporting': {'negative_candidate', 'safety_candidate'}, 'contradictory': {'positive_candidate'}}[claim.stance]
@@ -311,14 +312,37 @@ def omitted_contradictions(result: Investigation | None, bundle: dict, claim: AI
                and p.disease_match == 'matched' and set(p.direction_signals) & opposing]
     return sorted(omitted, key=lambda i: -next(p.cited_by_count for p in result.publications if p.identifier == i))[:4]
 
+def comparability(result: Investigation, claim: AIClaim, pub) -> tuple[bool, str]:
+    """Same disease and opposite direction are not enough: compound, population, setting and endpoint must
+    match before two findings contradict. Failure in suppressed patients' CSF does not contradict benefit
+    in treatment-experienced patients; both can be true."""
+    from .evidence_context import comparable
+    claim_text = claim.text + ' ' + ' '.join(c.excerpt for c in claim.citations)
+    record_text = pub.title + ' ' + pub.abstract
+    names = [n for c in result.compounds for n in [c.name, *c.synonyms] if n and len(n) >= 3]
+    exclude = {w.lower() for w in re.findall(r'[A-Za-z][A-Za-z0-9-]{3,}', ' '.join(
+        [result.target.target_symbol, *result.target.target_aliases, result.target.disease_name, *names]))}
+    exclude |= {w.rstrip('s') for w in exclude}
+    return comparable(claim_text, record_text, names, exclude)
+
+def omitted_contradictions(result: Investigation | None, bundle: dict, claim: AIClaim) -> list[str]:
+    """The subset of omitted related records whose clinical context is comparable to the claim."""
+    if result is None:
+        return []
+    pubs = {p.identifier: p for p in result.publications}
+    return [i for i in omitted_related(result, bundle, claim) if comparability(result, claim, pubs[i])[0]]
+
 def validate_ai_claim(claim: AIClaim, bundle: dict, result: Investigation | None = None) -> list[str]:
     objections = []
     excerpts = ' '.join(c.excerpt for c in claim.citations)
     applicability = [bundle['sources'].get(c.source_id, {}).get('applicability', {}) for c in claim.citations]
     # Stance must agree with the direction visible in the quoted excerpts, not with the challenger's reading.
-    if claim.stance == 'supporting' and re.search(NEGATIVE, excerpts, re.I) and not re.search(POSITIVE, excerpts, re.I):
+    from .evidence_context import directional
+    positive, negated_positive = directional(POSITIVE, excerpts)
+    negative = bool(re.search(NEGATIVE, excerpts, re.I)) or negated_positive  # "neither ... significantly reduced" is null
+    if claim.stance == 'supporting' and negative and not positive:
         objections.append('Stance/excerpt mismatch: the quoted source text reports a negative or safety outcome; a supporting stance is not justified by this citation.')
-    if claim.stance == 'contradictory' and re.search(POSITIVE, excerpts, re.I) and not re.search(NEGATIVE, excerpts, re.I):
+    if claim.stance == 'contradictory' and positive and not negative:
         objections.append('Stance/excerpt mismatch: the quoted source text reports a positive outcome; a contradictory stance is not justified by this citation.')
     # Disease/population applicability: an uncertain-disease source cannot ground a disease-specific stance.
     def visibly_matches_disease(citation):
@@ -427,10 +451,14 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
                 raise AIError('Duplicate generated claim IDs; AI output rejected.')
             checks = {c.claim_id: validate_ai_claim(c, bundle, result) for c in draft.claims}
             # Evidence Coverage Agent: pull omitted contradictory records into the packet for adjudication/revision (bounded).
-            requested = list(dict.fromkeys(i for c in draft.claims for i in omitted_contradictions(result, bundle, c)))[:4]
-            if requested:
-                add_publications_to_bundle(result, bundle, requested, settings, reason='Requested by the coverage check: contradicts a drafted claim.')
-                report.packet_audit.setdefault('retrieval_requests', []).append({'round': round_number, 'kind': 'omitted_contradiction', 'source_ids': requested})
+            # Opposite-direction records stay visible as related evidence; only comparable ones are labelled contradictions.
+            contradicting = set(i for c in draft.claims for i in omitted_contradictions(result, bundle, c))
+            requested = list(dict.fromkeys(i for c in draft.claims for i in omitted_related(result, bundle, c)))[:4]
+            for kind, source_ids, reason in [('omitted_contradiction', [i for i in requested if i in contradicting], 'Requested by the coverage check: contradicts a drafted claim in a comparable clinical context.'),
+                                      ('related_opposite_direction', [i for i in requested if i not in contradicting], 'Related evidence with the opposite direction in a different compound, population, setting or endpoint; not a contradiction.')]:
+                if source_ids:
+                    add_publications_to_bundle(result, bundle, source_ids, settings, reason=reason)
+                    report.packet_audit.setdefault('retrieval_requests', []).append({'round': round_number, 'kind': kind, 'source_ids': source_ids})
             batch = runner.generate('Evidence Adjudicator', ADJUDICATOR,
                 {'evidence': bundle, 'claims': [c.model_dump(mode='json') for c in draft.claims],
                  'deterministic_objections': checks}, AdjudicationBatch)
@@ -508,28 +536,29 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
         if identifier_objections(final.model_dump_json(), cited_sources):
             raise AIError('Final synthesis introduced an uncited identifier; output rejected.')
         if not allowed:
-            final.reassessment.assessment = 'insufficient evidence'
-            final.reassessment.remaining_uncertainty.append('No challenger claim survived verification; no meaningful experiment can be grounded.')
-        from .experiment_designer import check_experiment_readiness
+            final.reassessment.remaining_uncertainty.append('No challenger claim survived verification; the proposal below is not anchored to an accepted claim.')
+        from .experiment_designer import check_experiment_readiness, flag, has_design, template_experiment
         final.experiment=check_experiment_readiness(result,final.experiment,len(allowed))
-        if result.coverage.pathway=='preclinical_validation':
+        if has_design(final.experiment) and result.coverage.pathway=='preclinical_validation':
             anchored=[c for c in report.accepted_claims if c.claim_id in final.experiment.evidence_ids and
                 any(bundle['sources'][ref.source_id].get('applicability',{}).get('evidence_scope')=='direct_biological' for ref in c.citations)]
             if not anchored:
-                from .experiment_designer import abstain_experiment
-                final.experiment=abstain_experiment('Preclinical experiment lacks an accepted uncertainty anchored in direct disease-specific biological literature.')
-        if final.experiment.status!='INSUFFICIENT EVIDENCE FOR EXPERIMENT':
+                flag(final.experiment,'Not anchored in an accepted uncertainty from direct disease-specific biological literature; establish the causal link first.')
+        if has_design(final.experiment):
             if on_stage:on_stage('Final source and question-specific prior-art checks')
             report.prior_art_check=check_prior_art(result,final.experiment,client=prior_art_client)
             report.prior_art_check['original_proposal']=final.experiment.model_dump(mode='json')
             report.final_checks=report.prior_art_check['objections']
             if report.prior_art_check['decision']=='abstain':
-                from .experiment_designer import abstain_experiment
-                final.experiment=abstain_experiment('Question-specific prior-art/claim checks require revision or expert review. '+
-                    '; '.join(report.final_checks)+'. Closely matching sources: '+', '.join(report.prior_art_check['close_matches']))
-                report.warnings.append('Final proposal withheld after prior-art/claim checks; original findings and matched sources remain in the audit.')
-        if final.experiment.status!='INSUFFICIENT EVIDENCE FOR EXPERIMENT':
+                matches=report.prior_art_check['close_matches']
+                flag(final.experiment,'Prior-art check: '+'; '.join(report.final_checks)+
+                     ('. Closely matching sources: '+', '.join(matches) if matches else '')+'. Confirm this question is still open before proceeding.')
+                report.warnings.append('Prior-art/claim checks raised concerns; they are listed as review flags on the proposal.')
             final.experiment.status = 'AI-generated research proposal: potentially informative and unvalidated; not performed or validated. Researcher approval required.'
+        else:
+            # Gemini declined to design a study; give the researcher the rule-based template instead of nothing.
+            final.experiment=flag(template_experiment(result),'Gemini did not propose a design for this packet; this is a rule-based template from retrieved records.')
+            report.warnings.append('Gemini returned no experimental design; a rule-based template proposal is shown instead.')
         final.experiment.limitations.append('Gemini interpretation is not independent evidence or expert validation; source sampling and excerpt truncation limit conclusions.')
         final.experiment.limitations.append('Model suitability, genetic-versus-pharmacological comparability, replication, randomization and predefined outcomes require expert design review before approval.')
         report.warnings.append('The final reassessment and experiment are AI synthesis, not separately adjudicated findings or independent scientific validation.')

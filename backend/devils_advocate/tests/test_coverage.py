@@ -128,7 +128,9 @@ def test_existing_approval_does_not_justify_repeating_generic_benefit_experiment
  i.compounds[0].indications=[{'approval_precedent':True,'disease_match':'lexical'}]
  e=final().experiment;e.question='Does this treatment work?'
  checked=check_experiment_readiness(i,e,1)
- assert checked.status=='INSUFFICIENT EVIDENCE FOR EXPERIMENT' and not checked.competing_explanations
+ # The design is kept for the researcher; the repetition risk is a visible review flag, not an erased proposal.
+ assert checked.competing_explanations and checked.question=='Does this treatment work?'
+ assert any(l.startswith('Review flag:') and 'approved clinical precedent' in l for l in checked.limitations)
 
 def test_string_indication_phase_is_preserved_and_disease_scope_not_transferred():
  from devils_advocate.precedent import retrieve_precedent

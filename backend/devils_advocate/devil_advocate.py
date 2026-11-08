@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 """Deterministic evidence pipeline; no language-model confidence as evidence."""
 import json
 import html
@@ -115,6 +116,16 @@ def verify_gene_symbol_only(client, target: TargetInput, audit: list[SearchAudit
         target.target_id = hits[0]['id']
     return unique
 
+def concurrently(client, *tasks):
+    """Run independent retrieval tasks in parallel on the thread-safe JsonClient (requests to different
+    hosts overlap; each host keeps its own rate limit). Other clients, such as scripted test clients
+    that answer in a fixed order, run the tasks one after another."""
+    if isinstance(client, JsonClient) and client.max_workers > 1 and len(tasks) > 1:
+        with ThreadPoolExecutor(max_workers=len(tasks), thread_name_prefix='retrieval-stage') as pool:
+            futures = [pool.submit(task) for task in tasks]
+            return [future.result() for future in futures]
+    return [task() for task in tasks]
+
 def investigate_target(target_input: TargetInput | dict, *, offline: bool = False,
                        client: JsonClient | None = None, max_followup_rounds: int | None = None,
                        planner_hook=None, on_stage=None) -> Investigation:
@@ -142,16 +153,31 @@ def investigate_target(target_input: TargetInput | dict, *, offline: bool = Fals
         target = resolve_disease_terms(client, target, result.search_audit)
         result.target = target
         try:
-            try:
-                verify_supplied_gene(client,target,result.search_audit)
-            except RetrievalError as exc:
+            # The Ensembl cross-check (slow and intermittently failing) runs alongside ChEMBL resolution;
+            # its verdict is joined before anything downstream, so a mismatch still blocks the report.
+            gene_audit=[]
+            def check_gene():
+                try:verify_supplied_gene(client,target,gene_audit)
+                except (RetrievalError,TargetIdentityError) as exc:return exc
+            def resolve_chembl():
+                try:return resolve_target(client, target)
+                except (RetrievalError,TargetIdentityError) as exc:return exc
+            if isinstance(client,JsonClient) and client.max_workers>1:
+                gene_error,resolved=concurrently(client,check_gene,resolve_chembl)
+            else:  # Sequential: a failed identity check stops before any ChEMBL request.
+                gene_error=check_gene()
+                resolved=None if isinstance(gene_error,TargetIdentityError) else resolve_chembl()
+            result.search_audit.extend(gene_audit)
+            if isinstance(gene_error,TargetIdentityError):raise gene_error
+            if isinstance(gene_error,RetrievalError):
                 # A gene-registry outage is a retrieval failure, not an identity failure: continue with
                 # symbol-based ChEMBL resolution and let coverage demand an independent identity check.
-                result.retrieval_errors.append(str(exc))
+                result.retrieval_errors.append(str(gene_error))
                 result.search_audit.append(SearchAudit(source='Ensembl',operation='gene identity',url='https://rest.ensembl.org/lookup/id/'+(target.target_id or ''),
                     state='failed',detail='Gene registry lookup failed; supplied identifier unverified, not established wrong. Symbol-based resolution continues.'))
                 result.missing_information.append('Ensembl gene-identity cross-check unavailable: the supplied gene identifier was not verified against the target symbol. ChEMBL resolution used the symbol only.')
-            result.resolved_target_id = resolve_target(client, target)
+            if isinstance(resolved,Exception):raise resolved
+            result.resolved_target_id = resolved
             result.search_audit.append(SearchAudit(source='ChEMBL',operation='target identity',
                 url='https://www.ebi.ac.uk/chembl/api/data/target/search.json',query={'q':target.target_symbol},
                 state='found' if result.resolved_target_id else 'no_results',relevant=int(bool(result.resolved_target_id))))
@@ -186,15 +212,31 @@ def investigate_target(target_input: TargetInput | dict, *, offline: bool = Fals
             retrieve_association(client,result)
             retrieve_precedent(client, result)
             finish_stage('precedent')
-            stage('Retrieving registry trials')
-            result.trials = retrieve_trials(client, target, result.compounds, result.retrieval_errors, result.search_audit)
+            stage('Retrieving registry trials and literature')
+            # Europe PMC searches do not depend on trials, so they run alongside registry retrieval; only the
+            # lookup of publications linked from verified registry records waits for the trials.
+            trial_audit,literature_audit,trial_errors=[],[],[]
+            def literature_searches():
+                try:return retrieve_publications(client, target, result.compounds, literature_audit, None, include_clinical=True)
+                except RetrievalError as exc:return exc
+            trials,searched=concurrently(client,
+                lambda:retrieve_trials(client, target, result.compounds, trial_errors, trial_audit),literature_searches)
+            result.trials=trials
+            result.retrieval_errors.extend(trial_errors);result.search_audit.extend(trial_audit)
             finish_stage('trials')
-            stage('Retrieving literature')
+            stage('Retrieving registry-linked literature')
+            linked=[]
             try:
                 refs=[p for t in result.trials if t.disease_match=='matched' and t.relationship=='verified' for p in t.publication_ids]
-                result.publications = retrieve_publications(client, target, result.compounds, result.search_audit,refs,include_clinical=True)
+                if refs:linked=retrieve_publications(client, target, result.compounds, literature_audit, refs, include_clinical=True, searches=False)
             except RetrievalError as exc:
                 result.retrieval_errors.append(str(exc))
+            if isinstance(searched,RetrievalError):
+                result.retrieval_errors.append(str(searched));searched=[]
+            # Registry-linked records first, as when they were the first query of a single pass.
+            seen={p.identifier for p in linked}
+            result.publications=linked+[p for p in searched if p.identifier not in seen]
+            result.search_audit.extend(literature_audit)
             finish_stage('literature')
             # Coverage assessment → targeted follow-up → reassessment, bounded and audited.
             stage('Assessing evidence coverage')
