@@ -2,6 +2,12 @@ import type { Compound } from './scout-types';
 
 export type ScreenView = 'rubric' | 'baseline';
 
+/** ChEMBL renders a 2-D depiction of every molecule from its canonical structure; no key, no SMILES needed. */
+export function chemblImageUrl(chemblId: string): string {
+  return `https://www.ebi.ac.uk/chembl/api/data/image/${encodeURIComponent(chemblId)}.svg`;
+}
+
+
 /** Column explanations for the screening table (hover tooltips). */
 export const SCREEN_COLUMN_HELP = {
   rank: { title: 'Rank', body: 'Position under the selected prioritisation rubric, a documented heuristic over the four factors shown. The small arrow is the movement against the potency-only baseline (max pChEMBL), which you can switch to for comparison.' },
@@ -10,6 +16,7 @@ export const SCREEN_COLUMN_HELP = {
   clinical: { title: 'Clinical stage', body: 'Highest ChEMBL development phase, qualified by indication: development for the approved disease is marked separately from development for other indications. A phase reached in another disease is human-exposure precedent, not evidence of efficacy here.' },
   selectivity: { title: 'Selectivity (observed)', body: 'Observed off-target activity in ChEMBL for shortlisted molecules only: how many targets and assays were actually tested and the window between the on-target median and the strongest comparable off-target median of the same measurement type. Untested targets are unknown, and a lack of off-target records is not evidence of selectivity.' },
   warnings: { title: 'Warnings', body: 'Missing values, sparse or conflicting measurements, truncated retrieval and factors excluded from the composite. Nothing here is hidden inside the score: a missing factor removes it from the weighted mean instead of counting as zero.' },
+  structure: { title: 'Structure', body: 'The 2-D depiction ChEMBL renders from the recorded canonical structure. Click it to open the ChEMBL compound report card with the full record: SMILES, synonyms, assays and documents.' },
   reason: { title: 'Why this position', body: 'The factor values that produced the rank, which factors were missing and therefore excluded, and the objective in force. Read it as an explanation of the heuristic, not as a prediction of success.' },
 } as const;
 

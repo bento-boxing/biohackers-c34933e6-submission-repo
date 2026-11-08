@@ -4,9 +4,23 @@ from .http_client import RetrievalError
 from .models import SearchAudit, TargetInput
 from .relevance import ALIASES, mentions
 
+def gene_defined_terms(target: TargetInput) -> list[str]:
+    """Lexical forms for a disorder that is named after the target gene itself (e.g. "NGLY1 deficiency",
+    "CDKL5 deficiency disorder"): a record about mutation, loss or ablation of that gene is a record
+    about the disease. Not applied to "<GENE>-mutant <tissue cancer>" names, where the gene is a
+    biomarker of a broader disease and the same wording appears in unrelated cancers."""
+    symbol = re.escape(target.target_symbol)
+    gene_named = any(re.match(r'^' + symbol + r'[- ](?:deficiency|deficient|disorder|syndrome|related|associated|encephalopathy)\b', name, re.I)
+                     or re.search(r'\b(?:deficiency|loss) of ' + symbol + r'\b', name, re.I)
+                     for name in [target.disease_name, *target.disease_aliases])
+    if not gene_named:
+        return []
+    s = target.target_symbol
+    return [f'{s} deficient', f'{s}-deficient', f'{s}-defective', f'{s} knockout', f'{s}-/-', f'{s}(-/-)', f'{s} mutation', f'{s} mutations', f'human {s} gene', f'{s} null']
+
 def terms(target: TargetInput) -> list[str]:
     original = target.disease_name
-    candidates = [original, *target.disease_aliases, *ALIASES.get(original.casefold(), [])]
+    candidates = [original, *target.disease_aliases, *ALIASES.get(original.casefold(), []), *gene_defined_terms(target)]
     # Ontology display labels often add a generic suffix absent from abstracts.
     shortened = re.sub(r'\s+(?:infectious disease|disease|disorder)$', '', original, flags=re.I)
     if shortened != original and len(shortened) >= 3:

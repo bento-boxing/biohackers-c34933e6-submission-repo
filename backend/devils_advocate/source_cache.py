@@ -54,7 +54,9 @@ def _verified_response(url: str,data: dict) -> bool:
         for segment,key in [('mechanism','mechanisms'),('drug_indication','drug_indications'),('molecule','molecules'),('target/search','targets')]:
             if '/'+segment in path:return isinstance(data.get(key),list)
         return False
-    if source=='OLS':return isinstance(data.get('_embedded',{}).get('terms'),list)
+    if source=='OLS':
+        if path.endswith('/search'):return isinstance(data.get('response',{}).get('docs'),list)
+        return isinstance(data.get('_embedded',{}).get('terms'),list)
     if source=='openFDA':return isinstance(data.get('results'),list)
     if source=='Open Targets':return isinstance(data.get('data'),dict) and not data.get('errors')
     return False  # Only explicitly known public datasets may persist.

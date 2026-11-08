@@ -209,13 +209,26 @@ def test_initial_deterministic_result_remains_available_if_ai_fails():
     assert result.ai.status == 'failed' and result.conclusion == original
     assert result.trials and result.claims and result.ai.experiment is None
 
-def test_ai_sdk_invalid_json_is_not_accepted_or_retried():
+def test_ai_sdk_invalid_json_is_retried_once_then_rejected():
     runner = GeminiRunner(settings())
     runner.client = Mock()
     runner.client.interactions.create.return_value = SimpleNamespace(status='completed', output_text='not JSON', usage=None)
     with pytest.raises(AIError, match='invalid structured output'):
         runner.generate('test', 'instruction', {}, ChallengeDraft)
-    assert len(runner.calls) == 1 and not runner.calls[0].success
+    assert len(runner.calls) == 2 and not any(c.success for c in runner.calls)
+
+def test_ai_sdk_overlong_fields_are_trimmed_to_schema_limits_not_rejected():
+    # Gemini's structured mode honours enums and shapes but not string/list length caps.
+    runner = GeminiRunner(settings())
+    runner.client = Mock()
+    claim = {'claim_id': 'DA_CLAIM_1', 'text': 'x' * 2500, 'kind': 'interpretation', 'concern': 'safety', 'stance': 'contradictory',
+             'citations': [{'source_id': 'NCT1', 'field': 'why_stopped', 'excerpt': 'y' * 1500}] * 5, 'relevance': 'r', 'uncertainty': 'u'}
+    body = json.dumps({'initial_assessment': 'a', 'claims': [claim] * 6, 'remaining_uncertainty': []})
+    runner.client.interactions.create.return_value = SimpleNamespace(status='completed', output_text=body, usage=None)
+    draft = runner.generate('test', 'instruction', {}, ChallengeDraft)
+    assert len(runner.calls) == 1 and runner.calls[0].success
+    assert len(draft.claims) == 4 and len(draft.claims[0].citations) == 3
+    assert len(draft.claims[0].text) == 1800 and len(draft.claims[0].citations[0].excerpt) == 1000
 
 def test_live_ui_displays_model_audit_and_requires_human_review():
     from streamlit.testing.v1 import AppTest

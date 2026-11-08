@@ -22,3 +22,6 @@ body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
 .table-scrollbar>div{height:1px}
 .ranked-table-scroll{scrollbar-width:none}
 .ranked-table-scroll::-webkit-scrollbar{display:none}
+
+/* Compound candidates: 2-D structure thumbnails drawn by ChEMBL, large enough to read a scaffold, white so bonds stay visible on the dark theme. */
+.ligand-thumb{display:block;width:176px;height:132px;background:#fff;border:1px solid #3a4a5e;border-radius:8px;overflow:hidden;transition:border-color .15s,box-shadow .15s}.ligand-thumb img{display:block;width:100%;height:100%;object-fit:contain;padding:6px}.ligand-thumb:hover,.ligand-thumb:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px #84dec433}

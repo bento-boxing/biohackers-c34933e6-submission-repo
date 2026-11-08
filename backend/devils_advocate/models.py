@@ -61,6 +61,12 @@ class Trial(BaseModel):
     url: str
     phases: list[str] = Field(default_factory=list)
     publication_ids: list[str] = Field(default_factory=list)
+    start_date: str | None = None
+    completion_date: str | None = None
+    last_update_date: str | None = None
+    results_posted_date: str | None = None
+    evidence_tier: str = 'registry_status'
+    search_terms: list[str] = Field(default_factory=list, description='Intervention/full-text query terms that returned this record; registry indexing, not a verified compound link.')
 
 class Publication(BaseModel):
     identifier: str
@@ -78,6 +84,9 @@ class Publication(BaseModel):
     evidence_scope: str = 'unassessed'
     biological_signals: list[str] = Field(default_factory=list)
     scope_reason: str = ''
+    publication_date: str | None = None
+    evidence_tier: str = 'unverified'
+    discovered_by: str = 'initial retrieval'
 
 class SearchAudit(BaseModel):
     source: str
@@ -114,6 +123,51 @@ class BiologicalAssociation(BaseModel):
     limitations: list[str] = Field(default_factory=list)
     ontology_association: dict = Field(default_factory=dict)
 
+NeedStatus = Literal['satisfied', 'partial', 'unmet', 'not_applicable', 'unverifiable']
+
+class EvidenceNeed(BaseModel):
+    key: str
+    label: str
+    status: NeedStatus = 'unmet'
+    evidence_ids: list[str] = Field(default_factory=list)
+    material_ids: list[str] = Field(default_factory=list, description='Records the packet must not drop; selected by deterministic rules.')
+    searches: list[str] = Field(default_factory=list, description='Operation names of follow-up searches issued for this need.')
+    note: str = ''
+    applies_to: Literal['clinical', 'preclinical', 'both'] = 'both'
+
+class EvidenceSearch(BaseModel):
+    need_key: str
+    source: str
+    operation: str
+    query: dict = Field(default_factory=dict)
+    state: Literal['found', 'no_results', 'failed', 'not_searched', 'limit_reached', 'skipped']
+    returned: int = 0
+    new_evidence_ids: list[str] = Field(default_factory=list)
+    duration_seconds: float = 0.
+    detail: str = ''
+
+class EvidenceRound(BaseModel):
+    round_number: int
+    unmet_before: list[str] = Field(default_factory=list)
+    searches: list[EvidenceSearch] = Field(default_factory=list)
+    new_evidence_ids: list[str] = Field(default_factory=list)
+    unmet_after: list[str] = Field(default_factory=list)
+    duration_seconds: float = 0.
+
+class EvidencePlan(BaseModel):
+    stage: Literal['clinical', 'preclinical', 'unresolved'] = 'unresolved'
+    stage_reason: str = ''
+    identifiers: dict = Field(default_factory=dict)
+    needs: list[EvidenceNeed] = Field(default_factory=list)
+    rounds: list[EvidenceRound] = Field(default_factory=list)
+    max_rounds: int = 2
+    stop_reason: str = 'not_run'
+    planner: str = 'deterministic'
+    planner_suggestions: list[dict] = Field(default_factory=list, description='Optional model-suggested searches; suggestions are never evidence.')
+    limitations: list[str] = Field(default_factory=list)
+    duration_seconds: float = 0.
+    caution: str = 'A satisfied need means source records were retrieved and scoped, not that the science is settled. Unmet needs after bounded search are not evidence of absence.'
+
 class Claim(BaseModel):
     claim_id: str
     text: str
@@ -148,7 +202,7 @@ class Investigation(BaseModel):
     target: TargetInput
     mode: Literal['live', 'offline']
     resolved_target_id: str | None = None
-    resolution_status: Literal['resolved', 'unknown', 'unavailable', 'invalid_identifier'] = 'unknown'
+    resolution_status: Literal['resolved', 'gene_verified', 'unknown', 'unavailable', 'invalid_identifier'] = 'unknown'
     compounds: list[Compound] = Field(default_factory=list)
     trials: list[Trial] = Field(default_factory=list)
     publications: list[Publication] = Field(default_factory=list)
@@ -165,6 +219,8 @@ class Investigation(BaseModel):
     regulatory_records: list[dict] = Field(default_factory=list)
     association: BiologicalAssociation | None = None
     ontology_association: dict = Field(default_factory=dict)
+    evidence_plan: EvidencePlan | None = None
+    stage_timings: dict[str, float] = Field(default_factory=dict)
 
 class Experiment(BaseModel):
     question: str

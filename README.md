@@ -38,14 +38,16 @@ and a candidate pool of ChEMBL compounds (pChEMBL ≥ 6, retrieved strongest-fir
 cutoff reported) ranked by a documented, heuristic four-factor rubric: potency (median of comparable
 exact binding measurements, never the lone maximum), drug-likeness (QED, Lipinski), clinical stage
 qualified by indication, and observed off-target evidence for the shortlist. Missing factors are listed,
-not scored as zero; the potency-only baseline ranking is kept for comparison. See
+not scored as zero; the potency-only baseline ranking is kept for comparison. The candidates have their
+own page (05 / Compound candidates), unlocked by the approval, where each row shows the 2-D structure ChEMBL
+renders for the molecule; clicking it opens the ChEMBL compound report card. See
 `backend/devils_advocate/MOLECULE_RANKING_VALIDATION.md`. A second checkpoint writes a shortlist to
 `backend/runs/shortlists.jsonl`.
 
 ## Repository layout
 
 ```
-frontend/                   Next.js 16 research workbench (the only UI): discovery → challenge → experiment → decision
+frontend/                   Next.js 16 research workbench (the only UI): discovery → challenge → experiment → decision → compound candidates
 backend/app.py              The one Flask app (local :5050 and the Vercel Function): stateless workbench server
 backend/pipeline/           Target Scout: evidence retrieval, transparent ranking, approvals, screening
 backend/devils_advocate/    Target Challenger: evidence pipeline, Gemini reasoning, experiment designer, server.py
@@ -101,6 +103,15 @@ The downloadable research report is the durable record.
   rationale and challenger reasoning). Leave `SCOUT_CACHE_ONLY` unset so every disease runs live.
   Browser origins: the deployment's own `VERCEL_URL` / production URL are allowed automatically;
   add custom domains to `WORKBENCH_ORIGINS` (comma-separated).
+- **Adaptive evidence discovery.** After the initial retrieval the challenger builds an evidence
+  plan (association, genetic/mechanistic, approved therapy, positive clinical, negative/safety,
+  programme status, population, recent developments), assesses each need against what was
+  retrieved and runs targeted follow-up searches for open needs only: `ADAPTIVE_MAX_ROUNDS`
+  (default 2), `ADAPTIVE_MAX_SEARCHES_PER_ROUND` (6), `ADAPTIVE_RECENT_YEARS` (3),
+  `AI_MAX_MATERIAL_EXTRA` (6 planner-flagged records admitted beyond the packet cutoff).
+  `AI_PLANNING_CALL=true` allows one extra Gemini call that proposes search terms only (off by
+  default; counts against `AI_MAX_CALLS`). The UI's *Refresh public sources* checkbox bypasses
+  caches for one request. See `backend/devils_advocate/ADAPTIVE_EVIDENCE_VALIDATION.md`.
 - **Time budget.** Vercel's default function limit is 300 s (Hobby and Pro). Live retrieval is
   capped at `RESEARCH_RETRIEVAL_BUDGET_SECONDS` (default 240 s, or 150 s when Gemini reasoning is
   authorized). The whole request has a deadline of `RESEARCH_REQUEST_BUDGET_SECONDS` (default 280):

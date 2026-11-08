@@ -61,12 +61,12 @@ def resolve_target(client: JsonClient, target: TargetInput) -> str | None:
             raise RetrievalError(f'{CHEMBL}/target/search.json: malformed target search response; identity unavailable.')
         records = page['targets']
     exact = []
+    primary = []  # matches on the component's current GENE_SYMBOL, not a historical alias
     for record in records:
         if not isinstance(record, dict):
             raise RetrievalError(f'{CHEMBL}/target/search.json: malformed target candidate.')
-        symbols = [s.get('component_synonym', '')
-                   for c in record.get('target_components', [])
-                   for s in c.get('target_component_synonyms', [])]
+        synonyms = [s for c in record.get('target_components', []) for s in c.get('target_component_synonyms', [])]
+        symbols = [s.get('component_synonym', '') for s in synonyms]
         components = record.get('target_components', [])
         if (record.get('organism') == 'Homo sapiens'
                 and record.get('target_type') == 'SINGLE PROTEIN'
@@ -75,7 +75,11 @@ def resolve_target(client: JsonClient, target: TargetInput) -> str | None:
                 and (not target.uniprot or any(c.get('accession') == target.uniprot for c in components))
                 and target.target_symbol.casefold() in [s.casefold() for s in symbols]):
             exact.append(record['target_chembl_id'])
-    resolved = exact[0] if len(set(exact)) == 1 else None
+            if any(s.get('syn_type') == 'GENE_SYMBOL' and s.get('component_synonym', '').casefold() == target.target_symbol.casefold() for s in synonyms):
+                primary.append(record['target_chembl_id'])
+    # A symbol shared with another protein's historical alias (e.g. HTT for SLC6A4's 5-HTT) is
+    # resolved by the current gene symbol; a residual tie stays unresolved rather than guessed.
+    resolved = exact[0] if len(set(exact)) == 1 else primary[0] if len(set(primary)) == 1 else None
     if supplied and not resolved:
         raise TargetIdentityError('Supplied ChEMBL ID does not match the exact human protein symbol and component accession.')
     if resolved and isinstance(client, JsonClient):
@@ -172,13 +176,23 @@ def parse_trial(record: dict, compounds: list[Compound], *, matcher=None) -> Tri
             probable.append(identifier)
     nct = identity['nctId']
     reason = inspect_stop_reason(record, nct)
+    if not isinstance(status, dict):
+        status = {}  # malformed status module: the stop-reason evidence already records 'invalid'
+    def date(key):
+        value = status.get(key) if isinstance(status, dict) else None
+        value = value.get('date') if isinstance(value, dict) else None
+        return value if isinstance(value, str) and re.fullmatch(r'\d{4}(?:-\d{2}){0,2}', value) else None
+    has_results = record.get('hasResults', bool(record.get('resultsSection')))
     return Trial(nct_id=nct, title=identity.get('briefTitle', ''),
+        start_date=date('startDateStruct'), completion_date=date('primaryCompletionDateStruct') or date('completionDateStruct'),
+        last_update_date=date('lastUpdatePostDateStruct'), results_posted_date=date('resultsFirstPostDateStruct'),
+        evidence_tier='registry_results' if has_results else 'registry_status',
         status=status.get('overallStatus', 'UNKNOWN'), why_stopped=reason.value if reason.state == 'reported' else '',
         stop_reason=reason,
         conditions=protocol.get('conditionsModule', {}).get('conditions', []),
         interventions=interventions,
         population=protocol.get('eligibilityModule', {}).get('eligibilityCriteria', ''),
-        has_results=record.get('hasResults', bool(record.get('resultsSection'))),
+        has_results=has_results,
         compound_ids=list(dict.fromkeys(exact + probable)),
         compound_matches={**{identifier: 'probable' for identifier in probable},
                           **{identifier: 'verified' for identifier in exact}},
@@ -206,6 +220,7 @@ def retrieve_trials(client: JsonClient, target: TargetInput, compounds: list[Com
     found = {}
     matcher=compound_matcher(compounds)
     raw_records={}
+    hits: dict[str, list[str]] = {}
     # Separate queries avoid a long OR expression and retain per-compound provenance.
     terms = [target.target_symbol, *target.target_aliases, *[c.name for c in compounds]]
     for term in dict.fromkeys(terms):
@@ -227,6 +242,7 @@ def retrieve_trials(client: JsonClient, target: TargetInput, compounds: list[Com
                         continue
                     relevant+=matches(' '.join(conditions),target)
                     raw_records[nct]=record
+                    hits.setdefault(nct,[]).append(term)
                 token = page.get('nextPageToken')
                 if not token:
                     break
@@ -239,12 +255,22 @@ def retrieve_trials(client: JsonClient, target: TargetInput, compounds: list[Com
         except RetrievalError as exc:
             notes.append(str(exc))
             if audit is not None:audit.append(SearchAudit(source='ClinicalTrials.gov',operation='trial search',url=CTG,state='failed',detail='Trial query failed; not a zero-result query.'))
+    return complete_trial_records(client, target, compounds, raw_records, notes, audit, matcher=matcher, search_terms=hits)
+
+
+def complete_trial_records(client, target: TargetInput, compounds: list[Compound], raw_records: dict,
+                           notes: list[str], audit: list[SearchAudit] | None = None, *, matcher=None,
+                           search_terms: dict[str, list[str]] | None = None) -> list[Trial]:
+    """Parse search rows, then verify each unique trial against its full registry record (batched, cached)."""
+    found = {}
+    matcher = matcher if matcher is not None else compound_matcher(compounds)
     # Search results may omit fields. Fetch each unique trial's full record once
     # (the shared client caches it), then inspect actual field membership.
     for nct,raw in raw_records.items():
         try:
             trial=parse_trial(raw,compounds,matcher=matcher)
             trial.disease_match='matched' if matches(' '.join(trial.conditions),target) else 'uncertain'
+            trial.search_terms=list(dict.fromkeys((search_terms or {}).get(nct,[])))
             found[nct]=trial
         except (KeyError,TypeError,ValueError):notes.append(f'{CTG}: malformed study record skipped.')
     def fetch_detail(trial):
@@ -298,6 +324,7 @@ def retrieve_trials(client: JsonClient, target: TargetInput, compounds: list[Com
             try:
                 detailed=parse_trial(full[0],compounds,matcher=matcher)
                 detailed.disease_match='matched' if matches(' '.join(detailed.conditions),target) else 'uncertain'
+                detailed.search_terms=trial.search_terms
                 found[trial.nct_id]=detailed
                 trial=detailed
             except (KeyError,TypeError,ValueError):

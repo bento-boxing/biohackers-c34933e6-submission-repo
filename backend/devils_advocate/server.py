@@ -11,6 +11,7 @@ import hmac
 import json
 import math
 import os
+import re
 from pathlib import Path
 import sys
 import uuid
@@ -34,7 +35,8 @@ from .ai_reasoning import run_ai_reasoning
 from .approval_signing import configured as signing_configured, sign, sign_payload, verify, verify_token
 from .build_info import runtime_info
 from .devil_advocate import investigate_target
-from .investigation import InvestigationFailed, run_investigation
+from .investigation import InvestigationFailed, read_progress, run_investigation
+from .evidence_planner import settings as adaptive_settings
 from .models import TargetInput
 from .target_scout_adapter import flatten_scout_selection
 
@@ -60,6 +62,9 @@ class ChallengeRequest(BaseModel):
     use_ai: bool = False
     paid_authorized: bool = False
     weights: dict[str, float] = Field(default_factory=lambda: Weights().as_dict())
+    refresh_evidence: bool = Field(default=False, description='Bypass memory and persistent public-source caches (manual refresh for recent developments).')
+    max_followup_rounds: int | None = Field(default=None, ge=0, le=4, description='Override the adaptive follow-up round limit for this request.')
+    progress_token: str | None = Field(default=None, pattern=r'^[a-f0-9]{8,64}$', description='Client-chosen token to poll stage progress while the request runs.')
 
 
 class DecisionRequest(BaseModel):
@@ -167,9 +172,19 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
     def config():
         settings = load_ai_settings()
         return jsonify(ai={k: v for k, v in settings.model_dump(mode='json').items()
-                           if k in ['enabled', 'provider', 'model', 'thinking_level', 'max_calls', 'timeout_seconds']},
+                           if k in ['enabled', 'provider', 'model', 'thinking_level', 'max_calls', 'timeout_seconds', 'planning_call']},
+                       adaptive={**adaptive_settings(), 'planning_call': settings.planning_call},
                        demo_targets=['LRRK2', 'BACE1'], server='Flask (stateless)', modes=['live', 'offline'],
                        backend=runtime_info())
+
+    @app.get('/api/investigations/progress/<token>')
+    def investigation_progress(token):
+        if not re.fullmatch(r'[a-f0-9]{8,64}', token):
+            return jsonify(error='Invalid progress token.'), 400
+        progress = read_progress(token)
+        if progress is None:
+            return jsonify(available=False, detail='Progress is not available from this backend instance; the investigation may still be running.')
+        return jsonify(available=True, **progress)
 
     @app.route('/api/<path:legacy>', methods=['GET', 'POST'])
     def legacy_api(legacy):
@@ -234,7 +249,9 @@ def create_app(runtime: Path | None = None, *, investigator=investigate_target, 
         if body.use_ai and mode() == 'live' and (not body.paid_authorized or not settings.enabled):
             return jsonify(error='Paid AI requires explicit authorization and enabled backend configuration.'), 400
         payload = {'selection': selection, 'mode': mode(), 'use_ai': body.use_ai and mode() == 'live',
-                   'weights': weights.normalised().as_dict(), 'ai_policy': settings.model_dump(mode='json')}
+                   'weights': weights.normalised().as_dict(), 'ai_policy': settings.model_dump(mode='json'),
+                   'refresh_evidence': body.refresh_evidence and mode() == 'live', 'max_followup_rounds': body.max_followup_rounds,
+                   'progress_token': body.progress_token}
         job_id = uuid.uuid4().hex
         try:
             report = run_investigation(payload, investigator=app.config['INVESTIGATOR'],

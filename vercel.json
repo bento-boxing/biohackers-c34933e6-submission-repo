@@ -27,6 +27,7 @@
   "git": {
     "deploymentEnabled": {
       "prod": true,
+      "prod-improved": true,
       "**": false
     }
   }

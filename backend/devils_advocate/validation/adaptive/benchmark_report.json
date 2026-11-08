@@ -1,0 +1,4570 @@
+{
+ "base": "http://127.0.0.1:3002",
+ "started_at": 1794133933.4652612,
+ "paid_calls": 0,
+ "modes": [
+  "baseline",
+  "adaptive_cold",
+  "adaptive_warm"
+ ],
+ "cases": [
+  {
+   "name": "ccr5_hiv",
+   "held_out": false,
+   "target_input": {
+    "disease_name": "HIV infection",
+    "disease_id": "MONDO_0005109",
+    "target_symbol": "CCR5",
+    "target_id": "ENSG00000160791"
+   },
+   "runs": {
+    "baseline": {
+     "case": "ccr5_hiv",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 74.215,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL274",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000160791",
+      "disease_id": "MONDO_0005109",
+      "expected_chembl": "CHEMBL274",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "follow_up_disabled",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "satisfied",
+       "positive_clinical": "satisfied",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "positive_clinical": true,
+       "negative_or_safety": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 163,
+      "publications": 231,
+      "compounds": 12,
+      "followup_publications": 0,
+      "dated_publications": 231,
+      "recent_direct": [
+       [
+        "MED:38819839",
+        "2024-06-25"
+       ],
+       [
+        "MED:39250652",
+        "2024-10-01"
+       ],
+       [
+        "MED:39353749",
+        "2024-09-30"
+       ],
+       [
+        "MED:39774003",
+        "2025-01-07"
+       ],
+       [
+        "MED:39805095",
+        "2025-01-13"
+       ],
+       [
+        "MED:39872519",
+        "2025-01-13"
+       ],
+       [
+        "MED:39972543",
+        "2025-06-01"
+       ],
+       [
+        "MED:40130879",
+        "2025-03-25"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "18832244",
+       "20151839"
+      ],
+      "retrieved": [
+       "MED:18832244",
+       "MED:20151839"
+      ],
+      "in_packet": [
+       "MED:18832244",
+       "MED:20151839"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 378,
+      "material_included": [
+       "MED:26825032",
+       "MED:18587387",
+       "MED:18832244",
+       "MED:20151839",
+       "NCT02500849",
+       "MED:42953116",
+       "MED:26202768",
+       "MED:19487424"
+      ],
+      "material_omitted": [
+       "MED:38819839",
+       "MED:20847699",
+       "MED:42847201",
+       "NCT01345630",
+       "NCT02990858"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 74.054343,
+      "requests": 70,
+      "cache_hits": 0,
+      "network_attempts": 71,
+      "source_seconds": {
+       "ChEMBL": 9.791853,
+       "ClinicalTrials.gov": 51.481563,
+       "Ensembl": 20.617495,
+       "Europe PMC": 7.114596,
+       "OLS": 0.12797,
+       "Open Targets": 0.115822,
+       "openFDA": 2.535264
+      },
+      "stages": {
+       "adaptive_rounds": 1.150788,
+       "claims": 0.025522,
+       "compounds": 5.461435,
+       "coverage": 1.147879,
+       "identity": 21.050109,
+       "literature": 8.272788,
+       "precedent": 6.692947,
+       "trials": 30.252823
+      }
+     },
+     "retrieval_errors": [
+      "https://rest.ensembl.org/lookup/id/ENSG00000160791: ReadTimeout"
+     ],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "ccr5_hiv",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 83.216,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL274",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000160791",
+      "disease_id": "MONDO_0005109",
+      "expected_chembl": "CHEMBL274",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "coverage_achieved",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "satisfied",
+       "positive_clinical": "satisfied",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "positive_clinical": true,
+       "negative_or_safety": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 163,
+      "publications": 231,
+      "compounds": 12,
+      "followup_publications": 0,
+      "dated_publications": 231,
+      "recent_direct": [
+       [
+        "MED:38819839",
+        "2024-06-25"
+       ],
+       [
+        "MED:39250652",
+        "2024-10-01"
+       ],
+       [
+        "MED:39353749",
+        "2024-09-30"
+       ],
+       [
+        "MED:39774003",
+        "2025-01-07"
+       ],
+       [
+        "MED:39805095",
+        "2025-01-13"
+       ],
+       [
+        "MED:39872519",
+        "2025-01-13"
+       ],
+       [
+        "MED:39972543",
+        "2025-06-01"
+       ],
+       [
+        "MED:40130879",
+        "2025-03-25"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "18832244",
+       "20151839"
+      ],
+      "retrieved": [
+       "MED:18832244",
+       "MED:20151839"
+      ],
+      "in_packet": [
+       "MED:18832244",
+       "MED:20151839"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 378,
+      "material_included": [
+       "MED:26825032",
+       "MED:18587387",
+       "MED:18832244",
+       "MED:20151839",
+       "NCT02500849",
+       "MED:42953116",
+       "MED:26202768",
+       "MED:19487424"
+      ],
+      "material_omitted": [
+       "MED:38819839",
+       "MED:20847699",
+       "MED:42847201",
+       "NCT01345630",
+       "NCT02990858"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 83.083163,
+      "requests": 70,
+      "cache_hits": 0,
+      "network_attempts": 71,
+      "source_seconds": {
+       "ChEMBL": 8.619645,
+       "ClinicalTrials.gov": 51.684032,
+       "Ensembl": 20.825797,
+       "Europe PMC": 17.281794,
+       "OLS": 0.124135,
+       "Open Targets": 0.133552,
+       "openFDA": 2.465453
+      },
+      "stages": {
+       "adaptive_rounds": 1.14552,
+       "claims": 0.023229,
+       "compounds": 4.427679,
+       "coverage": 1.144325,
+       "identity": 21.096867,
+       "literature": 18.340224,
+       "precedent": 6.662036,
+       "trials": 30.243239
+      }
+     },
+     "retrieval_errors": [
+      "https://rest.ensembl.org/lookup/id/ENSG00000160791: ReadTimeout"
+     ],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "ccr5_hiv",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 7.949,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL274",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000160791",
+      "disease_id": "MONDO_0005109",
+      "expected_chembl": "CHEMBL274",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "coverage_achieved",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "satisfied",
+       "positive_clinical": "satisfied",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "positive_clinical": true,
+       "negative_or_safety": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 163,
+      "publications": 231,
+      "compounds": 12,
+      "followup_publications": 0,
+      "dated_publications": 231,
+      "recent_direct": [
+       [
+        "MED:38819839",
+        "2024-06-25"
+       ],
+       [
+        "MED:39250652",
+        "2024-10-01"
+       ],
+       [
+        "MED:39353749",
+        "2024-09-30"
+       ],
+       [
+        "MED:39774003",
+        "2025-01-07"
+       ],
+       [
+        "MED:39805095",
+        "2025-01-13"
+       ],
+       [
+        "MED:39872519",
+        "2025-01-13"
+       ],
+       [
+        "MED:39972543",
+        "2025-06-01"
+       ],
+       [
+        "MED:40130879",
+        "2025-03-25"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "18832244",
+       "20151839"
+      ],
+      "retrieved": [
+       "MED:18832244",
+       "MED:20151839"
+      ],
+      "in_packet": [
+       "MED:18832244",
+       "MED:20151839"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 378,
+      "material_included": [
+       "MED:26825032",
+       "MED:18587387",
+       "MED:18832244",
+       "MED:20151839",
+       "NCT02500849",
+       "MED:42953116",
+       "MED:26202768",
+       "MED:19487424"
+      ],
+      "material_omitted": [
+       "MED:38819839",
+       "MED:20847699",
+       "MED:42847201",
+       "NCT01345630",
+       "NCT02990858"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 7.835249,
+      "requests": 5,
+      "cache_hits": 220,
+      "network_attempts": 6,
+      "source_seconds": {
+       "Ensembl": 1.060366,
+       "openFDA": 2.012878
+      },
+      "stages": {
+       "adaptive_rounds": 1.203782,
+       "claims": 0.025286,
+       "compounds": 0.003566,
+       "coverage": 1.175052,
+       "identity": 1.06407,
+       "literature": 1.137766,
+       "precedent": 2.02168,
+       "trials": 1.204005
+      }
+     },
+     "retrieval_errors": [
+      "https://rest.ensembl.org/lookup/id/ENSG00000160791: HTTPError"
+     ],
+     "mode": "adaptive_warm"
+    }
+   }
+  },
+  {
+   "name": "pcsk9_hchol",
+   "held_out": false,
+   "target_input": {
+    "disease_name": "hypercholesterolemia",
+    "target_symbol": "PCSK9"
+   },
+   "runs": {
+    "baseline": {
+     "case": "pcsk9_hchol",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 53.945,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL2929",
+      "resolution_status": "resolved",
+      "ensembl": null,
+      "disease_id": null,
+      "expected_chembl": "CHEMBL2929",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "follow_up_disabled",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "partial",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "satisfied",
+       "positive_clinical": "satisfied",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "target_disease_association"
+      ],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "positive_clinical": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 197,
+      "publications": 172,
+      "compounds": 9,
+      "followup_publications": 0,
+      "dated_publications": 172,
+      "recent_direct": [
+       [
+        "MED:38818934",
+        "2024-05-31"
+       ],
+       [
+        "MED:38866609",
+        "2024-04-24"
+       ],
+       [
+        "MED:39498965",
+        "2024-11-01"
+       ],
+       [
+        "MED:39531353",
+        "2026-07-01"
+       ],
+       [
+        "MED:39870096",
+        "2025-01-24"
+       ],
+       [
+        "MED:39999660",
+        "2025-01-29"
+       ],
+       [
+        "MED:40543299",
+        "2025-06-16"
+       ],
+       [
+        "MED:40611077",
+        "2025-07-03"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "28304224",
+       "30403574"
+      ],
+      "retrieved": [
+       "MED:28304224",
+       "MED:30403574"
+      ],
+      "in_packet": [],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 353,
+      "material_included": [
+       "MED:27618825",
+       "MED:32197277",
+       "MED:22435370",
+       "MED:23129602",
+       "NCT05762276",
+       "MED:16989838",
+       "MED:39531353",
+       "MED:27625344",
+       "NCT03694197"
+      ],
+      "material_omitted": [
+       "MED:18666258",
+       "MED:26330422",
+       "MED:26027630",
+       "MED:42054033",
+       "NCT05325203"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 53.724901,
+      "requests": 58,
+      "cache_hits": 0,
+      "network_attempts": 58,
+      "source_seconds": {
+       "ChEMBL": 10.646838,
+       "ClinicalTrials.gov": 45.629915,
+       "Europe PMC": 12.999919,
+       "openFDA": 3.236654
+      },
+      "stages": {
+       "adaptive_rounds": 0.475219,
+       "claims": 0.017767,
+       "compounds": 5.751162,
+       "coverage": 0.474145,
+       "identity": 0.413087,
+       "literature": 13.356353,
+       "precedent": 7.73223,
+       "trials": 25.504891
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "pcsk9_hchol",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 42.075,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL2929",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000169174",
+      "disease_id": null,
+      "expected_chembl": "CHEMBL2929",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "searches": 4,
+      "failed_searches": 0,
+      "new_evidence": 37,
+      "needs": {
+       "target_disease_association": "partial",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "satisfied",
+       "positive_clinical": "satisfied",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "target_disease_association"
+      ],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "positive_clinical": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 197,
+      "publications": 208,
+      "compounds": 9,
+      "followup_publications": 36,
+      "dated_publications": 208,
+      "recent_direct": [
+       [
+        "MED:38818934",
+        "2024-05-31"
+       ],
+       [
+        "MED:38866609",
+        "2024-04-24"
+       ],
+       [
+        "MED:39498965",
+        "2024-11-01"
+       ],
+       [
+        "MED:39531353",
+        "2026-07-01"
+       ],
+       [
+        "MED:39870096",
+        "2025-01-24"
+       ],
+       [
+        "MED:39999660",
+        "2025-01-29"
+       ],
+       [
+        "MED:40543299",
+        "2025-06-16"
+       ],
+       [
+        "MED:40611077",
+        "2025-07-03"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "28304224",
+       "30403574"
+      ],
+      "retrieved": [
+       "MED:28304224",
+       "MED:30403574"
+      ],
+      "in_packet": [],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 389,
+      "material_included": [
+       "MED:27618825",
+       "MED:15654334",
+       "MED:22435370",
+       "MED:23129602",
+       "NCT05762276",
+       "MED:16989838",
+       "MED:42815806",
+       "MED:27625344",
+       "NCT03694197"
+      ],
+      "material_omitted": [
+       "MED:32197277",
+       "MED:26330422",
+       "MED:26027630",
+       "MED:39531353",
+       "NCT05325203"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 41.867598,
+      "requests": 62,
+      "cache_hits": 0,
+      "network_attempts": 62,
+      "source_seconds": {
+       "ChEMBL": 6.662556,
+       "ClinicalTrials.gov": 46.06196,
+       "Europe PMC": 3.499676,
+       "OLS": 0.052052,
+       "Open Targets": 0.153788,
+       "openFDA": 3.718982
+      },
+      "stages": {
+       "adaptive_rounds": 1.758637,
+       "claims": 0.020569,
+       "compounds": 3.378468,
+       "coverage": 0.606942,
+       "identity": 0.156659,
+       "literature": 3.37646,
+       "precedent": 6.857366,
+       "trials": 25.71245
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "pcsk9_hchol",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 6.045,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL2929",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000169174",
+      "disease_id": null,
+      "expected_chembl": "CHEMBL2929",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "searches": 4,
+      "failed_searches": 0,
+      "new_evidence": 37,
+      "needs": {
+       "target_disease_association": "partial",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "satisfied",
+       "positive_clinical": "satisfied",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "target_disease_association"
+      ],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "positive_clinical": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 197,
+      "publications": 208,
+      "compounds": 9,
+      "followup_publications": 36,
+      "dated_publications": 208,
+      "recent_direct": [
+       [
+        "MED:38818934",
+        "2024-05-31"
+       ],
+       [
+        "MED:38866609",
+        "2024-04-24"
+       ],
+       [
+        "MED:39498965",
+        "2024-11-01"
+       ],
+       [
+        "MED:39531353",
+        "2026-07-01"
+       ],
+       [
+        "MED:39870096",
+        "2025-01-24"
+       ],
+       [
+        "MED:39999660",
+        "2025-01-29"
+       ],
+       [
+        "MED:40543299",
+        "2025-06-16"
+       ],
+       [
+        "MED:40611077",
+        "2025-07-03"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "28304224",
+       "30403574"
+      ],
+      "retrieved": [
+       "MED:28304224",
+       "MED:30403574"
+      ],
+      "in_packet": [],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 389,
+      "material_included": [
+       "MED:27618825",
+       "MED:15654334",
+       "MED:22435370",
+       "MED:23129602",
+       "NCT05762276",
+       "MED:16989838",
+       "MED:42815806",
+       "MED:27625344",
+       "NCT03694197"
+      ],
+      "material_omitted": [
+       "MED:32197277",
+       "MED:26330422",
+       "MED:26027630",
+       "MED:39531353",
+       "NCT05325203"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 5.868509,
+      "requests": 4,
+      "cache_hits": 247,
+      "network_attempts": 4,
+      "source_seconds": {
+       "openFDA": 1.73342
+      },
+      "stages": {
+       "adaptive_rounds": 1.068525,
+       "claims": 0.192627,
+       "compounds": 0.002769,
+       "coverage": 0.624448,
+       "identity": 0.002943,
+       "literature": 0.365191,
+       "precedent": 1.741725,
+       "trials": 1.870236
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_warm"
+    }
+   }
+  },
+  {
+   "name": "egfr_nsclc",
+   "held_out": false,
+   "target_input": {
+    "disease_name": "EGFR-mutant non-small-cell lung cancer",
+    "disease_id": "MONDO_0005233",
+    "target_symbol": "EGFR",
+    "target_id": "ENSG00000146648"
+   },
+   "runs": {
+    "baseline": {
+     "case": "egfr_nsclc",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 71.768,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL203",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000146648",
+      "disease_id": "MONDO_0005233",
+      "expected_chembl": "CHEMBL203",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "follow_up_disabled",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "satisfied",
+       "positive_clinical": "satisfied",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "population_subtype": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 179,
+      "publications": 370,
+      "compounds": 15,
+      "followup_publications": 0,
+      "dated_publications": 370,
+      "recent_direct": [
+       [
+        "MED:37937763",
+        "2023-11-08"
+       ],
+       [
+        "MED:38381317",
+        "2024-02-21"
+       ],
+       [
+        "MED:38520847",
+        "2024-03-22"
+       ],
+       [
+        "MED:38538093",
+        "2024-03-27"
+       ],
+       [
+        "MED:38573331",
+        "2024-04-04"
+       ],
+       [
+        "MED:38818581",
+        "2024-05-01"
+       ],
+       [
+        "MED:38924756",
+        "2024-06-26"
+       ],
+       [
+        "MED:39244004",
+        "2024-09-05"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "29151359"
+      ],
+      "retrieved": [
+       "MED:29151359"
+      ],
+      "in_packet": [
+       "MED:29151359"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 533,
+      "material_included": [
+       "MED:29151359",
+       "MED:15118073",
+       "NCT07699328",
+       "MED:41558224",
+       "MED:27959700",
+       "MED:29863955",
+       "MED:32955177",
+       "MED:19318484"
+      ],
+      "material_omitted": [
+       "NCT06186076",
+       "NCT06093503"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 71.614822,
+      "requests": 71,
+      "cache_hits": 0,
+      "network_attempts": 71,
+      "source_seconds": {
+       "ChEMBL": 6.199358,
+       "ClinicalTrials.gov": 60.645085,
+       "Ensembl": 9.448471,
+       "Europe PMC": 7.79682,
+       "OLS": 0.110495,
+       "Open Targets": 0.127166,
+       "openFDA": 1.725468
+      },
+      "stages": {
+       "adaptive_rounds": 2.745025,
+       "claims": 0.04244,
+       "compounds": 0.77667,
+       "coverage": 2.76254,
+       "identity": 10.148645,
+       "literature": 9.244306,
+       "precedent": 6.780796,
+       "trials": 39.114334
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "egfr_nsclc",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 62.631,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL203",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000146648",
+      "disease_id": "MONDO_0005233",
+      "expected_chembl": "CHEMBL203",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "coverage_achieved",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "satisfied",
+       "positive_clinical": "satisfied",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "population_subtype": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 179,
+      "publications": 370,
+      "compounds": 15,
+      "followup_publications": 0,
+      "dated_publications": 370,
+      "recent_direct": [
+       [
+        "MED:37937763",
+        "2023-11-08"
+       ],
+       [
+        "MED:38381317",
+        "2024-02-21"
+       ],
+       [
+        "MED:38520847",
+        "2024-03-22"
+       ],
+       [
+        "MED:38538093",
+        "2024-03-27"
+       ],
+       [
+        "MED:38573331",
+        "2024-04-04"
+       ],
+       [
+        "MED:38818581",
+        "2024-05-01"
+       ],
+       [
+        "MED:38924756",
+        "2024-06-26"
+       ],
+       [
+        "MED:39244004",
+        "2024-09-05"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "29151359"
+      ],
+      "retrieved": [
+       "MED:29151359"
+      ],
+      "in_packet": [
+       "MED:29151359"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 533,
+      "material_included": [
+       "MED:29151359",
+       "MED:15118073",
+       "NCT07699328",
+       "MED:41558224",
+       "MED:27959700",
+       "MED:29863955",
+       "MED:32955177",
+       "MED:19318484"
+      ],
+      "material_omitted": [
+       "NCT06186076",
+       "NCT06093503"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 62.493746,
+      "requests": 71,
+      "cache_hits": 0,
+      "network_attempts": 71,
+      "source_seconds": {
+       "ChEMBL": 6.309751,
+       "ClinicalTrials.gov": 60.683925,
+       "Ensembl": 0.117699,
+       "Europe PMC": 8.000069,
+       "OLS": 0.1187,
+       "Open Targets": 0.122103,
+       "openFDA": 1.860924
+      },
+      "stages": {
+       "adaptive_rounds": 2.665071,
+       "claims": 0.040011,
+       "compounds": 0.677197,
+       "coverage": 2.65394,
+       "identity": 1.02255,
+       "literature": 9.544028,
+       "precedent": 6.915112,
+       "trials": 38.975783
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "egfr_nsclc",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 9.16,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL203",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000146648",
+      "disease_id": "MONDO_0005233",
+      "expected_chembl": "CHEMBL203",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "coverage_achieved",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "satisfied",
+       "positive_clinical": "satisfied",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "population_subtype": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 179,
+      "publications": 370,
+      "compounds": 15,
+      "followup_publications": 0,
+      "dated_publications": 370,
+      "recent_direct": [
+       [
+        "MED:37937763",
+        "2023-11-08"
+       ],
+       [
+        "MED:38381317",
+        "2024-02-21"
+       ],
+       [
+        "MED:38520847",
+        "2024-03-22"
+       ],
+       [
+        "MED:38538093",
+        "2024-03-27"
+       ],
+       [
+        "MED:38573331",
+        "2024-04-04"
+       ],
+       [
+        "MED:38818581",
+        "2024-05-01"
+       ],
+       [
+        "MED:38924756",
+        "2024-06-26"
+       ],
+       [
+        "MED:39244004",
+        "2024-09-05"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "29151359"
+      ],
+      "retrieved": [
+       "MED:29151359"
+      ],
+      "in_packet": [
+       "MED:29151359"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 533,
+      "material_included": [
+       "MED:29151359",
+       "MED:15118073",
+       "NCT07699328",
+       "MED:41558224",
+       "MED:27959700",
+       "MED:29863955",
+       "MED:32955177",
+       "MED:19318484"
+      ],
+      "material_omitted": [
+       "NCT06186076",
+       "NCT06093503"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 9.049081,
+      "requests": 1,
+      "cache_hits": 241,
+      "network_attempts": 1,
+      "source_seconds": {
+       "openFDA": 0.890546
+      },
+      "stages": {
+       "adaptive_rounds": 2.678673,
+       "claims": 0.052893,
+       "compounds": 0.007336,
+       "coverage": 2.797161,
+       "identity": 0.072676,
+       "literature": 1.583681,
+       "precedent": 0.916734,
+       "trials": 0.939868
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_warm"
+    }
+   }
+  },
+  {
+   "name": "bace1_ad",
+   "held_out": false,
+   "target_input": {
+    "disease_name": "Alzheimer's disease",
+    "disease_id": "MONDO_0004975",
+    "target_symbol": "BACE1",
+    "target_id": "ENSG00000186318"
+   },
+   "runs": {
+    "baseline": {
+     "case": "bace1_ad",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 20.354,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL4822",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000186318",
+      "disease_id": "MONDO_0004975",
+      "expected_chembl": "CHEMBL4822",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "follow_up_disabled",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "unmet",
+       "positive_clinical": "partial",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "approved_therapy",
+       "positive_clinical"
+      ],
+      "expected_needs_ok": {
+       "negative_or_safety": true,
+       "programme_status": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 28,
+      "publications": 139,
+      "compounds": 4,
+      "followup_publications": 0,
+      "dated_publications": 139,
+      "recent_direct": [
+       [
+        "MED:40507910",
+        "2025-05-26"
+       ],
+       [
+        "MED:42161904",
+        "2026-05-20"
+       ],
+       [
+        "MED:42256792",
+        "2026-05-30"
+       ],
+       [
+        "MED:42521490",
+        "2026-07-29"
+       ],
+       [
+        "MED:42554173",
+        "2026-08-05"
+       ],
+       [
+        "MED:42650743",
+        "2026-07-23"
+       ],
+       [
+        "MED:42726720",
+        "2026-09-11"
+       ],
+       [
+        "MED:42934111",
+        "2026-10-01"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "29719179",
+       "30970186"
+      ],
+      "retrieved": [
+       "MED:29719179",
+       "MED:30970186"
+      ],
+      "in_packet": [
+       "MED:29719179",
+       "MED:30970186"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 151,
+      "material_included": [
+       "MED:29719179",
+       "MED:17121991",
+       "NCT02406027",
+       "MED:17409228",
+       "MED:42957517",
+       "MED:30970186",
+       "MED:15788759",
+       "MED:42934111",
+       "NCT02783573"
+      ],
+      "material_omitted": [
+       "NCT02260674"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 20.301878,
+      "requests": 32,
+      "cache_hits": 0,
+      "network_attempts": 32,
+      "source_seconds": {
+       "ChEMBL": 3.241896,
+       "ClinicalTrials.gov": 10.046994,
+       "Ensembl": 0.080944,
+       "Europe PMC": 3.477294,
+       "OLS": 0.116258,
+       "Open Targets": 0.14651,
+       "openFDA": 1.550743
+      },
+      "stages": {
+       "adaptive_rounds": 0.49235,
+       "claims": 0.011859,
+       "compounds": 1.576982,
+       "coverage": 0.476288,
+       "identity": 0.564186,
+       "literature": 3.785678,
+       "precedent": 3.003119,
+       "trials": 10.39136
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "bace1_ad",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 22.121,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL4822",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000186318",
+      "disease_id": "MONDO_0004975",
+      "expected_chembl": "CHEMBL4822",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "searches": 7,
+      "failed_searches": 0,
+      "new_evidence": 44,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "unmet",
+       "positive_clinical": "partial",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "approved_therapy",
+       "positive_clinical"
+      ],
+      "expected_needs_ok": {
+       "negative_or_safety": true,
+       "programme_status": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 28,
+      "publications": 183,
+      "compounds": 4,
+      "followup_publications": 44,
+      "dated_publications": 183,
+      "recent_direct": [
+       [
+        "MED:40507910",
+        "2025-05-26"
+       ],
+       [
+        "MED:40814010",
+        "2025-08-14"
+       ],
+       [
+        "MED:42161904",
+        "2026-05-20"
+       ],
+       [
+        "MED:42256792",
+        "2026-05-30"
+       ],
+       [
+        "MED:42292846",
+        "2026-05-28"
+       ],
+       [
+        "MED:42497792",
+        "2026-07-17"
+       ],
+       [
+        "MED:42521490",
+        "2026-07-29"
+       ],
+       [
+        "MED:42554173",
+        "2026-08-05"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "29719179",
+       "30970186"
+      ],
+      "retrieved": [
+       "MED:29719179",
+       "MED:30970186"
+      ],
+      "in_packet": [
+       "MED:29719179",
+       "MED:30970186"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 195,
+      "material_included": [
+       "MED:29719179",
+       "MED:17121991",
+       "NCT02406027",
+       "MED:17409228",
+       "MED:42957517",
+       "MED:30970186",
+       "MED:15788759",
+       "MED:42934111",
+       "NCT02783573"
+      ],
+      "material_omitted": [
+       "NCT02260674"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 22.053487,
+      "requests": 39,
+      "cache_hits": 0,
+      "network_attempts": 39,
+      "source_seconds": {
+       "ChEMBL": 3.495242,
+       "ClinicalTrials.gov": 9.949611,
+       "Ensembl": 0.0543,
+       "Europe PMC": 7.015828,
+       "OLS": 0.116442,
+       "Open Targets": 0.117349,
+       "openFDA": 1.354384
+      },
+      "stages": {
+       "adaptive_rounds": 3.600011,
+       "claims": 0.014341,
+       "compounds": 1.452787,
+       "coverage": 0.674256,
+       "identity": 0.962242,
+       "literature": 2.254626,
+       "precedent": 2.730527,
+       "trials": 10.36465
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "bace1_ad",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 3.849,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL4822",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000186318",
+      "disease_id": "MONDO_0004975",
+      "expected_chembl": "CHEMBL4822",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "searches": 7,
+      "failed_searches": 0,
+      "new_evidence": 44,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "unmet",
+       "positive_clinical": "partial",
+       "negative_or_safety": "satisfied",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "approved_therapy",
+       "positive_clinical"
+      ],
+      "expected_needs_ok": {
+       "negative_or_safety": true,
+       "programme_status": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 28,
+      "publications": 183,
+      "compounds": 4,
+      "followup_publications": 44,
+      "dated_publications": 183,
+      "recent_direct": [
+       [
+        "MED:40507910",
+        "2025-05-26"
+       ],
+       [
+        "MED:40814010",
+        "2025-08-14"
+       ],
+       [
+        "MED:42161904",
+        "2026-05-20"
+       ],
+       [
+        "MED:42256792",
+        "2026-05-30"
+       ],
+       [
+        "MED:42292846",
+        "2026-05-28"
+       ],
+       [
+        "MED:42497792",
+        "2026-07-17"
+       ],
+       [
+        "MED:42521490",
+        "2026-07-29"
+       ],
+       [
+        "MED:42554173",
+        "2026-08-05"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "29719179",
+       "30970186"
+      ],
+      "retrieved": [
+       "MED:29719179",
+       "MED:30970186"
+      ],
+      "in_packet": [
+       "MED:29719179",
+       "MED:30970186"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 195,
+      "material_included": [
+       "MED:29719179",
+       "MED:17121991",
+       "NCT02406027",
+       "MED:17409228",
+       "MED:42957517",
+       "MED:30970186",
+       "MED:15788759",
+       "MED:42934111",
+       "NCT02783573"
+      ],
+      "material_omitted": [
+       "NCT02260674"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 3.794548,
+      "requests": 3,
+      "cache_hits": 62,
+      "network_attempts": 3,
+      "source_seconds": {
+       "openFDA": 1.295189
+      },
+      "stages": {
+       "adaptive_rounds": 1.342545,
+       "claims": 0.01372,
+       "compounds": 0.001555,
+       "coverage": 0.653293,
+       "identity": 0.008271,
+       "literature": 0.2696,
+       "precedent": 1.297659,
+       "trials": 0.207849
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_warm"
+    }
+   }
+  },
+  {
+   "name": "lrrk2_pd",
+   "held_out": false,
+   "target_input": {
+    "disease_name": "Parkinson disease",
+    "disease_id": "MONDO_0005180",
+    "target_symbol": "LRRK2",
+    "target_id": "ENSG00000188906"
+   },
+   "runs": {
+    "baseline": {
+     "case": "lrrk2_pd",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 12.72,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL1075104",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000188906",
+      "disease_id": "MONDO_0005180",
+      "expected_chembl": "CHEMBL1075104",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "follow_up_disabled",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "unmet",
+       "positive_clinical": "partial",
+       "negative_or_safety": "partial",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "approved_therapy",
+       "positive_clinical",
+       "negative_or_safety"
+      ],
+      "expected_needs_ok": {
+       "recent_development": true,
+       "programme_status": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 41,
+      "publications": 124,
+      "compounds": 0,
+      "followup_publications": 0,
+      "dated_publications": 124,
+      "recent_direct": [
+       [
+        "MED:41164908",
+        "2026-07-01"
+       ],
+       [
+        "MED:41821671",
+        "2026-03-05"
+       ],
+       [
+        "MED:41876647",
+        "2026-03-24"
+       ],
+       [
+        "MED:41920366",
+        "2026-04-01"
+       ],
+       [
+        "MED:42003785",
+        "2026-04-20"
+       ],
+       [
+        "MED:42133347",
+        "2026-06-01"
+       ],
+       [
+        "MED:42166327",
+        "2026-05-21"
+       ],
+       [
+        "MED:42270006",
+        "2026-06-10"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "35675433",
+       "36807624"
+      ],
+      "retrieved": [
+       "MED:35675433",
+       "MED:36807624"
+      ],
+      "in_packet": [
+       "MED:35675433",
+       "MED:36807624"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 149,
+      "material_included": [
+       "MED:35675433",
+       "MED:19915575",
+       "NCT07642908",
+       "MED:37059509",
+       "PPR:PPR1355728",
+       "MED:36807624",
+       "MED:42900584"
+      ],
+      "material_omitted": [
+       "NCT05287620"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 12.68267,
+      "requests": 13,
+      "cache_hits": 0,
+      "network_attempts": 13,
+      "source_seconds": {
+       "ChEMBL": 0.382439,
+       "ClinicalTrials.gov": 3.841901,
+       "Ensembl": 6.407966,
+       "Europe PMC": 1.352321,
+       "OLS": 0.100238,
+       "Open Targets": 0.142267
+      },
+      "stages": {
+       "adaptive_rounds": 0.146818,
+       "claims": 0.010801,
+       "compounds": 0.249248,
+       "coverage": 0.145385,
+       "identity": 6.646226,
+       "literature": 1.422842,
+       "precedent": 0.142465,
+       "trials": 3.918848
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "lrrk2_pd",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 29.311,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL1075104",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000188906",
+      "disease_id": "MONDO_0005180",
+      "expected_chembl": "CHEMBL1075104",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "searches": 3,
+      "failed_searches": 0,
+      "new_evidence": 49,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "unmet",
+       "positive_clinical": "partial",
+       "negative_or_safety": "partial",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "approved_therapy",
+       "positive_clinical",
+       "negative_or_safety"
+      ],
+      "expected_needs_ok": {
+       "recent_development": true,
+       "programme_status": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 41,
+      "publications": 173,
+      "compounds": 0,
+      "followup_publications": 49,
+      "dated_publications": 173,
+      "recent_direct": [
+       [
+        "MED:41164908",
+        "2026-07-01"
+       ],
+       [
+        "MED:41504091",
+        "2025-12-01"
+       ],
+       [
+        "MED:41539556",
+        "2026-01-13"
+       ],
+       [
+        "MED:41625179",
+        "2026-01-31"
+       ],
+       [
+        "MED:41821671",
+        "2026-03-05"
+       ],
+       [
+        "MED:41876647",
+        "2026-03-24"
+       ],
+       [
+        "MED:41920366",
+        "2026-04-01"
+       ],
+       [
+        "MED:41994471",
+        "2026-03-31"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "35675433",
+       "36807624"
+      ],
+      "retrieved": [
+       "MED:35675433",
+       "MED:36807624"
+      ],
+      "in_packet": [
+       "MED:35675433",
+       "MED:36807624"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 198,
+      "material_included": [
+       "MED:35675433",
+       "MED:19915575",
+       "NCT07642908",
+       "MED:37059509",
+       "PPR:PPR1355728",
+       "MED:36807624",
+       "MED:42900584"
+      ],
+      "material_omitted": [
+       "NCT05287620"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 29.265917,
+      "requests": 16,
+      "cache_hits": 0,
+      "network_attempts": 17,
+      "source_seconds": {
+       "ChEMBL": 1.571035,
+       "ClinicalTrials.gov": 3.910856,
+       "Ensembl": 20.602567,
+       "Europe PMC": 2.598294,
+       "OLS": 0.097288,
+       "Open Targets": 0.103879
+      },
+      "stages": {
+       "adaptive_rounds": 1.471609,
+       "claims": 0.013647,
+       "compounds": 0.035398,
+       "coverage": 0.203123,
+       "identity": 22.268577,
+       "literature": 1.157494,
+       "precedent": 0.104082,
+       "trials": 4.011937
+      }
+     },
+     "retrieval_errors": [
+      "https://rest.ensembl.org/lookup/id/ENSG00000188906: ReadTimeout"
+     ],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "lrrk2_pd",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 0.8,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL1075104",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000188906",
+      "disease_id": "MONDO_0005180",
+      "expected_chembl": "CHEMBL1075104",
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": "clinical_precedent",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "searches": 3,
+      "failed_searches": 0,
+      "new_evidence": 49,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "unmet",
+       "positive_clinical": "partial",
+       "negative_or_safety": "partial",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "approved_therapy",
+       "positive_clinical",
+       "negative_or_safety"
+      ],
+      "expected_needs_ok": {
+       "recent_development": true,
+       "programme_status": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 41,
+      "publications": 173,
+      "compounds": 0,
+      "followup_publications": 49,
+      "dated_publications": 173,
+      "recent_direct": [
+       [
+        "MED:41164908",
+        "2026-07-01"
+       ],
+       [
+        "MED:41504091",
+        "2025-12-01"
+       ],
+       [
+        "MED:41539556",
+        "2026-01-13"
+       ],
+       [
+        "MED:41625179",
+        "2026-01-31"
+       ],
+       [
+        "MED:41821671",
+        "2026-03-05"
+       ],
+       [
+        "MED:41876647",
+        "2026-03-24"
+       ],
+       [
+        "MED:41920366",
+        "2026-04-01"
+       ],
+       [
+        "MED:41994471",
+        "2026-03-31"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "35675433",
+       "36807624"
+      ],
+      "retrieved": [
+       "MED:35675433",
+       "MED:36807624"
+      ],
+      "in_packet": [
+       "MED:35675433",
+       "MED:36807624"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 198,
+      "material_included": [
+       "MED:35675433",
+       "MED:19915575",
+       "NCT07642908",
+       "MED:37059509",
+       "PPR:PPR1355728",
+       "MED:36807624",
+       "MED:42900584"
+      ],
+      "material_omitted": [
+       "NCT05287620"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 0.76294,
+      "requests": 0,
+      "cache_hits": 55,
+      "network_attempts": 0,
+      "source_seconds": {},
+      "stages": {
+       "adaptive_rounds": 0.380723,
+       "claims": 0.015285,
+       "compounds": 0.000227,
+       "coverage": 0.214292,
+       "identity": 0.005747,
+       "literature": 0.089352,
+       "precedent": 0.000231,
+       "trials": 0.057031
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_warm"
+    }
+   }
+  },
+  {
+   "name": "bcl2_scoliosis",
+   "held_out": false,
+   "target_input": {
+    "disease_name": "scoliosis",
+    "disease_id": "MONDO_0005392",
+    "target_symbol": "BCL2",
+    "target_id": "ENSG00000171791"
+   },
+   "runs": {
+    "baseline": {
+     "case": "bcl2_scoliosis",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 35.771,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL4860",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000171791",
+      "disease_id": "MONDO_0005392",
+      "expected_chembl": "CHEMBL4860",
+      "chembl_ok": true
+     },
+     "pathway": "preclinical_validation",
+     "expected_pathway": "preclinical_validation",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "preclinical",
+      "stop_reason": "follow_up_disabled",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "not_applicable",
+       "positive_clinical": "not_applicable",
+       "negative_or_safety": "not_applicable",
+       "programme_status": "not_applicable",
+       "population_subtype": "satisfied",
+       "recent_development": "partial",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "recent_development"
+      ],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "genetic_mechanistic": true,
+       "positive_clinical": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 0,
+      "publications": 47,
+      "compounds": 4,
+      "followup_publications": 0,
+      "dated_publications": 47,
+      "recent_direct": [
+       [
+        "MED:42244182",
+        "2026-06-04"
+       ],
+       [
+        "PPR:PPR1242034",
+        "2026-05-29"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "31337422"
+      ],
+      "retrieved": [
+       "MED:31337422"
+      ],
+      "in_packet": [
+       "MED:31337422"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 5,
+      "omitted": 42,
+      "material_included": [
+       "MED:31337422",
+       "MED:32030084",
+       "MED:42244182"
+      ],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 35.745153,
+      "requests": 27,
+      "cache_hits": 0,
+      "network_attempts": 28,
+      "source_seconds": {
+       "ChEMBL": 4.389067,
+       "ClinicalTrials.gov": 5.126487,
+       "Ensembl": 20.602541,
+       "Europe PMC": 3.361264,
+       "OLS": 0.069744,
+       "Open Targets": 0.090214,
+       "openFDA": 1.804136
+      },
+      "stages": {
+       "adaptive_rounds": 0.100343,
+       "claims": 0.00333,
+       "compounds": 1.661751,
+       "coverage": 0.09608,
+       "identity": 22.246865,
+       "literature": 3.433865,
+       "precedent": 3.074526,
+       "trials": 5.128356
+      }
+     },
+     "retrieval_errors": [
+      "https://rest.ensembl.org/lookup/id/ENSG00000171791: ReadTimeout"
+     ],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "bcl2_scoliosis",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 34.5,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL4860",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000171791",
+      "disease_id": "MONDO_0005392",
+      "expected_chembl": "CHEMBL4860",
+      "chembl_ok": true
+     },
+     "pathway": "preclinical_validation",
+     "expected_pathway": "preclinical_validation",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "preclinical",
+      "stop_reason": "no_new_evidence",
+      "rounds": 1,
+      "searches": 1,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "not_applicable",
+       "positive_clinical": "not_applicable",
+       "negative_or_safety": "not_applicable",
+       "programme_status": "not_applicable",
+       "population_subtype": "satisfied",
+       "recent_development": "partial",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "recent_development"
+      ],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "genetic_mechanistic": true,
+       "positive_clinical": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 0,
+      "publications": 47,
+      "compounds": 4,
+      "followup_publications": 0,
+      "dated_publications": 47,
+      "recent_direct": [
+       [
+        "MED:42244182",
+        "2026-06-04"
+       ],
+       [
+        "PPR:PPR1242034",
+        "2026-05-29"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "31337422"
+      ],
+      "retrieved": [
+       "MED:31337422"
+      ],
+      "in_packet": [
+       "MED:31337422"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 5,
+      "omitted": 42,
+      "material_included": [
+       "MED:31337422",
+       "MED:32030084",
+       "MED:42244182"
+      ],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 34.473764,
+      "requests": 28,
+      "cache_hits": 0,
+      "network_attempts": 29,
+      "source_seconds": {
+       "ChEMBL": 3.680922,
+       "ClinicalTrials.gov": 5.127588,
+       "Ensembl": 12.323385,
+       "Europe PMC": 11.160103,
+       "OLS": 0.054541,
+       "Open Targets": 0.098553,
+       "openFDA": 1.680519
+      },
+      "stages": {
+       "adaptive_rounds": 0.250756,
+       "claims": 0.006031,
+       "compounds": 1.435934,
+       "coverage": 0.110787,
+       "identity": 13.37071,
+       "literature": 11.113419,
+       "precedent": 3.057601,
+       "trials": 5.12849
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "bcl2_scoliosis",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 1.439,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL4860",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000171791",
+      "disease_id": "MONDO_0005392",
+      "expected_chembl": "CHEMBL4860",
+      "chembl_ok": true
+     },
+     "pathway": "preclinical_validation",
+     "expected_pathway": "preclinical_validation",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "preclinical",
+      "stop_reason": "no_new_evidence",
+      "rounds": 1,
+      "searches": 1,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "not_applicable",
+       "positive_clinical": "not_applicable",
+       "negative_or_safety": "not_applicable",
+       "programme_status": "not_applicable",
+       "population_subtype": "satisfied",
+       "recent_development": "partial",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "recent_development"
+      ],
+      "expected_needs_ok": {
+       "approved_therapy": true,
+       "genetic_mechanistic": true,
+       "positive_clinical": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 0,
+      "publications": 47,
+      "compounds": 4,
+      "followup_publications": 0,
+      "dated_publications": 47,
+      "recent_direct": [
+       [
+        "MED:42244182",
+        "2026-06-04"
+       ],
+       [
+        "PPR:PPR1242034",
+        "2026-05-29"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "31337422"
+      ],
+      "retrieved": [
+       "MED:31337422"
+      ],
+      "in_packet": [
+       "MED:31337422"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 5,
+      "omitted": 42,
+      "material_included": [
+       "MED:31337422",
+       "MED:32030084",
+       "MED:42244182"
+      ],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 1.417119,
+      "requests": 2,
+      "cache_hits": 26,
+      "network_attempts": 2,
+      "source_seconds": {
+       "openFDA": 1.040923
+      },
+      "stages": {
+       "adaptive_rounds": 0.143977,
+       "claims": 0.006315,
+       "compounds": 0.001916,
+       "coverage": 0.11563,
+       "identity": 0.030702,
+       "literature": 0.069798,
+       "precedent": 1.04747,
+       "trials": 0.001266
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_warm"
+    }
+   }
+  },
+  {
+   "name": "ngly1_rare",
+   "held_out": false,
+   "target_input": {
+    "disease_name": "NGLY1 deficiency",
+    "disease_id": "MONDO_0800044",
+    "target_symbol": "NGLY1",
+    "target_id": "ENSG00000151092"
+   },
+   "runs": {
+    "baseline": {
+     "case": "ngly1_rare",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 12.41,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL4523429",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000151092",
+      "disease_id": "MONDO_0800044",
+      "expected_chembl": "CHEMBL4523429",
+      "chembl_ok": true
+     },
+     "pathway": "preclinical_validation",
+     "expected_pathway": "preclinical_validation",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "preclinical",
+      "stop_reason": "follow_up_disabled",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "not_applicable",
+       "positive_clinical": "not_applicable",
+       "negative_or_safety": "not_applicable",
+       "programme_status": "not_applicable",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [],
+      "expected_needs_ok": {
+       "genetic_mechanistic": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 4,
+      "publications": 75,
+      "compounds": 0,
+      "followup_publications": 0,
+      "dated_publications": 75,
+      "recent_direct": [
+       [
+        "MED:38156787",
+        "2024-03-01"
+       ],
+       [
+        "MED:38417795",
+        "2024-02-28"
+       ],
+       [
+        "MED:38581946",
+        "2024-03-28"
+       ],
+       [
+        "MED:38649481",
+        "2024-04-22"
+       ],
+       [
+        "MED:38991033",
+        "2024-07-11"
+       ],
+       [
+        "MED:39137042",
+        "2024-10-08"
+       ],
+       [
+        "MED:40470739",
+        "2025-07-01"
+       ],
+       [
+        "MED:40643555",
+        "2025-07-07"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "24651605",
+       "25605922"
+      ],
+      "retrieved": [
+       "MED:24651605",
+       "MED:25605922"
+      ],
+      "in_packet": [
+       "MED:25605922"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 11,
+      "omitted": 68,
+      "material_included": [
+       "MED:40687377",
+       "MED:25605922",
+       "MED:42959123",
+       "MED:28426790",
+       "MED:42896834",
+       "NCT06122766"
+      ],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 12.384809,
+      "requests": 13,
+      "cache_hits": 0,
+      "network_attempts": 13,
+      "source_seconds": {
+       "ChEMBL": 0.411325,
+       "ClinicalTrials.gov": 3.870126,
+       "Ensembl": 6.052818,
+       "Europe PMC": 1.277794,
+       "OLS": 0.106312,
+       "Open Targets": 0.187614
+      },
+      "stages": {
+       "adaptive_rounds": 0.190914,
+       "claims": 0.033171,
+       "compounds": 0.365645,
+       "coverage": 0.193286,
+       "identity": 6.205895,
+       "literature": 1.328806,
+       "precedent": 0.1879,
+       "trials": 3.879154
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "ngly1_rare",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 17.292,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL4523429",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000151092",
+      "disease_id": "MONDO_0800044",
+      "expected_chembl": "CHEMBL4523429",
+      "chembl_ok": true
+     },
+     "pathway": "preclinical_validation",
+     "expected_pathway": "preclinical_validation",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "preclinical",
+      "stop_reason": "coverage_achieved",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "not_applicable",
+       "positive_clinical": "not_applicable",
+       "negative_or_safety": "not_applicable",
+       "programme_status": "not_applicable",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [],
+      "expected_needs_ok": {
+       "genetic_mechanistic": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 4,
+      "publications": 75,
+      "compounds": 0,
+      "followup_publications": 0,
+      "dated_publications": 75,
+      "recent_direct": [
+       [
+        "MED:38156787",
+        "2024-03-01"
+       ],
+       [
+        "MED:38417795",
+        "2024-02-28"
+       ],
+       [
+        "MED:38581946",
+        "2024-03-28"
+       ],
+       [
+        "MED:38649481",
+        "2024-04-22"
+       ],
+       [
+        "MED:38991033",
+        "2024-07-11"
+       ],
+       [
+        "MED:39137042",
+        "2024-10-08"
+       ],
+       [
+        "MED:40470739",
+        "2025-07-01"
+       ],
+       [
+        "MED:40643555",
+        "2025-07-07"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "24651605",
+       "25605922"
+      ],
+      "retrieved": [
+       "MED:24651605",
+       "MED:25605922"
+      ],
+      "in_packet": [
+       "MED:25605922"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 11,
+      "omitted": 68,
+      "material_included": [
+       "MED:40687377",
+       "MED:25605922",
+       "MED:42959123",
+       "MED:28426790",
+       "MED:42896834",
+       "NCT06122766"
+      ],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 17.261353,
+      "requests": 13,
+      "cache_hits": 0,
+      "network_attempts": 13,
+      "source_seconds": {
+       "ChEMBL": 0.515041,
+       "ClinicalTrials.gov": 3.931163,
+       "Ensembl": 0.076013,
+       "Europe PMC": 12.069768,
+       "OLS": 0.149146,
+       "Open Targets": 0.092263
+      },
+      "stages": {
+       "adaptive_rounds": 0.176243,
+       "claims": 0.004751,
+       "compounds": 0.376369,
+       "coverage": 0.191854,
+       "identity": 0.364929,
+       "literature": 12.115761,
+       "precedent": 0.092415,
+       "trials": 3.939002
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "ngly1_rare",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 0.482,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL4523429",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000151092",
+      "disease_id": "MONDO_0800044",
+      "expected_chembl": "CHEMBL4523429",
+      "chembl_ok": true
+     },
+     "pathway": "preclinical_validation",
+     "expected_pathway": "preclinical_validation",
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "preclinical",
+      "stop_reason": "coverage_achieved",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "not_applicable",
+       "positive_clinical": "not_applicable",
+       "negative_or_safety": "not_applicable",
+       "programme_status": "not_applicable",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [],
+      "expected_needs_ok": {
+       "genetic_mechanistic": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 4,
+      "publications": 75,
+      "compounds": 0,
+      "followup_publications": 0,
+      "dated_publications": 75,
+      "recent_direct": [
+       [
+        "MED:38156787",
+        "2024-03-01"
+       ],
+       [
+        "MED:38417795",
+        "2024-02-28"
+       ],
+       [
+        "MED:38581946",
+        "2024-03-28"
+       ],
+       [
+        "MED:38649481",
+        "2024-04-22"
+       ],
+       [
+        "MED:38991033",
+        "2024-07-11"
+       ],
+       [
+        "MED:39137042",
+        "2024-10-08"
+       ],
+       [
+        "MED:40470739",
+        "2025-07-01"
+       ],
+       [
+        "MED:40643555",
+        "2025-07-07"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "24651605",
+       "25605922"
+      ],
+      "retrieved": [
+       "MED:24651605",
+       "MED:25605922"
+      ],
+      "in_packet": [
+       "MED:25605922"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 11,
+      "omitted": 68,
+      "material_included": [
+       "MED:40687377",
+       "MED:25605922",
+       "MED:42959123",
+       "MED:28426790",
+       "MED:42896834",
+       "NCT06122766"
+      ],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 0.455613,
+      "requests": 0,
+      "cache_hits": 15,
+      "network_attempts": 0,
+      "source_seconds": {},
+      "stages": {
+       "adaptive_rounds": 0.175442,
+       "claims": 0.006388,
+       "compounds": 0.000307,
+       "coverage": 0.185177,
+       "identity": 0.00127,
+       "literature": 0.080601,
+       "precedent": 0.000284,
+       "trials": 0.006103
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_warm"
+    }
+   }
+  },
+  {
+   "name": "invalid_gene",
+   "held_out": false,
+   "target_input": {
+    "disease_name": "HIV infection",
+    "disease_id": "MONDO_0005109",
+    "target_symbol": "AUDIT_FAKE_GENE_ZXQ987"
+   },
+   "runs": {
+    "baseline": {
+     "case": "invalid_gene",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 0.575,
+     "error": null,
+     "identity": {
+      "resolved_chembl": null,
+      "resolution_status": "unknown",
+      "ensembl": null,
+      "disease_id": "MONDO_0005109",
+      "expected_chembl": null,
+      "chembl_ok": true
+     },
+     "pathway": "unresolved",
+     "expected_pathway": "unresolved",
+     "pathway_ok": true,
+     "coverage_status": "INSUFFICIENT COVERAGE",
+     "coverage_gaps": [
+      "Exact target identity unresolved.",
+      "ClinicalTrials.gov search missing or failed; cannot establish pathway coverage.",
+      "Europe PMC search missing or failed; cannot establish pathway coverage.",
+      "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify."
+     ],
+     "plan": {
+      "stage": "unresolved",
+      "stop_reason": "target_unresolved",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "unverifiable",
+       "genetic_mechanistic": "unverifiable",
+       "approved_therapy": "unverifiable",
+       "positive_clinical": "unverifiable",
+       "negative_or_safety": "unverifiable",
+       "programme_status": "unverifiable",
+       "population_subtype": "unverifiable",
+       "recent_development": "unverifiable",
+       "unresolved_uncertainty": "unverifiable"
+      },
+      "open_needs": [
+       "target_disease_association",
+       "genetic_mechanistic",
+       "approved_therapy",
+       "positive_clinical",
+       "negative_or_safety",
+       "programme_status",
+       "population_subtype",
+       "recent_development"
+      ],
+      "expected_needs_ok": {
+       "positive_clinical": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 0,
+      "publications": 0,
+      "compounds": 0,
+      "followup_publications": 0,
+      "dated_publications": 0,
+      "recent_direct": []
+     },
+     "references": {
+      "rubric": [],
+      "retrieved": [],
+      "in_packet": [],
+      "missed": [],
+      "recall": null
+     },
+     "packet": {
+      "selected": 0,
+      "omitted": 0,
+      "material_included": [],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": false,
+      "ok": true
+     },
+     "claims": {
+      "verified": 0,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 0.561104,
+      "requests": 3,
+      "cache_hits": 0,
+      "network_attempts": 3,
+      "source_seconds": {
+       "ChEMBL": 0.287048,
+       "OLS": 0.152454,
+       "Open Targets": 0.120619
+      },
+      "stages": {
+       "claims": 0.120973,
+       "coverage": 0.000131,
+       "identity": 0.439984
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "invalid_gene",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 0.496,
+     "error": null,
+     "identity": {
+      "resolved_chembl": null,
+      "resolution_status": "unknown",
+      "ensembl": null,
+      "disease_id": "MONDO_0005109",
+      "expected_chembl": null,
+      "chembl_ok": true
+     },
+     "pathway": "unresolved",
+     "expected_pathway": "unresolved",
+     "pathway_ok": true,
+     "coverage_status": "INSUFFICIENT COVERAGE",
+     "coverage_gaps": [
+      "Exact target identity unresolved.",
+      "ClinicalTrials.gov search missing or failed; cannot establish pathway coverage.",
+      "Europe PMC search missing or failed; cannot establish pathway coverage.",
+      "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify."
+     ],
+     "plan": {
+      "stage": "unresolved",
+      "stop_reason": "target_unresolved",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "unverifiable",
+       "genetic_mechanistic": "unverifiable",
+       "approved_therapy": "unverifiable",
+       "positive_clinical": "unverifiable",
+       "negative_or_safety": "unverifiable",
+       "programme_status": "unverifiable",
+       "population_subtype": "unverifiable",
+       "recent_development": "unverifiable",
+       "unresolved_uncertainty": "unverifiable"
+      },
+      "open_needs": [
+       "target_disease_association",
+       "genetic_mechanistic",
+       "approved_therapy",
+       "positive_clinical",
+       "negative_or_safety",
+       "programme_status",
+       "population_subtype",
+       "recent_development"
+      ],
+      "expected_needs_ok": {
+       "positive_clinical": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 0,
+      "publications": 0,
+      "compounds": 0,
+      "followup_publications": 0,
+      "dated_publications": 0,
+      "recent_direct": []
+     },
+     "references": {
+      "rubric": [],
+      "retrieved": [],
+      "in_packet": [],
+      "missed": [],
+      "recall": null
+     },
+     "packet": {
+      "selected": 0,
+      "omitted": 0,
+      "material_included": [],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": false,
+      "ok": true
+     },
+     "claims": {
+      "verified": 0,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 0.484976,
+      "requests": 3,
+      "cache_hits": 0,
+      "network_attempts": 3,
+      "source_seconds": {
+       "ChEMBL": 0.267961,
+       "OLS": 0.112616,
+       "Open Targets": 0.103395
+      },
+      "stages": {
+       "claims": 0.103675,
+       "coverage": 0.000108,
+       "identity": 0.38118
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "invalid_gene",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 0.008,
+     "error": null,
+     "identity": {
+      "resolved_chembl": null,
+      "resolution_status": "unknown",
+      "ensembl": null,
+      "disease_id": "MONDO_0005109",
+      "expected_chembl": null,
+      "chembl_ok": true
+     },
+     "pathway": "unresolved",
+     "expected_pathway": "unresolved",
+     "pathway_ok": true,
+     "coverage_status": "INSUFFICIENT COVERAGE",
+     "coverage_gaps": [
+      "Exact target identity unresolved.",
+      "ClinicalTrials.gov search missing or failed; cannot establish pathway coverage.",
+      "Europe PMC search missing or failed; cannot establish pathway coverage.",
+      "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify."
+     ],
+     "plan": {
+      "stage": "unresolved",
+      "stop_reason": "target_unresolved",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "unverifiable",
+       "genetic_mechanistic": "unverifiable",
+       "approved_therapy": "unverifiable",
+       "positive_clinical": "unverifiable",
+       "negative_or_safety": "unverifiable",
+       "programme_status": "unverifiable",
+       "population_subtype": "unverifiable",
+       "recent_development": "unverifiable",
+       "unresolved_uncertainty": "unverifiable"
+      },
+      "open_needs": [
+       "target_disease_association",
+       "genetic_mechanistic",
+       "approved_therapy",
+       "positive_clinical",
+       "negative_or_safety",
+       "programme_status",
+       "population_subtype",
+       "recent_development"
+      ],
+      "expected_needs_ok": {
+       "positive_clinical": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 0,
+      "publications": 0,
+      "compounds": 0,
+      "followup_publications": 0,
+      "dated_publications": 0,
+      "recent_direct": []
+     },
+     "references": {
+      "rubric": [],
+      "retrieved": [],
+      "in_packet": [],
+      "missed": [],
+      "recall": null
+     },
+     "packet": {
+      "selected": 0,
+      "omitted": 0,
+      "material_included": [],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": false,
+      "ok": true
+     },
+     "claims": {
+      "verified": 0,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 0.00107,
+      "requests": 0,
+      "cache_hits": 3,
+      "network_attempts": 0,
+      "source_seconds": {},
+      "stages": {
+       "claims": 0.000336,
+       "coverage": 9e-05,
+       "identity": 0.000634
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_warm"
+    }
+   }
+  },
+  {
+   "name": "unsupported_pair",
+   "held_out": false,
+   "target_input": {
+    "disease_name": "achondroplasia",
+    "disease_id": "MONDO_0007037",
+    "target_symbol": "CCR5",
+    "target_id": "ENSG00000160791"
+   },
+   "runs": {
+    "baseline": {
+     "case": "unsupported_pair",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 42.003,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL274",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000160791",
+      "disease_id": "MONDO_0007037",
+      "expected_chembl": "CHEMBL274",
+      "chembl_ok": true
+     },
+     "pathway": "unresolved",
+     "expected_pathway": "unresolved",
+     "pathway_ok": true,
+     "coverage_status": "INSUFFICIENT COVERAGE",
+     "coverage_gaps": [
+      "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify."
+     ],
+     "plan": {
+      "stage": "preclinical",
+      "stop_reason": "follow_up_disabled",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "unmet",
+       "genetic_mechanistic": "unmet",
+       "approved_therapy": "not_applicable",
+       "positive_clinical": "not_applicable",
+       "negative_or_safety": "not_applicable",
+       "programme_status": "not_applicable",
+       "population_subtype": "unmet",
+       "recent_development": "unmet",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "target_disease_association",
+       "genetic_mechanistic",
+       "population_subtype",
+       "recent_development"
+      ],
+      "expected_needs_ok": {
+       "target_disease_association": true,
+       "approved_therapy": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 0,
+      "publications": 46,
+      "compounds": 12,
+      "followup_publications": 0,
+      "dated_publications": 46,
+      "recent_direct": []
+     },
+     "references": {
+      "rubric": [],
+      "retrieved": [],
+      "in_packet": [],
+      "missed": [],
+      "recall": null
+     },
+     "packet": {
+      "selected": 4,
+      "omitted": 42,
+      "material_included": [],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": false,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 41.981657,
+      "requests": 58,
+      "cache_hits": 0,
+      "network_attempts": 58,
+      "source_seconds": {
+       "ChEMBL": 8.651829,
+       "ClinicalTrials.gov": 16.352317,
+       "Ensembl": 9.053849,
+       "Europe PMC": 4.466291,
+       "OLS": 0.109377,
+       "Open Targets": 0.102288,
+       "openFDA": 2.706503
+      },
+      "stages": {
+       "adaptive_rounds": 0.198177,
+       "claims": 0.00293,
+       "compounds": 4.555956,
+       "coverage": 0.19895,
+       "identity": 9.203063,
+       "literature": 4.586369,
+       "precedent": 6.881161,
+       "trials": 16.355014
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "unsupported_pair",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 36.872,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL274",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000160791",
+      "disease_id": "MONDO_0007037",
+      "expected_chembl": "CHEMBL274",
+      "chembl_ok": true
+     },
+     "pathway": "unresolved",
+     "expected_pathway": "unresolved",
+     "pathway_ok": true,
+     "coverage_status": "INSUFFICIENT COVERAGE",
+     "coverage_gaps": [
+      "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify."
+     ],
+     "plan": {
+      "stage": "preclinical",
+      "stop_reason": "no_new_evidence",
+      "rounds": 1,
+      "searches": 4,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "unmet",
+       "genetic_mechanistic": "unmet",
+       "approved_therapy": "not_applicable",
+       "positive_clinical": "not_applicable",
+       "negative_or_safety": "not_applicable",
+       "programme_status": "not_applicable",
+       "population_subtype": "unmet",
+       "recent_development": "unmet",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "target_disease_association",
+       "genetic_mechanistic",
+       "population_subtype",
+       "recent_development"
+      ],
+      "expected_needs_ok": {
+       "target_disease_association": true,
+       "approved_therapy": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 0,
+      "publications": 46,
+      "compounds": 12,
+      "followup_publications": 0,
+      "dated_publications": 46,
+      "recent_direct": []
+     },
+     "references": {
+      "rubric": [],
+      "retrieved": [],
+      "in_packet": [],
+      "missed": [],
+      "recall": null
+     },
+     "packet": {
+      "selected": 4,
+      "omitted": 42,
+      "material_included": [],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": false,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 36.843389,
+      "requests": 62,
+      "cache_hits": 0,
+      "network_attempts": 62,
+      "source_seconds": {
+       "ChEMBL": 9.119926,
+       "ClinicalTrials.gov": 16.36416,
+       "Ensembl": 0.050228,
+       "Europe PMC": 9.144678,
+       "OLS": 0.10436,
+       "Open Targets": 0.088786,
+       "openFDA": 2.610079
+      },
+      "stages": {
+       "adaptive_rounds": 1.49475,
+       "claims": 0.012142,
+       "compounds": 4.447242,
+       "coverage": 0.236305,
+       "identity": 0.4804,
+       "literature": 6.748151,
+       "precedent": 7.0579,
+       "trials": 16.366464
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "unsupported_pair",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 2.544,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL274",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000160791",
+      "disease_id": "MONDO_0007037",
+      "expected_chembl": "CHEMBL274",
+      "chembl_ok": true
+     },
+     "pathway": "unresolved",
+     "expected_pathway": "unresolved",
+     "pathway_ok": true,
+     "coverage_status": "INSUFFICIENT COVERAGE",
+     "coverage_gaps": [
+      "Insufficient disease-specific primary biological support: need multiple distinct primary study groups with genetic, functional cellular or disease-model evidence; compound pharmacology and co-mentions do not qualify."
+     ],
+     "plan": {
+      "stage": "preclinical",
+      "stop_reason": "no_new_evidence",
+      "rounds": 1,
+      "searches": 4,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "unmet",
+       "genetic_mechanistic": "unmet",
+       "approved_therapy": "not_applicable",
+       "positive_clinical": "not_applicable",
+       "negative_or_safety": "not_applicable",
+       "programme_status": "not_applicable",
+       "population_subtype": "unmet",
+       "recent_development": "unmet",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "target_disease_association",
+       "genetic_mechanistic",
+       "population_subtype",
+       "recent_development"
+      ],
+      "expected_needs_ok": {
+       "target_disease_association": true,
+       "approved_therapy": true
+      },
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 0,
+      "publications": 46,
+      "compounds": 12,
+      "followup_publications": 0,
+      "dated_publications": 46,
+      "recent_direct": []
+     },
+     "references": {
+      "rubric": [],
+      "retrieved": [],
+      "in_packet": [],
+      "missed": [],
+      "recall": null
+     },
+     "packet": {
+      "selected": 4,
+      "omitted": 42,
+      "material_included": [],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": false,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 2.524222,
+      "requests": 4,
+      "cache_hits": 58,
+      "network_attempts": 4,
+      "source_seconds": {
+       "openFDA": 1.871635
+      },
+      "stages": {
+       "adaptive_rounds": 0.288781,
+       "claims": 0.003592,
+       "compounds": 0.003478,
+       "coverage": 0.205048,
+       "identity": 0.002664,
+       "literature": 0.119783,
+       "precedent": 1.897954,
+       "trials": 0.002883
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_warm"
+    }
+   }
+  },
+  {
+   "name": "htt_huntington",
+   "held_out": true,
+   "target_input": {
+    "disease_name": "Huntington disease",
+    "disease_id": "MONDO_0007739",
+    "target_symbol": "HTT",
+    "target_id": "ENSG00000197386"
+   },
+   "runs": {
+    "baseline": {
+     "case": "htt_huntington",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 9.415,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL5514",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000197386",
+      "disease_id": "MONDO_0007739",
+      "expected_chembl": null,
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": null,
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "follow_up_disabled",
+      "rounds": 0,
+      "searches": 0,
+      "failed_searches": 0,
+      "new_evidence": 0,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "unmet",
+       "positive_clinical": "partial",
+       "negative_or_safety": "partial",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "approved_therapy",
+       "positive_clinical",
+       "negative_or_safety"
+      ],
+      "expected_needs_ok": {},
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 29,
+      "publications": 118,
+      "compounds": 0,
+      "followup_publications": 0,
+      "dated_publications": 118,
+      "recent_direct": [
+       [
+        "MED:39824182",
+        "2025-01-16"
+       ],
+       [
+        "MED:41238535",
+        "2025-11-14"
+       ],
+       [
+        "MED:41570009",
+        "2026-01-22"
+       ],
+       [
+        "MED:41578740",
+        "2026-06-01"
+       ],
+       [
+        "MED:41622913",
+        "2026-09-01"
+       ],
+       [
+        "MED:41841355",
+        "2026-03-17"
+       ],
+       [
+        "MED:41849610",
+        "2026-03-18"
+       ],
+       [
+        "MED:41884622",
+        "2026-03-11"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "31059641"
+      ],
+      "retrieved": [
+       "MED:31059641"
+      ],
+      "in_packet": [
+       "MED:31059641"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 15,
+      "omitted": 132,
+      "material_included": [
+       "MED:36357392",
+       "MED:10823891",
+       "NCT07378644",
+       "MED:19646924",
+       "MED:42950817",
+       "MED:12089530",
+       "PPR:PPR1348412",
+       "NCT04257513"
+      ],
+      "material_omitted": []
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 9.383126,
+      "requests": 13,
+      "cache_hits": 0,
+      "network_attempts": 13,
+      "source_seconds": {
+       "ChEMBL": 0.386384,
+       "ClinicalTrials.gov": 3.85116,
+       "Ensembl": 2.26329,
+       "Europe PMC": 2.203825,
+       "OLS": 0.101629,
+       "Open Targets": 0.125698
+      },
+      "stages": {
+       "adaptive_rounds": 0.154475,
+       "claims": 0.00825,
+       "compounds": 0.287737,
+       "coverage": 0.152743,
+       "identity": 2.467571,
+       "literature": 2.256903,
+       "precedent": 0.125883,
+       "trials": 3.929531
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "baseline"
+    },
+    "adaptive_cold": {
+     "case": "htt_huntington",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 8.028,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL5514",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000197386",
+      "disease_id": "MONDO_0007739",
+      "expected_chembl": null,
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": null,
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "searches": 3,
+      "failed_searches": 0,
+      "new_evidence": 47,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "unmet",
+       "positive_clinical": "partial",
+       "negative_or_safety": "partial",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "approved_therapy",
+       "positive_clinical",
+       "negative_or_safety"
+      ],
+      "expected_needs_ok": {},
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 29,
+      "publications": 165,
+      "compounds": 0,
+      "followup_publications": 47,
+      "dated_publications": 165,
+      "recent_direct": [
+       [
+        "MED:38379425",
+        "2024-02-21"
+       ],
+       [
+        "MED:39824182",
+        "2025-01-16"
+       ],
+       [
+        "MED:41238535",
+        "2025-11-14"
+       ],
+       [
+        "MED:41410782",
+        "2025-12-18"
+       ],
+       [
+        "MED:41497150",
+        "2025-12-10"
+       ],
+       [
+        "MED:41570009",
+        "2026-01-22"
+       ],
+       [
+        "MED:41578740",
+        "2026-06-01"
+       ],
+       [
+        "MED:41622913",
+        "2026-09-01"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "31059641"
+      ],
+      "retrieved": [
+       "MED:31059641"
+      ],
+      "in_packet": [
+       "MED:31059641"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 178,
+      "material_included": [
+       "MED:36357392",
+       "MED:10823891",
+       "NCT07378644",
+       "MED:19646924",
+       "MED:42950817",
+       "MED:12089530",
+       "PPR:PPR1348412"
+      ],
+      "material_omitted": [
+       "NCT04257513"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 7.990007,
+      "requests": 16,
+      "cache_hits": 0,
+      "network_attempts": 16,
+      "source_seconds": {
+       "ChEMBL": 0.866944,
+       "ClinicalTrials.gov": 3.829213,
+       "Ensembl": 0.054523,
+       "Europe PMC": 2.613637,
+       "OLS": 0.101753,
+       "Open Targets": 0.167333
+      },
+      "stages": {
+       "adaptive_rounds": 1.424133,
+       "claims": 0.013019,
+       "compounds": 0.479111,
+       "coverage": 0.219987,
+       "identity": 0.548257,
+       "literature": 1.195967,
+       "precedent": 0.167579,
+       "trials": 3.941915
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_cold"
+    },
+    "adaptive_warm": {
+     "case": "htt_huntington",
+     "state": "completed",
+     "http_status": 200,
+     "wall_seconds": 0.786,
+     "error": null,
+     "identity": {
+      "resolved_chembl": "CHEMBL5514",
+      "resolution_status": "resolved",
+      "ensembl": "ENSG00000197386",
+      "disease_id": "MONDO_0007739",
+      "expected_chembl": null,
+      "chembl_ok": true
+     },
+     "pathway": "clinical_precedent",
+     "expected_pathway": null,
+     "pathway_ok": true,
+     "coverage_status": "BOUNDED REVIEW",
+     "coverage_gaps": [],
+     "plan": {
+      "stage": "clinical",
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "searches": 3,
+      "failed_searches": 0,
+      "new_evidence": 47,
+      "needs": {
+       "target_disease_association": "satisfied",
+       "genetic_mechanistic": "satisfied",
+       "approved_therapy": "unmet",
+       "positive_clinical": "partial",
+       "negative_or_safety": "partial",
+       "programme_status": "satisfied",
+       "population_subtype": "satisfied",
+       "recent_development": "satisfied",
+       "unresolved_uncertainty": "satisfied"
+      },
+      "open_needs": [
+       "approved_therapy",
+       "positive_clinical",
+       "negative_or_safety"
+      ],
+      "expected_needs_ok": {},
+      "limitations": [
+       "Sponsor press releases and investor announcements are not retrieved: no permitted public API exists. Registry status, registry-posted results, peer-reviewed publications and FDA records are the only development tiers searched."
+      ]
+     },
+     "sources": {
+      "trials": 29,
+      "publications": 165,
+      "compounds": 0,
+      "followup_publications": 47,
+      "dated_publications": 165,
+      "recent_direct": [
+       [
+        "MED:38379425",
+        "2024-02-21"
+       ],
+       [
+        "MED:39824182",
+        "2025-01-16"
+       ],
+       [
+        "MED:41238535",
+        "2025-11-14"
+       ],
+       [
+        "MED:41410782",
+        "2025-12-18"
+       ],
+       [
+        "MED:41497150",
+        "2025-12-10"
+       ],
+       [
+        "MED:41570009",
+        "2026-01-22"
+       ],
+       [
+        "MED:41578740",
+        "2026-06-01"
+       ],
+       [
+        "MED:41622913",
+        "2026-09-01"
+       ]
+      ]
+     },
+     "references": {
+      "rubric": [
+       "31059641"
+      ],
+      "retrieved": [
+       "MED:31059641"
+      ],
+      "in_packet": [
+       "MED:31059641"
+      ],
+      "missed": [],
+      "recall": 1.0
+     },
+     "packet": {
+      "selected": 16,
+      "omitted": 178,
+      "material_included": [
+       "MED:36357392",
+       "MED:10823891",
+       "NCT07378644",
+       "MED:19646924",
+       "MED:42950817",
+       "MED:12089530",
+       "PPR:PPR1348412"
+      ],
+      "material_omitted": [
+       "NCT04257513"
+      ]
+     },
+     "abstention": {
+      "experiment_status": "INSUFFICIENT EVIDENCE FOR EXPERIMENT",
+      "expected_abstain": true,
+      "abstained": true,
+      "reasoning_permitted": true,
+      "ok": true
+     },
+     "claims": {
+      "verified": 200,
+      "unverified_supporting": 0
+     },
+     "timing": {
+      "retrieval_seconds": 0.756573,
+      "requests": 0,
+      "cache_hits": 43,
+      "network_attempts": 0,
+      "source_seconds": {},
+      "stages": {
+       "adaptive_rounds": 0.395453,
+       "claims": 0.011531,
+       "compounds": 0.000271,
+       "coverage": 0.219456,
+       "identity": 0.005396,
+       "literature": 0.061121,
+       "precedent": 0.000274,
+       "trials": 0.063033
+      }
+     },
+     "retrieval_errors": [],
+     "mode": "adaptive_warm"
+    }
+   }
+  }
+ ],
+ "reference_checks": {
+  "ccr5_hiv": {
+   "18832244": {
+    "pmid": "18832244",
+    "exists": null,
+    "error": "ReadTimeout"
+   },
+   "20151839": {
+    "pmid": "20151839",
+    "exists": null,
+    "error": "ReadTimeout"
+   }
+  },
+  "pcsk9_hchol": {
+   "28304224": {
+    "pmid": "28304224",
+    "exists": true,
+    "title": "Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease.",
+    "date": "2017-03-17"
+   },
+   "30403574": {
+    "pmid": "30403574",
+    "exists": true,
+    "title": "Alirocumab and Cardiovascular Outcomes after Acute Coronary Syndrome.",
+    "date": "2018-11-07"
+   }
+  },
+  "egfr_nsclc": {
+   "29151359": {
+    "pmid": "29151359",
+    "exists": true,
+    "title": "Osimertinib in Untreated EGFR-Mutated Advanced Non-Small-Cell Lung Cancer.",
+    "date": "2017-11-18"
+   }
+  },
+  "bace1_ad": {
+   "29719179": {
+    "pmid": "29719179",
+    "exists": true,
+    "title": "Randomized Trial of Verubecestat for Mild-to-Moderate Alzheimer's Disease.",
+    "date": "2018-05-01"
+   },
+   "30970186": {
+    "pmid": "30970186",
+    "exists": true,
+    "title": "Randomized Trial of Verubecestat for Prodromal Alzheimer's Disease.",
+    "date": "2019-04-01"
+   }
+  },
+  "lrrk2_pd": {
+   "35675433": {
+    "pmid": "35675433",
+    "exists": true,
+    "title": "Preclinical and clinical evaluation of the LRRK2 inhibitor DNL201 for Parkinson's disease.",
+    "date": "2022-06-08"
+   },
+   "36807624": {
+    "pmid": "36807624",
+    "exists": true,
+    "title": "LRRK2 Inhibition by BIIB122 in Healthy Participants and Patients with Parkinson's Disease.",
+    "date": "2023-02-18"
+   }
+  },
+  "bcl2_scoliosis": {
+   "31337422": {
+    "pmid": "31337422",
+    "exists": true,
+    "title": "Suv39h1 promotes facet joint chondrocyte proliferation by targeting miR-15a/Bcl2 in idiopathic scoliosis patients.",
+    "date": "2019-07-23"
+   }
+  },
+  "ngly1_rare": {
+   "24651605": {
+    "pmid": "24651605",
+    "exists": true,
+    "title": "Mutations in NGLY1 cause an inherited disorder of the endoplasmic reticulum-associated degradation pathway.",
+    "date": "2014-03-20"
+   },
+   "25605922": {
+    "pmid": "25605922",
+    "exists": true,
+    "title": "Endo-\u03b2-N-acetylglucosaminidase forms N-GlcNAc protein aggregates during ER-associated degradation in Ngly1-defective cells.",
+    "date": "2015-01-20"
+   }
+  },
+  "invalid_gene": {},
+  "unsupported_pair": {},
+  "htt_huntington": {
+   "31059641": {
+    "pmid": "31059641",
+    "exists": true,
+    "title": "Targeting Huntingtin Expression in Patients with Huntington's Disease.",
+    "date": "2019-05-06"
+   }
+  }
+ },
+ "caution": "Evaluation rubric only. Reference PMIDs, expected pathways and expected need statuses are implementer-selected labels used to score retrieval coverage; they are never read by production code and do not establish biological truth.",
+ "finished_at": 1794134698.4237337
+}
