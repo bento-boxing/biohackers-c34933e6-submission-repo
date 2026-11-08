@@ -18,8 +18,8 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'backend'))
+ROOT = Path(__file__).resolve().parents[1]  # backend/
+sys.path.insert(0, str(ROOT))
 from pipeline.api import RUNS, create_app as scout_app
 from pipeline.http import HttpClient
 from pipeline.models import (ComponentScores, Disease, SafetyFlag, ScoredTarget,
@@ -65,7 +65,7 @@ def create_app(runtime: Path | None = None, *, start_worker: bool = True):
     apps = {}
     for mode in ['live', 'offline']:
         http = HttpClient(write_dir=runtime / 'api_cache' if mode == 'live' else None,
-            read_dirs=[runtime / 'api_cache'] if mode == 'live' else [ROOT / 'backend/data/demo_cache'],
+            read_dirs=[runtime / 'api_cache'] if mode == 'live' else [ROOT / 'data/demo_cache'],
             cache_only=mode == 'offline')
         apps[mode] = scout_app(client=http, approvals_path=runtime / mode / 'approvals.jsonl',
                                shortlists_path=runtime / mode / 'shortlists.jsonl')

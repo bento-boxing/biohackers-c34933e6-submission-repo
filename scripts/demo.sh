@@ -5,10 +5,10 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 ( cd backend && . venv/bin/activate && pytest -q )
-( cd backend && . venv/bin/activate && python -m pytest devils_advocate/tests -q --rootdir=.. ) || true
+( cd backend && . venv/bin/activate && python -m pytest devils_advocate/tests -q )
 ( cd frontend && npm test )
 
-( cd backend && . venv/bin/activate && cd .. && python -m devils_advocate.server --port 5050 ) &
+( cd backend && . venv/bin/activate && python -m devils_advocate.server --port 5050 ) &
 BACKEND_PID=$!
 trap 'kill $BACKEND_PID 2>/dev/null || true' EXIT
 echo "Workbench backend on :5050. Starting Next.js on :3000 ..."

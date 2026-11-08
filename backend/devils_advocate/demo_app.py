@@ -1,4 +1,4 @@
-"""Run from repository root: python -m streamlit run devils_advocate/demo_app.py."""
+"""Run from backend/: python -m streamlit run devils_advocate/demo_app.py."""
 import json
 import sys
 from pathlib import Path

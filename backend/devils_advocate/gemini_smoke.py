@@ -7,7 +7,7 @@ def main() -> int:
     from dotenv import load_dotenv
     from google import genai
 
-    load_dotenv(Path(__file__).resolve().parents[1] / '.env', override=False)
+    load_dotenv(Path(__file__).resolve().parents[2] / '.env', override=False)
     model = os.getenv('AI_MODEL', '').strip()
     key = os.getenv('GEMINI_API_KEY', '').strip()
     result = {'model': model, 'success': False}

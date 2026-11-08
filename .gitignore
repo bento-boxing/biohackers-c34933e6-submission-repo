@@ -61,3 +61,6 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
+# workbench runtime (api cache, approvals log)
+backend/runtime/

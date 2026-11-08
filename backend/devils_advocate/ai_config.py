@@ -20,7 +20,7 @@ class AISettings(BaseModel):
     retries: int = Field(default=1, ge=0, le=1)
 
 def load_ai_settings(env_file: Path | None = None) -> AISettings:
-    load_dotenv(env_file or Path(__file__).resolve().parents[1] / '.env', override=False)
+    load_dotenv(env_file or Path(__file__).resolve().parents[2] / '.env', override=False)
     return AISettings(enabled=os.getenv('AI_ENABLED', 'false').lower() == 'true',
         provider=os.getenv('AI_PROVIDER', 'google'), model=os.getenv('AI_MODEL', '').strip(),
         api_key=SecretStr(os.getenv('GEMINI_API_KEY', '')),
