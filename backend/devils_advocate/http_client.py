@@ -15,6 +15,14 @@ class RetrievalError(RuntimeError):
 class RetrievalDeadlineExceeded(RuntimeError):
     pass
 
+# Per-host transport policy: identity lookups must not consume the retrieval budget when a
+# registry is degraded (Ensembl answered 503 after 20 s per attempt during validation).
+HOST_POLICY={'rest.ensembl.org':{'timeout':(5,10),'attempts':2}}
+DEFAULT_POLICY={'timeout':(5,20),'attempts':3}
+
+def host_policy(url: str) -> dict:
+    return {**DEFAULT_POLICY,**HOST_POLICY.get(urlsplit(url).hostname or '',{})}
+
 class JsonClient:
     def __init__(self,min_interval: float=.35,*,cache_path=None,max_workers: int=1):
         self.session=self._new_session();self._main_thread=threading.get_ident();self._local=threading.local()
@@ -87,7 +95,7 @@ class JsonClient:
     def _emit(self,url,state,**values):
         with self._lock:
             event={'source':source_name(url),'operation':urlsplit(url).path,'state':state,'at':time.time(),
-                'retry_policy_max_attempts':3,**values}
+                'retry_policy_max_attempts':host_policy(url)['attempts'],**values}
             if self._profile is not None:
                 p=self._profile
                 if state=='request':p['requests']+=1;p['cache_misses']+=1
@@ -139,7 +147,8 @@ class JsonClient:
                     self.cache[key]=cached
                     self._emit(url,'cache_hit',provenance='CACHED_PERSISTENT',**cached[1]);return copy.deepcopy(cached[0])
             started=time.monotonic();self._emit(url,'request',started_at=time.time())
-            maximum=3 if method=='GET' else 1
+            policy=host_policy(url)
+            maximum=policy['attempts'] if method=='GET' else 1
             try:
                 for attempt in range(maximum):
                     self._rate_limit(url)
@@ -147,7 +156,7 @@ class JsonClient:
                         if self._profile is not None:self._profile['network_attempts']+=1
                     try:
                         session=self._session()
-                        response=session.get(url,params=parameters,timeout=(5,20)) if method=='GET' else session.post(url,json=parameters,timeout=(5,20))
+                        response=session.get(url,params=parameters,timeout=policy['timeout']) if method=='GET' else session.post(url,json=parameters,timeout=policy['timeout'])
                         if response.status_code in [429,500,502,503,504] and attempt+1<maximum:
                             self._emit(url,'retry',status_code=response.status_code,retries_observed=attempt+1)
                             # Honor short Retry-After; fail rather than retry before a long server-requested wait.

@@ -1,9 +1,11 @@
 """Three actual Gemini roles with deterministic provenance and one revision round."""
 import json
 import re
+from pydantic import BaseModel, Field
 from .ai_client import AIError, GeminiRunner
 from .ai_config import AISettings, load_ai_settings
 from .coverage import check_coverage, select_evidence, target_level_objections
+from .association import assess_association
 from .prior_art import prior_art_context,check_prior_art
 from .models import (AIClaim, AIReport, AIAuditRound, AdjudicationBatch, ChallengeDraft,
                      ExperimentalResponse, Investigation)
@@ -123,6 +125,38 @@ answer in the selected packet is not proof that the literature has no answer.
 Do not claim absolute absence below assay detection limits or an only-effective
 therapy/mechanism. Preserve population differences and nonexclusive explanations.'''
 
+PLANNER = COMMON + '''
+Role P: Evidence Discovery Planner. You receive the deterministic evidence plan (needs with
+status), the identifiers and a compact list of what was retrieved. For needs that are unmet or
+partial, suggest up to six short literature search terms each (study names, programme or drug
+code names, mechanisms, populations, endpoints) that a biomedical librarian would try next.
+Terms are QUERIES ONLY: they will be searched in public databases and anything found is
+verified there. Never assert that a study, result or approval exists; never include outcomes.
+Return only the JSON structure requested.'''
+
+class PlannerSuggestion(BaseModel):
+    need_key: str = Field(min_length=1, max_length=60)
+    terms: list[str] = Field(min_length=1, max_length=6)
+    rationale: str = Field(default='', max_length=400)
+
+class PlannerSuggestions(BaseModel):
+    suggestions: list[PlannerSuggestion] = Field(max_length=6)
+
+def plan_followups_with_gemini(runner, result: Investigation, plan) -> list[dict]:
+    """One bounded planning call. Output is a list of search-term suggestions, never evidence."""
+    open_needs = [n for n in plan.needs if n.status in ['unmet', 'partial']]
+    if not open_needs:
+        return []
+    payload = {'identifiers': plan.identifiers, 'stage': plan.stage,
+               'needs': [{'key': n.key, 'label': n.label, 'status': n.status, 'note': n.note} for n in plan.needs],
+               'retrieved_titles': [p.title for p in sorted(result.publications, key=lambda p: -p.cited_by_count)[:25]],
+               'compounds': [{'name': c.name, 'max_phase': c.max_phase} for c in result.compounds[:15]],
+               'trial_titles': [t.title for t in result.trials[:20]]}
+    parsed = runner.generate('Evidence Planner', PLANNER, payload, PlannerSuggestions)
+    keys = {n.key for n in open_needs}
+    return [{'need_key': s.need_key, 'terms': s.terms, 'rationale': s.rationale, 'origin': 'gemini planning call; queries only'}
+            for s in parsed.suggestions if s.need_key in keys]
+
 def experimental_evidence(bundle: dict, claims: list[AIClaim]) -> dict:
     """The designer receives accepted context; adjudication still sees all sources.
 
@@ -172,6 +206,9 @@ def evidence_bundle(result: Investigation, settings: AISettings) -> dict:
         fields.update(conditions='; '.join(trial.conditions), interventions='; '.join(trial.interventions),
                       population=trial.population[:min(settings.excerpt_chars, 800)],
                       phases='; '.join(trial.phases),
+                      development_dates=json.dumps({'start':trial.start_date,'primary_completion':trial.completion_date,'last_registry_update':trial.last_update_date,
+                        'results_first_posted':trial.results_posted_date,'evidence_tier':trial.evidence_tier,
+                        'meaning':'Registry dates and status only; registry-posted results are not peer-reviewed outcomes and a sponsor announcement is not a registry record.'}),
                       outcome_records=json.dumps({'record_count':len(trial.outcome_records),
                         'outcome_index':[{'title':o.get('title',''),'type':o.get('type','')} for o in trial.outcome_records],
                         'scope':'Complete endpoint-title index only. Numerical results remain in the full Investigation/source; this index cannot establish efficacy or safety.'},ensure_ascii=False,separators=(',',':')))
@@ -183,7 +220,8 @@ def evidence_bundle(result: Investigation, settings: AISettings) -> dict:
             'caution': 'Eligibility/outcome text may be truncated; name links do not establish engagement or selectivity.'}
     for pub in pubs:
         add(pub.identifier, pub.url, {'title': pub.title, 'abstract': pub.abstract[:settings.excerpt_chars],
-            'conclusion_excerpt':pub.conclusion_excerpt[:settings.excerpt_chars]})
+            'conclusion_excerpt':pub.conclusion_excerpt[:settings.excerpt_chars],
+            'publication_date':pub.publication_date or 'unknown','evidence_tier':pub.evidence_tier,'retrieved_by':pub.discovered_by})
         sources[pub.identifier]['clinical_context']=pub.clinical_candidate
         sources[pub.identifier]['biological_context']=pub.evidence_scope=='direct_biological'
         sources[pub.identifier]['direction_signals']=pub.direction_signals
@@ -204,9 +242,48 @@ def evidence_bundle(result: Investigation, settings: AISettings) -> dict:
              'publications_sent': len(pubs), 'publications_retrieved': len(result.publications),
              'excerpt_character_limit': settings.excerpt_chars,'reasons':reasons,
              'omitted_count':len(result.trials)-len(trials)+len(result.publications)-len(pubs)},
+            'evidence_plan':{'stage':result.evidence_plan.stage,'stop_reason':result.evidence_plan.stop_reason,
+                'needs':[{'key':n.key,'status':n.status,'note':n.note,'evidence_ids':n.evidence_ids[:8]} for n in result.evidence_plan.needs],
+                'limitations':result.evidence_plan.limitations,
+                'caution':'Need statuses are deterministic retrieval-coverage labels. An unmet need after bounded search is not evidence of absence; sponsor announcements were not searched.'} if result.evidence_plan else {'status':'not planned'},
+            'development_timeline':development_timeline(result,sources),
             'coverage':{'status':result.coverage.status,'pathway':result.coverage.pathway,'gaps':result.coverage.gaps,
                 'caution':result.coverage.caution,'limits':[{'source':a.source,'operation':a.operation,'state':a.state,'total':a.total} for a in result.search_audit if a.state in ['failed','limit_reached','not_searched']]} if result.coverage else {'status':'not assessed for historical fixture'},
             'missing_information': result.missing_information}
+
+def development_timeline(result: Investigation, sources: dict) -> list[dict]:
+    """Dated, tiered records in the packet, newest first; a timeline is context, not an outcome adjudication."""
+    rows=[]
+    for identifier in sources:
+        if identifier.startswith('NCT'):
+            trial=next((t for t in result.trials if t.nct_id==identifier),None)
+            if trial and (trial.results_posted_date or trial.last_update_date):
+                rows.append({'date':trial.results_posted_date or trial.last_update_date,'source_id':identifier,'tier':trial.evidence_tier,'status':trial.status,
+                             'kind':'registry results posted' if trial.results_posted_date else 'registry status update'})
+        elif identifier.startswith(('MED:','PMC:','PPR:')):
+            pub=next((p for p in result.publications if p.identifier==identifier),None)
+            if pub and pub.publication_date:
+                rows.append({'date':pub.publication_date,'source_id':identifier,'tier':pub.evidence_tier,'kind':'publication','signals':pub.direction_signals})
+        elif identifier.startswith('FDAAPP:'):
+            record=next((r for r in result.regulatory_records if r['id']==identifier),None)
+            if record:
+                try:dates=json.loads(record['fields'].get('product_context','{}')).get('approval_dates',[])
+                except (ValueError,AttributeError):dates=[]
+                if dates:rows.append({'date':max(dates),'source_id':identifier,'tier':'regulatory_decision','kind':'FDA original approval'})
+    return sorted(rows,key=lambda r:(r['date'],r['source_id']),reverse=True)[:12]
+
+def add_publications_to_bundle(result: Investigation, bundle: dict, identifiers: list[str], settings: AISettings, *, reason: str) -> None:
+    for pub in result.publications:
+        if pub.identifier in identifiers and pub.identifier not in bundle['sources']:
+            bundle['sources'][pub.identifier] = {'url': pub.url, 'fields': {'title': pub.title, 'abstract': pub.abstract[:settings.excerpt_chars],
+                'conclusion_excerpt': pub.conclusion_excerpt[:settings.excerpt_chars], 'publication_date': pub.publication_date or 'unknown',
+                'evidence_tier': pub.evidence_tier, 'retrieved_by': pub.discovered_by},
+                'clinical_context': pub.clinical_candidate, 'biological_context': pub.evidence_scope == 'direct_biological',
+                'direction_signals': pub.direction_signals, 'coverage_request': reason,
+                'applicability': {'disease_match': pub.disease_match, 'detail': pub.relevance, 'evidence_scope': pub.evidence_scope,
+                                  'biological_signals': pub.biological_signals, 'scope_reason': pub.scope_reason},
+                'caution': 'Added by the coverage check after drafting; abstract may be truncated; no causal adjudication.'}
+            bundle['selection']['reasons'][pub.identifier] = [reason]
 
 def identifier_objections(narrative: str, cited: set[str]) -> list[str]:
     objections = []
@@ -218,8 +295,48 @@ def identifier_objections(narrative: str, cited: set[str]) -> list[str]:
             objections.append('Narrative PMID lacks a matching retrieved publication citation.')
     return list(dict.fromkeys(objections))
 
-def validate_ai_claim(claim: AIClaim, bundle: dict) -> list[str]:
+NEGATIVE = r'\b(did not (?:improve|reduce|meet|demonstrate|differ)|not superior|no (?:significant )?(?:benefit|difference|improvement)|failed to|futility|discontinued|terminated|adverse events|toxicity|safety concerns|hepatotoxicity)\b'
+POSITIVE = r'\b(significantly (?:reduced|improved|lower|higher|longer)|superior|met (?:the|its) primary endpoint|efficacy was demonstrated|greater (?:virologic|viral|reduction|suppression)|improved .{0,60}(?:compared with|versus))\b'
+CAUSAL = r'\b(causes?|caused by|due to|leads? to|results? in|drives?|is responsible for|because of|mediates?)\b'
+ASSOCIATIVE = r'\b(associated|association|correlat\w*|linked|observed|reported|found)\b'
+
+def omitted_contradictions(result: Investigation | None, bundle: dict, claim: AIClaim) -> list[str]:
+    """Direct, disease-matched records in the full collection whose triage signal opposes the claim's stance and that the packet lacks."""
+    if result is None or claim.stance == 'context':
+        return []
+    opposing = {'supporting': {'negative_candidate', 'safety_candidate'}, 'contradictory': {'positive_candidate'}}[claim.stance]
+    omitted = [p.identifier for p in result.publications if p.identifier not in bundle['sources'] and p.evidence_scope == 'direct_clinical'
+               and p.disease_match == 'matched' and set(p.direction_signals) & opposing]
+    return sorted(omitted, key=lambda i: -next(p.cited_by_count for p in result.publications if p.identifier == i))[:4]
+
+def validate_ai_claim(claim: AIClaim, bundle: dict, result: Investigation | None = None) -> list[str]:
     objections = []
+    excerpts = ' '.join(c.excerpt for c in claim.citations)
+    applicability = [bundle['sources'].get(c.source_id, {}).get('applicability', {}) for c in claim.citations]
+    # Stance must agree with the direction visible in the quoted excerpts, not with the challenger's reading.
+    if claim.stance == 'supporting' and re.search(NEGATIVE, excerpts, re.I) and not re.search(POSITIVE, excerpts, re.I):
+        objections.append('Stance/excerpt mismatch: the quoted source text reports a negative or safety outcome; a supporting stance is not justified by this citation.')
+    if claim.stance == 'contradictory' and re.search(POSITIVE, excerpts, re.I) and not re.search(NEGATIVE, excerpts, re.I):
+        objections.append('Stance/excerpt mismatch: the quoted source text reports a positive outcome; a contradictory stance is not justified by this citation.')
+    # Disease/population applicability: an uncertain-disease source cannot ground a disease-specific stance.
+    def visibly_matches_disease(citation):
+        from .disease_terms import matches
+        from .models import TargetInput
+        try:
+            target = TargetInput.model_validate({k: v for k, v in bundle.get('target', {}).items() if k in TargetInput.model_fields})
+        except Exception:
+            return True  # Unknown target context: do not object on applicability.
+        fields = bundle['sources'].get(citation.source_id, {}).get('fields', {})
+        return matches(' '.join(str(v) for v in fields.values()), target)
+    if claim.stance != 'context' and applicability and all(a.get('disease_match') == 'uncertain' for a in applicability if a) \
+            and not any(visibly_matches_disease(c) for c in claim.citations):
+        objections.append('Population applicability: every cited source has an uncertain disease match for the requested disease; qualify the claim to the studied condition and population.')
+    # Observed outcome versus causal interpretation.
+    if re.search(CAUSAL, claim.text, re.I) and not re.search(CAUSAL, excerpts, re.I) and re.search(ASSOCIATIVE, excerpts, re.I) and not re.search(r'\b(?:may|might|could|hypothes\w*|possibly|interpretation)\b', claim.text, re.I):
+        objections.append('Causal wording exceeds the cited observation: the source reports an association/observation; state the observed outcome and mark causality as an interpretation.')
+    missing = omitted_contradictions(result, bundle, claim)
+    if missing:
+        objections.append('Material contradictory evidence omitted from the packet: ' + ', '.join(missing) + ' report the opposite direction for this disease; address or qualify the claim (records added to the revision packet).')
     for citation in claim.citations:
         source = bundle['sources'].get(citation.source_id)
         field = source.get('fields', {}).get(citation.field) if source else None
@@ -276,7 +393,7 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
     if not settings.enabled:
         report.warnings.append('Gemini was not requested/authorized for this job or backend AI is disabled. Coverage eligibility is reported independently; zero paid calls made.')
         return report
-    if not result.resolved_target_id or not (result.trials or result.publications):
+    if not (result.resolved_target_id or result.resolution_status == 'gene_verified') or not (result.trials or result.publications):
         report.status = 'skipped'
         report.warnings.append('Insufficient resolved public evidence for AI reasoning; no calls made.')
         return report
@@ -295,6 +412,7 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
     report.source_bundle = bundle
     report.sent_source_ids = list(bundle['sources'])
     report.source_urls = {key: value['url'] for key, value in bundle['sources'].items()}
+    report.packet_audit['selection_reasons']=bundle['selection']['reasons']
     owned = runner is None
     runner = runner or GeminiRunner(settings, on_progress=on_progress, should_cancel=should_cancel, deadline=deadline)
     report.calls = runner.calls
@@ -305,7 +423,12 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
             ids = [c.claim_id for c in draft.claims]
             if len(ids) != len(set(ids)):
                 raise AIError('Duplicate generated claim IDs; AI output rejected.')
-            checks = {c.claim_id: validate_ai_claim(c, bundle) for c in draft.claims}
+            checks = {c.claim_id: validate_ai_claim(c, bundle, result) for c in draft.claims}
+            # Evidence Coverage Agent: pull omitted contradictory records into the packet for adjudication/revision (bounded).
+            requested = list(dict.fromkeys(i for c in draft.claims for i in omitted_contradictions(result, bundle, c)))[:4]
+            if requested:
+                add_publications_to_bundle(result, bundle, requested, settings, reason='Requested by the coverage check: contradicts a drafted claim.')
+                report.packet_audit.setdefault('retrieval_requests', []).append({'round': round_number, 'kind': 'omitted_contradiction', 'source_ids': requested})
             batch = runner.generate('Evidence Adjudicator', ADJUDICATOR,
                 {'evidence': bundle, 'claims': [c.model_dump(mode='json') for c in draft.claims],
                  'deterministic_objections': checks}, AdjudicationBatch)
@@ -315,6 +438,20 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
             if identifier_objections(batch.model_dump_json(), set(bundle['sources'])):
                 raise AIError('Adjudicator introduced an unretrieved identifier; output rejected.')
             accepted = [c for c in draft.claims if not checks[c.claim_id] and findings[c.claim_id].verdict == 'supported']
+            # Consequential assertions the adjudicator could not verify get one targeted retrieval before revision.
+            unverified = [c for c in draft.claims if findings[c.claim_id].verdict != 'supported' and c.stance != 'context' and c.concern in ['efficacy', 'safety']]
+            if unverified and prior_art_client is not None and round_number == 0 and not (should_cancel and should_cancel()):
+                from .prior_art import targeted_search
+                for c in unverified[:2]:
+                    found, audit = targeted_search(result, c.text + ' ' + c.relevance, prior_art_client, 'adjudicator retrieval request', limit=6, page_size=10)
+                    report.packet_audit.setdefault('retrieval_requests', []).append({'round': round_number, 'kind': 'unverified_consequential_claim', 'claim_id': c.claim_id,
+                        'state': audit.state if audit else 'not_searched', 'new_source_ids': found})
+                    if found:
+                        assess_association(result)
+                        add_publications_to_bundle(result, bundle, found[:3], settings, reason='Targeted retrieval for an unverified consequential claim.')
+            report.sent_source_ids = list(bundle['sources'])
+            report.source_urls = {key: value['url'] for key, value in bundle['sources'].items()}
+            report.packet_audit['agent_source_ids']['Evidence Adjudicator'] = list(bundle['sources'])
             report.rounds.append(AIAuditRound(round_number=round_number, draft=draft,
                 deterministic_objections=checks, adjudications=batch.findings,
                 accepted_claim_ids=[c.claim_id for c in accepted]))
@@ -390,7 +527,7 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
                     '; '.join(report.final_checks)+'. Closely matching sources: '+', '.join(report.prior_art_check['close_matches']))
                 report.warnings.append('Final proposal withheld after prior-art/claim checks; original findings and matched sources remain in the audit.')
         if final.experiment.status!='INSUFFICIENT EVIDENCE FOR EXPERIMENT':
-            final.experiment.status = 'AI-generated unvalidated research proposal; not performed or validated. Researcher approval required.'
+            final.experiment.status = 'AI-generated research proposal: potentially informative and unvalidated; not performed or validated. Researcher approval required.'
         final.experiment.limitations.append('Gemini interpretation is not independent evidence or expert validation; source sampling and excerpt truncation limit conclusions.')
         final.experiment.limitations.append('Model suitability, genetic-versus-pharmacological comparability, replication, randomization and predefined outcomes require expert design review before approval.')
         report.warnings.append('The final reassessment and experiment are AI synthesis, not separately adjudicated findings or independent scientific validation.')

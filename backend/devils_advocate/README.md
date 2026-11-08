@@ -507,3 +507,22 @@ both memory and persistent caches. A cached public record is not a validated
 scientific conclusion. Full source records and selected/omitted packet IDs remain
 auditable. The five-attempt default and separate extra-call authorization retain
 the full adjudication workflow and human gates.
+
+## Adaptive evidence discovery and verification
+
+`evidence_planner.py` turns the single-pass pipeline into a bounded loop: build a plan of what the
+pair must establish → assess each need from the scoped records → targeted follow-up searches for
+open needs only (Europe PMC, ClinicalTrials.gov, Open Targets/OLS identifier resolution, ChEMBL
+retry) → reassess → stop with a recorded reason (`coverage_achieved`, `no_actionable_gaps`,
+`no_new_evidence`, `round_limit`, `budget_exhausted`). Every search, response state and new record
+is kept in `Investigation.evidence_plan`; failed searches are never cached or read as absence.
+Publications and trials now carry dates and an evidence tier (registry status, registry results,
+peer-reviewed, regulatory decision); sponsor announcements are reported as not searchable.
+Planner-flagged material records enter the Gemini packet beyond the stratified cutoff with a stated
+reason, the adjudicator checks stance/excerpt direction, disease applicability, causal wording,
+universal claims and omitted contradictions (pulling omitted records into the revision packet), and
+the prior-art check searches the question, mechanism/readout and competing hypotheses. Results,
+measurements and limitations: [ADAPTIVE_EVIDENCE_VALIDATION.md](ADAPTIVE_EVIDENCE_VALIDATION.md).
+Reproduce the cross-disease benchmark with `python -m devils_advocate.adaptive_benchmark --base <next-url>`
+(public sources only; zero paid calls).
+

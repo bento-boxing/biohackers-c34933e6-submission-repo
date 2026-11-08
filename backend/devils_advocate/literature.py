@@ -21,6 +21,20 @@ def disease_query_term(value: str) -> str:
     exact='TITLE_ABS:'+quoted(value)
     return '('+exact+' OR TITLE_ABS:'+possessive[1]+'*)' if possessive else exact
 
+def publication_from_record(record: dict, *, discovered_by: str = 'initial retrieval') -> Publication | None:
+    """One Europe PMC search row → Publication with dates and study types; None when unidentifiable."""
+    if not isinstance(record, dict) or not record.get('source') or not record.get('id'):
+        return None
+    date = record.get('firstPublicationDate') or record.get('pubYear')
+    date = date if isinstance(date, str) and re.fullmatch(r'\d{4}(?:-\d{2}){0,2}', date) else None
+    pub = Publication(identifier=f"{record['source']}:{record['id']}", title=record.get('title', ''),
+        abstract=re.sub(r'</?[A-Za-z][^>]*>', ' ', html.unescape(record.get('abstractText') or '')).strip(),
+        doi=record.get('doi'), url=f"https://europepmc.org/article/{record['source']}/{record['id']}",
+        cited_by_count=int(record.get('citedByCount') or 0), publication_date=date, discovered_by=discovered_by)
+    pub.study_types = [t for t in record.get('pubTypeList', {}).get('pubType', []) if isinstance(t, str)]
+    pub.evidence_tier = 'peer_reviewed' if record.get('source') in ['MED', 'PMC'] and not re.search(r'preprint', ' '.join(pub.study_types), re.I) and record.get('source') != 'PPR' else 'unverified'
+    return pub
+
 def annotate(pub: Publication) -> Publication:
     text=pub.title+' '+pub.abstract
     if aggregate_publication(pub):
@@ -107,12 +121,8 @@ def retrieve_publications(client: JsonClient,target: TargetInput,compounds: list
             if total is not None: total=int(total)
             retained=0
             for record in raw:
-                if not record.get('source') or not record.get('id'): continue
-                pub=Publication(identifier=f"{record['source']}:{record['id']}",title=record.get('title',''),
-                    abstract=re.sub(r'</?[A-Za-z][^>]*>',' ',html.unescape(record.get('abstractText') or '')).strip(),
-                    doi=record.get('doi'),url=f"https://europepmc.org/article/{record['source']}/{record['id']}",
-                    cited_by_count=int(record.get('citedByCount') or 0))
-                pub.study_types=record.get('pubTypeList',{}).get('pubType',[])
+                pub=publication_from_record(record)
+                if pub is None: continue
                 text=pub.title+' '+pub.abstract
                 disease_match=matches(text,target)
                 named=target_mentioned(text,target) or any(mentions(text,n) for n in names)
