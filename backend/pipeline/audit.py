@@ -8,8 +8,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from pipeline.models import Approval, ScoredTarget, ScoutResult
+from pipeline.settings import data_dir
 
-RUNS_DIR = Path(__file__).resolve().parent.parent / "runs"
+RUNS_DIR = data_dir("runs")  # /tmp on Vercel: ephemeral
 APPROVALS_PATH = RUNS_DIR / "approvals.jsonl"
 SHORTLISTS_PATH = RUNS_DIR / "shortlists.jsonl"
 

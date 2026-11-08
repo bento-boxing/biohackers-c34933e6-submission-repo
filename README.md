@@ -77,6 +77,25 @@ python -m pipeline.cli scout "Parkinson disease" --cache-only
 python -m pipeline.cli screen --latest                     # newest approval
 ```
 
+## Deploying to Vercel
+
+The repo is a two-service Vercel project (`vercel.json`): Next.js at the root and Flask in
+`backend/`, with `/api/*` routed to Flask. Flask receives the full `/api/...` path.
+
+- **Only the `prod` branch deploys.** `git.deploymentEnabled` allows `prod` and blocks every other
+  branch (`**` also covers names with slashes such as `feat/x`). In the Vercel dashboard set
+  *Settings → Git → Production Branch* to `prod`, otherwise pushes to `prod` become previews.
+- Set the framework preset to **Services** (dashboard, or `vercel project update --framework services`).
+- Environment variables: `ANTHROPIC_API_KEY` (optional, for rationales). Leave `SCOUT_CACHE_ONLY`
+  unset so every disease runs live.
+- Vercel Functions can only write to `/tmp`. When `VERCEL=1` the HTTP cache, approval log and
+  shortlist log go to `/tmp/target-scout/`. That storage is per-instance and is wiped when an
+  instance is recycled, so on Vercel the audit logs are **ephemeral** and a scout run can expire if
+  the Approve click lands on a different instance (the page then asks you to re-run the scout).
+- An uncached live scout of 25 targets takes about 25 s and a new screening about 12 s, well under
+  Vercel's function time limit. Parkinson disease is instant because its responses ship in
+  `backend/data/demo_cache/`. Repeat runs on a warm instance are instant too.
+
 ## API
 
 All JSON. Errors are `{"error": "..."}` with 404 (unknown disease / run / approval), 400 (bad input,

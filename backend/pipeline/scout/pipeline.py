@@ -19,7 +19,7 @@ def _enrich(client: HttpClient, disease: Disease, ev: TargetEvidence) -> TargetE
                    potent_count=potent, safety_flags=flags)
 
 
-def gather_evidence(client: HttpClient, disease: Disease, n: int, workers: int = 8) -> list[TargetEvidence]:
+def gather_evidence(client: HttpClient, disease: Disease, n: int, workers: int = 5) -> list[TargetEvidence]:  # Europe PMC allows ~10 req/s per IP
     base = opentargets.associated_targets(client, disease.id, n)
     with ThreadPoolExecutor(max_workers=workers) as pool:
         return list(pool.map(lambda ev: _enrich(client, disease, ev), base))

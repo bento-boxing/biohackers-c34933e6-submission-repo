@@ -9,10 +9,11 @@ from pathlib import Path
 from typing import Iterable
 
 from pipeline.models import ScoutResult
+from pipeline.settings import data_dir
 
 MODEL = "claude-opus-5-5"
 BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
-DEFAULT_CACHE_DIR = BACKEND_DIR / "cache" / "rationale"
+DEFAULT_CACHE_DIR = data_dir("cache") / "rationale"
 DEMO_RATIONALE_DIR = BACKEND_DIR / "data" / "demo_cache" / "rationale"
 
 SYSTEM_PROMPT = (
