@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-# Offline demo: run both test suites, then start Flask (cache-only) and Next.js.
+# Local demo: run the test suites, then start the research workbench backend (:5050) and frontend (:3000).
+# The workbench backend wraps the Target Scout Flask app, so port 5000 is not needed.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
 ( cd backend && . venv/bin/activate && pytest -q )
-npm test
+( cd backend && . venv/bin/activate && python -m pytest devils_advocate/tests -q --rootdir=.. ) || true
+( cd frontend && npm test )
 
-export SCOUT_CACHE_ONLY="${SCOUT_CACHE_ONLY:-1}"
-( cd backend && . venv/bin/activate && FLASK_DEBUG=0 python app.py ) &
-FLASK_PID=$!
-trap 'kill $FLASK_PID 2>/dev/null || true' EXIT
-echo "Flask on :5000 (SCOUT_CACHE_ONLY=$SCOUT_CACHE_ONLY). Starting Next.js on :3000 ..."
-npm run dev
+( cd backend && . venv/bin/activate && cd .. && python -m devils_advocate.server --port 5050 ) &
+BACKEND_PID=$!
+trap 'kill $BACKEND_PID 2>/dev/null || true' EXIT
+echo "Workbench backend on :5050. Starting Next.js on :3000 ..."
+( cd frontend && npm run dev )

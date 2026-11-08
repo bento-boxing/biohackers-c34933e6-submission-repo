@@ -1,4 +1,4 @@
-import type { Components, ScoutTarget, Weights } from "./types";
+import type { Components, ScoutTarget, Weights } from "./scout-types";
 
 export const DEFAULT_WEIGHTS: Weights = {
   genetic: 0.4,

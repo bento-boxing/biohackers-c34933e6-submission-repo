@@ -1,4 +1,8 @@
-"""Optional LLM rationale: explains the ranking using only the evidence we fetched."""
+"""Optional LLM rationale: explains the ranking using only the evidence we fetched.
+
+Uses the same Gemini configuration as the Target Challenger (devils_advocate):
+GEMINI_API_KEY, AI_MODEL, AI_ENABLED, AI_THINKING_LEVEL, loaded from the repository-root .env.
+"""
 from __future__ import annotations
 
 import hashlib
@@ -8,11 +12,13 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Iterable
 
+from dotenv import load_dotenv
+
 from pipeline.models import ScoutResult
 from pipeline.settings import data_dir
 
-MODEL = "claude-opus-5-5"
 BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
+REPO_ROOT = BACKEND_DIR.parent
 DEFAULT_CACHE_DIR = data_dir("cache") / "rationale"
 DEMO_RATIONALE_DIR = BACKEND_DIR / "data" / "demo_cache" / "rationale"
 
@@ -36,13 +42,24 @@ RATIONALE_SCHEMA = {
                     "evidence_strength": {"type": "string", "enum": ["strong", "moderate", "weak"]},
                 },
                 "required": ["symbol", "rationale", "evidence_strength"],
-                "additionalProperties": False,
             },
         }
     },
     "required": ["items"],
-    "additionalProperties": False,
 }
+
+
+def gemini_settings() -> dict:
+    """Same environment contract as devils_advocate.ai_config, without importing that package."""
+    load_dotenv(REPO_ROOT / ".env", override=False)
+    return {
+        "enabled": os.getenv("AI_ENABLED", "false").lower() == "true",
+        "model": os.getenv("AI_MODEL", "").strip(),
+        "api_key": os.getenv("GEMINI_API_KEY", ""),
+        "thinking_level": os.getenv("AI_THINKING_LEVEL", "medium").lower(),
+        "timeout_seconds": int(os.getenv("AI_TIMEOUT_SECONDS", "120")),
+        "max_output_tokens": int(os.getenv("AI_MAX_OUTPUT_TOKENS", "8192")),
+    }
 
 
 def evidence_payload(result: ScoutResult, top: int = 10) -> list[dict]:
@@ -73,15 +90,13 @@ def rationale_key(result: ScoutResult, top: int = 10) -> str:
 
 
 def _client():
-    """Return an Anthropic client, or None when no credentials are configured."""
-    try:
-        import anthropic
-        client = anthropic.Anthropic()
-        if not getattr(client, "api_key", None) and not getattr(client, "auth_token", None):
-            return None
-        return client
-    except Exception:
+    """Return a configured Gemini client, or None when AI is disabled or unconfigured."""
+    s = gemini_settings()
+    if not (s["enabled"] and s["model"] and s["api_key"]):
         return None
+    from google import genai
+    return genai.Client(api_key=s["api_key"],
+                        http_options={"timeout": s["timeout_seconds"] * 1000, "retry_options": {"attempts": 1}})
 
 
 def _read_cached(key: str, dirs: Iterable[Path]) -> dict | None:
@@ -102,31 +117,38 @@ def _apply(result: ScoutResult, items: list[dict]) -> ScoutResult:
 
 
 def explain(result: ScoutResult, top: int = 10, cache_dir: Path = DEFAULT_CACHE_DIR,
-            read_dirs: Iterable[Path] = (DEMO_RATIONALE_DIR,)) -> ScoutResult | None:
+            read_dirs: Iterable[Path] = (DEMO_RATIONALE_DIR,), offline: bool = False) -> ScoutResult | None:
+    """Fill rationales from cache or Gemini. Returns None when no rationale is available.
+
+    offline=True (or SCOUT_CACHE_ONLY=1) means cache only: no paid call is ever made.
+    """
     key = rationale_key(result, top)
     cached = _read_cached(key, [cache_dir, *read_dirs])
     if cached is not None:
         return _apply(result, cached["items"])
-    if os.environ.get("SCOUT_CACHE_ONLY") == "1":
+    if offline or os.environ.get("SCOUT_CACHE_ONLY") == "1":
         return None
     client = _client()
     if client is None:
         return None
-    response = client.beta.messages.create(
-        model=MODEL,
-        max_tokens=4000,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": json.dumps(evidence_payload(result, top))}],
-        output_config={"effort": "low", "format": {"type": "json_schema", "schema": RATIONALE_SCHEMA}},
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",
+    s = gemini_settings()
+    response = client.interactions.create(
+        model=s["model"],
+        system_instruction=SYSTEM_PROMPT,
+        input=json.dumps(evidence_payload(result, top), ensure_ascii=False, separators=(",", ":")),
+        store=False,
+        automatic_continuation=False,
+        timeout=s["timeout_seconds"],
+        generation_config={"thinking_level": s["thinking_level"], "max_output_tokens": s["max_output_tokens"]},
+        response_format=[{"type": "text", "mime_type": "application/json", "schema": RATIONALE_SCHEMA}],
     )
-    if response.stop_reason == "refusal":
+    if getattr(response, "status", "completed") != "completed":
         return None
-    text = next((b.text for b in response.content if getattr(b, "type", "") == "text"), None)
-    if not text:
+    try:
+        data = json.loads(response.output_text)
+        items = data["items"]
+    except (ValueError, KeyError, TypeError, AttributeError):
         return None
-    data = json.loads(text)
     Path(cache_dir).mkdir(parents=True, exist_ok=True)
-    (Path(cache_dir) / f"{key}.json").write_text(json.dumps(data))
-    return _apply(result, data["items"])
+    (Path(cache_dir) / f"{key}.json").write_text(json.dumps({"items": items}))
+    return _apply(result, items)

@@ -153,3 +153,12 @@ def test_unrelated_or_invalid_live_targets_use_given_identifiers(app):
         job=app.config['STORE'].claim();worker.execute(job)
         assert worker.investigator.call_args.args[0].chembl_target_id==identifier
         assert app.config['STORE'].get(job['id'])['state']=='completed'
+
+
+def test_rationale_route_is_forwarded_to_scout_backend(app, monkeypatch):
+    import pipeline.api as scout_api
+    monkeypatch.setattr(scout_api, 'explain', lambda result, **kw: None)
+    client=app.test_client();run=scout(client)
+    response=client.post('/api/rationale',headers=HEADERS,json={'run_id':run['run_id'],'weights':run['default_weights']})
+    assert response.status_code==200,response.get_json()
+    assert response.get_json()['available'] is False

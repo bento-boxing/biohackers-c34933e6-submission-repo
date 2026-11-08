@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DEFAULT_WEIGHTS, normaliseWeights, rankTargets, total } from "./score";
-import type { ScoutTarget } from "./types";
+import type { ScoutTarget } from "./scout-types";
 
 const sum = (w: Record<string, number>) => Object.values(w).reduce((a, b) => a + b, 0);
 

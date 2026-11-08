@@ -170,3 +170,17 @@ def test_rationale_endpoint_explain_raising_gives_available_false(api, monkeypat
     assert r.status_code == 200
     body = r.get_json()
     assert body["available"] is False and "no route to host" in body["reason"]
+
+
+def test_rationale_endpoint_passes_offline_flag_for_cache_only_client(api, monkeypatch):
+    from pipeline import api as api_mod
+    seen = {}
+
+    def fake_explain(result, **kw):
+        seen.update(kw)
+        return None
+
+    monkeypatch.setattr(api_mod, "explain", fake_explain)
+    run = scout(api).get_json()
+    api.post("/api/rationale", json={"run_id": run["run_id"], "weights": run["default_weights"]})
+    assert seen["offline"] is True  # the test fixture's client is cache-only

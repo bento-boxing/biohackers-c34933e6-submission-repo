@@ -156,7 +156,8 @@ def create_app(client: HttpClient | None = None,
             return error(f"no run {body.get('run_id')} (runs expire on server restart: re-run the scout)", 404)
         weights = _weights_from(body.get("weights"))
         try:
-            result = explain(rescore(run, weights))
+            # cache-only (offline / recorded) mode must never make a paid model call
+            result = explain(rescore(run, weights), offline=http.cache_only)
         except Exception as e:  # LLM failures must never break the page
             app.logger.warning("rationale failed: %s", e)
             return jsonify({"available": False, "reason": f"LLM call failed: {e}"})

@@ -270,7 +270,7 @@ The local service binds **127.0.0.1**, disables Flask debug/reloader, restricts
 browser origins to localhost/127.0.0.1:3000, validates request sizes and schemas,
 and sanitizes public API errors. Keys remain in the Python process and are
 excluded from job payloads, reports, Git and browser responses. The new frontend
-does not invoke Scout's optional Anthropic rationale endpoint. All decisions and
+forwards Scout's optional Gemini rationale endpoint (`/api/rationale`), which is cache-only in recorded mode. All decisions and
 experiments still require researcher review; no experiment executes automatically.
 
 SQLite is durable, not an in-memory job store. This is a **single-machine local

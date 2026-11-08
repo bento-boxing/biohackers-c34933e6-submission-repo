@@ -1,5 +1,5 @@
-export type { ScoutRun, ScoutTarget, Weights, Approval, ScreeningResult } from '../../lib/types';
-export { rankTargets, DEFAULT_WEIGHTS, normaliseWeights } from '../../lib/score';
+export type { ScoutRun, ScoutTarget, Weights, Approval, ScreeningResult } from './scout-types';
+export { rankTargets, DEFAULT_WEIGHTS, normaliseWeights } from './score';
 export type Mode = 'live' | 'offline';
 export type TargetInput = { disease_name: string; disease_id?: string | null; target_symbol: string; target_id?: string | null; chembl_target_id?: string | null; uniprot?: string | null };
 export type Call = {role: string; success: boolean; error: string; usage: Record<string,number>; started_at?:number|null;duration_seconds?:number|null;payload_bytes?:number|null};
@@ -19,6 +19,6 @@ export type Experiment = {question:string; competing_explanations:string[];model
 export type RetrievalProfile = {started_at:number;total_seconds:number;requests:number;cache_hits:number;completed_requests:number;source_seconds:Record<string,number>};
 export type Timings = {retrieval?:RetrievalProfile;recorded_playback_seconds?:number};
 export type Report = {timings?:Timings;investigation:Investigation;experiment:Experiment;recorded_ai:boolean;mode:Mode;selection:{target_input:TargetInput;weighted_score?:number;association_score?:number;run_id?:string;cache_only:boolean};weights:Record<string,number>};
-export type Decision = {decision_id:string;job_id:string;action:string;rationale:string;confirmed:boolean;mode:Mode;approval?:import('../../lib/types').Approval};
-export type Job = {job_id:string;state:string;progress:{stage:string;calls:Call[];stage_started_at?:number;timings?:Timings;retrieval?:{source:string;operation:string;state:string;started_at?:number;at:number;retry_policy_max_attempts:number;retries_observed?:number|null}};result:Report|null;error:string|null;mode:Mode;selection:Report['selection'];weights:import('../../lib/types').Weights;decisions:Decision[]};
+export type Decision = {decision_id:string;job_id:string;action:string;rationale:string;confirmed:boolean;mode:Mode;approval?:import('./scout-types').Approval};
+export type Job = {job_id:string;state:string;progress:{stage:string;calls:Call[];stage_started_at?:number;timings?:Timings;retrieval?:{source:string;operation:string;state:string;started_at?:number;at:number;retry_policy_max_attempts:number;retries_observed?:number|null}};result:Report|null;error:string|null;mode:Mode;selection:Report['selection'];weights:import('./scout-types').Weights;decisions:Decision[]};
 export type Config = {ai:{enabled:boolean;provider:string;model:string;thinking_level:string;max_calls:number;timeout_seconds:number}};

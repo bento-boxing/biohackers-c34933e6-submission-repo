@@ -9,3 +9,6 @@
 .target-panel th:last-child,.target-panel td:last-child{position:sticky;right:0;background:#141e29;box-shadow:-8px 0 12px #0b111a55}
 @media(max-width:760px){.sidebar nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible}.nav-item{white-space:normal}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:0s!important;transition:none!important}}
+
+.panel-actions{display:flex;gap:.5rem;align-items:center}
+.cell-secondary.rationale{display:block;max-width:28rem;white-space:normal;margin-top:.25rem}

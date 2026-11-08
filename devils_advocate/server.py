@@ -116,7 +116,7 @@ def create_app(runtime: Path | None = None, *, start_worker: bool = True):
 
     @app.route('/api/<path:legacy>', methods=['GET', 'POST'])
     def legacy_api(legacy):
-        if legacy not in ['health', 'scout', 'approvals', 'screen', 'shortlists']:
+        if legacy not in ['health', 'scout', 'rationale', 'approvals', 'screen', 'shortlists']:
             return jsonify(error='Unknown endpoint.'), 404
         body = request.get_json(silent=True) or {}
         if not isinstance(body, dict):

@@ -27,7 +27,7 @@ total = w_gen · genetic + w_assoc · association + w_drug · druggability + w_l
 | literature   | log-scaled Europe PMC hits for `"SYMBOL" AND "disease"`                 |
 
 Default weights are 0.4 / 0.3 / 0.2 / 0.1. The sliders re-rank in the browser; nothing is hidden.
-Safety flags are shown, never scored. An optional LLM rationale (Claude) is written from the fetched
+Safety flags are shown, never scored. An optional LLM rationale (Gemini) is written from the fetched
 evidence only, on an explicit button, and is cached per weight setting.
 
 **Human checkpoint.** Approving a target records who, when, why, the weights and the scores shown to
@@ -37,56 +37,57 @@ evidence only, on an explicit button, and is cached per weight setting.
 and the 50 most potent ChEMBL compounds (pChEMBL ≥ 6, i.e. ≤ 1 µM) with phase, Lipinski data and
 approved-drug flags. A second checkpoint writes a shortlist to `backend/runs/shortlists.jsonl`.
 
+## Repository layout
+
+```
+frontend/          Next.js 16 research workbench (the only UI): discovery → challenge → experiment → decision
+devils_advocate/   Target Challenger: Flask server on :5050 that wraps the Scout API, plus the evidence pipeline
+backend/           Target Scout pipeline + Flask API (library used by devils_advocate.server; runnable alone on :5000)
+scripts/           demo.sh (bash) and Windows .cmd launchers
+```
+
 ## Getting started
 
-### Backend (Flask)
+### Backend
 ```bash
 cd backend
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-pytest                          # 58 tests, fully offline
-python app.py                   # live data, http://localhost:5000
+python -m venv venv && source venv/bin/activate      # Windows: venv\Scripts\activate
+pip install -r requirements.txt -r ../devils_advocate/requirements.txt
+pytest                                               # Target Scout tests, offline
+cd .. && python -m pytest devils_advocate/tests -q   # Challenger + workbench tests, offline
+python -m devils_advocate.server --port 5050         # the server the UI talks to
 ```
 
-For the offline demo (no network needed, instant):
+### Frontend
 ```bash
-SCOUT_CACHE_ONLY=1 python app.py
-```
-
-Optional LLM rationale: set `ANTHROPIC_API_KEY` (or put it in `backend/.env`). Without it the button
-reports "LLM rationale off".
-
-### Frontend (Next.js)
-```bash
+cd frontend
 npm install
-npm test                        # vitest: client-side scoring
-npm run dev                     # http://localhost:3000, proxies /api/* to Flask on :5000
+npm test            # vitest: client-side scoring
+npm run dev         # http://localhost:3000, proxies /api/* to :5050
 ```
 
-### One-shot demo
-```bash
-bash scripts/demo.sh            # runs both test suites, then both servers (cache-only)
-```
+`bash scripts/demo.sh` runs all of the above in one go.
 
-### Command line
-```bash
-cd backend && source venv/bin/activate
-python -m pipeline.cli scout "Parkinson disease"          # live
-python -m pipeline.cli scout "Parkinson disease" --cache-only
-python -m pipeline.cli screen --latest                     # newest approval
-```
+### AI configuration (one set of keys for everything)
+Both the Scout ranking rationale and the Challenger's reasoning use Gemini, configured in the
+repository-root `.env` (see `devils_advocate/ai.env.example`): `GEMINI_API_KEY`, `AI_MODEL`,
+`AI_ENABLED=true`, `AI_THINKING_LEVEL`. No Anthropic key is used anywhere. In recorded/offline mode
+no paid call is ever made.
 
 ## Deploying to Vercel
 
-The repo is a two-service Vercel project (`vercel.json`): Next.js at the root and Flask in
-`backend/`, with `/api/*` routed to Flask. Flask receives the full `/api/...` path.
+The repo is a two-service Vercel project (`vercel.json`): the Next.js workbench in `frontend/` and a
+Python API service, with `/api/*` routed to the API. **Current limitation:** the API service points
+at the Target Scout Flask app in `backend/`, which works as a Vercel Function. The workbench's
+challenge, experiment and decision pages need `devils_advocate.server`, which runs a background
+worker and SQLite and therefore needs a long-lived host (Railway, Render, Fly). Until that is
+deployed and `/api/*` is rewritten to it, only the discovery page works on Vercel.
 
 - **Only the `prod` branch deploys.** `git.deploymentEnabled` allows `prod` and blocks every other
   branch (`**` also covers names with slashes such as `feat/x`). In the Vercel dashboard set
   *Settings → Git → Production Branch* to `prod`, otherwise pushes to `prod` become previews.
 - Set the framework preset to **Services** (dashboard, or `vercel project update --framework services`).
-- Environment variables: `ANTHROPIC_API_KEY` (optional, for rationales). Leave `SCOUT_CACHE_ONLY`
+- Environment variables: `GEMINI_API_KEY`, `AI_MODEL`, `AI_ENABLED` (optional, for rationales). Leave `SCOUT_CACHE_ONLY`
   unset so every disease runs live.
 - Vercel Functions can only write to `/tmp`. When `VERCEL=1` the HTTP cache, approval log and
   shortlist log go to `/tmp/target-scout/`. That storage is per-instance and is wiped when an
