@@ -21,6 +21,11 @@ export function associationStrengthLabel(strength: string): string {
   return strengthLabels[strength] || 'Association not classified';
 }
 
+export function associationSourceUrl(identifier: string, url: string, isDirect: boolean): string {
+  const pmid = identifier.match(/^MED:(\d+)$/)?.[1];
+  return isDirect && pmid ? `https://pubmed.ncbi.nlm.nih.gov/${pmid}/` : url;
+}
+
 export function associationVisualNodes(association: Association): AssociationVisualNode[] {
   const ontology = association.ontology_association;
   const score = typeof ontology.score === 'number' ? ` Descriptive score: ${ontology.score.toFixed(5)}.` : '';

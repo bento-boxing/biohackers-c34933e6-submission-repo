@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Investigation } from './contracts';
-import { associationStrengthLabel, associationVisualNodes } from './association-visual';
+import { associationSourceUrl, associationStrengthLabel, associationVisualNodes } from './association-visual';
 
 const association: NonNullable<Investigation['association']> = {
   strength: 'clinical_context',
@@ -28,5 +28,13 @@ describe('association visual', () => {
 
   it('does not present an unknown strength as a positive finding', () => {
     expect(associationStrengthLabel('unexpected')).toBe('Association not classified');
+  });
+
+  it('links direct PubMed records to PubMed while preserving other source links', () => {
+    const europePmcUrl = 'https://europepmc.org/article/MED/12345678';
+    expect(associationSourceUrl('MED:12345678', europePmcUrl, true))
+      .toBe('https://pubmed.ncbi.nlm.nih.gov/12345678/');
+    expect(associationSourceUrl('MED:12345678', europePmcUrl, false)).toBe(europePmcUrl);
+    expect(associationSourceUrl('PMC:PMC1234567', europePmcUrl, true)).toBe(europePmcUrl);
   });
 });

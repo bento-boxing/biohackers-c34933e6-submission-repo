@@ -48,6 +48,22 @@ textarea::placeholder {
   color: var(--muted);
 }
 
+.discovery-form {
+  overflow: visible;
+}
+
+.search-box {
+  position: relative;
+  z-index: 40;
+}
+
+.suggestions {
+  top: auto;
+  bottom: calc(100% + 6px);
+  max-height: min(300px, 45vh);
+  margin: 0;
+}
+
 .sidebar,
 .topbar {
   background: #FFFFFF;
@@ -129,6 +145,20 @@ textarea::placeholder {
 .manual p,
 .hypothesis-card p {
   color: var(--text);
+}
+
+.question-card h2 {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.empty-table h3,
+.bottom-note h3,
+.checkbox-row,
+.report-list li,
+.audit-round > h3,
+.claim-text {
+  color: var(--accent);
 }
 
 .table-note {

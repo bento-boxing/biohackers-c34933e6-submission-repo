@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import type { Investigation } from '@/lib/contracts';
-import { associationStrengthLabel, associationVisualNodes } from '@/lib/association-visual';
+import { associationSourceUrl, associationStrengthLabel, associationVisualNodes } from '@/lib/association-visual';
 import styles from './association-visual.module.css';
 
 type Source = Investigation['publications'][number];
@@ -67,8 +67,9 @@ export function AssociationVisual({ investigation }: { investigation: Investigat
         selected.sourceIds?.length
           ? <ul className={styles.sourceList}>{selected.sourceIds.slice(0, 12).map(id => {
               const source: Source | undefined = publications.get(id);
+              const href = source && associationSourceUrl(source.identifier, source.url, selected.id === 'direct');
               return <li key={id}>{source
-                ? <a href={source.url} target="_blank" rel="noreferrer">{id} · {source.title} ↗</a>
+                ? <a href={href} target="_blank" rel="noreferrer">{id} · {source.title} ↗</a>
                 : <span>{id} · Source record not included in this report</span>}
                 {source?.scope_reason && <small>{source.scope_reason}</small>}
               </li>;
