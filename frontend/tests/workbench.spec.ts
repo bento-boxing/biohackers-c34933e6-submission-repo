@@ -45,12 +45,6 @@ test('live mode runs Gemini without a consent checkbox and mode change clears ev
   await expect(page.getByText('Open the recorded investigation.')).toBeVisible();
   await expect(page.getByRole('heading',{name:'Scientific Challenge & Revision'})).toHaveCount(0);
 });
-  await expect(consent).toBeVisible();
-  if(await consent.isEnabled())await expect(page.getByRole('button',{name:'Challenge this target →'})).toBeDisabled();
-  await page.getByLabel('Research data mode').selectOption('offline');
-  await expect(consent).toHaveCount(0);
-  await expect(page.getByRole('heading',{name:'Scientific Challenge & Revision'})).toHaveCount(0);
-});
 
 test('mobile dashboard and navigation remain usable',async({page})=>{
   await page.setViewportSize({width:390,height:844});
