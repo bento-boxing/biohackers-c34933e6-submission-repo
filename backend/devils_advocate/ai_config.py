@@ -18,6 +18,7 @@ class AISettings(BaseModel):
     max_output_tokens: int = Field(default=8192, ge=512, le=16384)
     timeout_seconds: int = Field(default=120, ge=5, le=120)
     retries: int = Field(default=1, ge=0, le=1)
+    planning_call: bool = Field(default=False, description='Allow one extra Gemini evidence-planning call (search terms only) when deterministic follow-up leaves needs open.')
 
 def load_ai_settings(env_file: Path | None = None) -> AISettings:
     load_dotenv(env_file or Path(__file__).resolve().parents[2] / '.env', override=False)
@@ -25,6 +26,7 @@ def load_ai_settings(env_file: Path | None = None) -> AISettings:
         provider=os.getenv('AI_PROVIDER', 'google'), model=os.getenv('AI_MODEL', '').strip(),
         api_key=SecretStr(os.getenv('GEMINI_API_KEY', '')),
         thinking_level=os.getenv('AI_THINKING_LEVEL', 'medium').lower(),
+        planning_call=os.getenv('AI_PLANNING_CALL', 'false').lower() == 'true',
         **{field: os.environ[env] for field, env in {
             'max_calls': 'AI_MAX_CALLS', 'max_publications': 'AI_MAX_PUBLICATIONS',
             'max_trials': 'AI_MAX_TRIALS', 'excerpt_chars': 'AI_EXCERPT_CHARS',

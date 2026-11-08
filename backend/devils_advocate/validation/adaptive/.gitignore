@@ -1,0 +1,7 @@
+# Full per-case job responses are large and reproducible; keep the report, summary and rubric only.
+*_baseline.json
+*_adaptive_cold.json
+*_adaptive_warm.json
+rerun/*_baseline.json
+rerun/*_adaptive_cold.json
+rerun/*_adaptive_warm.json

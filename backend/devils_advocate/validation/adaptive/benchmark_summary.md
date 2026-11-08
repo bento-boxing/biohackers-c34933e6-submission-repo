@@ -1,0 +1,32 @@
+| Case | Mode | State | ChEMBL ok | Pathway | Plan stage · stop | Rounds/searches/new | Open needs | Ref recall (packet) | Pubs/trials | Retrieval s | Requests (cache) | Abstain ok |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| ccr5_hiv | baseline | completed | True | clinical_precedent | clinical · follow_up_disabled | 0/0/0 | none | 1.0 (2/2) | 231/163 | 74.054343 | 70 (0) | True |
+| ccr5_hiv | adaptive_cold | completed | True | clinical_precedent | clinical · coverage_achieved | 0/0/0 | none | 1.0 (2/2) | 231/163 | 83.083163 | 70 (0) | True |
+| ccr5_hiv | adaptive_warm | completed | True | clinical_precedent | clinical · coverage_achieved | 0/0/0 | none | 1.0 (2/2) | 231/163 | 7.835249 | 5 (220) | True |
+| pcsk9_hchol | baseline | completed | True | clinical_precedent | clinical · follow_up_disabled | 0/0/0 | target_disease_association | 1.0 (0/2) | 172/197 | 53.724901 | 58 (0) | True |
+| pcsk9_hchol | adaptive_cold | completed | True | clinical_precedent | clinical · round_limit | 2/4/37 | target_disease_association | 1.0 (0/2) | 208/197 | 41.867598 | 62 (0) | True |
+| pcsk9_hchol | adaptive_warm | completed | True | clinical_precedent | clinical · round_limit | 2/4/37 | target_disease_association | 1.0 (0/2) | 208/197 | 5.868509 | 4 (247) | True |
+| egfr_nsclc | baseline | completed | True | clinical_precedent | clinical · follow_up_disabled | 0/0/0 | none | 1.0 (1/1) | 370/179 | 71.614822 | 71 (0) | True |
+| egfr_nsclc | adaptive_cold | completed | True | clinical_precedent | clinical · coverage_achieved | 0/0/0 | none | 1.0 (1/1) | 370/179 | 62.493746 | 71 (0) | True |
+| egfr_nsclc | adaptive_warm | completed | True | clinical_precedent | clinical · coverage_achieved | 0/0/0 | none | 1.0 (1/1) | 370/179 | 9.049081 | 1 (241) | True |
+| bace1_ad | baseline | completed | True | clinical_precedent | clinical · follow_up_disabled | 0/0/0 | approved_therapy, positive_clinical | 1.0 (2/2) | 139/28 | 20.301878 | 32 (0) | True |
+| bace1_ad | adaptive_cold | completed | True | clinical_precedent | clinical · round_limit | 2/7/44 | approved_therapy, positive_clinical | 1.0 (2/2) | 183/28 | 22.053487 | 39 (0) | True |
+| bace1_ad | adaptive_warm | completed | True | clinical_precedent | clinical · round_limit | 2/7/44 | approved_therapy, positive_clinical | 1.0 (2/2) | 183/28 | 3.794548 | 3 (62) | True |
+| lrrk2_pd | baseline | completed | True | clinical_precedent | clinical · follow_up_disabled | 0/0/0 | approved_therapy, positive_clinical, negative_or_safety | 1.0 (2/2) | 124/41 | 12.68267 | 13 (0) | True |
+| lrrk2_pd | adaptive_cold | completed | True | clinical_precedent | clinical · round_limit | 2/3/49 | approved_therapy, positive_clinical, negative_or_safety | 1.0 (2/2) | 173/41 | 29.265917 | 16 (0) | True |
+| lrrk2_pd | adaptive_warm | completed | True | clinical_precedent | clinical · round_limit | 2/3/49 | approved_therapy, positive_clinical, negative_or_safety | 1.0 (2/2) | 173/41 | 0.76294 | 0 (55) | True |
+| bcl2_scoliosis | baseline | completed | True | preclinical_validation | preclinical · follow_up_disabled | 0/0/0 | recent_development | 1.0 (1/1) | 47/0 | 35.745153 | 27 (0) | True |
+| bcl2_scoliosis | adaptive_cold | completed | True | preclinical_validation | preclinical · no_new_evidence | 1/1/0 | recent_development | 1.0 (1/1) | 47/0 | 34.473764 | 28 (0) | True |
+| bcl2_scoliosis | adaptive_warm | completed | True | preclinical_validation | preclinical · no_new_evidence | 1/1/0 | recent_development | 1.0 (1/1) | 47/0 | 1.417119 | 2 (26) | True |
+| ngly1_rare | baseline | completed | True | preclinical_validation | preclinical · follow_up_disabled | 0/0/0 | none | 1.0 (1/2) | 75/4 | 12.384809 | 13 (0) | True |
+| ngly1_rare | adaptive_cold | completed | True | preclinical_validation | preclinical · coverage_achieved | 0/0/0 | none | 1.0 (1/2) | 75/4 | 17.261353 | 13 (0) | True |
+| ngly1_rare | adaptive_warm | completed | True | preclinical_validation | preclinical · coverage_achieved | 0/0/0 | none | 1.0 (1/2) | 75/4 | 0.455613 | 0 (15) | True |
+| invalid_gene | baseline | completed | True | unresolved | unresolved · target_unresolved | 0/0/0 | target_disease_association, genetic_mechanistic, approved_therapy, positive_clinical, negative_or_safety, programme_status, population_subtype, recent_development | None (0/0) | 0/0 | 0.561104 | 3 (0) | True |
+| invalid_gene | adaptive_cold | completed | True | unresolved | unresolved · target_unresolved | 0/0/0 | target_disease_association, genetic_mechanistic, approved_therapy, positive_clinical, negative_or_safety, programme_status, population_subtype, recent_development | None (0/0) | 0/0 | 0.484976 | 3 (0) | True |
+| invalid_gene | adaptive_warm | completed | True | unresolved | unresolved · target_unresolved | 0/0/0 | target_disease_association, genetic_mechanistic, approved_therapy, positive_clinical, negative_or_safety, programme_status, population_subtype, recent_development | None (0/0) | 0/0 | 0.00107 | 0 (3) | True |
+| unsupported_pair | baseline | completed | True | unresolved | preclinical · follow_up_disabled | 0/0/0 | target_disease_association, genetic_mechanistic, population_subtype, recent_development | None (0/0) | 46/0 | 41.981657 | 58 (0) | True |
+| unsupported_pair | adaptive_cold | completed | True | unresolved | preclinical · no_new_evidence | 1/4/0 | target_disease_association, genetic_mechanistic, population_subtype, recent_development | None (0/0) | 46/0 | 36.843389 | 62 (0) | True |
+| unsupported_pair | adaptive_warm | completed | True | unresolved | preclinical · no_new_evidence | 1/4/0 | target_disease_association, genetic_mechanistic, population_subtype, recent_development | None (0/0) | 46/0 | 2.524222 | 4 (58) | True |
+| htt_huntington (held-out) | baseline | completed | True | clinical_precedent | clinical · follow_up_disabled | 0/0/0 | approved_therapy, positive_clinical, negative_or_safety | 1.0 (1/1) | 118/29 | 9.383126 | 13 (0) | True |
+| htt_huntington (held-out) | adaptive_cold | completed | True | clinical_precedent | clinical · round_limit | 2/3/47 | approved_therapy, positive_clinical, negative_or_safety | 1.0 (1/1) | 165/29 | 7.990007 | 16 (0) | True |
+| htt_huntington (held-out) | adaptive_warm | completed | True | clinical_precedent | clinical · round_limit | 2/3/47 | approved_therapy, positive_clinical, negative_or_safety | 1.0 (1/1) | 165/29 | 0.756573 | 0 (43) | True |

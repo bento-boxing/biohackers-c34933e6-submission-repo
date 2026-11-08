@@ -101,6 +101,15 @@ The downloadable research report is the durable record.
   rationale and challenger reasoning). Leave `SCOUT_CACHE_ONLY` unset so every disease runs live.
   Browser origins: the deployment's own `VERCEL_URL` / production URL are allowed automatically;
   add custom domains to `WORKBENCH_ORIGINS` (comma-separated).
+- **Adaptive evidence discovery.** After the initial retrieval the challenger builds an evidence
+  plan (association, genetic/mechanistic, approved therapy, positive clinical, negative/safety,
+  programme status, population, recent developments), assesses each need against what was
+  retrieved and runs targeted follow-up searches for open needs only: `ADAPTIVE_MAX_ROUNDS`
+  (default 2), `ADAPTIVE_MAX_SEARCHES_PER_ROUND` (6), `ADAPTIVE_RECENT_YEARS` (3),
+  `AI_MAX_MATERIAL_EXTRA` (6 planner-flagged records admitted beyond the packet cutoff).
+  `AI_PLANNING_CALL=true` allows one extra Gemini call that proposes search terms only (off by
+  default; counts against `AI_MAX_CALLS`). The UI's *Refresh public sources* checkbox bypasses
+  caches for one request. See `backend/devils_advocate/ADAPTIVE_EVIDENCE_VALIDATION.md`.
 - **Time budget.** Vercel's default function limit is 300 s (Hobby and Pro). Live retrieval is
   capped at `RESEARCH_RETRIEVAL_BUDGET_SECONDS` (default 240 s, or 150 s when Gemini reasoning is
   authorized). The whole request has a deadline of `RESEARCH_REQUEST_BUDGET_SECONDS` (default 280):

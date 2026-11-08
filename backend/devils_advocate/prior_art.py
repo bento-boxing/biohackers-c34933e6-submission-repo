@@ -3,7 +3,7 @@ import math,re,time
 from contextlib import nullcontext
 from collections import Counter
 from .models import Experiment,Investigation,SearchAudit
-from .literature import ENDPOINT,quoted,annotate
+from .literature import ENDPOINT,quoted,annotate,publication_from_record
 from .models import Publication
 from .disease_terms import matches,terms
 from .association import target_mentioned
@@ -66,44 +66,70 @@ def proposal_objections(e: Experiment) -> list[str]:
         issues.append('Assay sensitivity: finite detection cannot establish absolute absence; specify a detection bound and uncertainty.')
     return issues
 
+def targeted_search(result: Investigation,text: str,client,operation: str,*,limit: int=8,page_size: int=20) -> tuple[list[str],SearchAudit | None]:
+    """One bounded Europe PMC search built from the distinctive terms of `text` plus verified target names.
+
+    Shared by prior-art facets and adjudicator retrieval requests. Terms come from the generated
+    text, never from target-specific canned answers. A failed search is audited, not treated as absence."""
+    if client is None:return [],None
+    ranked_terms=sorted(tokens(text)-tokens(result.target.disease_name+' '+result.target.target_symbol))
+    keywords=[t for t in ranked_terms if len(t)>4][:limit]
+    if not keywords:return [],None
+    entities=[result.target.target_symbol,*result.target.target_aliases]
+    query='('+' OR '.join('TITLE_ABS:'+quoted(n) for n in entities)+') AND ('+' OR '.join('TITLE_ABS:'+t+'*' for t in keywords)+')'
+    params={'query':query,'format':'json','resultType':'core','pageSize':page_size}
+    additional=[]
+    try:
+        context=client.tracking(scope=result.target.model_dump(mode='json'),budget_seconds=60) if hasattr(client,'tracking') and getattr(client,'_deadline',None) is None else nullcontext()
+        with context:data=client.get(ENDPOINT,params)
+        raw=data.get('resultList',{}).get('result')
+        if not isinstance(raw,list):raise RetrievalError('Malformed targeted literature response')
+        for r in raw:
+            p=publication_from_record(r,discovered_by=operation)
+            if p is None or not target_mentioned(p.title+' '+p.abstract,result.target):continue
+            p=annotate(p)
+            p.disease_match='matched' if matches(p.title+' '+p.abstract,result.target) else 'uncertain'
+            if p.identifier not in {x.identifier for x in result.publications}:result.publications.append(p);additional.append(p.identifier)
+        audit=SearchAudit(source='Europe PMC',operation=operation,url=ENDPOINT,query=params,relevant=len(additional),
+            state='limit_reached' if data.get('hitCount',0)>len(raw) else 'found' if raw else 'no_results',returned=len(raw),total=data.get('hitCount'))
+    except (RetrievalError,RetrievalDeadlineExceeded):
+        audit=SearchAudit(source='Europe PMC',operation=operation,url=ENDPOINT,query=params,state='failed',detail='Targeted search failed; absence cannot be inferred and nothing was cached.')
+    result.search_audit.append(audit)
+    return additional,audit
+
+FACETS=[('question','question-specific prior art'),('mechanism_readout','mechanism/readout prior art'),('competing_hypotheses','competing-hypothesis prior art')]
+
+def facet_texts(e: Experiment) -> dict[str,str]:
+    return {'question':e.question,'mechanism_readout':' '.join([e.mechanism,e.measurement,e.model]).strip(),
+            'competing_hypotheses':' '.join(e.competing_explanations).strip()}
+
 def check_prior_art(result: Investigation,e: Experiment,*,client=None) -> dict:
     start=time.monotonic();question=extract_question(e);searches=[];additional=[]
-    # Targeted retrieval uses domain terms from the actual proposed question,
-    # never target-specific canned answers. Failed searches are not negative findings.
+    # Targeted retrieval per facet (question, mechanism/readout, competing hypotheses) uses
+    # domain terms from the actual proposal. Failed searches are not negative findings.
+    texts=facet_texts(e)
     if client is not None:
-        ranked_terms=sorted(tokens(e.question)-tokens(result.target.disease_name+' '+result.target.target_symbol))
-        keywords=[t for t in ranked_terms if len(t)>4][:8]
-        if keywords:
-            entities=[result.target.target_symbol,*result.target.target_aliases]
-            query='('+' OR '.join('TITLE_ABS:'+quoted(n) for n in entities)+') AND ('+' OR '.join('TITLE_ABS:'+t+'*' for t in keywords)+')'
-            params={'query':query,'format':'json','resultType':'core','pageSize':20}
-            try:
-                context=client.tracking(scope=result.target.model_dump(mode='json'),budget_seconds=60) if hasattr(client,'tracking') else nullcontext()
-                with context:data=client.get(ENDPOINT,params)
-                raw=data.get('resultList',{}).get('result')
-                if not isinstance(raw,list):raise RetrievalError('Malformed targeted literature response')
-                import html
-                for r in raw:
-                    if not r.get('source') or not r.get('id'):continue
-                    abstract=re.sub(r'</?[A-Za-z][^>]*>',' ',html.unescape(r.get('abstractText') or '')).strip()
-                    if not target_mentioned(r.get('title','')+' '+abstract,result.target):continue
-                    p=annotate(Publication(identifier=f"{r['source']}:{r['id']}",title=r.get('title',''),abstract=abstract,
-                        doi=r.get('doi'),url=f"https://europepmc.org/article/{r['source']}/{r['id']}"))
-                    p.disease_match='matched' if matches(p.title+' '+p.abstract,result.target) else 'uncertain'
-                    if p.identifier not in {x.identifier for x in result.publications}:result.publications.append(p);additional.append(p.identifier)
-                audit=SearchAudit(source='Europe PMC',operation='question-specific prior art',url=ENDPOINT,query=params,
-                    state='limit_reached' if data.get('hitCount',0)>len(raw) else 'found' if raw else 'no_results',returned=len(raw),total=data.get('hitCount'))
-            except (RetrievalError,RetrievalDeadlineExceeded):
-                audit=SearchAudit(source='Europe PMC',operation='question-specific prior art',url=ENDPOINT,query=params,state='failed',detail='Prior-art search failed; novelty cannot be established from absence.')
-            result.search_audit.append(audit);searches.append(audit.model_dump(mode='json'))
+        for facet,operation in FACETS:
+            if not texts[facet]:continue
+            found,audit=targeted_search(result,texts[facet],client,operation)
+            additional.extend(found)
+            if audit is not None:searches.append({**audit.model_dump(mode='json'),'facet':facet})
     # The question controls blocking. Long generated gap/claim summaries often
     # repeat generic clinical context and must not inflate the overlap score.
     matches_=ranked_matches(result,e.question)
     close=[m for m in matches_ if m['score']>=.28 and len(m['specific_shared_terms'])>=2]
+    facet_matches={facet:ranked_matches(result,texts[facet])[:6] if texts[facet] else [] for facet,_ in FACETS}
+    # A record that matches the question AND the mechanism/readout or hypothesis facet has
+    # plausibly answered the proposed question itself, not only its background.
+    answered=[m['source_id'] for m in close if any(m['source_id']==f['source_id'] and f['score']>=.2 for facet in ['mechanism_readout','competing_hypotheses'] for f in facet_matches[facet])]
     issues=proposal_objections(e)
     status='PRIOR_ART_OVERLAP_REQUIRES_REVIEW' if close else 'NOVELTY_NOT_ESTABLISHED'
     if any(s['state']=='failed' for s in searches):issues.append('Question-specific literature lookup failed; prior-art coverage incomplete.')
+    if answered:issues.append('Existing studies appear to address the proposed question with the same mechanism/readout or hypotheses ('+', '.join(answered[:4])+'); a scientifically meaningful refinement is required.')
     return {'status':status,'question':question,'matches':matches_[:12],'close_matches':[m['source_id'] for m in close],
+        'facet_matches':{k:[{'source_id':m['source_id'],'score':m['score'],'title':m['title']} for m in v] for k,v in facet_matches.items()},
+        'substantially_answered_by':answered,
         'additional_source_ids':additional,'searches':searches,'objections':issues,'duration_seconds':round(time.monotonic()-start,6),
         'decision':'abstain' if close or issues else 'unvalidated_proposal_requires_expert_review',
+        'label':'Potentially informative and unvalidated: no search result establishes novelty.',
         'caution':'No-overlap is not proof of novelty; close overlap warrants review, not a categorical claim that all experimental details are solved.'}
