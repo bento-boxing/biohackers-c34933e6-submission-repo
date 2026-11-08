@@ -1,10 +1,13 @@
 import os
 
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 from pipeline.api import create_app
 
-load_dotenv()
 app = create_app()
 
 if __name__ == "__main__":

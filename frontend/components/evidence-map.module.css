@@ -1,0 +1,273 @@
+.mapPanel {
+  overflow: hidden;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 25px;
+  border-bottom: 1px solid var(--line);
+  background: #101822;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  border: 1px solid #35465a;
+  border-radius: 999px;
+  color: #aebed0;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.filter input {
+  width: 13px;
+  height: 13px;
+  margin: 0;
+}
+
+.filterNote {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.canvas {
+  height: 590px;
+  background: radial-gradient(circle at center, #19333a 0, #142431 22%, #0c131c 61%);
+}
+
+.node {
+  width: 136px;
+  height: 136px;
+  padding: 17px 13px;
+  border: 1px solid #44576d;
+  border-radius: 50%;
+  background: #172230;
+  color: #e7eef6;
+  box-shadow: 0 6px 20px #0006;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: evidenceBloom 0.5s cubic-bezier(0.2, 0.9, 0.25, 1.15) var(--enter-delay) both;
+}
+
+.selected {
+  scale: 1.2;
+  border-width: 2px;
+  border-color: #4f8f7b;
+  box-shadow: 0 0 0 7px #84dec414, 0 0 34px #84dec438, 0 8px 22px #0008;
+  transition:
+    scale 0.22s cubic-bezier(0.2, 0.9, 0.25, 1.2),
+    border-width 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.node strong {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.node small {
+  display: block;
+  overflow: hidden;
+  max-width: 104px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #9eb0c3;
+  font-size: 8px;
+}
+
+.nodeKind {
+  display: block;
+  margin-bottom: 4px;
+  color: #9eb0c3;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.node :global(.react-flow__handle) {
+  width: 7px;
+  height: 7px;
+  opacity: 0;
+}
+
+.target {
+  border-color: #4f8f7b;
+  background: #17322d;
+  box-shadow: 0 0 0 7px #84dec414, 0 0 34px #84dec438, 0 8px 22px #0008;
+  animation: evidenceBloom 0.5s cubic-bezier(0.2, 0.9, 0.25, 1.15) var(--enter-delay) both, targetPulse 3.5s ease-in-out 0.6s infinite;
+}
+
+.target .nodeKind,
+.target.filter,
+.target.detailKind {
+  color: #84dec4;
+}
+
+.compound {
+  border-color: #526c9a;
+  background: #1a263b;
+}
+
+.compound .nodeKind,
+.compound.filter,
+.compound.detailKind {
+  color: #a9c3f5;
+}
+
+.trial {
+  border-color: #866a3a;
+  background: #322b20;
+}
+
+.trial .nodeKind,
+.trial.filter,
+.trial.detailKind {
+  color: #e7bc78;
+}
+
+.publication {
+  border-color: #715c9e;
+  background: #29233a;
+}
+
+.publication .nodeKind,
+.publication.filter,
+.publication.detailKind {
+  color: #c2b6ee;
+}
+
+.claim {
+  border-color: #8d586b;
+  background: #35222c;
+}
+
+.claim .nodeKind,
+.claim.filter,
+.claim.detailKind {
+  color: #f0a2b5;
+}
+
+.detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 17px 25px;
+  border-top: 1px solid var(--line);
+  background: #131d29;
+}
+
+.detailKind {
+  min-width: 74px;
+  padding-top: 2px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.detail strong {
+  display: block;
+  font-size: 12px;
+}
+
+.detail p {
+  margin: 2px 0 0;
+  color: #aebdcd;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.detail .source-link {
+  margin: 1px 0 0 auto;
+  white-space: nowrap;
+}
+
+.edge {
+  animation: edgeFade 0.55s ease 0.18s both;
+}
+
+@keyframes evidenceBloom {
+  from {
+    opacity: 0;
+    transform: scale(0.45);
+    filter: brightness(1.8) saturate(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1) saturate(1);
+  }
+}
+
+@keyframes edgeFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes targetPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 7px #84dec414, 0 0 30px #84dec430, 0 8px 22px #0008;
+  }
+
+  50% {
+    box-shadow: 0 0 0 13px #84dec40b, 0 0 46px #84dec450, 0 8px 22px #0008;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node,
+  .target,
+  .edge {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .filters {
+    padding: 13px 17px;
+    gap: 7px;
+  }
+
+  .filterNote {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .canvas {
+    height: 470px;
+  }
+
+  .detail {
+    padding: 16px 17px;
+    flex-wrap: wrap;
+  }
+
+  .detail > div {
+    width: calc(100% - 88px);
+  }
+
+  .detail .source-link {
+    margin-left: 88px;
+  }
+}
