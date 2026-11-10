@@ -73,11 +73,11 @@ test('recorded LRRK2 flow: discovery, challenge, experiment, approval and screen
   await expect(page.getByRole('button',{name:'Challenge this target →'})).toBeDisabled();
 });
 
-test('live mode runs Gemini without a consent checkbox and mode change clears evidence',async({page})=>{
+test('live mode runs Claude without a consent checkbox and mode change clears evidence',async({page})=>{
   await page.goto('/challenge');
   await page.getByLabel('Research data mode').selectOption('live');
   await expect(page.getByRole('checkbox',{name:/I authorize up to/})).toHaveCount(0);
-  await expect(page.getByText(/then Gemini/)).toBeVisible();
+  await expect(page.getByText(/then Claude/)).toBeVisible();
   await page.getByLabel('Research data mode').selectOption('offline');
   await expect(page.getByText('Open the recorded investigation.')).toBeVisible();
   await expect(page.getByRole('heading',{name:'Scientific Challenge & Revision'})).toHaveCount(0);

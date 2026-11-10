@@ -57,7 +57,7 @@ def test_remaining_seconds_is_none_outside_tracking_and_counts_down_inside():
         assert 99 < client.remaining_seconds() <= 100
 
 
-def test_default_budget_leaves_room_for_gemini(monkeypatch):
+def test_default_budget_leaves_room_for_claude(monkeypatch):
     monkeypatch.delenv('RESEARCH_RETRIEVAL_BUDGET_SECONDS', raising=False)
     assert default_budget_seconds(use_ai=False) == 240 and default_budget_seconds(use_ai=True) == 150
     monkeypatch.setenv('RESEARCH_RETRIEVAL_BUDGET_SECONDS', '60')

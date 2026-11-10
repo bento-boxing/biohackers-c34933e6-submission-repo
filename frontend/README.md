@@ -18,7 +18,7 @@ confirmation. New synthesis requests map each hypothesis to accepted claim IDs.
 `AI_THINKING_LEVEL=medium` is the demo default; `high` remains supported.
 `AI_MODEL` remains configurable. Python loads the root `.env` with
 `override=False`, so an existing process environment takes precedence. The
-Google SDK receives the normalized level in `generation_config.thinking_level`.
+Anthropic SDK receives the normalized level as `output_config.effort`.
 An already running backend retains its environment until you choose to restart
 it. No restart or paid model request is required to run the offline tests.
 
@@ -32,7 +32,7 @@ are excluded. Requests retain 5-second connection / 20-second read timeouts,
 at most three attempts, and bounded backoff. A 300-second retrieval phase budget
 is checked between requests and after a response: it does not interrupt an
 in-flight request or guarantee a hard DNS/slow-stream wall-clock limit. Budget
-exhaustion produces an explicit error and starts no Gemini call.
+exhaustion produces an explicit error and starts no Claude call.
 
 The existing 15-minute in-process public-response cache is reused by the worker.
 Adjudication still receives the full selected evidence packet; the experiment
@@ -53,7 +53,7 @@ Reproduce the packet-size check without network/model calls:
 
 ```powershell
 .\.venv\Scripts\python.exe -m devils_advocate.profile_latency
-# Optional public ChEMBL request, never Gemini:
+# Optional public ChEMBL request, never Claude:
 .\.venv\Scripts\python.exe -m devils_advocate.profile_latency --live-cache-check
 ```
 
@@ -101,7 +101,7 @@ Two terminals:
   (default http://localhost:8501; an existing session may use 8510).
 
 Keep the repository-root `.env` private. The Python process loads the existing
-`GEMINI_API_KEY`, `AI_PROVIDER`, `AI_MODEL`, `AI_ENABLED`, `AI_THINKING_LEVEL`
+`ANTHROPIC_API_KEY`, `AI_MODEL`, `AI_ENABLED`, `AI_THINKING_LEVEL`
 and bounded-call settings. Never put keys in frontend files or `NEXT_PUBLIC_`
 variables. `RESEARCH_BACKEND_URL` optionally changes Next's server-side API proxy
 destination; it defaults to http://127.0.0.1:5050. There are no browser-side keys.
@@ -116,7 +116,7 @@ The frontend starts in **Recorded demo** mode. API requests include
 2. Select **LRRK2**. The selected Ensembl ID, ChEMBL ID, UniProt, disease ID,
    PMIDs, safety flags, scores and run/cache provenance are passed server-side.
 3. Click **Challenge this target**. Recorded LRRK2 evidence is loaded with **zero
-   retrieval/model calls**. No Gemini output is invented for this example.
+   retrieval/model calls**. No Claude output is invented for this example.
 4. Inspect historical evidence, applicability, missing stop reasons and citations.
    The experiment is a clearly labelled deterministic, unvalidated proposal.
 5. Open **Researcher decision**, choose a decision and enter a rationale.
@@ -147,12 +147,12 @@ Successful live responses may use the normal server API cache, labelled
 **LIVE / API CACHE**; no recorded evidence is silently substituted on failures.
 
 Pressing **Challenge this target** in Live APIs mode runs retrieval and, when the
-backend has `AI_ENABLED=true`, Gemini reasoning: there is no separate consent
+backend has `AI_ENABLED=true`, Claude reasoning: there is no separate consent
 checkbox, so every live investigation is a billed one. The frontend sends
 `paid_authorized=true` for live requests; the backend still refuses AI when its
 configuration has it disabled. Maximum paid request attempts are frozen server-side
 at submission (default five), with medium thinking and a 120-second request
-timeout. Source retrieval remains deterministic; the existing three Gemini
+timeout. Source retrieval remains deterministic; the existing three Claude
 roles, one revision round and citation checks are reused. No new paid test was
 required to validate this UI migration; network/AI failures are tested with mocks.
 
@@ -200,7 +200,7 @@ returned unknown. See `validation/chembl_identity_report.json` for exact outcome
 - `backend/devils_advocate/server.py`: thin, stateless Flask integration, source-mode
   boundaries, nested Scout adapter, signed approvals; no FastAPI duplicate.
 - `backend/devils_advocate/investigation.py`: runs deterministic retrieval + the existing
-  Gemini workflow (or recorded playback) to completion inside the request.
+  Claude workflow (or recorded playback) to completion inside the request.
 - `frontend/`: App Router pages, accessible native controls and reusable report
   components. Ranking calls the existing `lib/score.ts` helpers unchanged.
 
@@ -222,7 +222,7 @@ Association and ranking scores are never treated as success probabilities.
 
 The server keeps no state between requests, so it runs unchanged on a laptop and on Vercel.
 An investigation runs to completion inside one request (bounded by the retrieval budget and the
-Gemini timeout). The browser keeps the Scout run, the report and the decision history in
+Claude timeout). The browser keeps the Scout run, the report and the decision history in
 `localStorage` and restores them on refresh without any backend call. Duplicate clicks are blocked
 in the UI while a request is in flight. Screening requires the approval object the server returned
 from a Researcher Decision; it is HMAC-signed (`WORKBENCH_SECRET`) and any edit invalidates it.
@@ -245,8 +245,8 @@ npm.cmd --prefix frontend run test:e2e
 
 Playwright covers the recorded Parkinson/LRRK2 path, refresh recovery, experiment
 navigation, required rationale/confirmation, approved cached screening, clearing
-evidence after selecting SNCA, live-mode Gemini wording, and mobile navigation.
-Tests use installed Chrome and do not download a browser or call Gemini.
+evidence after selecting SNCA, live-mode Claude wording, and mobile navigation.
+Tests use installed Chrome and do not download a browser or call Claude.
 TypeScript, ESLint and optimized Next.js build are separate checks.
 The final validation passed **182 Python tests** and **5 browser scenarios**,
 plus TypeScript, ESLint and the production build. The browser suite also verifies
@@ -258,7 +258,7 @@ The local service binds **127.0.0.1**, disables Flask debug/reloader, restricts
 browser origins to localhost/127.0.0.1:3000, validates request sizes and schemas,
 and sanitizes public API errors. Keys remain in the Python process and are
 excluded from job payloads, reports, Git and browser responses. The new frontend
-forwards Scout's optional Gemini rationale endpoint (`/api/rationale`), which is cache-only in recorded mode. All decisions and
+forwards Scout's optional Claude rationale endpoint (`/api/rationale`), which is cache-only in recorded mode. All decisions and
 experiments still require researcher review; no experiment executes automatically.
 
 This is a **hackathon prototype**, not a production deployment: there is no authentication, the

@@ -47,7 +47,7 @@ def test_druggability_is_not_disease_target_biology():
     a=assess_association(i);coverage=check_coverage(i)
     assert a.strength=='insufficient' and not a.direct_source_ids
     assert coverage.pathway=='unresolved' and not coverage.reasoning_permitted
-    with patch('devils_advocate.ai_reasoning.GeminiRunner',side_effect=AssertionError('paid forbidden')):
+    with patch('devils_advocate.ai_reasoning.ClaudeRunner',side_effect=AssertionError('paid forbidden')):
         report=run_ai_reasoning(i,settings=settings())
     assert report.status=='skipped' and not report.calls
 
@@ -71,7 +71,7 @@ def test_production_investigation_returns_pathway_coverage_and_provenance(tmp_pa
     record=case(name);record.coverage=check_coverage(record)
     app=create_app(tmp_path,investigator=Mock(return_value=record))
     client=app.test_client();headers={'X-Research-Mode':'live'}
-    with patch('devils_advocate.ai_reasoning.GeminiRunner',side_effect=AssertionError('paid forbidden')):
+    with patch('devils_advocate.ai_reasoning.ClaudeRunner',side_effect=AssertionError('paid forbidden')):
         response=client.post('/api/investigations',headers=headers,json={'target_input':record.target.model_dump(mode='json'),'use_ai':False,'paid_authorized':False})
     assert response.status_code==200,response.get_json()
     job=response.get_json();assert job['state']=='completed',job['error']

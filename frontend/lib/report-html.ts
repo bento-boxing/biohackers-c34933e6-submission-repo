@@ -28,7 +28,7 @@ table{border-collapse:collapse;width:100%;font-size:9.5pt}th,td{border:1px solid
 ${inv.coverage ? `<p><strong>Coverage:</strong> ${esc(inv.coverage.status)}${inv.coverage.pathway ? ` · ${esc(inv.coverage.pathway.replaceAll('_',' '))}` : ''}</p>${list(inv.coverage.gaps, 'No coverage gaps recorded.')}` : ''}
 <h3>Missing information</h3>${list(inv.missing_information)}
 
-<h2>2. Scientific challenge (Gemini ${esc(ai?.model ?? '')}${ai ? `, status ${esc(ai.status)}` : ': not run'})</h2>
+<h2>2. Scientific challenge (${ai?.provider === 'google' ? 'Gemini' : 'Claude'} ${esc(ai?.model ?? '')}${ai ? `, status ${esc(ai.status)}` : ': not run'})</h2>
 ${ai?.warnings?.length ? `<div class="box warn">${list(ai.warnings)}</div>` : ''}
 <h3>Accepted claims (${accepted.length})</h3>
 ${accepted.length ? accepted.map(c => `<div class="claim"><strong>${esc(c.claim_id)}</strong> · ${esc(c.kind)} · ${esc(c.concern)} · ${esc(c.stance)}<p>${esc(c.text)}</p><p><em>Relevance:</em> ${esc(c.relevance)}<br><em>Uncertainty:</em> ${esc(c.uncertainty)}</p>${c.citations.map(ci => `<blockquote>${esc(ci.excerpt)}<br><small>${ai?.source_urls?.[ci.source_id] ? link(ai.source_urls[ci.source_id], ci.source_id) : esc(ci.source_id)} · ${esc(ci.field)}</small></blockquote>`).join('')}</div>`).join('') : '<p class="muted">No challenger claim was accepted for review.</p>'}

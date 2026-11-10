@@ -1,4 +1,4 @@
-"""Explicit full-record audit; no Gemini or Target Scout invocation."""
+"""Explicit full-record audit; no Claude or Target Scout invocation."""
 import argparse
 from datetime import datetime, timezone
 import json

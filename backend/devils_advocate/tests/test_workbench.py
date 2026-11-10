@@ -48,7 +48,7 @@ def test_actual_nested_lrrk2_handoff_preserves_ids_scores_and_provenance(app):
     assert 'association_score' not in flat['target_input']
 
 
-def test_offline_investigation_never_calls_live_retrieval_or_gemini(app):
+def test_offline_investigation_never_calls_live_retrieval_or_claude(app):
     app.config['INVESTIGATOR'] = Mock(side_effect=AssertionError('live forbidden'))
     app.config['AI_REASONER'] = Mock(side_effect=AssertionError('paid forbidden'))
     client, run, job = completed_job(app)
@@ -182,7 +182,7 @@ def test_live_investigation_preserves_failed_ai_report_without_discarding_retrie
     monkeypatch.setattr('devils_advocate.investigation.load_ai_settings', lambda: config)
     payload = {'target_input': {'disease_name': 'Non-small-cell lung cancer', 'target_symbol': 'EGFR', 'chembl_target_id': 'CHEMBL203'}, 'use_ai': True, 'paid_authorized': True}
     app.config['INVESTIGATOR'] = Mock(return_value=Investigation(target=TargetInput.model_validate(payload['target_input']), mode='live', resolved_target_id='CHEMBL203', resolution_status='resolved'))
-    app.config['AI_REASONER'] = Mock(return_value=AIReport(enabled=True, model='test-model', status='failed', calls=[AICall(role='Devils Advocate', success=False, error='Gemini response timed out.')], warnings=['Gemini response timed out.']))
+    app.config['AI_REASONER'] = Mock(return_value=AIReport(enabled=True, model='test-model', status='failed', calls=[AICall(role='Devils Advocate', success=False, error='Claude response timed out.')], warnings=['Claude response timed out.']))
     response = app.test_client().post('/api/investigations', headers=LIVE, json=payload)
     finished = response.get_json()
     assert response.status_code == 200 and finished['state'] == 'completed', finished

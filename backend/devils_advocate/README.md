@@ -4,7 +4,7 @@ Independent Python pipeline: disease + protein → ChEMBL mechanisms/compounds �
 ClinicalTrials.gov registry records + Europe PMC literature → conservative concern
 classification → source-field verification → one proposed experiment → human decision.
 No Target Scout dependency or patient records. Deterministic and offline modes
-need no LLM key; optional genuine Gemini reasoning uses the repository-root `.env`.
+need no LLM key; optional genuine Claude reasoning uses the repository-root `.env`.
 The existing backend and teammate files remain separate.
 
 ## Run locally (PowerShell, from `backend/`)
@@ -56,40 +56,41 @@ resolved ChEMBL target is separate; resolution requires a unique exact human gen
 symbol on a single-protein record. Ambiguity is reported rather than guessed.
 Disease IDs are preserved for future integration; current queries use disease names.
 
-## Optional genuine Gemini reasoning
+## Optional genuine Claude reasoning
 
-The application uses Google's official **google-genai 3.x** SDK and Interactions
-API, not an OpenAI compatibility shim or the retired `google-generativeai` package.
-Configuration is loaded with `python-dotenv` from the repository-root `.env`;
-existing process environment variables take precedence. `.env` is ignored and
-untracked by Git. Never commit it or place credentials in reports or prompts.
-See `ai.env.example` for non-secret configuration names.
+The application uses the official **anthropic** Python SDK (Messages API), not an
+OpenAI compatibility shim. Configuration is loaded with `python-dotenv` from the
+repository-root `.env`; existing process environment variables take precedence.
+`.env` is ignored and untracked by Git. Never commit it or place credentials in
+reports or prompts. See `ai.env.example` for non-secret configuration names.
 
 ```dotenv
-GEMINI_API_KEY=your_private_key
-AI_PROVIDER=google
-AI_MODEL=gemini-4-argon
+ANTHROPIC_API_KEY=your_private_key
+AI_MODEL=claude-opus-5-5
 AI_ENABLED=true
 AI_THINKING_LEVEL=medium
 ```
 
-The model is read from `AI_MODEL`; the code never substitutes another model.
-Current official references: [Argon developer guide](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/guides/gemini-4-argon)
-and [Interactions migration guide](https://ai.google.dev/gemini-api/docs/migrate-to-interactions).
-The SDK is called with top-level text/JSON `response_format`, configurable
-`generation_config.thinking_level`, `store=False` and automatic continuation
-disabled. No sampling knobs or legacy thinking budget are used.
+The model is read from `AI_MODEL` (default `claude-opus-5-5`). Each role is one
+`messages.create` call: the role instruction is the `system` prompt, the evidence
+packet is the single user message, and the reply is constrained to the role's
+JSON schema with structured outputs (`output_config.format`). Thinking is
+adaptive; `AI_THINKING_LEVEL` is sent as `output_config.effort`. No sampling
+knobs or thinking budgets are used, and SDK retries are off so every attempt is
+counted against the call budget. For models that support it, the server-side
+refusal fallback (`fallbacks: "default"`) is requested, so a safety decline is
+re-run on a fallback model inside the same call; the model that answered is the
+one reported by the API.
 
 Run the explicit short authentication/model-access check separately:
 
 ```powershell
-.\.venv\Scripts\python.exe -m devils_advocate.gemini_smoke
+.\.venv\Scripts\python.exe -m devils_advocate.claude_smoke
 ```
 
 It sends only a request to reply OK and prints model, success/failure and fixed
 safe diagnostics. It never prints the key, raw exceptions, headers or response
-body. The real `gemini-4-argon` short test succeeded in this workspace before
-scientific integration began. Authentication success does not guarantee future
+body. Authentication success does not guarantee future
 quota or availability for larger requests. No smoke test runs automatically.
 
 For the application, turn OFF **Offline recorded BACE1 example** and click
@@ -101,7 +102,7 @@ then makes real, separately instructed model calls for:
 2. **Evidence Adjudicator**: one structured verdict per claim, reviewing actual
    source material and deterministic objections. Unknown sources, invalid fields,
    nonmatching excerpts, invented narrative IDs and unquoted direct facts are
-   rejected deterministically even if Gemini agrees with the challenger.
+   rejected deterministically even if Claude agrees with the challenger.
 3. **Experimental Challenger**: a revised interpretation anchored to accepted
    claim IDs and ONE high-level, unvalidated experiment. Unsupported final anchors
    cause rejection. No wet-lab execution instructions or autonomous actions.
@@ -127,10 +128,10 @@ experiment = propose_experiment(investigation)
 print(investigation.ai.status)  # completed / failed / skipped / disabled
 ```
 
-`propose_experiment` uses Gemini's proposal only for a completed AI report.
+`propose_experiment` uses Claude's proposal only for a completed AI report.
 Otherwise the deterministic proposal remains available, explicitly labelled in
 the UI. AI errors never erase retrieved evidence or silently present rules as
-Gemini output. Disabling AI also preserves the existing workflow.
+Claude output. Disabling AI also preserves the existing workflow.
 
 ### Cost, latency and privacy controls
 
@@ -145,7 +146,7 @@ one revision uses five. If retries consume the remaining budget, AI reasoning
 fails safely rather than issuing another request. No paid calls occur merely
 from opening the app, editing inputs or exporting a report.
 
-Offline fixture mode **always makes zero Gemini calls**, regardless of
+Offline fixture mode **always makes zero Claude calls**, regardless of
 `AI_ENABLED`. Invalid/unresolved targets or no retrieved public evidence also
 skip paid reasoning. Source excerpts are selected and truncated explicitly;
 publications are bounded, so this is not a systematic literature assessment.
@@ -157,20 +158,23 @@ prompt-injection exposure but does not prove semantic correctness or immunity.
 The UI distinguishes data mode, configured AI provider/model, reasoning status,
 validated calls versus attempts, safe token-usage metadata, unsupported claims,
 and the **Scientific Challenge & Revision** audit. Token counts are shown when
-returned by Google; no monetary cost is invented. Requests that fail or time out
+returned by the API; no monetary cost is invented. Requests that fail or time out
 can still incur provider charges. Raw SDK error bodies and credentials are never
 included in application diagnostics.
 
 The explicit end-to-end test below can incur up to the configured paid-call cap:
 
 ```powershell
-.\.venv\Scripts\python.exe -m devils_advocate.gemini_validation
+.\.venv\Scripts\python.exe -m devils_advocate.claude_validation
 ```
 
-Its actual outcome and audit are saved in `validation/gemini_report.json`.
+Its actual outcome and audit are saved in `validation/claude_report.json`.
 Unit and Streamlit tests mock AI responses and never run this paid test.
 
-### Actual Gemini validation
+### Actual Gemini validation (historical)
+
+This section records the paid validation run made when the workflow used Gemini. It has not been
+repeated with Claude; `claude_validation` writes `validation/claude_report.json` when it is.
 
 The short authentication/model test succeeded. Two initial end-to-end attempts
 failed while using the initial 60-second request timeout; the safe diagnostic
@@ -274,8 +278,8 @@ population/mechanism limitations, compound specificity and engagement uncertaint
 Recommendations are retain (operational evidence alone), revise (documented
 applicable programme concern), or escalate (insufficient/uncertain evidence),
 with a rationale and NCT evidence anchors. None is an autonomous stop decision.
-These deterministic labels remain separate from optional Gemini interpretations.
-Gemini adds the explicit challenge/adjudication/revision stages above; model
+These deterministic labels remain separate from optional Claude interpretations.
+Claude adds the explicit challenge/adjudication/revision stages above; model
 findings do not overwrite the recorded facts or certify biological causality.
 
 Search is bounded and reports truncation; it is not a systematic review. Some
@@ -338,7 +342,7 @@ status module with `overallStatus=TERMINATED` but no `whyStopped` key. The cause
 the displayed empty value is registry absence, not a dropped nonempty reason.
 
 ```powershell
-# Direct full-record check; no Gemini calls or Target Scout modifications
+# Direct full-record check; no Claude calls or Target Scout modifications
 .\.venv\Scripts\python.exe -m devils_advocate.stop_reason_audit NCT02565511
 # Also audit recorded BACE1 trial IDs if the local source bundle is available
 .\.venv\Scripts\python.exe -m devils_advocate.stop_reason_audit NCT02565511 --include-recorded-bace1
@@ -412,7 +416,7 @@ do not equate classification accuracy with validation of the biological target.
 - [Europe PMC REST service](https://europepmc.org/RestfulWebService): publication metadata and abstracts. [Copyright and reuse](https://europepmc.org/Copyright): article/abstract rights vary; API availability does not grant blanket full-text reuse. Keep original identifiers and links, and review item-specific rights before redistributing fixture abstracts.
 
 No real patient-level data are collected. Biomedical retrieval needs no API key.
-Optional Gemini reasoning loads its key from environment variables; the key is
+Optional Claude reasoning loads its key from environment variables; the key is
 excluded from Git, model inputs, logs and downloaded reports.
 
 ## Presentation and profiling
@@ -460,7 +464,7 @@ only the configured 15 were retrieved, and four trial queries reached their
 100-record limit. No request errors occurred in the final five-case run. Invalid
 target resolution correctly skipped downstream retrieval, with explicit warnings.
 
-- Before Gemini integration, 47 offline tests passed, including API mocks, malformed records, individual
+- Before LLM integration, 47 offline tests passed, including API mocks, malformed records, individual
   compound links, neutral evidence, missing citations, negated stop reasons,
   stale-result prevention, JSON adapter, benchmark and Streamlit report formatting.
 - The preserved offline BACE1 fixture contains two TERMINATED records with no
@@ -518,7 +522,7 @@ retry) → reassess → stop with a recorded reason (`coverage_achieved`, `no_ac
 is kept in `Investigation.evidence_plan`; failed searches are never cached or read as absence.
 Publications and trials now carry dates and an evidence tier (registry status, registry results,
 peer-reviewed, regulatory decision); sponsor announcements are reported as not searchable.
-Planner-flagged material records enter the Gemini packet beyond the stratified cutoff with a stated
+Planner-flagged material records enter the Claude packet beyond the stratified cutoff with a stated
 reason, the adjudicator checks stance/excerpt direction, disease applicability, causal wording,
 universal claims and omitted contradictions (pulling omitted records into the revision packet), and
 the prior-art check searches the question, mechanism/readout and competing hypotheses. Results,

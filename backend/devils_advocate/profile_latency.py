@@ -1,4 +1,4 @@
-"""Measure packet sizes and optional public-data cache reuse. Never invokes Gemini."""
+"""Measure packet sizes and optional public-data cache reuse. Never invokes the model."""
 import argparse
 import json
 from pathlib import Path

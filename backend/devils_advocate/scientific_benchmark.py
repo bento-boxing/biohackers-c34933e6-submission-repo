@@ -55,13 +55,13 @@ def evaluate():
   cases.append({'target':case['target'],'expected_conclusion':case['expected'],'checks':checks,
    'approved_precedent_in_fixture':approved,'coverage':coverage.status,'coverage_gaps':coverage.gaps,
    'selected':list(packet['sources']),'direction_candidates':{p.identifier:p.direction_signals for p in i.publications},
-   'uncertainty':'Curated source subset; not an exhaustive clinical search or a verified Gemini interpretation.'})
+   'uncertainty':'Curated source subset; not an exhaustive clinical search or a verified Claude interpretation.'})
  return {'cases':cases,'checks_passed':sum(sum(c['checks'].values()) for c in cases),
   'checks_total':sum(len(c['checks']) for c in cases),
   'positive_evidence_omission':{'cases':positive_cases,'legacy_phrase_filter_misses':before_missed,'new_filter_and_packet_misses':after_missed,
    'meaning':'False-negative evidence omission in recorded reference replay, not measured AI scientific false-negative diagnoses.'},
   'coverage_check_ms':{'runs':len(measurements),'median':round(statistics.median(measurements),6),'p95':round(sorted(measurements)[int(.95*len(measurements))-1],6)},
-  'paid_calls':0,'limitations':['No paid or semantic Gemini evaluation performed.','Reference cases and expectations selected by implementer, not independently blinded.',
+  'paid_calls':0,'limitations':['No paid or semantic Claude evaluation performed.','Reference cases and expectations selected by implementer, not independently blinded.',
    'No absence-of-approval claim is made for BACE1/LRRK2; phase and source extracts only describe retrieved records.',
    'Direction detectors are triage signals; published efficacy and safety interpretations require expert adjudication.']}
 

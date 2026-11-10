@@ -50,9 +50,9 @@ def propose_experiment(investigation: Investigation | dict) -> Experiment:
         if not (result.resolved_target_id or result.resolution_status=='gene_verified') or not (result.trials or result.publications):
             return abstain_experiment('Target identity is unresolved or no registry or literature records were retrieved; '+result.conclusion)
         experiment=template_experiment(result)
-        reason={'failed':'Gemini synthesis did not complete','skipped':'Gemini reasoning was skipped','disabled':'Gemini reasoning was not run'}.get(
-            result.ai.status if result.ai else 'disabled','Gemini reasoning was not run')
-        return flag(experiment, reason+'; this is a rule-based template from retrieved records. Re-run with Gemini or have an expert scope it.')
+        reason={'failed':'Claude synthesis did not complete','skipped':'Claude reasoning was skipped','disabled':'Claude reasoning was not run'}.get(
+            result.ai.status if result.ai else 'disabled','Claude reasoning was not run')
+        return flag(experiment, reason+'; this is a rule-based template from retrieved records. Re-run with Claude or have an expert scope it.')
     return template_experiment(result)
 
 def template_experiment(result: Investigation) -> Experiment:

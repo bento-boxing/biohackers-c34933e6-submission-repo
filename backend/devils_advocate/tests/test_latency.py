@@ -4,11 +4,11 @@ from types import SimpleNamespace
 from unittest.mock import Mock, patch
 import pytest
 from devils_advocate.ai_config import load_ai_settings
-from devils_advocate.ai_client import GeminiRunner
+from devils_advocate.ai_client import ClaudeRunner
 from devils_advocate.ai_reasoning import experimental_evidence, run_ai_reasoning
 from devils_advocate.http_client import JsonClient, RetrievalDeadlineExceeded
 from devils_advocate.models import ExperimentalResponse
-from .test_ai import settings, investigation, draft, adjudication, final, ScriptedRunner, claim
+from .test_ai import reply, settings, investigation, draft, adjudication, final, ScriptedRunner, claim
 
 def response(data):
     return SimpleNamespace(status_code=200,raise_for_status=lambda:None,json=lambda:data,
@@ -18,22 +18,22 @@ def response(data):
 def test_dotenv_thinking_level_reaches_official_sdk(tmp_path,monkeypatch,level):
     monkeypatch.delenv('AI_THINKING_LEVEL',raising=False)
     monkeypatch.setenv('AI_MODEL','configured-test-model')
-    monkeypatch.setenv('GEMINI_API_KEY','PRIVATE-TEST-KEY')
+    monkeypatch.setenv('ANTHROPIC_API_KEY','PRIVATE-TEST-KEY')
     path=tmp_path/'.env'
     path.write_text('AI_THINKING_LEVEL='+level,encoding='utf-8')
     config=load_ai_settings(path)
-    runner=GeminiRunner(config)
+    runner=ClaudeRunner(config)
     runner.client=Mock()
-    runner.client.interactions.create.return_value=SimpleNamespace(status='completed',output_text=draft().model_dump_json(),usage=None)
+    runner.client.beta.messages.create.return_value=reply(draft().model_dump_json())
     runner.generate('test','instructions',{},type(draft()))
-    assert runner.client.interactions.create.call_args.kwargs['generation_config']['thinking_level']==level.lower()
-    assert runner.client.interactions.create.call_args.kwargs['model']=='configured-test-model'
+    assert runner.client.beta.messages.create.call_args.kwargs['output_config']['effort']==level.lower()
+    assert runner.client.beta.messages.create.call_args.kwargs['model']=='configured-test-model'
     assert 'PRIVATE-TEST-KEY' not in json.dumps([c.model_dump() for c in runner.calls])
 
 def test_agent_attempt_duration_and_compact_payload_are_measured():
-    runner=GeminiRunner(settings())
+    runner=ClaudeRunner(settings())
     runner.client=Mock()
-    runner.client.interactions.create.return_value=SimpleNamespace(status='completed',output_text=draft().model_dump_json(),usage=None)
+    runner.client.beta.messages.create.return_value=reply(draft().model_dump_json())
     with patch('devils_advocate.ai_client.time.monotonic',side_effect=[100.,101.25]):
         runner.generate('test','instructions',{'public':'record'},type(draft()))
     assert runner.calls[0].duration_seconds==1.25

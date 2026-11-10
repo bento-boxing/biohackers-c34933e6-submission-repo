@@ -2,7 +2,7 @@ import type { AIReport, Timings } from '@/lib/contracts';
 
 export function duration(value?:number|null) { return typeof value==='number'?`${value.toFixed(2)} s`:'Not recorded'; }
 const stageLabels:Record<string,string>={identity:'disease and target identity',compounds:'curated mechanism compounds',precedent:'association and approval precedent',trials:'registry trials and full records, with literature searches in parallel',literature:'registry-linked publications',adaptive_rounds:'coverage assessment and targeted follow-up rounds',claims:'claim verification and history',coverage:'packet selection and coverage gate',prior_art_checks:'question-specific prior-art checks'};
-export function stageLabel(stage:string){return stageLabels[stage]||stage.replace(/^gemini_/,'Gemini · ').replace(/_/g,' ');}
+export function stageLabel(stage:string){return stageLabels[stage]||stage.replace(/^claude_/,'Claude · ').replace(/^gemini_/,'Gemini · ').replace(/_/g,' ');}
 export function StageDurations({timings,ai,recorded=false}:{timings?:Timings;ai?:AIReport|null;recorded?:boolean}) {
   return <details className="panel panel-content"><summary>Measured stage durations & request sizes</summary><div className="table-scroll"><table><thead><tr><th>Stage</th><th>Measured elapsed</th><th>Input payload</th></tr></thead><tbody>
     <tr><td>{timings?.recorded_playback_seconds!=null?'Recorded evidence playback':'Biomedical retrieval pipeline'}</td><td>{duration(timings?.recorded_playback_seconds??timings?.retrieval?.total_seconds)}</td><td>Public evidence</td></tr>

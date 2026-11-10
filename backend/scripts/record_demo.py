@@ -65,7 +65,7 @@ if __name__ == "__main__":
     ap.add_argument("--screening-only", action="store_true",
                     help="only re-record the compound-screening responses (scout responses already recorded)")
     ap.add_argument("--rationale", action="store_true",
-                    help="also record the default-weights LLM rationale (needs GEMINI_API_KEY, AI_MODEL and AI_ENABLED=true in the root .env)")
+                    help="also record the default-weights LLM rationale (needs ANTHROPIC_API_KEY, AI_MODEL and AI_ENABLED=true in the root .env)")
     a = ap.parse_args()
     if a.screening_only:
         client = HttpClient(write_dir=DEMO_DIR, ttl_days=36500)

@@ -8,15 +8,15 @@ const cases=[{name:'ccr5',heading:'Clinical-precedent assessment',eligible:true}
   {name:'bcl2',heading:'Limited preclinical target-validation assessment',eligible:true},
   {name:'unsupported',heading:'Assessment pathway unresolved',eligible:false}];
 
-for(const scenario of cases)test(`recorded ${scenario.name}: pathway, provenance and skipped Gemini rendering`,async({page})=>{
+for(const scenario of cases)test(`recorded ${scenario.name}: pathway, provenance and skipped Claude rendering`,async({page})=>{
  const job=JSON.parse(readFileSync(path.join(__dirname,'fixtures',`pathway-${scenario.name}.json`),'utf8'));
  await page.addInitScript(saved=>localStorage.setItem('agentverse-workbench-v2',JSON.stringify(saved)),{mode:'live',run:null,target_id:null,weights:job.weights,job});
  await page.goto('/challenge');
  await expect(page.getByRole('heading',{name:scenario.heading,exact:true})).toBeVisible({timeout:30_000});
  await expect(page.getByRole('heading',{name:'Report provenance',exact:true})).toBeVisible();
- await expect(page.getByText('Gemini was not run',{exact:true})).toBeVisible();
+ await expect(page.getByText('Claude was not run',{exact:true})).toBeVisible();
  const text=scenario.eligible?'Coverage permits this limited analysis.':'Not eligible; resolve the coverage gaps above.';
- await expect(page.getByText('Gemini eligibility: '+text,{exact:true})).toBeVisible();
+ await expect(page.getByText('Claude eligibility: '+text,{exact:true})).toBeVisible();
  if(scenario.name==='bcl2'){
   await expect(page.getByText('Target pharmacology only · No matched approved indication found.',{exact:true})).toBeVisible();
   await expect(page.getByText('exploratory',{exact:true})).toBeVisible();

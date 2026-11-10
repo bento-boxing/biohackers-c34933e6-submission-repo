@@ -8,7 +8,7 @@ export function CoverageReport({investigation:i}:{investigation:Investigation}){
     <div className="eyebrow">EVIDENCE COVERAGE CHECK</div><h2>{c.status}</h2>
     <p>{c.caution}</p>{c.gaps.length>0&&<ul>{c.gaps.map((gap,index)=><li key={index}>{gap}</li>)}</ul>}
     <h3>{c.pathway==='preclinical_validation'?'Limited preclinical target-validation assessment':c.pathway==='clinical_precedent'?'Clinical-precedent assessment':'Assessment pathway unresolved'}</h3>
-    <p>Gemini eligibility: {c.reasoning_permitted?'Coverage permits this limited analysis.':'Not eligible; resolve the coverage gaps above.'}</p>
+    <p>Claude eligibility: {c.reasoning_permitted?'Coverage permits this limited analysis.':'Not eligible; resolve the coverage gaps above.'}</p>
     <AssociationVisual investigation={i}/>
     <h3>Indication-specific approval versus target druggability</h3>
     {i.compounds.flatMap(compound=>(compound.regulatory_approvals||[]).map(record=><div className="evidence-item" key={compound.chembl_id+record.application_number}><a className="source-link" href={record.source_url} target="_blank" rel="noreferrer">{compound.name} · FDA {record.application_number}</a><p><strong>FDA original approval documented: {record.approval_dates.join(', ')}</strong></p><p>ChEMBL phase remains {compound.max_phase??'unknown'}. {record.disease_match==='lexical'?'The label mentions the selected disease; exact population and product restrictions require review.':'Indication applicability is unresolved.'}</p><p>{record.scope}</p></div>))}

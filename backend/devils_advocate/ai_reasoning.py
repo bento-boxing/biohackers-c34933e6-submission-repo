@@ -1,8 +1,8 @@
-"""Three actual Gemini roles with deterministic provenance and one revision round."""
+"""Three actual Claude roles with deterministic provenance and one revision round."""
 import json
 import re
 from pydantic import BaseModel, Field
-from .ai_client import AIError, GeminiRunner
+from .ai_client import AIError, ClaudeRunner
 from .ai_config import AISettings, load_ai_settings
 from .coverage import check_coverage, select_evidence, target_level_objections
 from .association import assess_association
@@ -144,7 +144,7 @@ class PlannerSuggestion(BaseModel):
 class PlannerSuggestions(BaseModel):
     suggestions: list[PlannerSuggestion] = Field(max_length=6)
 
-def plan_followups_with_gemini(runner, result: Investigation, plan) -> list[dict]:
+def plan_followups_with_claude(runner, result: Investigation, plan) -> list[dict]:
     """One bounded planning call. Output is a list of search-term suggestions, never evidence."""
     open_needs = [n for n in plan.needs if n.status in ['unmet', 'partial']]
     if not open_needs:
@@ -156,7 +156,7 @@ def plan_followups_with_gemini(runner, result: Investigation, plan) -> list[dict
                'trial_titles': [t.title for t in result.trials[:20]]}
     parsed = runner.generate('Evidence Planner', PLANNER, payload, PlannerSuggestions)
     keys = {n.key for n in open_needs}
-    return [{'need_key': s.need_key, 'terms': s.terms, 'rationale': s.rationale, 'origin': 'gemini planning call; queries only'}
+    return [{'need_key': s.need_key, 'terms': s.terms, 'rationale': s.rationale, 'origin': 'claude planning call; queries only'}
             for s in parsed.suggestions if s.need_key in keys]
 
 def experimental_evidence(bundle: dict, claims: list[AIClaim]) -> dict:
@@ -414,10 +414,10 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
     # This guard runs before constructing a runner or SDK client.
     if result.mode == 'offline':
         report.status = 'skipped'
-        report.warnings.append('Offline fixture: Gemini is disabled and no paid calls were made.')
+        report.warnings.append('Offline fixture: Claude is disabled and no paid calls were made.')
         return report
     if not settings.enabled:
-        report.warnings.append('Gemini was not requested/authorized for this job or backend AI is disabled. Coverage eligibility is reported independently; zero paid calls made.')
+        report.warnings.append('Claude was not requested/authorized for this job or backend AI is disabled. Coverage eligibility is reported independently; zero paid calls made.')
         return report
     if not (result.resolved_target_id or result.resolution_status == 'gene_verified') or not (result.trials or result.publications):
         report.status = 'skipped'
@@ -440,7 +440,7 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
     report.source_urls = {key: value['url'] for key, value in bundle['sources'].items()}
     report.packet_audit['selection_reasons']=bundle['selection']['reasons']
     owned = runner is None
-    runner = runner or GeminiRunner(settings, on_progress=on_progress, should_cancel=should_cancel, deadline=deadline)
+    runner = runner or ClaudeRunner(settings, on_progress=on_progress, should_cancel=should_cancel, deadline=deadline)
     report.calls = runner.calls
     try:
         payload = {'evidence': bundle, 'initial_rule_based_assessment': result.conclusion}
@@ -556,10 +556,10 @@ def run_ai_reasoning(result: Investigation, *, settings: AISettings | None = Non
                 report.warnings.append('Prior-art/claim checks raised concerns; they are listed as review flags on the proposal.')
             final.experiment.status = 'AI-generated research proposal: potentially informative and unvalidated; not performed or validated. Researcher approval required.'
         else:
-            # Gemini declined to design a study; give the researcher the rule-based template instead of nothing.
-            final.experiment=flag(template_experiment(result),'Gemini did not propose a design for this packet; this is a rule-based template from retrieved records.')
-            report.warnings.append('Gemini returned no experimental design; a rule-based template proposal is shown instead.')
-        final.experiment.limitations.append('Gemini interpretation is not independent evidence or expert validation; source sampling and excerpt truncation limit conclusions.')
+            # Claude declined to design a study; give the researcher the rule-based template instead of nothing.
+            final.experiment=flag(template_experiment(result),'Claude did not propose a design for this packet; this is a rule-based template from retrieved records.')
+            report.warnings.append('Claude returned no experimental design; a rule-based template proposal is shown instead.')
+        final.experiment.limitations.append('Claude interpretation is not independent evidence or expert validation; source sampling and excerpt truncation limit conclusions.')
         final.experiment.limitations.append('Model suitability, genetic-versus-pharmacological comparability, replication, randomization and predefined outcomes require expert design review before approval.')
         report.warnings.append('The final reassessment and experiment are AI synthesis, not separately adjudicated findings or independent scientific validation.')
         report.reassessment = final.reassessment

@@ -27,7 +27,7 @@ def test_confirmed_invalid_disease_id_blocks_paid_runner_even_with_good_clinical
     i=investigation();i.target.disease_id='MONDO_999999999'
     i.search_audit.append(SearchAudit(source='OLS',operation='disease synonyms',url='https://example.org',state='no_results'))
     assert any('identifier was not found' in s for s in check_coverage(i).gaps)
-    with patch('devils_advocate.ai_reasoning.GeminiRunner',side_effect=AssertionError('paid call forbidden')):
+    with patch('devils_advocate.ai_reasoning.ClaudeRunner',side_effect=AssertionError('paid call forbidden')):
         report=run_ai_reasoning(i,settings=settings())
     assert report.status=='skipped' and not report.calls
 

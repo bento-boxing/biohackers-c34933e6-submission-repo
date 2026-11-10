@@ -3,7 +3,7 @@ import json
 from unittest.mock import Mock
 
 from devils_advocate.ai_config import AISettings
-from devils_advocate.ai_reasoning import PlannerSuggestions, plan_followups_with_gemini
+from devils_advocate.ai_reasoning import PlannerSuggestions, plan_followups_with_claude
 from devils_advocate.investigation import ProgressWriter, read_progress, run_investigation
 from devils_advocate.models import EvidenceNeed, EvidencePlan, Investigation, TargetInput
 from devils_advocate.server import create_app
@@ -91,7 +91,7 @@ def test_planning_call_is_off_by_default_and_yields_queries_only_when_authorized
         {'need_key': 'positive_clinical', 'terms': ['FLAURA', 'osimertinib first-line'], 'rationale': 'named study'},
         {'need_key': 'approved_therapy', 'terms': ['ignored because satisfied']},
         {'need_key': 'positive_clinical', 'terms': ['osimertinib was approved in 2018 and works']}]})])
-    suggestions = plan_followups_with_gemini(runner, result, plan)
+    suggestions = plan_followups_with_claude(runner, result, plan)
     assert [s['need_key'] for s in suggestions] == ['positive_clinical', 'positive_clinical']
     assert suggestions[0]['terms'] == ['FLAURA', 'osimertinib first-line'] and suggestions[0]['origin'].endswith('queries only')
     assert runner.calls[0].role == 'Evidence Planner' and 'QUERIES ONLY' in runner.payloads[0][0]

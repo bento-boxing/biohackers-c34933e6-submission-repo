@@ -87,7 +87,7 @@ def test_full_record_results_and_phase_are_not_dropped():
 
 def test_inadequate_coverage_blocks_runner_construction_even_if_enabled():
  i=investigation();i.publications=[]
- with patch('devils_advocate.ai_reasoning.GeminiRunner',side_effect=AssertionError('paid call forbidden')):
+ with patch('devils_advocate.ai_reasoning.ClaudeRunner',side_effect=AssertionError('paid call forbidden')):
   report=run_ai_reasoning(i,settings=settings())
  assert report.status=='skipped' and not report.calls and 'INSUFFICIENT COVERAGE' in report.warnings[0]
 

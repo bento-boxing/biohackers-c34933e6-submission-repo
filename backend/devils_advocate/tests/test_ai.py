@@ -6,11 +6,15 @@ import json
 import pytest
 from pydantic import SecretStr
 from devils_advocate import investigate_target, propose_experiment
-from devils_advocate.ai_client import AIError, GeminiRunner
+from devils_advocate.ai_client import AIError, ClaudeRunner
 from devils_advocate.ai_config import AISettings, load_ai_settings
 from devils_advocate.ai_reasoning import evidence_bundle, run_ai_reasoning, validate_ai_claim
 from devils_advocate.models import (AICall, AIClaim, AICitation, Adjudication, AdjudicationBatch,
     ChallengeDraft, ExperimentalResponse, Reassessment)
+
+def reply(text='', stop_reason='end_turn', usage=None):
+    """Shape of an Anthropic Messages response as the runner reads it."""
+    return SimpleNamespace(stop_reason=stop_reason, content=[SimpleNamespace(type='text', text=text)], usage=usage)
 
 def settings(**updates):
     return AISettings(enabled=True, model='configured-test-model', api_key=SecretStr('DO-NOT-LEAK'), **updates)
@@ -102,10 +106,10 @@ def test_no_second_revision_when_revised_claim_still_unsupported():
     report = run_ai_reasoning(investigation(), settings=settings(), runner=runner)
     assert len(report.calls) == 5 and len(report.rounds) == 2 and not report.accepted_claims
 
-def test_offline_never_constructs_gemini_runner_even_when_enabled():
+def test_offline_never_constructs_claude_runner_even_when_enabled():
     result = investigation()
     result.mode = 'offline'
-    with patch('devils_advocate.ai_reasoning.GeminiRunner', side_effect=AssertionError('paid call forbidden')):
+    with patch('devils_advocate.ai_reasoning.ClaudeRunner', side_effect=AssertionError('paid call forbidden')):
         report = run_ai_reasoning(result, settings=settings())
     assert report.status == 'skipped' and not report.calls
 
@@ -149,57 +153,72 @@ def test_incomplete_adjudication_and_unknown_final_anchors_fail_closed():
 
 def test_settings_loads_env_without_serializing_key(monkeypatch):
     monkeypatch.setenv('AI_ENABLED', 'true')
-    monkeypatch.setenv('AI_PROVIDER', 'google')
+    monkeypatch.setenv('AI_PROVIDER', 'google')  # stale variable from the previous provider: ignored
     monkeypatch.setenv('AI_MODEL', 'chosen-model')
-    monkeypatch.setenv('GEMINI_API_KEY', 'DO-NOT-LEAK')
+    monkeypatch.setenv('ANTHROPIC_API_KEY', 'DO-NOT-LEAK')
     config = load_ai_settings()
-    assert config.enabled and config.model == 'chosen-model'
+    assert config.enabled and config.model == 'chosen-model' and config.provider == 'anthropic'
     assert 'DO-NOT-LEAK' not in config.model_dump_json()
     assert 'DO-NOT-LEAK' not in repr(config)
 
-def test_transport_uses_official_interactions_and_hard_budget():
-    runner = GeminiRunner(settings(max_calls=3, retries=0))
-    response = SimpleNamespace(status='completed', output_text=draft().model_dump_json(),
-                               usage=SimpleNamespace(total_tokens=100))
+def test_transport_uses_official_messages_api_and_hard_budget():
+    runner = ClaudeRunner(settings(max_calls=3, retries=0))
+    response = reply(draft().model_dump_json(), usage=SimpleNamespace(input_tokens=80, output_tokens=20))
     runner.client = Mock()
-    runner.client.interactions.create.return_value = response
+    runner.client.beta.messages.create.return_value = response
     for _ in range(3):
         runner.generate('test', 'instruction', {}, ChallengeDraft)
     with pytest.raises(AIError, match='budget exhausted'):
         runner.generate('test', 'instruction', {}, ChallengeDraft)
-    assert runner.client.interactions.create.call_count == 3
-    kwargs = runner.client.interactions.create.call_args.kwargs
+    assert runner.client.beta.messages.create.call_count == 3
+    kwargs = runner.client.beta.messages.create.call_args.kwargs
     assert kwargs['model'] == 'configured-test-model'
-    assert kwargs['store'] is False and kwargs['automatic_continuation'] is False
-    assert kwargs['generation_config']['thinking_level'] == 'medium'
-    assert kwargs['response_format'][0]['mime_type'] == 'application/json'
-    assert runner.calls[0].usage == {'total_tokens': 100}
+    assert kwargs['system'] == 'instruction' and kwargs['messages'] == [{'role': 'user', 'content': '{}'}]
+    assert kwargs['output_config']['effort'] == 'medium'
+    assert kwargs['output_config']['format']['type'] == 'json_schema'
+    assert kwargs['output_config']['format']['schema']['additionalProperties'] is False
+    assert 'thinking' not in kwargs and 'betas' not in kwargs  # unknown model: no fallback beta sent
+    assert runner.calls[0].usage == {'input_tokens': 80, 'output_tokens': 20}
+
+def test_refusal_fallback_is_requested_only_for_models_that_support_it():
+    from devils_advocate.ai_client import request_options
+    options = request_options(settings().model_copy(update={'model': 'claude-opus-5-5'}), {})
+    assert options['betas'] == ['server-side-fallback-2026-07-01'] and options['fallbacks'] == 'default'
+    assert 'fallbacks' not in request_options(settings().model_copy(update={'model': 'claude-haiku-5-5'}), {})
+
+def test_declined_request_is_rejected_without_retry():
+    runner = ClaudeRunner(settings())
+    runner.client = Mock()
+    runner.client.beta.messages.create.return_value = reply(stop_reason='refusal')
+    with pytest.raises(AIError, match='declined'):
+        runner.generate('test', 'instruction', {}, ChallengeDraft)
+    assert len(runner.calls) == 1
 
 def test_transient_retries_consume_budget_and_never_leak_error():
     class BadRequest(Exception):
         status_code = 429
-    runner = GeminiRunner(settings(max_calls=3))
+    runner = ClaudeRunner(settings(max_calls=3))
     runner.client = Mock()
-    runner.client.interactions.create.side_effect = BadRequest('DO-NOT-LEAK')
+    runner.client.beta.messages.create.side_effect = BadRequest('DO-NOT-LEAK')
     with pytest.raises(AIError, match='Quota'):
         runner.generate('test', 'instruction', {}, ChallengeDraft)
     assert len(runner.calls) == 2
     assert 'DO-NOT-LEAK' not in json.dumps([c.model_dump() for c in runner.calls])
 
 def test_truncated_output_is_rejected_without_extra_request():
-    runner = GeminiRunner(settings())
+    runner = ClaudeRunner(settings())
     runner.client = Mock()
-    runner.client.interactions.create.return_value = SimpleNamespace(status='incomplete', usage=None)
+    runner.client.beta.messages.create.return_value = reply(stop_reason='max_tokens')
     with pytest.raises(AIError, match='incomplete'):
         runner.generate('test', 'instruction', {}, ChallengeDraft)
     assert len(runner.calls) == 1
 
 def test_safe_cancellation_prevents_the_next_paid_request():
-    runner=GeminiRunner(settings(),should_cancel=lambda:True)
+    runner=ClaudeRunner(settings(),should_cancel=lambda:True)
     runner.client=Mock()
     with pytest.raises(AIError,match='Cancellation requested'):
         runner.generate('test','instruction',{},ChallengeDraft)
-    assert not runner.calls and not runner.client.interactions.create.called
+    assert not runner.calls and not runner.client.beta.messages.create.called
 
 def test_initial_deterministic_result_remains_available_if_ai_fails():
     runner = ScriptedRunner([AIError('Model access denied.')])
@@ -210,21 +229,21 @@ def test_initial_deterministic_result_remains_available_if_ai_fails():
     assert result.trials and result.claims and result.ai.experiment is None
 
 def test_ai_sdk_invalid_json_is_retried_once_then_rejected():
-    runner = GeminiRunner(settings())
+    runner = ClaudeRunner(settings())
     runner.client = Mock()
-    runner.client.interactions.create.return_value = SimpleNamespace(status='completed', output_text='not JSON', usage=None)
+    runner.client.beta.messages.create.return_value = reply('not JSON')
     with pytest.raises(AIError, match='invalid structured output'):
         runner.generate('test', 'instruction', {}, ChallengeDraft)
     assert len(runner.calls) == 2 and not any(c.success for c in runner.calls)
 
 def test_ai_sdk_overlong_fields_are_trimmed_to_schema_limits_not_rejected():
-    # Gemini's structured mode honours enums and shapes but not string/list length caps.
-    runner = GeminiRunner(settings())
+    # Structured outputs guarantee enums and shapes but not string/list length caps.
+    runner = ClaudeRunner(settings())
     runner.client = Mock()
     claim = {'claim_id': 'DA_CLAIM_1', 'text': 'x' * 2500, 'kind': 'interpretation', 'concern': 'safety', 'stance': 'contradictory',
              'citations': [{'source_id': 'NCT1', 'field': 'why_stopped', 'excerpt': 'y' * 1500}] * 5, 'relevance': 'r', 'uncertainty': 'u'}
     body = json.dumps({'initial_assessment': 'a', 'claims': [claim] * 6, 'remaining_uncertainty': []})
-    runner.client.interactions.create.return_value = SimpleNamespace(status='completed', output_text=body, usage=None)
+    runner.client.beta.messages.create.return_value = reply(body)
     draft = runner.generate('test', 'instruction', {}, ChallengeDraft)
     assert len(runner.calls) == 1 and runner.calls[0].success
     assert len(draft.claims) == 4 and len(draft.claims[0].citations) == 3
@@ -248,7 +267,7 @@ def test_live_ui_displays_model_audit_and_requires_human_review():
     assert 'result' not in app.session_state
     assert 'researcher_approved' not in app.session_state
 
-def test_real_recorded_gemini_audit_passes_current_provenance_rules_offline():
+def test_real_recorded_claude_audit_passes_current_provenance_rules_offline():
     from devils_advocate.ai_reasoning import identifier_objections
     from devils_advocate.models import AIReport
     path = Path(__file__).parents[1] / 'validation' / 'gemini_report.json'

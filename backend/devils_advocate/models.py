@@ -297,7 +297,7 @@ class AICall(BaseModel):
 
 class AIReport(BaseModel):
     enabled: bool = False
-    provider: str = 'google'
+    provider: str = 'anthropic'
     model: str = ''
     thinking_level: str | None = None
     status: Literal['disabled', 'skipped', 'completed', 'failed'] = 'disabled'

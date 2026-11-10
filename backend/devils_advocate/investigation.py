@@ -8,9 +8,9 @@ import os
 import re
 import time
 
-from .ai_client import GeminiRunner
+from .ai_client import ClaudeRunner
 from .ai_config import load_ai_settings
-from .ai_reasoning import plan_followups_with_gemini, run_ai_reasoning
+from .ai_reasoning import plan_followups_with_claude, run_ai_reasoning
 from .devil_advocate import investigate_target
 from .experiment_designer import propose_experiment
 from .http_client import JsonClient, RetrievalDeadlineExceeded
@@ -83,7 +83,7 @@ def read_progress(token: str) -> dict | None:
 
 
 def default_budget_seconds(use_ai: bool = False) -> int:
-    """Fit one Vercel request (300 s): retrieval + up to 120 s of Gemini when AI is on."""
+    """Fit one Vercel request (300 s): retrieval + up to 120 s of Claude when AI is on."""
     override = os.getenv('RESEARCH_RETRIEVAL_BUDGET_SECONDS')
     if override:
         return int(override)
@@ -117,14 +117,14 @@ def run_investigation(payload: dict, *, investigator=investigate_target, ai_reas
                 # up to four workers fetch registry records in parallel.
                 client = owned_client = JsonClient(cache_path=data_dir('runtime') / 'public-evidence-cache.sqlite3', max_workers=4)
             budget = budget_seconds if budget_seconds is not None else default_budget_seconds(payload['use_ai'])
-            # Gemini must finish inside the same request: clamp each call to the time left and
+            # Claude must finish inside the same request: clamp each call to the time left and
             # refuse to start a new (billed) call once the deadline is within reach.
             settings = load_ai_settings().model_copy(update={**payload.get('ai_policy', {}), 'enabled': payload['use_ai']})
 
             def progress(ai_calls):
                 calls[:] = [c.model_dump(mode='json') for c in ai_calls]
                 if ai_calls:
-                    progress_writer.stage('Gemini: ' + ai_calls[-1].role)
+                    progress_writer.stage('Claude: ' + ai_calls[-1].role)
 
             def past_deadline():
                 return time.monotonic() > deadline - 5
@@ -134,8 +134,8 @@ def run_investigation(payload: dict, *, investigator=investigate_target, ai_reas
             runner = None
             planner_hook = None
             if payload['use_ai'] and settings.planning_call:
-                runner = GeminiRunner(settings, on_progress=progress, should_cancel=past_deadline, deadline=deadline)
-                planner_hook = lambda result, plan: plan_followups_with_gemini(runner, result, plan)
+                runner = ClaudeRunner(settings, on_progress=progress, should_cancel=past_deadline, deadline=deadline)
+                planner_hook = lambda result, plan: plan_followups_with_claude(runner, result, plan)
             rounds = payload.get('max_followup_rounds')
             investigator_kwargs = {}
             if rounds is not None or planner_hook is not None or payload.get('progress_token'):
@@ -150,7 +150,7 @@ def run_investigation(payload: dict, *, investigator=investigate_target, ai_reas
             if runner is not None:
                 runner.settings = settings
             reasoner_kwargs = {'runner': runner} if runner is not None else {}
-            # Each Gemini call is also clamped inside the runner to the time left before `deadline`.
+            # Each Claude call is also clamped inside the runner to the time left before `deadline`.
             result.ai = ai_reasoner(result, settings=settings, on_progress=progress, should_cancel=past_deadline,
                                     prior_art_client=client, deadline=deadline, **reasoner_kwargs)
             if runner is not None:
@@ -161,7 +161,7 @@ def run_investigation(payload: dict, *, investigator=investigate_target, ai_reas
             if result.ai is not None and not calls:
                 calls[:] = [c.model_dump(mode='json') for c in result.ai.calls]
             if result.ai is not None:
-                timings['stages'].update({'gemini_' + re.sub(r'\W+', '_', c.role.lower()): c.duration_seconds for c in result.ai.calls if c.duration_seconds is not None})
+                timings['stages'].update({'claude_' + re.sub(r'\W+', '_', c.role.lower()): c.duration_seconds for c in result.ai.calls if c.duration_seconds is not None})
                 if result.ai.prior_art_check.get('duration_seconds') is not None:
                     timings['stages']['prior_art_checks'] = result.ai.prior_art_check['duration_seconds']
         progress_writer.finish('completed')

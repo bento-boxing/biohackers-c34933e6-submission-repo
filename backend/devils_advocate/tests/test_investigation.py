@@ -50,7 +50,7 @@ def test_deadline_exceeded_message_is_surfaced():
     assert 'budget exhausted' in str(exc.value)
 
 
-def test_gemini_phase_is_cancelled_and_clamped_when_the_request_deadline_is_near():
+def test_claude_phase_is_cancelled_and_clamped_when_the_request_deadline_is_near():
     target = TargetInput.model_validate(EGFR)
     investigator = Mock(return_value=Investigation(target=target, mode='live', resolved_target_id='CHEMBL203', resolution_status='resolved'))
     reasoner = Mock(return_value=None)
@@ -64,7 +64,7 @@ def test_gemini_phase_is_cancelled_and_clamped_when_the_request_deadline_is_near
 def _runner_with_fake_client(deadline):
     from types import SimpleNamespace
     from pydantic import BaseModel, SecretStr
-    from devils_advocate.ai_client import GeminiRunner
+    from devils_advocate.ai_client import ClaudeRunner
     from devils_advocate.ai_config import AISettings
 
     class Tiny(BaseModel):
@@ -74,21 +74,21 @@ def _runner_with_fake_client(deadline):
 
     def create(**kwargs):
         seen.update(kwargs)
-        return SimpleNamespace(status='completed', output_text='{"ok": true}', usage=None)
+        return SimpleNamespace(stop_reason='end_turn', content=[SimpleNamespace(type='text', text='{"ok": true}')], usage=None)
 
-    settings = AISettings(enabled=True, model='gemini-test', api_key=SecretStr('k'), timeout_seconds=120)
-    runner = GeminiRunner(settings, deadline=deadline)
-    runner.client = SimpleNamespace(interactions=SimpleNamespace(create=create), close=lambda: None)
+    settings = AISettings(enabled=True, model='claude-test', api_key=SecretStr('k'), timeout_seconds=120)
+    runner = ClaudeRunner(settings, deadline=deadline)
+    runner.client = SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(create=create)), close=lambda: None)
     return runner, Tiny, seen
 
 
-def test_gemini_call_timeout_is_clamped_to_the_time_left_before_the_request_deadline():
+def test_claude_call_timeout_is_clamped_to_the_time_left_before_the_request_deadline():
     runner, schema, seen = _runner_with_fake_client(deadline=time.monotonic() + 40)
     assert runner.generate('role', 'instruction', {}, schema).ok is True
     assert 30 <= seen['timeout'] <= 35  # 40 s left minus a safety margin, never the 120 s default
 
 
-def test_gemini_call_is_refused_when_the_deadline_is_too_close_to_finish():
+def test_claude_call_is_refused_when_the_deadline_is_too_close_to_finish():
     from devils_advocate.ai_client import AIError
     runner, schema, seen = _runner_with_fake_client(deadline=time.monotonic() + 10)
     with pytest.raises(AIError, match='deadline'):

@@ -15,9 +15,9 @@ def main():
               'publications': len(result.publications), 'retrieval_errors': result.retrieval_errors,
               'ai': result.ai.model_dump(mode='json'),
               'selected_experiment': propose_experiment(result).model_dump(mode='json')}
-    output = Path(__file__).parent / 'validation' / 'gemini_report.json'
+    output = Path(__file__).parent / 'validation' / 'claude_report.json'
     output.write_text(json.dumps(report, indent=2), encoding='utf-8')
-    history_path = output.with_name('gemini_validation_history.json')
+    history_path = output.with_name('claude_validation_history.json')
     history = json.loads(history_path.read_text(encoding='utf-8')) if history_path.exists() else []
     history.append({'tested_at_utc': report['tested_at_utc'], 'model': result.ai.model,
                     'status': result.ai.status, 'calls_attempted': len(result.ai.calls),

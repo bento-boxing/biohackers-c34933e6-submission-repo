@@ -1,7 +1,7 @@
 """Optional LLM rationale: explains the ranking using only the evidence we fetched.
 
-Uses the same Gemini configuration as the Target Challenger (devils_advocate):
-GEMINI_API_KEY, AI_MODEL, AI_ENABLED, AI_THINKING_LEVEL, loaded from the repository-root .env.
+Uses the same Claude configuration as the Target Challenger (devils_advocate):
+ANTHROPIC_API_KEY, AI_MODEL, AI_ENABLED, AI_THINKING_LEVEL, loaded from the repository-root .env.
 """
 from __future__ import annotations
 
@@ -42,23 +42,29 @@ RATIONALE_SCHEMA = {
                     "evidence_strength": {"type": "string", "enum": ["strong", "moderate", "weak"]},
                 },
                 "required": ["symbol", "rationale", "evidence_strength"],
+                "additionalProperties": False,
             },
         }
     },
     "required": ["items"],
+    "additionalProperties": False,
 }
 
+DEFAULT_MODEL = "claude-opus-5-5"
+# Models that accept the server-side refusal fallback (same list as devils_advocate.ai_client).
+FALLBACK_MODELS = ("claude-opus-5", "claude-sonnet-5-5", "claude-fable-5-1", "claude-fable-5-2")
 
-def gemini_settings() -> dict:
+
+def claude_settings() -> dict:
     """Same environment contract as devils_advocate.ai_config, without importing that package."""
     load_dotenv(REPO_ROOT / ".env", override=False)
     return {
         "enabled": os.getenv("AI_ENABLED", "false").lower() == "true",
-        "model": os.getenv("AI_MODEL", "").strip(),
-        "api_key": os.getenv("GEMINI_API_KEY", ""),
+        "model": os.getenv("AI_MODEL", "").strip() or DEFAULT_MODEL,
+        "api_key": os.getenv("ANTHROPIC_API_KEY", ""),
         "thinking_level": os.getenv("AI_THINKING_LEVEL", "medium").lower(),
         "timeout_seconds": int(os.getenv("AI_TIMEOUT_SECONDS", "120")),
-        "max_output_tokens": int(os.getenv("AI_MAX_OUTPUT_TOKENS", "8192")),
+        "max_output_tokens": int(os.getenv("AI_MAX_OUTPUT_TOKENS", "16000")),
     }
 
 
@@ -90,13 +96,12 @@ def rationale_key(result: ScoutResult, top: int = 10) -> str:
 
 
 def _client():
-    """Return a configured Gemini client, or None when AI is disabled or unconfigured."""
-    s = gemini_settings()
+    """Return a configured Anthropic client, or None when AI is disabled or unconfigured."""
+    s = claude_settings()
     if not (s["enabled"] and s["model"] and s["api_key"]):
         return None
-    from google import genai
-    return genai.Client(api_key=s["api_key"],
-                        http_options={"timeout": s["timeout_seconds"] * 1000, "retry_options": {"attempts": 1}})
+    import anthropic
+    return anthropic.Anthropic(api_key=s["api_key"], timeout=s["timeout_seconds"], max_retries=0)
 
 
 def _read_cached(key: str, dirs: Iterable[Path]) -> dict | None:
@@ -118,7 +123,7 @@ def _apply(result: ScoutResult, items: list[dict]) -> ScoutResult:
 
 def explain(result: ScoutResult, top: int = 10, cache_dir: Path = DEFAULT_CACHE_DIR,
             read_dirs: Iterable[Path] = (DEMO_RATIONALE_DIR,), offline: bool = False) -> ScoutResult | None:
-    """Fill rationales from cache or Gemini. Returns None when no rationale is available.
+    """Fill rationales from cache or Claude. Returns None when no rationale is available.
 
     offline=True (or SCOUT_CACHE_ONLY=1) means cache only: no paid call is ever made.
     """
@@ -131,21 +136,24 @@ def explain(result: ScoutResult, top: int = 10, cache_dir: Path = DEFAULT_CACHE_
     client = _client()
     if client is None:
         return None
-    s = gemini_settings()
-    response = client.interactions.create(
+    s = claude_settings()
+    # A safety decline is re-run server-side on a fallback model where the configured model supports it.
+    fallback = ({"betas": ["server-side-fallback-2026-07-01"], "fallbacks": "default"}
+                if s["model"].startswith(FALLBACK_MODELS) else {})
+    response = client.beta.messages.create(
         model=s["model"],
-        system_instruction=SYSTEM_PROMPT,
-        input=json.dumps(evidence_payload(result, top), ensure_ascii=False, separators=(",", ":")),
-        store=False,
-        automatic_continuation=False,
+        max_tokens=s["max_output_tokens"],
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user",
+                   "content": json.dumps(evidence_payload(result, top), ensure_ascii=False, separators=(",", ":"))}],
+        output_config={"effort": s["thinking_level"], "format": {"type": "json_schema", "schema": RATIONALE_SCHEMA}},
         timeout=s["timeout_seconds"],
-        generation_config={"thinking_level": s["thinking_level"], "max_output_tokens": s["max_output_tokens"]},
-        response_format=[{"type": "text", "mime_type": "application/json", "schema": RATIONALE_SCHEMA}],
+        **fallback,
     )
-    if getattr(response, "status", "completed") != "completed":
+    if response.stop_reason != "end_turn":  # truncated (max_tokens) or declined (refusal)
         return None
     try:
-        data = json.loads(response.output_text)
+        data = json.loads("".join(b.text for b in response.content if b.type == "text"))
         items = data["items"]
     except (ValueError, KeyError, TypeError, AttributeError):
         return None

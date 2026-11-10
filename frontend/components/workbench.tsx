@@ -132,10 +132,10 @@ export function Progress(){
   const serverClock=progress?.now??progress?.updated_at;
   const runningFor=(startedAt:number)=>Math.max(0,Math.round((serverClock?serverClock-startedAt:0)+sinceSnapshot));
   return <section className="panel progress-panel" aria-live="polite"><div className="spinner"/><div><h3>Investigating {symbol}…</h3>
-    <p>{mode==='offline'?'Loading the recorded public evidence.':`Retrieving ChEMBL, ClinicalTrials.gov and Europe PMC records, assessing evidence coverage and running targeted follow-up searches${config?.ai.enabled?', then Gemini reasoning if you authorized it':''}. This usually takes one to three minutes.`}</p>
+    <p>{mode==='offline'?'Loading the recorded public evidence.':`Retrieving ChEMBL, ClinicalTrials.gov and Europe PMC records, assessing evidence coverage and running targeted follow-up searches${config?.ai.enabled?', then Claude reasoning if you authorized it':''}. This usually takes one to three minutes.`}</p>
     <p>{seconds} s elapsed. The report arrives in one response; keep this page open.</p>
     {stages.length>0&&<ul className="report-list" data-testid="progress-stages">{stages.map((s,index)=><li key={index}>{s.finished_at?`✓ ${s.name} · ${(s.seconds??0).toFixed(1)} s`:`… ${s.name} · ${runningFor(s.started_at)} s so far`}</li>)}</ul>}
-    {stages.length>0&&<small>Stages are coarse: registry retrieval can run a minute or more and each Gemini call 30–90 s, so the list moves only when a stage completes. Backend last reported {Math.round(sinceSnapshot)} s ago.</small>}
+    {stages.length>0&&<small>Stages are coarse: registry retrieval can run a minute or more and each Claude call 30–90 s, so the list moves only when a stage completes. Backend last reported {Math.round(sinceSnapshot)} s ago.</small>}
     {progress&&!progress.available&&<small>Backend stage progress is not available from this host instance; the investigation is still running.</small>}
     <small>No progress percentage is invented. A request that exceeds its time budget fails with an explicit message and no recorded data is substituted.</small></div></section>;
 }
